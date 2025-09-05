@@ -1,0 +1,310 @@
+.tcg-marquee {
+    position: relative;
+    overflow-x: clip;
+
+    .curvtop {
+        background: #222;
+        position: absolute;
+        left: -100px;
+        right: -100px;
+        top: 0;
+        height: 5vw;
+        border-radius: 0 0 50% 50%/0 0 100% 100%;
+        z-index: 3;
+    }
+
+    .curvbotm {
+        background: #222;
+        position: absolute;
+        bottom: 0;
+        left: -100px;
+        right: -100px;
+        height: 5vw;
+        border-radius: 50% 50% 0 0/100% 100% 0 0;
+        z-index: 3;
+    }
+
+    .images {
+        &:after {
+            content: '';
+            position: absolute;
+            top: -30px;
+            bottom: -30px;
+            left: -30px;
+            right: -30px;
+            pointer-events: none;
+        }
+    }
+
+    .main-marq {
+        position: relative;
+        padding: 0;
+
+        &:after {
+            position: absolute;
+            top: -30px;
+            bottom: -30px;
+            left: -30px;
+            right: -30px;
+            pointer-events: none;
+        }
+
+        a {
+            display: inline-block;
+        }
+
+        a,
+        a:hover {
+            color: inherit;
+        }
+
+        .slide-har {
+            display: flex;
+        }
+
+        .box {
+            display: flex;
+
+            .item {
+                position: relative;
+                padding: 0 30px;
+
+                h4 {
+                    white-space: nowrap;
+                    line-height: 1.1;
+                    margin: 0;
+                }
+
+                h2 {
+                    line-height: 1;
+                    margin: 0;
+                }
+
+                &:nth-of-type(even) {
+
+                    h4 {
+                        color: transparent;
+                        -webkit-text-stroke: .5px #1a1a1a;
+
+                        a {
+                            color: transparent;
+                            -webkit-text-stroke: .5px #1a1a1a;
+                        }
+                    }
+                }
+            }
+
+            &:last-of-type {
+
+                .item {
+
+                    &:nth-of-type(even) {
+
+                        h4 {
+                            color: #1a1a1a;
+                            -webkit-text-stroke: 0;
+
+                            a {
+                                color: #1a1a1a;
+                                -webkit-text-stroke: 0;
+                            }
+                        }
+                    }
+
+                    &:nth-of-type(odd) {
+
+                        h4 {
+                            color: transparent;
+                            -webkit-text-stroke: 1px #1a1a1a;
+
+                            a {
+                                color: transparent;
+                                -webkit-text-stroke: 1px #1a1a1a;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .slide-har {
+        position: relative;
+
+        &.st1 {
+
+            .box {
+                position: relative;
+                animation: slide-har 80s linear infinite;
+            }
+        }
+
+        &.st2 {
+
+            .box {
+                position: relative;
+                animation: slide-har-revers 80s linear infinite;
+            }
+        }
+    }
+}
+
+@keyframes slide-har {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes slide-har-revers {
+    100% {
+        transform: translateX(0%);
+    }
+
+    0% {
+        transform: translateX(-100%);
+    }
+}
+
+// Dark Mode
+body.tcg-dark-mode {
+    .tcg-marquee {
+        .main-marq {
+            .box {
+                .item {
+                    padding: 0 30px;
+
+                    h4 {
+                        white-space: nowrap;
+                        line-height: 1.1;
+                        margin: 0;
+                    }
+
+                    h2 {
+                        line-height: 1;
+                        margin: 0;
+                    }
+
+                    &:nth-of-type(even) {
+
+                        h4 {
+                            color: transparent;
+                            -webkit-text-stroke: .5px #fff;
+
+                            a {
+                                color: transparent;
+                                -webkit-text-stroke: .5px #fff;
+                            }
+                        }
+                    }
+                }
+
+                &:last-of-type {
+
+                    .item {
+
+                        &:nth-of-type(even) {
+
+                            h4 {
+                                color: #fff;
+                                -webkit-text-stroke: 0;
+
+                                a {
+                                    color: #fff;
+                                    -webkit-text-stroke: 0;
+                                }
+                            }
+                        }
+
+                        &:nth-of-type(odd) {
+
+                            h4 {
+                                color: transparent;
+                                -webkit-text-stroke: 1px #fff;
+
+                                a {
+                                    color: transparent;
+                                    -webkit-text-stroke: 1px #fff;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Auto Mode
+@media (prefers-color-scheme: dark) {
+    body.tcg-auto-mode {
+        .tcg-marquee {
+            .main-marq {
+                .box {
+                    .item {
+                        padding: 0 30px;
+
+                        h4 {
+                            white-space: nowrap;
+                            line-height: 1.1;
+                            margin: 0;
+                        }
+
+                        h2 {
+                            line-height: 1;
+                            margin: 0;
+                        }
+
+                        &:nth-of-type(even) {
+
+                            h4 {
+                                color: transparent;
+                                -webkit-text-stroke: .5px #fff;
+
+                                a {
+                                    color: transparent;
+                                    -webkit-text-stroke: .5px #fff;
+                                }
+                            }
+                        }
+                    }
+
+                    &:last-of-type {
+
+                        .item {
+
+                            &:nth-of-type(even) {
+
+                                h4 {
+                                    color: #fff;
+                                    -webkit-text-stroke: 0;
+
+                                    a {
+                                        color: #fff;
+                                        -webkit-text-stroke: 0;
+                                    }
+                                }
+                            }
+
+                            &:nth-of-type(odd) {
+
+                                h4 {
+                                    color: transparent;
+                                    -webkit-text-stroke: 1px #fff;
+
+                                    a {
+                                        color: transparent;
+                                        -webkit-text-stroke: 1px #fff;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

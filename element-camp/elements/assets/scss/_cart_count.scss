@@ -1,0 +1,13 @@
+.tcgelements-cart-count{
+  display: inline-block;
+  transition: all 0.3s ease;
+  span{
+    display: inline-block;
+    position: relative;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px;
+    border-radius: 3px;
+    line-height: 1;
+  }
+}

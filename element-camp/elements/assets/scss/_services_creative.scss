@@ -1,0 +1,98 @@
+.tcgelements-services-creative{
+  .card-column{
+    .service-card{
+      position: relative;
+      display: block;
+      padding: 30px 0;
+      .service-card-row{
+        .image-column{
+          text-align: right;
+          img{
+            opacity: 0;
+            transition: all 0.3s ease;
+          }
+        }
+        .title{
+          margin: 0;
+        }
+      }
+      &:hover {
+        .image-column {
+          img{
+            opacity: 1;
+          }
+        }
+        .title-column{
+          .title{
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .exp-wrapper{
+      display: flex;
+      align-items: center;
+      margin-top: 80px;
+      .exp-number{
+        display: inline-block;
+        margin-right: 30px;
+      }
+      .exp-text{
+        display: inline-block;
+        margin-top: 20px;
+      }
+    }
+  }
+  .images-column{
+    .media-image{
+      height: 140px;
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .imgs{
+      position: relative;
+      height: 500px;
+      margin-top: 40px;
+      img{
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transform : perspective(var(--e-transform-tcgelements-services-creative-images-image-perspective,0)) rotate(var(--e-transform-tcgelements-services-creative-images-image-rotateZ,0)) rotateX(var(--e-transform-tcgelements-services-creative-images-image-rotateX,0)) rotateY(var(--e-transform-tcgelements-services-creative-images-image-rotateY,0)) translate(var(--e-transform-tcgelements-services-creative-images-image-translate,0)) translateX(var(--e-transform-tcgelements-services-creative-images-image-translateX,0)) translateY(var(--e-transform-tcgelements-services-creative-images-image-translateY,0)) scaleX(calc(var(--e-transform-tcgelements-services-creative-images-image-flipX, 1) * var(--e-transform-tcgelements-services-creative-images-image-scaleX, var(--e-transform-tcgelements-services-creative-images-image-scale, 1)))) scaleY(calc(var(--e-transform-tcgelements-services-creative-images-image-flipY, 1) * var(--e-transform-tcgelements-services-creative-images-image-scaleY, var(--e-transform-tcgelements-services-creative-images-image-scale, 1)))) skewX(var(--e-transform-tcgelements-services-creative-images-image-skewX,0)) skewY(var(--e-transform-tcgelements-services-creative-images-image-skewY,0));
+        object-fit: cover;
+        opacity: 0;
+        clip-path: polygon(25% 0, 75% 0, 75% 100%, 25% 100%);
+        transition: all 1s ease;
+        max-width: 100%;
+        max-height: 100%;
+        &.show{
+          opacity: 1;
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .tcgelements-services-creative{
+    .card-column{
+      .service-card{
+        .service-card-row{
+          .image-column{
+            display: none;
+          }
+        }
+      }
+    }
+    .images-column{
+      .imgs {
+        position: relative;
+        height: 300px;
+        width: 80%;
+        left: 10%;
+      }
+    }
+  }
+}

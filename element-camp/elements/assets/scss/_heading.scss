@@ -1,0 +1,30 @@
+.tcgelements-heading-text{
+  a{
+    transition: all 0.3s ease;
+  }
+  >a,a:hover{
+    color: inherit;
+  }
+  .tcgelements-heading{
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    &::before{
+      position: absolute;
+      content: "";
+      z-index: -1;
+    }
+  }
+}
+.tcgelements-heading-text{
+  span{
+    display: inline-block;
+  }
+}
+@media screen and (max-width: 991px) {
+  .tcgelements-heading-text {
+    .tcgelements-heading.tcgelements-text-breakline br {
+      display: none;
+    }
+  }
+}

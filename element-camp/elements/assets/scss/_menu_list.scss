@@ -1,0 +1,119 @@
+.tcgelements-menu-list {
+    overflow: auto;
+
+    li {
+        list-style-type: none;
+    }
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #eee;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #aaa;
+        border-radius: 5px;
+    }
+
+    ul {
+        position: relative;
+        z-index: 2;
+
+        > .menu-item {
+            position: relative;
+            color: #1a1a1a;
+            display: block;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
+
+            a {
+                position: relative;
+                display: inline-block;
+                color: inherit;
+                transition: all 0.3s ease-in-out;
+                &:after{
+                    left: 0;
+                    top: 50%;
+                    width: 20px;
+                    height: 1px;
+                    background-color: #fff;
+                    opacity: 0.4;
+                }
+                &:hover {
+                    opacity: 1;
+                    &::after {
+                        width: 30px;
+                    }
+                }
+            }
+
+            .sub-menu {
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+                background: transparent;
+                display: block; /* Keep block for transition effect */
+                max-height: 0; /* Collapse submenu initially */
+                opacity: 0;
+                transition: all 0.3s ease-in-out; /* Smooth transition for open/close */
+                overflow: auto;
+                padding: 0;
+                margin: 0;
+                &::-webkit-scrollbar {
+                    width: 5px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background: #eee;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background: #aaa;
+                    border-radius: 5px;
+                }
+                &.sub-open{
+                    max-height: 500px; /* Adjust this value based on your submenu content height */
+                    opacity: 1;
+                }
+            }
+
+        }
+    }
+    &.hover-animation{
+        ul{
+            > .menu-item {
+                a{
+                    &.fill-text{
+                        position: relative;
+                        &:before{
+                            content: attr(data-text);
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            color: #fff;
+                            width: 100%;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            transition: width .75s cubic-bezier(.63,.03,.21,1);
+                        }
+                    }
+                }
+                &.hoverd{
+                    a{
+                        &.fill-text{
+                            &:before{
+                                width: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+@media screen and (max-width: 992px) {
+    /* Responsive adjustments if needed */
+}

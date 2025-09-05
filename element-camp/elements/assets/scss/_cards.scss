@@ -1,0 +1,124 @@
+.tcgelements-cards{
+  &.scroll-animation {
+    width: 200vw;
+    padding-top: 140px;
+    display: flex;
+    flex-wrap: nowrap;
+    .panel {
+      display: flex;
+      height: 100%;
+      flex: 1;
+      justify-content: flex-end;
+      align-items: center;
+
+      &:nth-of-type(even){
+
+        .card-item{
+          transform: translateY(-20px);
+        }
+      }
+
+      .card-item{
+        width: 25vw;
+        position: relative;
+        transform: translateY(20px);
+
+        .img{
+          filter: grayscale(1);
+          transition: all .4s;
+        }
+
+        .cont{
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 30px;
+          h5{
+            font-size: 24px;
+            font-weight: 500;
+          }
+          span{
+            font-size: 15px;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: .75;
+          }
+        }
+
+        &:hover{
+
+          .img{
+            filter: grayscale(0);
+          }
+        }
+      }
+    }
+  }
+  .card-item{
+    .img{
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  &.preserve-3d{
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    .card-item{
+      cursor: pointer;
+      filter: brightness(0.2);
+      &:hover {
+        filter: brightness(1);
+        transform: translateZ(110px);
+        & + * {
+          filter: brightness(0.8);
+          transform: translateZ(80px) rotateY(20deg);
+        }
+        & + * + * {
+          filter: brightness(0.6);
+          transform: translateZ(50px) rotateY(15deg);
+        }
+        & + * + * + * {
+          filter: brightness(0.4);
+          transform: translateZ(20px) rotateY(8deg);
+        }
+      }
+      &:has(+ *:hover) {
+        filter: brightness(0.8);
+        transform: translateZ(80px) rotateY(-20deg);
+      }
+      &:has(+ * + *:hover) {
+        filter: brightness(0.6);
+        transform: translateZ(50px) rotateY(-15deg);
+      }
+      &:has(+ * + * + *:hover) {
+        filter: brightness(0.4);
+        transform: translateZ(20px) rotateY(-8deg);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .tcgelements-cards{
+    &.scroll-animation {
+      width: 100%;
+      min-height: auto;
+      display: block;
+      padding-top: 80px;
+      .panel{
+        display: block;
+        padding: 0 15px;
+
+        .card-item{
+          width: 100%;
+          margin-top: 50px;
+          transform: none;
+        }
+      }
+    }
+  }
+}

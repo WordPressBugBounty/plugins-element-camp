@@ -1,0 +1,114 @@
+.tcgelements-search-field{
+    position: relative;
+    input{
+      color: #1a1a1a;
+      padding: 15px;
+      border: 1px solid rgba(0,0,0,.4);
+      border-radius: 5px;
+      width: 100%;
+      background: transparent;
+
+      &:focus{
+        border-color: #1a1a1a;
+        box-shadow: none;
+      }
+    }
+    .searchsubmit{
+      background-color: transparent;
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      margin: 0;
+      padding:0;
+      border:0;
+    }
+}
+.tcgelements-search-form {
+  position: relative;
+  .tcgelements-search-icon {
+    position: relative;
+    .form-group {
+      width: 267.200px;
+      position: absolute;
+      right: 0;
+      bottom: -35px;
+      transform: translateY(100%);
+      padding: 15px;
+      background: rgba(255, 255, 255, .15);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all .4s;
+
+      input {
+        padding: 10px 55px 10px 15px;
+        background: #fff;
+        border: 0;
+        border-radius: 5px;
+      }
+
+      button {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        padding: 10px 15px;
+        background: #ccc;
+        border: 0;
+        border-radius: 5px;
+      }
+    }
+
+    .search-icon {
+      position: relative;
+      padding: 25px 30px;
+      cursor: pointer;
+      color: #fff;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      .close-search {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, .15);
+        text-align: center;
+        padding: 25px 0;
+        font-size: 20px;
+        display: none;
+      }
+
+      .open-search {
+        transition: all .3s;
+      }
+
+    }
+  }
+
+  &.open {
+
+    .form-group {
+      opacity: 1;
+      visibility: visible;
+      bottom: -1px;
+    }
+
+    .search-icon {
+
+      .open-search {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+      }
+    }
+  }
+}

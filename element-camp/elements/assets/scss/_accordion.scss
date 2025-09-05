@@ -1,0 +1,93 @@
+.tcgelements-accordion{
+  .accordion-item {
+    border-radius: 0;
+    border: 0;
+    background-color: #B6997422;
+    margin-bottom: 30px;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+    .accordion-header {
+      .accordion-button {
+        border-radius: 0;
+        background-color: transparent;
+        color: #181C20;
+        font-size: 16px;
+        box-shadow: none;
+        padding: 20px;
+        text-wrap: balance;
+        &.arrow{
+          &:not(.collapsed) {
+            border-bottom: 1px solid #9994;
+            &::after {
+              content: "\f175";
+              color: #fff;
+              z-index: 20;
+            }
+            &::before {
+              background-color: #181C20;
+              z-index: 1;
+            }
+          }
+          &::after {
+            background-image: none;
+            content: "\f176";
+            font-family: "Font Awesome 5 Pro";
+            font-weight: 300;
+            transform: rotate(0);
+          }
+          &::before {
+            position: absolute;
+            content: "";
+            width: 65px;
+            right: 0;
+            top: 0;
+            height: 100%;
+            border-inline-start: 1px solid #9994;
+            z-index: 2;
+          }
+        }
+        &.custom{
+          &::after{
+            display: none;
+          }
+          .tcgelements-accordion-icon-opened,.tcgelements-accordion-icon-closed{
+            margin-left: auto;
+          }
+          &:not(.collapsed) {
+            .tcgelements-accordion-icon-opened{
+              display: inline-flex;
+              justify-content: center;
+              align-items: center;
+              opacity: 1;
+            }
+            .tcgelements-accordion-icon-closed{
+              display: none !important;
+              opacity: 0;
+              color: #fff;
+            }
+          }
+          &.collapsed{
+            .tcgelements-accordion-icon-opened{
+              display: none !important;
+              opacity: 0;
+            }
+            .tcgelements-accordion-icon-closed{
+              display: inline-flex;
+              justify-content: center;
+              align-items: center;
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+    .accordion-body{
+      > *{
+        word-spacing: 0;
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+}
