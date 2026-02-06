@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: ElementCamp
- * Plugin URI: https://themescamp.com/
- * Description: This is a plugin with elements bundle for Elementor builder.
- * Author: themesCamp
- * Author URI: https://themescamp.com
- * License: GPLv2 or later
- * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Version: 2.2.2
+ * Plugin URI: https://wpdive.com/plugins/elementcamp/
+ * Description: Elements plugin for Elementor builder.
+ * Author: WPDive
+ * Author URI: https://wpdive.com
+ * License: GPLv3 or later
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+ * Version: 2.3.6
  * Text Domain: element-camp
  * Domain Path: /lang
  */
@@ -28,6 +28,7 @@ function elementcamp_upgrade_check() {
     if ( is_plugin_active( 'themescamp-elements/themescamp-elements.php' ) ) {
         // Deactivate old plugin
         deactivate_plugins( 'themescamp-elements/themescamp-elements.php' );
+        delete_plugins( array( 'themescamp-elements/themescamp-elements.php' ) );
     }
 }
 register_activation_hook( __FILE__, 'elementcamp_upgrade_check' );
@@ -78,6 +79,6 @@ add_action('after_setup_theme', 'elementcamp_textdomain_translation');
 
 // TCE Badge
 function elementcamp_badge_style() {
-    wp_enqueue_style( 'tce-widget-badge', plugins_url( 'elements/assets/css/global/tce-badge.css', __FILE__ ) );
+    wp_enqueue_style( 'tce-widget-badge', plugins_url( 'elementor/elements/assets/css/global/tce-badge.css', __FILE__ ) );
 }
 add_action( 'elementor/editor/after_enqueue_styles', 'elementcamp_badge_style' );

@@ -23,16 +23,6 @@ class ElementCamp_Extend_section {
                 'hide_in_inner' => false,
             ]
         );
-        // $element->add_control(
-        //     'elementcamp_is_sticky',
-        //     [
-        //         'label'                 => esc_html__( 'Enable Sticky', 'element-camp' ),
-        //         'type'                  => Controls_Manager::SWITCHER,
-        //         'frontend_available'    => true,
-        //         'return_value'          => 'section',
-        //         'prefix_class'          => 'tcgelements-sticky-', 
-        //     ]
-        // );
 
 		$element->add_control(
 			'sticky',

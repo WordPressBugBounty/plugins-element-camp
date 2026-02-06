@@ -21,14 +21,15 @@ class ElementCampPlugin {
 
 	//register all widgets & assets 
 	public function add_actions() { 
+        require_once( __DIR__ . '/elementor/elementor-init.php' );
 
 		//register all widgets & scripts
 		add_action( 'elementor/widgets/register', [ $this, 'on_widgets_registered' ] );
 
 		//Global called scripts
         add_action( 'elementor/frontend/after_enqueue_scripts', function() {
-            $js_dir = untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/elements/assets/js/global/';
-            $js_url = untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/elements/assets/js/global/';
+            $js_dir = untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/elementor/elements/assets/js/global/';
+            $js_url = untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/elementor/elements/assets/js/global/';
             foreach( glob( $js_dir . '*.js' ) as $file ) {
                 $file_url = str_replace( $js_dir, $js_url, $file );
                 $handle = '' . basename( $file, '.js' );
@@ -38,8 +39,8 @@ class ElementCampPlugin {
 
 		//LIB Ready to call scripts
         add_action( 'elementor/frontend/after_register_scripts', function() {
-            $js_dir = untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/elements/assets/js/lib/';
-            $js_url = untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/elements/assets/js/lib/';
+            $js_dir = untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/elementor/elements/assets/js/lib/';
+            $js_url = untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/elementor/elements/assets/js/lib/';
             foreach( glob( $js_dir . '*.js' ) as $file ) {
                 $file_url = str_replace( $js_dir, $js_url, $file );
                 $handle = '' . basename( $file, '.js' );
@@ -49,8 +50,8 @@ class ElementCampPlugin {
 
 		//ELEMENTS Ready to call scripts
 	    add_action( 'elementor/frontend/after_register_scripts', function() {
-		      $js_dir = untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/elements/assets/js/';
-		      $js_url = untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/elements/assets/js/';
+		      $js_dir = untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/elementor/elements/assets/js/';
+		      $js_url = untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/elementor/elements/assets/js/';
 		      foreach( glob( $js_dir . '*.js' ) as $file ) {
 		          $file_url = str_replace( $js_dir, $js_url, $file );
 		          $handle = 'tcgelements-' . basename( $file, '.js' );
@@ -61,8 +62,8 @@ class ElementCampPlugin {
 
         //Global Lib called styles
 		add_action( 'elementor/frontend/after_enqueue_styles', function() {
-		    $css_dir = untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/elements/assets/css/global/';
-		    $css_url = untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/elements/assets/css/global/';
+		    $css_dir = untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/elementor/elements/assets/css/global/';
+		    $css_url = untrailingslashit( plugin_dir_url( __FILE__ ) ) . '/elementor/elements/assets/css/global/';
 		    
 		    foreach( glob( $css_dir . '*.css' ) as $file ) {
 		        $file_url = str_replace( $css_dir, $css_url, $file );
@@ -72,12 +73,12 @@ class ElementCampPlugin {
 		});
 
 		//Theme style
-//		add_action( 'elementor/frontend/after_enqueue_styles', function() {  wp_enqueue_style('tcgelements-plg-style',ELEMENTCAMP_URL .'elements/assets/css/style.css', array(), '1.0.0', 'all'  );} );
+//		add_action( 'elementor/frontend/after_enqueue_styles', function() {  wp_enqueue_style('tcgelements-plg-style',ELEMENTCAMP_URL .'elementor/elements/assets/css/style.css', array(), '1.0.0', 'all'  );} );
         add_action( 'elementor/frontend/after_enqueue_styles', function() {
             if( is_rtl() ) {
-                wp_enqueue_style('tcgelements-plg-style-rtl',ELEMENTCAMP_URL .'elements/assets/css/style-rtl.css', array(), '1.0.0', 'all'  );
+                wp_enqueue_style('tcgelements-plg-style-rtl',ELEMENTCAMP_URL .'elementor/elements/assets/css/style-rtl.css', array(), '1.0.0', 'all'  );
             } else {
-                wp_enqueue_style('tcgelements-plg-style',ELEMENTCAMP_URL .'elements/assets/css/style.css', array(), '1.0.0', 'all'  );
+                wp_enqueue_style('tcgelements-plg-style',ELEMENTCAMP_URL .'elementor/elements/assets/css/style.min.css', array(), '1.0.0', 'all'  );
             }
         });
 	}
@@ -90,7 +91,7 @@ class ElementCampPlugin {
 
 	//List of elements
 	public function widgets() {
-		$widgets_path    = dirname( __FILE__ ) . '/elements/widgets/';
+		$widgets_path    = dirname( __FILE__ ) . '/elementor/elements/widgets/';
 		$elementcamp_widgets = array_diff(scandir($widgets_path), array('.', '..'));
 		return $elementcamp_widgets;
 	}
@@ -98,7 +99,7 @@ class ElementCampPlugin {
 	//Includes
 	private function includes() {
 		foreach ( $this->widgets() as $widget_name ) {
-			require_once( __DIR__ . '/elements/widgets/'.$widget_name.'/'.$widget_name.'.php' );
+			require_once( __DIR__ . '/elementor/elements/widgets/'.$widget_name.'/'.$widget_name.'.php' );
 		}
 	}
 	
