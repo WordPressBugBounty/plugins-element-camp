@@ -23,13 +23,14 @@ class TCG_Pro_Elements_Extender
 
             $section_bg = Plugin::instance()->controls_manager->get_control_from_stack($stack->get_unique_name(), '_background_background');
             $section_bg['options']['tcg_gradient'] = [
-                'title' => esc_html__('3 Colors Gradient', 'elementor'),
+                'title' => esc_html__('3 Colors Gradient', 'element-camp'),
                 'icon' => 'eicon-barcode',
             ];
             $stack->update_control('_background_background', $section_bg);
         }, 10, 3);
 
         // elements controls
+        add_action('elementor/element/after_section_end', [$this, 'register_tc_position_controls'], 10, 3);
         add_action('elementor/element/before_section_end', [$this, 'register_tc_element_background_controls'], 10, 3);
         add_action('elementor/element/before_section_end', [$this, 'register_tc_element_border_controls'], 10, 3);
         add_action('elementor/element/after_section_end', [$this, 'register_tc_dark_mode_responsive_controls'], 10, 3);
@@ -300,7 +301,13 @@ class TCG_Pro_Elements_Extender
                 'separator' => 'none',
             ]
         );
-
+        $widget->start_controls_tabs('_tabs_tc_elements_border_dark_mode');
+        $widget->start_controls_tab(
+            '_tab_tc_elments_border_normal_dark_mode',
+            [
+                'label' => esc_html__('Normal', 'element-camp'),
+            ]
+        );
         $widget->add_control(
             'tc_element_border_color_dark_mode',
             [
@@ -313,6 +320,27 @@ class TCG_Pro_Elements_Extender
                 ],
             ]
         );
+        $widget->end_controls_tab();
+        $widget->start_controls_tab(
+            '_tab_tc_elments_border_hover_dark_mode',
+            [
+                'label' => esc_html__('Hover', 'element-camp'),
+            ]
+        );
+        $widget->add_control(
+            'tc_element_border_color_dark_mode_hover',
+            [
+                'label' => esc_html__('Border Color (Dark Mode)', 'element-camp'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} > .elementor-widget-container:hover' => 'border-color: {{VALUE}};',
+                    '} body.tcg-dark-mode {{WRAPPER}} > .elementor-widget-container:hover' => 'border-color: {{VALUE}};',
+                ],
+            ]
+        );
+        $widget->end_controls_tab();
+        $widget->end_controls_tabs();
     }
 
     function register_tc_smooth_scroll_animations_controls($widget, $widget_id, $args)
@@ -731,6 +759,8 @@ class TCG_Pro_Elements_Extender
                     'up-down' => esc_html__('Up Down', 'element-camp'),
                     'pulse' => esc_html__('Scale Pulse', 'element-camp'),
                     'pulse2' => esc_html__('Pulse', 'element-camp'),
+                    'fall-in' => esc_html__('Fall-In Infinite', 'element-camp'),
+                    'float' => esc_html__('Float', 'element-camp'),
                 ],
                 'default' => 'none',
                 'render_type' => 'ui',
@@ -855,6 +885,203 @@ class TCG_Pro_Elements_Extender
             ]
         );
 
+        $widget->end_controls_section();
+    }
+
+    function register_tc_position_controls($widget, $widget_id, $args)
+    {
+        static $widgets = [
+            'section_effects',
+        ];
+
+        if (!in_array($widget_id, $widgets)) {
+            return;
+        }
+
+        $start = is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
+        $end   = !is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
+
+        $widget->start_controls_section(
+            'tc_position_section',
+            [
+                'label' => __('TCG Position', 'element-camp'),
+                'tab'   => \Elementor\Controls_Manager::TAB_ADVANCED,
+            ]
+        );
+
+        $widget->add_responsive_control(
+            'tc_position',
+            [
+                'label'   => esc_html__('Position', 'element-camp'),
+                'type'    => \Elementor\Controls_Manager::SELECT,
+                'options' => [
+                    ''         => esc_html__('Default', 'element-camp'),
+                    'relative' => esc_html__('Relative', 'element-camp'),
+                    'absolute' => esc_html__('Absolute', 'element-camp'),
+                    'fixed'    => esc_html__('Fixed', 'element-camp'),
+                    'sticky'   => esc_html__('Sticky', 'element-camp'),
+                ],
+                'default'   => '',
+                'selectors' => [
+                    '{{WRAPPER}}' => 'position: {{VALUE}};',
+                ],
+            ]
+        );
+
+        // ✅ Notice is now INSIDE the section
+        $widget->add_control(
+            'tc_position_notice',
+            [
+                'type' => \Elementor\Controls_Manager::RAW_HTML,
+                'raw' => '<div style="background: #f0a500; color: #fff; padding: 8px 12px; border-radius: 4px; font-size: 12px; line-height: 1.5;">
+                    <span style="font-weight: 700;">⚠ Notice:</span> This will override Elementor\'s default position controls set in the Layout tab.
+                    <br><br>
+                    <span style="font-weight: 700;">📌 Sticky tip:</span> For sticky to work, make sure no parent container has <strong>overflow: hidden</strong> or <strong>overflow: auto</strong> set.
+                  </div>',
+                'condition' => [
+                    'tc_position!' => '',
+                ],
+            ]
+        );
+
+        $widget->add_control(
+            'tc_position_offset_orientation_h',
+            [
+                'label'     => esc_html__('Horizontal Orientation', 'element-camp'),
+                'type'      => \Elementor\Controls_Manager::CHOOSE,
+                'toggle'    => false,
+                'default'   => 'start',
+                'options'   => [
+                    'start' => [
+                        'title' => $start,
+                        'icon'  => 'eicon-h-align-left',
+                    ],
+                    'end' => [
+                        'title' => $end,
+                        'icon'  => 'eicon-h-align-right',
+                    ],
+                ],
+                'classes'     => 'elementor-control-start-end',
+                'render_type' => 'ui',
+                'condition'   => [
+                    'tc_position!' => '',
+                ],
+            ]
+        );
+
+        $widget->add_responsive_control(
+            'tc_position_offset_x',
+            [
+                'label'      => esc_html__('Offset', 'element-camp'),
+                'type'       => \Elementor\Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => ['min' => -2000, 'max' => 2000, 'step' => 1],
+                    '%'  => ['min' => -200,  'max' => 200],
+                    'vw' => ['min' => -200,  'max' => 200],
+                    'vh' => ['min' => -200,  'max' => 200],
+                ],
+                'size_units' => ['px', '%', 'em', 'rem', 'vw', 'vh', 'custom'],
+                'selectors'  => [
+                    'body:not(.rtl) {{WRAPPER}}' => 'left: {{SIZE}}{{UNIT}}; right: unset;',
+                    'body.rtl {{WRAPPER}}'       => 'right: {{SIZE}}{{UNIT}}; left: unset;',
+                ],
+                'condition'  => [
+                    'tc_position!'                      => '',
+                    'tc_position_offset_orientation_h!' => 'end',
+                ],
+            ]
+        );
+
+        $widget->add_responsive_control(
+            'tc_position_offset_x_end',
+            [
+                'label'      => esc_html__('Offset', 'element-camp'),
+                'type'       => \Elementor\Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => ['min' => -2000, 'max' => 2000, 'step' => 1],
+                    '%'  => ['min' => -200,  'max' => 200],
+                    'vw' => ['min' => -200,  'max' => 200],
+                    'vh' => ['min' => -200,  'max' => 200],
+                ],
+                'size_units' => ['px', '%', 'em', 'rem', 'vw', 'vh', 'custom'],
+                'selectors'  => [
+                    'body:not(.rtl) {{WRAPPER}}' => 'right: {{SIZE}}{{UNIT}}; left: unset;',
+                    'body.rtl {{WRAPPER}}'       => 'left: {{SIZE}}{{UNIT}}; right: unset;',
+                ],
+                'condition'  => [
+                    'tc_position!'                     => '',
+                    'tc_position_offset_orientation_h' => 'end',
+                ],
+            ]
+        );
+
+        $widget->add_control(
+            'tc_position_offset_orientation_v',
+            [
+                'label'       => esc_html__('Vertical Orientation', 'element-camp'),
+                'type'        => \Elementor\Controls_Manager::CHOOSE,
+                'toggle'      => false,
+                'default'     => 'start',
+                'options'     => [
+                    'start' => [
+                        'title' => esc_html__('Top', 'element-camp'),
+                        'icon'  => 'eicon-v-align-top',
+                    ],
+                    'end' => [
+                        'title' => esc_html__('Bottom', 'element-camp'),
+                        'icon'  => 'eicon-v-align-bottom',
+                    ],
+                ],
+                'render_type' => 'ui',
+                'condition'   => [
+                    'tc_position!' => '',
+                ],
+            ]
+        );
+
+        $widget->add_responsive_control(
+            'tc_position_offset_y',
+            [
+                'label'      => esc_html__('Offset', 'element-camp'),
+                'type'       => \Elementor\Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => ['min' => -2000, 'max' => 2000, 'step' => 1],
+                    '%'  => ['min' => -200,  'max' => 200],
+                    'vh' => ['min' => -200,  'max' => 200],
+                    'vw' => ['min' => -200,  'max' => 200],
+                ],
+                'size_units' => ['px', '%', 'em', 'rem', 'vh', 'vw', 'custom'],
+                'selectors'  => [
+                    '{{WRAPPER}}' => 'top: {{SIZE}}{{UNIT}}; bottom: unset;',
+                ],
+                'condition'  => [
+                    'tc_position!'                      => '',
+                    'tc_position_offset_orientation_v!' => 'end',
+                ],
+            ]
+        );
+
+        $widget->add_responsive_control(
+            'tc_position_offset_y_end',
+            [
+                'label'      => esc_html__('Offset', 'element-camp'),
+                'type'       => \Elementor\Controls_Manager::SLIDER,
+                'range'      => [
+                    'px' => ['min' => -2000, 'max' => 2000, 'step' => 1],
+                    '%'  => ['min' => -200,  'max' => 200],
+                    'vh' => ['min' => -200,  'max' => 200],
+                    'vw' => ['min' => -200,  'max' => 200],
+                ],
+                'size_units' => ['px', '%', 'em', 'rem', 'vh', 'vw', 'custom'],
+                'selectors'  => [
+                    '{{WRAPPER}}' => 'bottom: {{SIZE}}{{UNIT}}; top: unset;',
+                ],
+                'condition'  => [
+                    'tc_position!'                     => '',
+                    'tc_position_offset_orientation_v' => 'end',
+                ],
+            ]
+        );
         $widget->end_controls_section();
     }
 }

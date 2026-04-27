@@ -1,0 +1,37 @@
+.tcgelements-cart-count {
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s ease;
+
+    &.icon {
+
+        svg {
+            display: inline-block;
+            width: 20px;
+        }
+
+        span {
+            position: absolute;
+            background: #fff;
+            width: 15px;
+            height: 15px;
+            border-radius: 150px;
+            font-size: 10px;
+            color: #000;
+            text-align: center;
+            right: -30%;
+            top: -30%;
+        }
+
+    }
+
+    span {
+        display: inline-block;
+        position: relative;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 3px;
+        border-radius: 3px;
+        line-height: 1;
+    }
+}

@@ -246,8 +246,8 @@ class ElementCamp_Parallax_Slider extends Widget_Base
             [
                 'type' => \Elementor\Controls_Manager::ALERT,
                 'alert_type' => 'warning',
-                'heading' => esc_html__('Warning', 'themescamp-core'),
-                'content' => esc_html__('This option will only affect in <strong>Archive page of Elementor Theme Builder</strong> dynamically.', 'themescamp-core'),
+                'heading' => esc_html__('Warning', 'element-camp'),
+                'content' => esc_html__('This option will only affect in <strong>Archive page of Elementor Theme Builder</strong> dynamically.', 'element-camp'),
                 'condition' => [
                     'post_type' => 'source_dynamic',
                     'tcg_select_type' => 'query'
@@ -640,7 +640,7 @@ class ElementCamp_Parallax_Slider extends Widget_Base
                                     <div class="tcg-parallax-slide <?php echo esc_attr($slide['tcg_select_block']); ?> <?php echo 'elementor-repeater-item-' . esc_attr($slide['_id']) . ''; ?>">
                                         <?php
                                         $frontend = new \Elementor\Frontend();
-                                        echo $frontend->get_builder_content_for_display($block_id);
+                                        echo $frontend->get_builder_content_for_display($block_id); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                         ?>
                                     </div>
                                 </div>
@@ -679,7 +679,8 @@ class ElementCamp_Parallax_Slider extends Widget_Base
                                             setup_postdata($post);
                                             ?>
                                             <div class="tcg-parallax-slide <?php echo esc_attr($query_block_id); ?>">
-                                                <?php echo $frontend->get_builder_content_for_display($query_block_id); ?>
+                                                <?php 
+                                                echo $frontend->get_builder_content_for_display($query_block_id); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                                             </div>
                                             <?php
                                         }

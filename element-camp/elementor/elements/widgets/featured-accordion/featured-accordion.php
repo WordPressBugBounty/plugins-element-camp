@@ -244,7 +244,7 @@ class ElementCamp_Featured_Accordion extends Widget_Base
         $this->add_responsive_control(
             'space_between_x',
             [
-                'label' => esc_html__('Space Between Columns (Horizontal)', 'themescamp-core'),
+                'label' => esc_html__('Space Between Columns (Horizontal)', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'unit' => 'px',
@@ -800,7 +800,7 @@ class ElementCamp_Featured_Accordion extends Widget_Base
         $accordion_id = 'featured-accordion-' . $this->get_id();
         $active_item = $settings['active_item'] - 1;
         ?>
-        <div class="accordion tcgelements-featured-accordion" id="<?= esc_attr($accordion_id) ?>">
+        <div class="accordion tcgelements-featured-accordion" id="<?php echo esc_attr($accordion_id) ?>">
             <?php $itemCount = 0; foreach ($settings['accordion_items'] as $index => $item) :
                 $is_active = ($index === $active_item);
                 $collapse_id = 'collapse-' . $accordion_id . '-' . $index;
@@ -809,22 +809,22 @@ class ElementCamp_Featured_Accordion extends Widget_Base
                 <div class="accordion-item-wrapper">
                     <div class="row">
                         <?php if (!empty($item['image']['url'])): ?>
-                            <div class="col-lg-2 bg-img" data-background="<?= esc_url($item['image']['url']); ?>" ></div>
+                            <div class="col-lg-2 bg-img" data-background="<?php echo esc_url($item['image']['url']); ?>" ></div>
                         <?php endif; ?>
                         <div class="col-lg-9 offset-lg-1">
-                            <div class="accordion-item <?= $is_active ? 'active' : '' ?>">
-                                <div class="accordion-header" id="<?= esc_attr($heading_id) ?>">
-                                    <button class="accordion-button<?= !$is_active ? ' collapsed' : '' ?>" type="button"
+                            <div class="accordion-item <?php echo $is_active ? 'active' : '' ?>">
+                                <div class="accordion-header" id="<?php echo esc_attr($heading_id) ?>">
+                                    <button class="accordion-button<?php echo !$is_active ? ' collapsed' : '' ?>" type="button"
                                             data-bs-toggle="collapse"
-                                            data-bs-target="#<?= esc_attr($collapse_id) ?>"
-                                            aria-expanded="<?= $is_active ? 'true' : 'false' ?>"
-                                            aria-controls="<?= esc_attr($collapse_id) ?>">
+                                            data-bs-target="#<?php echo esc_attr($collapse_id) ?>"
+                                            aria-expanded="<?php echo $is_active ? 'true' : 'false' ?>"
+                                            aria-controls="<?php echo esc_attr($collapse_id) ?>">
                                     <span class="row align-items-center">
                                         <span class="number-col">
-                                            <span class="accordion-number"><?= esc_html($item['number']) ?></span>
+                                            <span class="accordion-number"><?php echo esc_html($item['number']) ?></span>
                                         </span>
                                         <span class="title-col">
-                                            <span class="accordion-title text-uppercase"><?= esc_html($item['title']) ?></span>
+                                            <span class="accordion-title text-uppercase"><?php echo esc_html($item['title']) ?></span>
                                         </span>
                                         <span class="arrow-col d-flex justify-content-end">
                                             <span class="btn">
@@ -834,10 +834,10 @@ class ElementCamp_Featured_Accordion extends Widget_Base
                                     </span>
                                     </button>
                                 </div>
-                                <div id="<?= esc_attr($collapse_id) ?>"
-                                     class="accordion-collapse collapse<?= $is_active ? ' show' : '' ?>"
-                                     aria-labelledby="<?= esc_attr($heading_id) ?>"
-                                     data-bs-parent="#<?= esc_attr($accordion_id) ?>">
+                                <div id="<?php echo esc_attr($collapse_id) ?>"
+                                     class="accordion-collapse collapse<?php echo $is_active ? ' show' : '' ?>"
+                                     aria-labelledby="<?php echo esc_attr($heading_id) ?>"
+                                     data-bs-parent="#<?php echo esc_attr($accordion_id) ?>">
                                     <div class="row accordion-body">
                                         <?php if (!empty($item['tags_list'])):?>
                                             <div class="tags-col">
@@ -847,14 +847,14 @@ class ElementCamp_Featured_Accordion extends Widget_Base
                                                         $nofollow = $tag['tag_link']['nofollow'] ? ' rel="nofollow"' : '';
                                                         $link_attributes = $target . $nofollow;
                                                         ?>
-                                                        <a href="<?= esc_url($tag['tag_link']['url']) ?>"<?= $link_attributes ?>><?= esc_html($tag['tag_text']) ?></a>
+                                                        <a href="<?php echo esc_url($tag['tag_link']['url']) ?>"<?php echo esc_attr($link_attributes) ?>><?php echo esc_html($tag['tag_text']) ?></a>
                                                     <?php endforeach; ?>
                                                 </div>
                                             </div>
                                         <?php endif; ?>
                                         <div class="content-col">
                                             <div class="accordion-content">
-                                                <?= wp_kses_post($item['content']) ?>
+                                                <?php echo wp_kses_post($item['content']) ?>
                                             </div>
                                         </div>
                                     </div>

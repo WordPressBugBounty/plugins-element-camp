@@ -1974,27 +1974,27 @@ class ElementCamp_Service_Modern extends Widget_Base
     {
         $settings = $this->get_settings();
         ?>
-        <a class="tcgelements-service-modern" href="<?= esc_url($settings['link']['url']) ?>" <?php if ($settings['link']['is_external']) {
+        <a class="tcgelements-service-modern" href="<?php echo esc_url($settings['link']['url']) ?>" <?php if ($settings['link']['is_external']) {
             echo 'target="_blank"';
         } ?>>
             <div class="row">
                 <div class="col-lg-1 d-none d-lg-block">
                     <div class="col-lg-1 d-none d-lg-block">
                         <?php if (!empty($settings['service_number'])) { ?>
-                            <span class="number"><?= esc_html($settings['service_number']) ?></span>
+                            <span class="number"><?php echo esc_html($settings['service_number']) ?></span>
                         <?php } ?>
                     </div>
                 </div>
                 <div class="col-lg-2 col-12">
                     <div class="img">
                         <?php if (!empty($settings['service_image']['url'])) { ?>
-                            <img src="<?= esc_url($settings['service_image']['url']) ?>" alt="<?php if (!empty($settings['service_image']['alt'])) echo esc_attr($settings['service_image']['alt']); ?>">
+                            <img src="<?php echo esc_url($settings['service_image']['url']) ?>" alt="<?php if (!empty($settings['service_image']['alt'])) echo esc_attr($settings['service_image']['alt']); ?>">
                         <?php } ?>
                     </div>
                 </div>
-                <div class="<?= esc_attr($settings['show_services'] != 'yes' ? 'col-lg-12' : 'col-lg-4') ?> col-12">
+                <div class="<?php echo esc_attr($settings['show_services'] != 'yes' ? 'col-lg-12' : 'col-lg-4') ?> col-12">
                     <div class="cont">
-                        <h5 class="title"><?= __($settings['service_title'], 'element-camp') ?></h5>
+                        <h5 class="title"><?php echo esc_html($settings['service_title']) ?></h5>
                     </div>
                 </div>
                 <?php if ($settings["show_services"] == 'yes') { ?>
@@ -2005,7 +2005,7 @@ class ElementCamp_Service_Modern extends Widget_Base
                                     <span class="icon">
                                         <?php Icons_Manager::render_icon($value['selected_icon'], ['aria-hidden' => 'true']); ?>
                                     </span>
-                                    <span class="text"><?= esc_html__($value['title']) ?></span>
+                                    <span class="text"><?php echo esc_html($value['title']) ?></span>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -2032,7 +2032,7 @@ class ElementCamp_Service_Modern extends Widget_Base
                     </div>
                 <?php endif; ?>
             </div>
-            <img class="float-img" src="<?= esc_url($settings['float_image']['url']) ?>" alt="<?php if (!empty($settings['float_image']['alt'])) echo esc_attr($settings['float_image']['alt']); ?>">
+            <img class="float-img" src="<?php echo esc_url($settings['float_image']['url']) ?>" alt="<?php if (!empty($settings['float_image']['alt'])) echo esc_attr($settings['float_image']['alt']); ?>">
         </a>
         <?php
     }

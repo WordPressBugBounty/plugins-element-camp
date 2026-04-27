@@ -22,19 +22,22 @@
                 });
             });
 
-            // parent n
             $('.e-parent .elementor-widget-tcgelements-heading').each(function () {
-                const element = $(this).find('.tcgelements-heading-text')
+                const $thisWidget = $(this);
+                const element = $thisWidget.find('.tcgelements-heading-text');
+
                 if (element.attr('data-parent-level') !== undefined) {
-                    let parentLevel = parseInt($(this).find('.tcgelements-heading-text').data('parent-level')) || 1;
-                    let $parentTarget = $(this);
+                    let parentLevel = parseInt(element.data('parent-level')) || 1;
+                    let $parentTarget = $thisWidget;
+
                     for (let i = 0; i < parentLevel; i++) {
                         $parentTarget = $parentTarget.parent();
                     }
+
                     $parentTarget.on('mouseenter', function () {
-                        $(this).find('.heading-selector-type-parent-n').addClass('tc-heading-container-active');
+                        $thisWidget.find('.heading-selector-type-parent-n').addClass('tc-heading-container-active');
                     }).on('mouseleave', function () {
-                        $(this).find('.heading-selector-type-parent-n').removeClass('tc-heading-container-active');
+                        $thisWidget.find('.heading-selector-type-parent-n').removeClass('tc-heading-container-active');
                     });
                 }
             });

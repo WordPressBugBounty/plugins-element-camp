@@ -708,7 +708,8 @@ class ElementCamp_Marquee extends Widget_Base
                 ],
                 'condition'=>['item_display'=>'flex'],
                 'responsive' => true,
-            ]);
+            ]
+        );
         $this->add_responsive_control(
             'item_align_items',
             [
@@ -738,7 +739,36 @@ class ElementCamp_Marquee extends Widget_Base
                 ],
                 'condition'=>['item_display'=>'flex'],
                 'responsive' => true,
-            ]);
+            ]
+        );
+        $this->add_responsive_control(
+            'item_flex_direction',
+            [
+                'label' => __('Flex Direction', 'element-camp'),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'row' => [
+                        'title' => __('Row', 'element-camp'),
+                        'icon' => 'eicon-arrow-right',
+                    ],
+                    'row-reverse' => [
+                        'title' => __('Row Reverse', 'element-camp'),
+                        'icon' => 'eicon-arrow-left',
+                    ],
+                    'column' => [
+                        'title' => __('Column', 'element-camp'),
+                        'icon' => 'eicon-arrow-down',
+                    ],
+                    'column-reverse' => [
+                        'title' => __('Column Reverse', 'element-camp'),
+                        'icon' => 'eicon-arrow-up',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcg-marquee .main-marq .box .item' => 'flex-direction: {{VALUE}}'
+                ],
+            ]
+        );
         $this->add_responsive_control(
             'item_padding',
             [
@@ -981,7 +1011,7 @@ class ElementCamp_Marquee extends Widget_Base
         $this->add_responsive_control(
             'text_padding',
             [
-                'label' => esc_html__('Text Padding', 'element-camp'),
+                'label' => esc_html__('Heading Padding', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem', 'custom'],
                 'selectors' => [
@@ -992,7 +1022,7 @@ class ElementCamp_Marquee extends Widget_Base
         $this->add_responsive_control(
             'text_margin',
             [
-                'label' => esc_html__('Text Margin', 'element-camp'),
+                'label' => esc_html__('Heading Margin', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem', 'custom'],
                 'selectors' => [
@@ -1004,7 +1034,7 @@ class ElementCamp_Marquee extends Widget_Base
             \Elementor\Group_Control_Border::get_type(),
             [
                 'name' => 'text_border',
-                'label' => esc_html__('Text Border', 'element-camp'),
+                'label' => esc_html__('Heading Border', 'element-camp'),
                 'selector' => '{{WRAPPER}} .tcg-marquee .main-marq .box .item h4',
             ]
         );
@@ -1012,7 +1042,7 @@ class ElementCamp_Marquee extends Widget_Base
         $this->add_responsive_control(
             'text_border_radius',
             [
-                'label' => esc_html__('Text Border Radius', 'element-camp'),
+                'label' => esc_html__('Heading Border Radius', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
@@ -1224,7 +1254,6 @@ class ElementCamp_Marquee extends Widget_Base
                 ],
             ]
         );
-
         $this->add_control(
             'span_style_options',
             [
@@ -1702,6 +1731,23 @@ class ElementCamp_Marquee extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcg-marquee .main-marq .box .item .icon-image' => 'opacity: {{SIZE}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'image_gray_scale',
+            [
+                'label' => esc_html__( 'Image Gray Scale', 'element-camp' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 1,
+                        'min' => 0.10,
+                        'step' => 0.01,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcg-marquee .main-marq .box .item .icon-image' => 'filter: grayscale({{SIZE}});',
                 ],
             ]
         );
@@ -2643,9 +2689,109 @@ class ElementCamp_Marquee extends Widget_Base
             [
                 'name' => 'marquee_overlay_bg',
                 'selector' => '{{WRAPPER}} .tcg-marquee .main-marq::after',
-                'types' => ['classic', 'gradient', 'tcg_gradient'],
+                'types' => ['classic', 'gradient', 'tcg_gradient', 'tcg_gradient_4'],
             ]
         );
+        $this->add_control('marquee_overlay_style_dark_mode', [
+            'label' => esc_html__('Dark Mode', 'element-camp'),
+            'type' => \Elementor\Controls_Manager::HEADING,
+            'separator' => 'before',
+        ]);
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'marquee_overlay_bg_dark_mode',
+                'selector' => '{{WRAPPER}} .tcg-marquee .main-marq::after',
+                'types' => ['classic', 'gradient', 'tcg_gradient', 'tcg_gradient_4'],
+                'fields_options' => [
+                    'color' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: {{VALUE}};',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: {{VALUE}};',
+                        ],
+                    ],
+                    'gradient_angle' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
+                        ],
+                    ],
+                    'gradient_position' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
+                        ],
+                    ],
+                    'tcg_gradient_angle' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                        ],
+                    ],
+                    'tcg_gradient_position' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                        ],
+                    ],
+                    'image' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-image: url("{{URL}}");',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-image: url("{{URL}}");',
+                        ],
+                    ],
+                    'position' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{VALUE}};',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{VALUE}};',
+                        ],
+                    ],
+                    'xpos' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}',
+                        ],
+                    ],
+                    'ypos' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}',
+                        ],
+                    ],
+                    'attachment' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode (desktop+){{SELECTOR}}' => 'background-attachment: {{VALUE}};',
+                            '} body.tcg-dark-mode (desktop+){{SELECTOR}}' => 'background-attachment: {{VALUE}};',
+                        ],
+                    ],
+                    'repeat' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-repeat: {{VALUE}};',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-repeat: {{VALUE}};',
+                        ],
+                    ],
+                    'size' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-size: {{VALUE}};',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-size: {{VALUE}};',
+                        ],
+                    ],
+                    'bg_width' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-size: {{SIZE}}{{UNIT}} auto',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-size: {{SIZE}}{{UNIT}} auto',
+                        ],
+                    ],
+                    'video_fallback' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background: url("{{URL}}") 50% 50%; background-size: cover;',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background: url("{{URL}}") 50% 50%; background-size: cover;',
+                        ],
+                    ],
+                ]
+            ]
+        );
+
         $this->end_controls_section();
         $this->start_controls_section(
             'letters_animation_section',
@@ -2837,25 +2983,25 @@ class ElementCamp_Marquee extends Widget_Base
             $data_attrs .= ' data-letters-start="' . esc_attr($settings['letters_animation_start']) . '"';
         }
         ?>
-            <div class="<?php echo esc_attr(implode(' ', $wrapper_classes)); ?>"<?php echo $data_attrs; ?>>
+            <div class="<?php echo esc_attr(implode(' ', $wrapper_classes)); ?>"<?php echo esc_attr($data_attrs); ?>>
                 <?php if ($settings['marque_option'] == 'images' && $settings['curves'] == 'yes') : ?>
                     <div class="curvtop"></div>
                     <div class="curvbotm"></div>
                 <?php endif; ?>
-                <div class="main-marq <?= $settings['marque_option'] ?> <?php if ($settings['overflow'] == 'yes') echo 'o-hidden' ?>">
-                    <div class="slide-har <?= $settings['slide_option'] ?>">
+                <div class="main-marq <?php echo esc_attr($settings['marque_option']) ?> <?php if ($settings['overflow'] == 'yes') echo esc_html('o-hidden') ?>">
+                    <div class="slide-har <?php echo esc_attr($settings['slide_option']) ?>">
                         <?php for ($i = 0; $i < 2; $i++) : ?>
                             <div class="box">
                                 <?php if ($settings['marque_option'] == 'text'): ?>
                                     <?php foreach ($settings['marquee_rep'] as $item) : ?>
                                         <?php if (!empty($item['link']['url'])) : ?>
-                                            <a href="<?= esc_url($item['link']['url']) ?>" <?php if ($item['link']['is_external']) echo 'target="_blank"'; ?>>
+                                            <a href="<?php echo esc_url($item['link']['url']) ?>" <?php if ($item['link']['is_external']) echo 'target="_blank"'; ?>>
                                         <?php endif; ?>
                                             <div class="item <?php echo 'elementor-repeater-item-' . esc_attr($item['_id']) . ''; ?>">
                                                 <?php if ($item['use_icon_image'] === 'yes') : ?>
                                                     <?php if ($item['icon_image_align'] === 'left') : ?>
                                                         <span class="icon-image">
-                                                            <img src="<?= esc_url($item['icon_image']['url']) ?>" alt="<?php if (!empty($item['icon_image']['alt'])) echo esc_attr($item['icon_image']['alt']); ?>">
+                                                            <img src="<?php echo esc_url($item['icon_image']['url']) ?>" alt="<?php if (!empty($item['icon_image']['alt'])) echo esc_attr($item['icon_image']['alt']); ?>">
                                                         </span>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
@@ -2863,18 +3009,18 @@ class ElementCamp_Marquee extends Widget_Base
                                                     <?php if ($item['icon_align'] == 'left') : ?>
                                                         <?php Icons_Manager::render_icon($item['icon'], ['aria-hidden' => 'true']); ?>
                                                     <?php endif; ?>
-                                                    <span class="text"><?= wp_kses_post($item['text']); ?></span>
+                                                    <span class="text"><?php echo wp_kses_post($item['text']); ?></span>
                                                     <?php if ($item['icon_align'] == 'right') : ?>
                                                         <?php Icons_Manager::render_icon($item['icon'], ['aria-hidden' => 'true']); ?>
                                                     <?php endif; ?>
                                                     <?php if (!empty($item['separator'])): ?>
-                                                        <span class="separator"><?= esc_html($item['separator']) ?></span>
+                                                        <span class="separator"><?php echo esc_html($item['separator']) ?></span>
                                                     <?php endif; ?>
                                                 </h4>
                                                 <?php if ($item['use_icon_image'] === 'yes') : ?>
                                                     <?php if ($item['icon_image_align'] === 'right') : ?>
                                                         <span class="icon-image">
-                                                            <img src="<?= esc_url($item['icon_image']['url']) ?>" alt="<?php if (!empty($item['icon_image']['alt'])) echo esc_attr($item['icon_image']['alt']); ?>">
+                                                            <img src="<?php echo esc_url($item['icon_image']['url']) ?>" alt="<?php if (!empty($item['icon_image']['alt'])) echo esc_attr($item['icon_image']['alt']); ?>">
                                                         </span>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
@@ -2888,7 +3034,7 @@ class ElementCamp_Marquee extends Widget_Base
                                         <?php foreach ($settings['gallery'] as $image) : ?>
                                             <div class="item">
                                                 <div class="img">
-                                                    <img src="<?= esc_url($image['url']); ?>" alt="<?php if (!empty($image['alt'])) echo esc_attr($image['alt']); ?>">
+                                                    <img src="<?php echo esc_url($image['url']); ?>" alt="<?php if (!empty($image['alt'])) echo esc_attr($image['alt']); ?>">
                                                 </div>
                                             </div>
                                         <?php endforeach; ?>
@@ -2896,8 +3042,8 @@ class ElementCamp_Marquee extends Widget_Base
                                     <?php if ($settings['images_option'] == 'repeater') : ?>
                                         <?php foreach ($settings['images_rep'] as $item) : ?>
                                             <div class="item">
-                                                <a class="img" href="<?= esc_url($item['link']['url']) ?>" <?php if ($item['link']['is_external']) echo 'target="_blank"'; ?>>
-                                                    <img src="<?= esc_url($item['image']['url']); ?>" alt="<?php if (!empty($item['image']['alt'])) echo esc_attr($item['image']['alt']); ?>">
+                                                <a class="img" href="<?php echo esc_url($item['link']['url']) ?>" <?php if ($item['link']['is_external']) echo 'target="_blank"'; ?>>
+                                                    <img src="<?php echo esc_url($item['image']['url']); ?>" alt="<?php if (!empty($item['image']['alt'])) echo esc_attr($item['image']['alt']); ?>">
                                                 </a>
                                             </div>
                                         <?php endforeach; ?>

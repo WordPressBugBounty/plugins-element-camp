@@ -364,7 +364,7 @@ class ElementCamp_Services_List extends Widget_Base
                             <div class="col-lg-6">
                                 <div class="row d-flex align-items-center">
                                     <div class="col-md-4">
-                                        <span class="count"><?= $item['item_count']; ?></span>
+                                        <span class="count"><?php echo esc_html($item['item_count']); ?></span>
                                     </div>
                                     <div class="col-md-8">
                                         <h2 class="title"><?php echo esc_html($item['title']); ?></h2>
@@ -390,20 +390,20 @@ class ElementCamp_Services_List extends Widget_Base
                             <div class="col-lg-6">
                                 <div class="row d-flex align-items-center">
                                     <div class="col-md-4">
-                                        <span class="count"><?= esc_html($item['item_count']); ?></span>
+                                        <span class="count"><?php echo esc_html($item['item_count']); ?></span>
                                     </div>
                                     <div class="col-md-8">
-                                        <div class="text"><?= wp_kses_post($item['content']); ?></div>
+                                        <div class="text"><?php echo wp_kses_post($item['content']); ?></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="row d-flex align-items-center">
                                     <div class="col-md-8">
-                                        <h2 class="title"><?= esc_html($item['title']); ?></h2>
+                                        <h2 class="title"><?php echo esc_html($item['title']); ?></h2>
                                     </div>
                                     <div class="col-md-4 d-flex">
-                                        <a href="<?= esc_url($item['btn_link']['url']); ?>" class="butn" <?php if ( $item['btn_link']['is_external'] ) echo'target="_blank"'; ?>>
+                                        <a href="<?php echo esc_url($item['btn_link']['url']); ?>" class="butn" <?php if ( $item['btn_link']['is_external'] ) echo'target="_blank"'; ?>>
                                         <span class="icon">
                                             <?php \Elementor\Icons_Manager::render_icon( $item['btn_icon'], [ 'aria-hidden' => 'true' ] );?>
                                         </span>

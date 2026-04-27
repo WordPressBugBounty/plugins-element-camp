@@ -844,10 +844,10 @@ class ElementCamp_Map_Items extends \Elementor\Widget_Base
         $this->add_control(
             'cards_button_transform_options',
             [
-                'label' => esc_html__('Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
         $this->start_popover();
@@ -987,7 +987,8 @@ class ElementCamp_Map_Items extends \Elementor\Widget_Base
                                     }
                                     $this->add_render_attribute($link_key, 'class', $button_classes);
                                     ?>
-                                    <a <?php echo $this->get_render_attribute_string($link_key); ?>>
+                                    <a <?php 
+                                        echo $this->get_render_attribute_string($link_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
                                         <?php if (!empty($item['button_animation']) && $item['button_animation'] === 'hvr_text') : ?>
                                             <div class="hvr-txt" data-text="<?php echo esc_attr($hover_text); ?>">
                                                 <span><?php echo esc_html($item['button_text']); ?></span>

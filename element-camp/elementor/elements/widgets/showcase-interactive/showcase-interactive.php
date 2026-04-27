@@ -104,7 +104,7 @@ class elementcamp_Showcase_Interactive extends Widget_Base
     protected function _register_controls()
     {
         $post_types = ControlsHelper::get_post_types();
-        $post_types['by_id'] = __('Manual Selection', 'themescamp-plugin');
+        $post_types['by_id'] = __('Manual Selection', 'element-camp');
         $taxonomies = get_taxonomies([], 'objects');
 
         $this->start_controls_section(
@@ -160,7 +160,7 @@ class elementcamp_Showcase_Interactive extends Widget_Base
         $this->add_control(
             'posts_ids',
             [
-                'label' => __('Search & Select', 'themescamp-plugin'),
+                'label' => __('Search & Select', 'element-camp'),
                 'type' => 'tcg-select2',
                 'options' => ControlsHelper::get_post_list(),
                 'label_block' => true,
@@ -175,7 +175,7 @@ class elementcamp_Showcase_Interactive extends Widget_Base
         $this->add_control(
             'posts_per_page',
             [
-                'label' => __('Posts Per Page', 'themescamp-plugin'),
+                'label' => __('Posts Per Page', 'element-camp'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '4',
                 'min' => '1',
@@ -194,7 +194,7 @@ class elementcamp_Showcase_Interactive extends Widget_Base
         $this->add_control(
             'order',
             [
-                'label' => __('Order', 'themescamp-plugin'),
+                'label' => __('Order', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'asc' => 'Ascending',
@@ -207,7 +207,7 @@ class elementcamp_Showcase_Interactive extends Widget_Base
         $this->add_control(
             'orderby',
             [
-                'label' => __('Order By', 'themescamp-plugin'),
+                'label' => __('Order By', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => ControlsHelper::get_post_orderby_options(),
                 'default' => 'date',
@@ -218,7 +218,7 @@ class elementcamp_Showcase_Interactive extends Widget_Base
         $this->add_control(
             'authors',
             [
-                'label' => __('Author', 'themescamp-plugin'),
+                'label' => __('Author', 'element-camp'),
                 'label_block' => true,
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
@@ -232,7 +232,7 @@ class elementcamp_Showcase_Interactive extends Widget_Base
         $this->add_control(
             'post__not_in',
             [
-                'label'       => __('Exclude', 'themescamp-plugin'),
+                'label'       => __('Exclude', 'element-camp'),
                 'type'        => 'tcg-select2',
                 'label_block' => true,
                 'multiple'    => true,
@@ -382,10 +382,10 @@ class elementcamp_Showcase_Interactive extends Widget_Base
                     }
                     ?>
                     <div class="item block" data-fx="1">
-                        <a href="<?= esc_url(get_the_permalink()) ?>" class="block__link" data-img="<?= esc_url(get_the_post_thumbnail_url()) ?>">
+                        <a href="<?php echo esc_url(get_the_permalink()) ?>" class="block__link" data-img="<?php echo esc_url(get_the_post_thumbnail_url()) ?>">
                             <div class="cont">
-                                <h4 class="title"><?= esc_html(get_the_title()) ?></h4>
-                                <p class="taxonomy"><?= esc_html($terms_display) ?></p>
+                                <h4 class="title"><?php echo esc_html(get_the_title()) ?></h4>
+                                <p class="taxonomy"><?php echo esc_html($terms_display) ?></p>
                             </div>
                         </a>
                     </div>

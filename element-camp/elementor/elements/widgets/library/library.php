@@ -111,21 +111,21 @@ class ElementCamp_Library extends \Elementor\Widget_Base
             <div class="library-column">
                 <?php foreach($settings['left_items'] as $item) : ?>
                     <div class="item">
-                        <img src="<?= esc_url($item['left_image']['url']); ?>" alt="<?php if (!empty($item['left_image']['alt'])) echo esc_attr($item['left_image']['alt']); ?>">
+                        <img src="<?php echo esc_url($item['left_image']['url']); ?>" alt="<?php if (!empty($item['left_image']['alt'])) echo esc_attr($item['left_image']['alt']); ?>">
                     </div>
                 <?php endforeach;?>
             </div>
             <div class="library-column center">
                 <?php foreach($settings['center_items'] as $item) : ?>
                     <div class="item">
-                        <img src="<?= esc_url($item['center_image']['url']); ?>" alt="<?php if (!empty($item['center_image']['alt'])) echo esc_attr($item['center_image']['alt']); ?>">
+                        <img src="<?php echo esc_url($item['center_image']['url']); ?>" alt="<?php if (!empty($item['center_image']['alt'])) echo esc_attr($item['center_image']['alt']); ?>">
                     </div>
                 <?php endforeach;?>
             </div>
             <div class="library-column">
                 <?php foreach($settings['right_items'] as $item) : ?>
                     <div class="item">
-                        <img src="<?= esc_url($item['right_image']['url']); ?>" alt="<?php if (!empty($item['right_image']['alt'])) echo esc_attr($item['right_image']['alt']); ?>">
+                        <img src="<?php echo esc_url($item['right_image']['url']); ?>" alt="<?php if (!empty($item['right_image']['alt'])) echo esc_attr($item['right_image']['alt']); ?>">
                     </div>
                 <?php endforeach;?>
             </div>

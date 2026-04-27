@@ -142,7 +142,7 @@ class ElementCamp_Tip_Showcase extends Widget_Base
     protected function register_controls()
     {
         $post_types = ControlsHelper::get_post_types();
-        $post_types['by_id'] = __('Manual Selection', 'themescamp-plugin');
+        $post_types['by_id'] = __('Manual Selection', 'element-camp');
         $taxonomies = get_taxonomies([], 'objects');
 
         $this->start_controls_section(
@@ -184,7 +184,7 @@ class ElementCamp_Tip_Showcase extends Widget_Base
         $this->add_control(
             'posts_ids',
             [
-                'label' => __('Search & Select', 'themescamp-plugin'),
+                'label' => __('Search & Select', 'element-camp'),
                 'type' => 'tcg-select2',
                 'options' => ControlsHelper::get_post_list(),
                 'label_block' => true,
@@ -199,7 +199,7 @@ class ElementCamp_Tip_Showcase extends Widget_Base
         $this->add_control(
             'posts_per_page',
             [
-                'label' => __('Posts Per Page', 'themescamp-plugin'),
+                'label' => __('Posts Per Page', 'element-camp'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '4',
                 'min' => '1',
@@ -216,7 +216,7 @@ class ElementCamp_Tip_Showcase extends Widget_Base
         $this->add_control(
             'order',
             [
-                'label' => __('Order', 'themescamp-plugin'),
+                'label' => __('Order', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'asc' => 'Ascending',
@@ -229,7 +229,7 @@ class ElementCamp_Tip_Showcase extends Widget_Base
         $this->add_control(
             'orderby',
             [
-                'label' => __('Order By', 'themescamp-plugin'),
+                'label' => __('Order By', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => ControlsHelper::get_post_orderby_options(),
                 'default' => 'date',
@@ -239,7 +239,7 @@ class ElementCamp_Tip_Showcase extends Widget_Base
         $this->add_control(
             'authors',
             [
-                'label' => __('Author', 'themescamp-plugin'),
+                'label' => __('Author', 'element-camp'),
                 'label_block' => true,
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
@@ -253,7 +253,7 @@ class ElementCamp_Tip_Showcase extends Widget_Base
         $this->add_control(
             'post__not_in',
             [
-                'label'       => __('Exclude', 'themescamp-plugin'),
+                'label'       => __('Exclude', 'element-camp'),
                 'type'        => 'tcg-select2',
                 'label_block' => true,
                 'multiple'    => true,
@@ -4842,7 +4842,7 @@ class ElementCamp_Tip_Showcase extends Widget_Base
         $selected_term_type = $settings['display_terms_type'];
         ?>
 
-        <div class="tcgelements-tip-showcase <?=esc_attr($settings['tip_style'])?>"  <?php if ($settings['tip_style']=='slider') : ?> data-tcgelements-tip-showcase='<?php echo esc_attr(json_encode($slider_settings)); ?>' <?php endif;?>>
+        <div class="tcgelements-tip-showcase <?php echo esc_attr($settings['tip_style'])?>"  <?php if ($settings['tip_style']=='slider') : ?> data-tcgelements-tip-showcase='<?php echo esc_attr(json_encode($slider_settings)); ?>' <?php endif;?>>
             <?php if ($settings['tip_style']=='slider') : ?>
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
@@ -4868,8 +4868,8 @@ class ElementCamp_Tip_Showcase extends Widget_Base
                                 }
                             }
                             ?>
-                            <a class="swiper-slide" href="<?=esc_url(get_the_permalink())?>">
-                                <div class="item bg-img" data-background="<?=esc_url(get_the_post_thumbnail_url())?>" data-tooltip-tit="<?= esc_html(get_the_title()) ?>" data-tooltip-sub="<?= esc_html($terms_display) ?>">
+                            <a class="swiper-slide" href="<?php echo esc_url(get_the_permalink())?>">
+                                <div class="item bg-img" data-background="<?php echo esc_url(get_the_post_thumbnail_url())?>" data-tooltip-tit="<?php echo esc_html(get_the_title()) ?>" data-tooltip-sub="<?php echo esc_html($terms_display) ?>">
                                 </div>
                             </a>
                         <?php endwhile;  wp_reset_postdata(); endif; ?>
@@ -4879,7 +4879,7 @@ class ElementCamp_Tip_Showcase extends Widget_Base
                 endif; ?>
                 <?php if ($settings['pagination'] === 'true') : ?>
                     <!-- If we need pagination -->
-                    <div class="swiper-pagination swiper-pagination-<?= $settings['direction'] ?>"></div>
+                    <div class="swiper-pagination swiper-pagination-<?php echo esc_attr($settings['direction']) ?>"></div>
                 <?php endif; ?>
                 <?php if ($settings['arrows'] === 'true') : ?>
                     <!-- If we need navigation buttons -->
@@ -4908,7 +4908,7 @@ class ElementCamp_Tip_Showcase extends Widget_Base
                 endif; ?>
                 <?php if ($settings['scrollbar'] === 'true') : ?>
                     <!-- If we need scrollbar -->
-                    <div class="swiper-scrollbar scrollbar-<?= $settings['direction'] ?>"></div>
+                    <div class="swiper-scrollbar scrollbar-<?php echo esc_attr($settings['direction']) ?>"></div>
                 <?php endif; ?>
             <?php else: ?>
                 <div class="row">
@@ -4936,9 +4936,9 @@ class ElementCamp_Tip_Showcase extends Widget_Base
                     ?>
                         <div class="column">
                             <div class="item">
-                                <a href="<?=esc_url(get_the_permalink())?>">
-                                    <div class="img" data-tooltip-tit="<?= esc_html(get_the_title()) ?>" data-tooltip-sub="<?= esc_html($terms_display) ?>">
-                                        <img src="<?=esc_url(get_the_post_thumbnail_url())?>" alt="">
+                                <a href="<?php echo esc_url(get_the_permalink())?>">
+                                    <div class="img" data-tooltip-tit="<?php echo esc_html(get_the_title()) ?>" data-tooltip-sub="<?php echo esc_html($terms_display) ?>">
+                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url())?>" alt="">
                                     </div>
                                 </a>
                             </div>

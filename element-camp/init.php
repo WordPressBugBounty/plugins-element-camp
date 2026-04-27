@@ -33,7 +33,7 @@ class ElementCampPlugin {
             foreach( glob( $js_dir . '*.js' ) as $file ) {
                 $file_url = str_replace( $js_dir, $js_url, $file );
                 $handle = '' . basename( $file, '.js' );
-                wp_enqueue_script( $handle, $file_url, array( 'jquery' ), null, true );
+                wp_enqueue_script( $handle, $file_url, array( 'jquery' ), filemtime( $file ), true );
             }
         });
 
@@ -44,7 +44,7 @@ class ElementCampPlugin {
             foreach( glob( $js_dir . '*.js' ) as $file ) {
                 $file_url = str_replace( $js_dir, $js_url, $file );
                 $handle = '' . basename( $file, '.js' );
-                wp_register_script( $handle, $file_url, array( 'jquery' ), null, true );
+                wp_register_script( $handle, $file_url, array( 'jquery' ), filemtime( $file ), true );
             }
         });
 
@@ -55,7 +55,7 @@ class ElementCampPlugin {
 		      foreach( glob( $js_dir . '*.js' ) as $file ) {
 		          $file_url = str_replace( $js_dir, $js_url, $file );
 		          $handle = 'tcgelements-' . basename( $file, '.js' );
-		          wp_register_script( $handle, $file_url, array( 'jquery' ), null, true );
+		          wp_register_script( $handle, $file_url, array( 'jquery' ), filemtime( $file ), true );
 		      }
 		} );
 
@@ -68,17 +68,20 @@ class ElementCampPlugin {
 		    foreach( glob( $css_dir . '*.css' ) as $file ) {
 		        $file_url = str_replace( $css_dir, $css_url, $file );
 		        $handle = '' . basename( $file, '.css' );
-		        wp_enqueue_style( $handle, $file_url, array(), null, 'all' );
+		        wp_enqueue_style( $handle, $file_url, array(), filemtime( $file ), 'all' );
 		    }
 		});
 
 		//Theme style
 //		add_action( 'elementor/frontend/after_enqueue_styles', function() {  wp_enqueue_style('tcgelements-plg-style',ELEMENTCAMP_URL .'elementor/elements/assets/css/style.css', array(), '1.0.0', 'all'  );} );
         add_action( 'elementor/frontend/after_enqueue_styles', function() {
+            $plugin_path = plugin_dir_path( ELEMENTCAMP__FILE__ );
             if( is_rtl() ) {
-                wp_enqueue_style('tcgelements-plg-style-rtl',ELEMENTCAMP_URL .'elementor/elements/assets/css/style-rtl.css', array(), '1.0.0', 'all'  );
+                $file = $plugin_path . 'elementor/elements/assets/css/style-rtl.css';
+                wp_enqueue_style('tcgelements-plg-style-rtl', ELEMENTCAMP_URL . 'elementor/elements/assets/css/style-rtl.css', array(), filemtime( $file ), 'all' );
             } else {
-                wp_enqueue_style('tcgelements-plg-style',ELEMENTCAMP_URL .'elementor/elements/assets/css/style.min.css', array(), '1.0.0', 'all'  );
+                $file = $plugin_path . 'elementor/elements/assets/css/style.min.css';
+                wp_enqueue_style('tcgelements-plg-style', ELEMENTCAMP_URL . 'elementor/elements/assets/css/style.min.css', array(), filemtime( $file ), 'all' );
             }
         });
 	}

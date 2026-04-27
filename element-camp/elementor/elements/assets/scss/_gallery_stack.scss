@@ -1,0 +1,238 @@
+// Main wrapper
+.tcgelements-gallery-stack {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+
+  // Gallery wrap container
+  .gallery-wrap {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    &--dense {
+      margin: 0;
+    }
+  }
+
+  // Main gallery container
+  .gallery {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    flex: none;
+
+    &--stack {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      align-items: center;
+      justify-content: start;
+      gap: 2rem;
+      padding: 2rem;
+      --offset: 1rem;
+      position: relative;
+      min-height: 100vh;
+
+      // Gallery items
+      .gallery__item {
+        width: 25vw;
+        height: 500px;
+        z-index: 1;
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 10px;
+        will-change: transform;
+
+        a {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: block;
+          text-decoration: none;
+          z-index: 2;
+        }
+      }
+
+      // Caption positioning (initial state)
+      .caption {
+        position: absolute;
+        top: 0;
+        left: 100vw;
+        width: 100vw;
+        padding: 5vw;
+        opacity: 0;
+        z-index: 0;
+        font-size: clamp(1rem, 3vw, 1.75rem);
+        font-weight: 400;
+
+        .title,
+        h2 {
+          margin: 0;
+          font-size: 12vw;
+          line-height: 1;
+        }
+      }
+
+      // Switched state (stacked state after animation)
+      &.gallery--switch {
+        .gallery__item {
+          grid-area: 1 / 1 / 2 / 2;
+
+          &:nth-child(2) {
+            margin-left: var(--offset);
+          }
+
+          &:nth-child(3) {
+            margin-left: calc(var(--offset) * 2);
+          }
+
+          &:nth-child(4) {
+            margin-left: calc(var(--offset) * 3);
+          }
+
+          &:nth-child(5) {
+            margin-left: calc(var(--offset) * 4);
+          }
+
+          &:nth-child(6) {
+            margin-left: calc(var(--offset) * 5);
+          }
+        }
+
+        .caption {
+          left: 0;
+          opacity: 1;
+        }
+      }
+
+      // Dark style variant
+      &.gallery--stack-dark {
+        .gallery__item {
+          filter: opacity(1);
+        }
+
+        &.gallery--switch {
+          .gallery__item:nth-child(2) {
+            filter: brightness(0.9);
+          }
+
+          .gallery__item:nth-child(3) {
+            filter: brightness(0.8);
+          }
+
+          .gallery__item:nth-child(4) {
+            filter: brightness(0.7);
+          }
+
+          .gallery__item:nth-child(5) {
+            filter: brightness(0.6);
+          }
+
+          .gallery__item:nth-child(6) {
+            filter: brightness(0.5);
+          }
+        }
+      }
+
+      // Glass style variant
+      &.gallery--stack-glass {
+        .gallery__item {
+          filter: opacity(1);
+        }
+
+        &.gallery--switch {
+          .gallery__item {
+            opacity: 0.7;
+          }
+        }
+      }
+
+      // Scale style variant
+      &.gallery--stack-scale {
+        &.gallery--switch {
+          .gallery__item:nth-child(2) {
+            transform: scale(0.98);
+          }
+
+          .gallery__item:nth-child(3) {
+            transform: scale(0.96);
+          }
+
+          .gallery__item:nth-child(4) {
+            transform: scale(0.94);
+          }
+
+          .gallery__item:nth-child(5) {
+            transform: scale(0.92);
+          }
+
+          .gallery__item:nth-child(6) {
+            transform: scale(0.9);
+          }
+        }
+      }
+
+      // Inverse z-index ordering
+      &.gallery--stack-inverse {
+        .gallery__item:nth-child(1) {
+          z-index: 6;
+        }
+
+        .gallery__item:nth-child(2) {
+          z-index: 5;
+        }
+
+        .gallery__item:nth-child(3) {
+          z-index: 4;
+        }
+
+        .gallery__item:nth-child(4) {
+          z-index: 3;
+        }
+
+        .gallery__item:nth-child(5) {
+          z-index: 2;
+        }
+      }
+    }
+  }
+
+  // Utility classes
+  .text-uppercase {
+    text-transform: uppercase;
+  }
+
+  .fw-600 {
+    font-weight: 600;
+  }
+}
+
+// Responsive styles
+@media screen and (min-width: 53em) {
+  .tcgelements-gallery-stack {
+    .gallery {
+      &--stack {
+        .caption {
+          top: 10%;
+          width: 60vw;
+          max-width: 800px;
+        }
+
+        &.gallery--switch {
+          .caption {
+            left: 40vw;
+          }
+        }
+      }
+    }
+  }
+}

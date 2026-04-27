@@ -141,10 +141,6 @@
             var containerWidth = containerRect.width;
             var containerHeight = containerRect.height;
 
-            // Calculate normalized mouse position (-1 to 1)
-            var normalizedX = (mouseX / containerWidth) * 2 - 1;
-            var normalizedY = (mouseY / containerHeight) * 2 - 1;
-
             var parallaxElements = container.querySelectorAll(".parallaxed, .tce-mouse-parallax");
 
             for (var i = 0; i < parallaxElements.length; i++) {
@@ -153,32 +149,32 @@
                 var elementCenterX = elementRect.left + elementRect.width / 2 - containerRect.left;
                 var elementCenterY = elementRect.top + elementRect.height / 2 - containerRect.top;
 
-                // Calculate distance from mouse to element center
                 var distanceX = (mouseX - elementCenterX) / containerWidth;
                 var distanceY = (mouseY - elementCenterY) / containerHeight;
 
-                // Get custom intensity or use default
+                // Read direction from data attribute
+                var direction = element.getAttribute("data-parallax-direction") || "default";
+
                 var customIntensity = parseFloat(element.getAttribute("data-parallax-intensity"));
                 var baseIntensity = !isNaN(customIntensity) ? customIntensity : 0.4;
                 var intensity = baseIntensity + i * 0.15;
 
-                // Get custom scale or use default
                 var useScale = element.getAttribute("data-parallax-scale") !== "false";
                 var customScaleFactor = parseFloat(element.getAttribute("data-parallax-scale-factor"));
                 var scaleFactor = !isNaN(customScaleFactor) ? customScaleFactor : 0.15;
 
-                // Movement calculations
                 var moveRange = parseFloat(element.getAttribute("data-parallax-range")) || 50;
-                var amountMovedX = distanceX * intensity * moveRange;
-                var amountMovedY = distanceY * intensity * moveRange;
 
-                // Enhanced scale based on mouse proximity
+                // Apply direction
+                var directionMultiplier = (direction === "inverse") ? -1 : 1;
+                var amountMovedX = distanceX * intensity * moveRange * directionMultiplier;
+                var amountMovedY = distanceY * intensity * moveRange * directionMultiplier;
+
                 var scale = 1;
                 if (useScale) {
                     scale = 1 + (Math.abs(distanceX) + Math.abs(distanceY)) * scaleFactor;
                 }
 
-                // Combine transformations
                 element.style.transform = 'translate(' + amountMovedX + 'px, ' + amountMovedY + 'px) scale(' + scale + ')';
                 element.style.transition = 'transform 0.1s ease-out';
             }

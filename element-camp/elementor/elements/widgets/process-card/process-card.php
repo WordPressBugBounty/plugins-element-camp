@@ -22,7 +22,7 @@ class ElementCamp_Process_Card extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('Process Card', 'elementcamp_plg');
+        return esc_html__('Process Card', 'element-camp');
     }
 
     public function get_icon()
@@ -46,15 +46,15 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->start_controls_section(
             'section_content',
             [
-                'label' => esc_html__('Content', 'elementcamp_plg'),
+                'label' => esc_html__('Content', 'element-camp'),
             ]
         );
 
         $this->add_control(
             'number',
             [
-                'label' => esc_html__('Number', 'elementcamp_plg'),
-                'default' => esc_html__('01', 'elementcamp_plg'),
+                'label' => esc_html__('Number', 'element-camp'),
+                'default' => esc_html__('01', 'element-camp'),
                 'type' => Controls_Manager::TEXT,
             ]
         );
@@ -62,8 +62,8 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_control(
             'title',
             [
-                'label' => esc_html__('Title', 'elementcamp_plg'),
-                'default' => esc_html__('Examine Brief', 'elementcamp_plg'),
+                'label' => esc_html__('Title', 'element-camp'),
+                'default' => esc_html__('Examine Brief', 'element-camp'),
                 'description' => esc_html__( 'You can use <small></small> to set different style', 'element-camp' ),
                 'type' => Controls_Manager::TEXTAREA,
             ]
@@ -72,8 +72,8 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_control(
             'text',
             [
-                'label' => esc_html__('Text', 'elementcamp_plg'),
-                'default' => esc_html__('Examine and research the Brief. Define the problem and solutions', 'elementcamp_plg'),
+                'label' => esc_html__('Text', 'element-camp'),
+                'default' => esc_html__('Examine and research the Brief. Define the problem and solutions', 'element-camp'),
                 'type' => Controls_Manager::TEXTAREA,
             ]
         );
@@ -81,8 +81,8 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_control(
             'float_text',
             [
-                'label' => esc_html__('Float Text', 'elementcamp_plg'),
-                'default' => esc_html__('Brainstorming', 'elementcamp_plg'),
+                'label' => esc_html__('Float Text', 'element-camp'),
+                'default' => esc_html__('Brainstorming', 'element-camp'),
                 'type' => Controls_Manager::TEXT,
             ]
         );
@@ -93,7 +93,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->start_controls_section(
             'section_number_style',
             [
-                'label' => esc_html__('Number Style', 'elementcamp_plg'),
+                'label' => esc_html__('Number Style', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -102,7 +102,7 @@ class ElementCamp_Process_Card extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'number_typography',
-                'label' => esc_html__('Typography', 'elementcamp_plg'),
+                'label' => esc_html__('Typography', 'element-camp'),
                 'selector' => '{{WRAPPER}} .tcgelements-process-card .num .txt',
             ]
         );
@@ -110,7 +110,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_control(
             'number_color',
             [
-                'label' => esc_html__('Color', 'elementcamp_plg'),
+                'label' => esc_html__('Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#999',
                 'selectors' => [
@@ -122,7 +122,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'number_margin',
             [
-                'label' => esc_html__('Margin', 'elementcamp_plg'),
+                'label' => esc_html__('Margin', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'default' => [
@@ -144,7 +144,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->start_controls_section(
             'section_line_style',
             [
-                'label' => esc_html__('Line Style', 'elementcamp_plg'),
+                'label' => esc_html__('Line Style', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -161,7 +161,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'line_width',
             [
-                'label' => esc_html__('Line Width', 'elementcamp_plg'),
+                'label' => esc_html__('Line Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -184,7 +184,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'line_height',
             [
-                'label' => esc_html__('Line Height', 'elementcamp_plg'),
+                'label' => esc_html__('Line Height', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -214,7 +214,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->start_controls_section(
             'section_card_info_style',
             [
-                'label' => esc_html__('Info Card Style', 'elementcamp_plg'),
+                'label' => esc_html__('Info Card Style', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -231,7 +231,7 @@ class ElementCamp_Process_Card extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'card_info_border',
-                'label' => esc_html__('Border', 'elementcamp_plg'),
+                'label' => esc_html__('Border', 'element-camp'),
                 'selector' => '{{WRAPPER}} .tcgelements-process-card .cont .info',
             ]
         );
@@ -239,7 +239,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'card_info_border_radius',
             [
-                'label' => esc_html__('Info Border Radius', 'elementcamp_plg'),
+                'label' => esc_html__('Info Border Radius', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'default' => [
@@ -258,7 +258,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'card_info_padding',
             [
-                'label' => esc_html__('Info Padding', 'elementcamp_plg'),
+                'label' => esc_html__('Info Padding', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'default' => [
@@ -286,7 +286,7 @@ class ElementCamp_Process_Card extends Widget_Base
             Group_Control_Background::get_type(),
             [
                 'name' => 'card_info_background',
-                'label' => esc_html__('Background', 'elementcamp_plg'),
+                'label' => esc_html__('Background', 'element-camp'),
                 'types' => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .tcgelements-process-card .cont .info',
                 'fields_options' => [
@@ -312,7 +312,7 @@ class ElementCamp_Process_Card extends Widget_Base
             Group_Control_Background::get_type(),
             [
                 'name' => 'card_info_hover_background',
-                'label' => esc_html__('Hover Background', 'elementcamp_plg'),
+                'label' => esc_html__('Hover Background', 'element-camp'),
                 'types' => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .tcgelements-process-card:hover .cont .info',
                 'fields_options' => [
@@ -337,7 +337,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'card_content_padding',
             [
-                'label' => esc_html__('Content Padding', 'elementcamp_plg'),
+                'label' => esc_html__('Content Padding', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'default' => [
@@ -356,7 +356,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'card_content_margin',
             [
-                'label' => esc_html__('Content Margin', 'elementcamp_plg'),
+                'label' => esc_html__('Content Margin', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -371,7 +371,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->start_controls_section(
             'section_title_style',
             [
-                'label' => esc_html__('Title Style', 'elementcamp_plg'),
+                'label' => esc_html__('Title Style', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -380,7 +380,7 @@ class ElementCamp_Process_Card extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'title_typography',
-                'label' => esc_html__('Typography', 'elementcamp_plg'),
+                'label' => esc_html__('Typography', 'element-camp'),
                 'selector' => '{{WRAPPER}} .tcgelements-process-card .cont .info .title',
             ]
         );
@@ -388,7 +388,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'title_margin',
             [
-                'label' => esc_html__('Margin', 'elementcamp_plg'),
+                'label' => esc_html__('Margin', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'default' => [
@@ -414,7 +414,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'title_color',
             [
-                'label' => esc_html__('Color', 'elementcamp_plg'),
+                'label' => esc_html__('Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#888',
                 'selectors' => [
@@ -433,7 +433,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_control(
             'card_hover_title_color',
             [
-                'label' => esc_html__('Color', 'elementcamp_plg'),
+                'label' => esc_html__('Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -486,7 +486,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->start_controls_section(
             'section_text_style',
             [
-                'label' => esc_html__('Text Style', 'elementcamp_plg'),
+                'label' => esc_html__('Text Style', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -495,7 +495,7 @@ class ElementCamp_Process_Card extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'text_typography',
-                'label' => esc_html__('Typography', 'elementcamp_plg'),
+                'label' => esc_html__('Typography', 'element-camp'),
                 'selector' => '{{WRAPPER}} .tcgelements-process-card .cont .info .text',
             ]
         );
@@ -503,7 +503,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'text_margin',
             [
-                'label' => esc_html__('Margin', 'elementcamp_plg'),
+                'label' => esc_html__('Margin', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'default' => [
@@ -522,7 +522,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'text_padding',
             [
-                'label' => esc_html__('Padding', 'elementcamp_plg'),
+                'label' => esc_html__('Padding', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'default' => [
@@ -542,7 +542,7 @@ class ElementCamp_Process_Card extends Widget_Base
             Group_Control_Border::get_type(),
             [
                 'name' => 'text_border',
-                'label' => esc_html__('Border', 'elementcamp_plg'),
+                'label' => esc_html__('Border', 'element-camp'),
                 'selector' => '{{WRAPPER}} .tcgelements-process-card .cont .info .text',
             ]
         );
@@ -558,7 +558,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'text_color',
             [
-                'label' => esc_html__('Color', 'elementcamp_plg'),
+                'label' => esc_html__('Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#888',
                 'selectors' => [
@@ -577,7 +577,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_control(
             'card_hover_text_color',
             [
-                'label' => esc_html__('Color', 'elementcamp_plg'),
+                'label' => esc_html__('Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -594,7 +594,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->start_controls_section(
             'section_float_text_style',
             [
-                'label' => esc_html__('Float Text Style', 'elementcamp_plg'),
+                'label' => esc_html__('Float Text Style', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -603,7 +603,7 @@ class ElementCamp_Process_Card extends Widget_Base
             Group_Control_Typography::get_type(),
             [
                 'name' => 'float_text_typography',
-                'label' => esc_html__('Typography', 'elementcamp_plg'),
+                'label' => esc_html__('Typography', 'element-camp'),
                 'selector' => '{{WRAPPER}} .tcgelements-process-card .float-txt',
                 'fields_options' => [
                     'font_size' => [
@@ -619,7 +619,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_control(
             'float_text_color',
             [
-                'label' => esc_html__('Color', 'elementcamp_plg'),
+                'label' => esc_html__('Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#fff',
                 'selectors' => [
@@ -632,7 +632,7 @@ class ElementCamp_Process_Card extends Widget_Base
             Group_Control_Background::get_type(),
             [
                 'name' => 'float_text_background',
-                'label' => esc_html__('Background', 'elementcamp_plg'),
+                'label' => esc_html__('Background', 'element-camp'),
                 'types' => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .tcgelements-process-card .float-txt',
                 'fields_options' => [
@@ -649,7 +649,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'float_text_padding',
             [
-                'label' => esc_html__('Padding', 'elementcamp_plg'),
+                'label' => esc_html__('Padding', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'default' => [
@@ -668,7 +668,7 @@ class ElementCamp_Process_Card extends Widget_Base
         $this->add_responsive_control(
             'float_text_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'elementcamp_plg'),
+                'label' => esc_html__('Border Radius', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'default' => [

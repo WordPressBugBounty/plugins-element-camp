@@ -23,11 +23,11 @@ class TCG_Pro_Container_Extender
 
             $section_bg = Plugin::instance()->controls_manager->get_control_from_stack($stack->get_unique_name(), 'background_background');
             $section_bg['options']['tcg_gradient'] = [
-                'title' => esc_html__('3 Colors Gradient', 'elementor'),
+                'title' => esc_html__('3 Colors Gradient', 'element-camp'),
                 'icon' => 'eicon-barcode',
             ];
             $section_bg['options']['tcg_gradient_4'] = [
-                'title' => esc_html__('4 Colors Gradient', 'elementor'),
+                'title' => esc_html__('4 Colors Gradient', 'element-camp'),
                 'icon' => 'eicon-barcode',
             ];
             $stack->update_control('background_background', $section_bg);
@@ -38,11 +38,11 @@ class TCG_Pro_Container_Extender
             $section_bg_hover = Plugin::instance()->controls_manager->get_control_from_stack($stack->get_unique_name(), 'background_hover_background');
             if ($section_bg_hover) {
                 $section_bg_hover['options']['tcg_gradient'] = [
-                    'title' => esc_html__('3 Colors Gradient', 'elementor'),
+                    'title' => esc_html__('3 Colors Gradient', 'element-camp'),
                     'icon' => 'eicon-barcode',
                 ];
                 $section_bg_hover['options']['tcg_gradient_4'] = [
-                    'title' => esc_html__('4 Colors Gradient', 'elementor'),
+                    'title' => esc_html__('4 Colors Gradient', 'element-camp'),
                     'icon' => 'eicon-barcode',
                 ];
                 $stack->update_control('background_hover_background', $section_bg_hover);
@@ -75,25 +75,37 @@ class TCG_Pro_Container_Extender
 
             $section_bg = Plugin::instance()->controls_manager->get_control_from_stack($stack->get_unique_name(), 'background_overlay_background');
             $section_bg['options']['tcg_gradient'] = [
-                'title' => esc_html__('3 Colors Gradient', 'elementor'),
+                'title' => esc_html__('3 Colors Gradient', 'element-camp'),
                 'icon' => 'eicon-barcode',
             ];
             $section_bg['options']['tcg_gradient_4'] = [
-                'title' => esc_html__('4 Colors Gradient', 'elementor'),
+                'title' => esc_html__('4 Colors Gradient', 'element-camp'),
                 'icon' => 'eicon-barcode',
             ];
             $stack->update_control('background_overlay_background', $section_bg);
+            // Update the opacity control condition to include custom gradient types
+            $opacity_control = $stack->get_controls('background_overlay_opacity');
+
+            if ($opacity_control && !is_wp_error($opacity_control)) {
+                $opacity_control['condition']['background_overlay_background'] = [
+                    'classic',
+                    'gradient',
+                    'tcg_gradient',
+                    'tcg_gradient_4'
+                ];
+                $stack->update_responsive_control('background_overlay_opacity', $opacity_control);
+            }
         }, 10, 3);
 
         add_action('elementor/element/container/section_background_overlay/before_section_end', function ($stack) {
             $section_bg_overlay_hover = Plugin::instance()->controls_manager->get_control_from_stack($stack->get_unique_name(), 'background_overlay_hover_background');
             if ($section_bg_overlay_hover) {
                 $section_bg_overlay_hover['options']['tcg_gradient'] = [
-                    'title' => esc_html__('3 Colors Gradient', 'elementor'),
+                    'title' => esc_html__('3 Colors Gradient', 'element-camp'),
                     'icon' => 'eicon-barcode',
                 ];
                 $section_bg_overlay_hover['options']['tcg_gradient_4'] = [
-                    'title' => esc_html__('4 Colors Gradient', 'elementor'),
+                    'title' => esc_html__('4 Colors Gradient', 'element-camp'),
                     'icon' => 'eicon-barcode',
                 ];
                 $stack->update_control('background_overlay_hover_background', $section_bg_overlay_hover);
@@ -101,7 +113,9 @@ class TCG_Pro_Container_Extender
         }, 15, 3); // Higher priority
 
         // container controls
+        add_action('elementor/element/container/section_border/before_section_end', [$this, 'register_tc_container_multi_shadow_controls'], 10, 3);
         add_action('elementor/frontend/container/before_render', [$this, 'before_container_render'], 10, 1);
+        add_action('elementor/frontend/container/before_render', [$this, 'multi_box_shadow_container_render'], 10, 1);
         add_action('elementor/element/container/section_background/after_section_start', [$this, 'register_tc_container_background_controls_start'], 10, 3);
         add_action('elementor/element/container/section_background/before_section_end', [$this, 'register_tc_container_background_controls'], 10, 3);
         add_action('elementor/element/container/section_background_overlay/before_section_end', [$this, 'register_tc_container_background_overlay_controls'], 10, 3);
@@ -225,13 +239,13 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'tc_container_hover_selector',
             [
-                'label' => esc_html__('Choose Selector', 'themescamp-elements'),
+                'label' => esc_html__('Choose Selector', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'container',
                 'options' => [
-                    'container'  => esc_html__('Container', 'themescamp-elements'),
-                    'parent-container'  => esc_html__('Parent Container', 'themescamp-elements'),
-                    'parent-parent-container'  => esc_html__('Parent Parent Container', 'themescamp-elements'),
+                    'container'  => esc_html__('Container', 'element-camp'),
+                    'parent-container'  => esc_html__('Parent Container', 'element-camp'),
+                    'parent-parent-container'  => esc_html__('Parent Parent Container', 'element-camp'),
                 ],
                 'render_type' => 'ui',
                 'frontend_available' => true,
@@ -385,7 +399,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'tcg_advanced_hover_transition',
             [
-                'label' => esc_html__('Advanced Hover Transition', 'themescamp-elements'),
+                'label' => esc_html__('Advanced Hover Transition', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -420,10 +434,10 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'float_cursor',
             [
-                'label' => esc_html__('Float Cursor', 'themescamp-plugin'),
+                'label' => esc_html__('Float Cursor', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('On', 'themescamp-plugin'),
-                'label_off' => esc_html__('Off', 'themescamp-plugin'),
+                'label_on' => esc_html__('On', 'element-camp'),
+                'label_off' => esc_html__('Off', 'element-camp'),
                 'return_value' => 'yes',
                 'default' => 'no',
                 'frontend_available' => true,
@@ -433,8 +447,8 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'float_cursor_text',
             [
-                'label' => esc_html__('Float Cursor Text', 'themescamp-plugin'),
-                'default' => esc_html__('Hold And Drag', 'themescamp-plugin'),
+                'label' => esc_html__('Float Cursor Text', 'element-camp'),
+                'default' => esc_html__('Hold And Drag', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'condition' => [
                     'float_cursor' => 'yes',
@@ -446,7 +460,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'float_cursor_icon',
             [
-                'label' => esc_html__('Choose Icon', 'themescamp-plugin'),
+                'label' => esc_html__('Choose Icon', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::ICONS,
                 'condition' => [
                     'float_cursor' => 'yes',
@@ -458,11 +472,11 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'float_cursor_icon_position',
             [
-                'label' => esc_html__('Icon Position', 'themescamp-plugin'),
+                'label' => esc_html__('Icon Position', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => [
-                    'before' => esc_html__('Before', 'themescamp-plugin'),
-                    'after' => esc_html__('After', 'themescamp-plugin'),
+                    'before' => esc_html__('Before', 'element-camp'),
+                    'after' => esc_html__('After', 'element-camp'),
                 ],
                 'default' => 'before',
                 'condition' => [
@@ -476,11 +490,11 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'tcg_advanced_animations',
             [
-                'label' => esc_html__('Animations', 'themescamp-elements'),
+                'label' => esc_html__('Animations', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-elements'),
-                    'tc-mouse-parallax' => esc_html__('Mouse Parallax', 'themescamp-elements'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'tc-mouse-parallax' => esc_html__('Mouse Parallax', 'element-camp'),
                 ],
                 'render_type' => 'ui',
                 'frontend_available' => true,
@@ -490,10 +504,10 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'tcg_mouse_parallax_enable_scale',
             [
-                'label' => esc_html__('Enable Scale Effect', 'themescamp-elements'),
+                'label' => esc_html__('Enable Scale Effect', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('Yes', 'themescamp-elements'),
-                'label_off' => esc_html__('No', 'themescamp-elements'),
+                'label_on' => esc_html__('Yes', 'element-camp'),
+                'label_off' => esc_html__('No', 'element-camp'),
                 'return_value' => 'yes',
                 'default' => 'no',
                 'condition' => [
@@ -507,14 +521,14 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'tcg_mouse_parallax_scope',
             [
-                'label' => esc_html__('Parallax Scope', 'themescamp-elements'),
+                'label' => esc_html__('Parallax Scope', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'options' => [
-                    'global' => esc_html__('Global (Entire Page)', 'themescamp-elements'),
-                    'container' => esc_html__('Container (Local Area)', 'themescamp-elements'),
+                    'global' => esc_html__('Global (Entire Page)', 'element-camp'),
+                    'container' => esc_html__('Container (Local Area)', 'element-camp'),
                 ],
                 'default' => 'global',
-                'description' => esc_html__('Global: Parallax based on mouse position on entire page. Container: Parallax based on mouse position within container only.', 'themescamp-elements'),
+                'description' => esc_html__('Global: Parallax based on mouse position on entire page. Container: Parallax based on mouse position within container only.', 'element-camp'),
                 'condition' => [
                     'tcg_advanced_animations' => 'tc-mouse-parallax',
                 ],
@@ -526,10 +540,10 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'tcg_mouse_parallax_item_class',
             [
-                'label' => esc_html__('Parallax Item Class', 'themescamp-elements'),
+                'label' => esc_html__('Parallax Item Class', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'placeholder' => esc_html__('e.g., parallaxed', 'themescamp-elements'),
-                'description' => esc_html__('Leave empty to apply parallax to the container itself. Add a class to target specific child elements instead.', 'themescamp-elements'),
+                'placeholder' => esc_html__('e.g., parallaxed', 'element-camp'),
+                'description' => esc_html__('Leave empty to apply parallax to the container itself. Add a class to target specific child elements instead.', 'element-camp'),
                 'condition' => [
                     'tcg_advanced_animations' => 'tc-mouse-parallax',
                 ],
@@ -541,7 +555,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'tcg_mouse_parallax_scale_intensity',
             [
-                'label' => esc_html__('Scale Intensity', 'themescamp-elements'),
+                'label' => esc_html__('Scale Intensity', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -565,11 +579,11 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'tcg_advanced_gsap_animations',
             [
-                'label' => esc_html__('Gsap Animations', 'themescamp-elements'),
+                'label' => esc_html__('Gsap Animations', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-elements'),
-                    'flip-scroll' => esc_html__('Flip Scroll', 'themescamp-elements'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'flip-scroll' => esc_html__('Flip Scroll', 'element-camp'),
                 ],
                 'render_type' => 'ui',
                 'frontend_available' => true,
@@ -593,7 +607,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'float_cursor_width',
             [
-                'label' => esc_html__('Width', 'themescamp-plugin'),
+                'label' => esc_html__('Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -620,7 +634,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'float_cursor_height',
             [
-                'label' => esc_html__('Height', 'themescamp-plugin'),
+                'label' => esc_html__('Height', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -654,7 +668,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'float_cursor_text_color',
             [
-                'label' => esc_html__('Text Color', 'themescamp-plugin'),
+                'label' => esc_html__('Text Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcg-float-cursor' => 'color: {{VALUE}};',
@@ -672,7 +686,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'float_cursor_blur_method',
             [
-                'label' => esc_html__('Blur Method', 'themescamp-plugin'),
+                'label' => esc_html__('Blur Method', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'backdrop-filter' => 'backdrop-filter',
@@ -687,7 +701,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'float_cursor_blur_value',
             [
-                'label' => esc_html__('Blur', 'themescamp-plugin'),
+                'label' => esc_html__('Blur', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -700,7 +714,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'float_cursor_icon_heading',
             [
-                'label' => esc_html__('Icon', 'themescamp-plugin'),
+                'label' => esc_html__('Icon', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::HEADING,
                 'separator' => 'before',
                 'condition' => [
@@ -712,7 +726,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'float_cursor_icon_size',
             [
-                'label' => esc_html__('Icon Size', 'themescamp-plugin'),
+                'label' => esc_html__('Icon Size', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -748,7 +762,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'float_cursor_icon_color',
             [
-                'label' => esc_html__('Icon Color', 'themescamp-plugin'),
+                'label' => esc_html__('Icon Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcg-float-cursor i' => 'color: {{VALUE}};',
@@ -1253,9 +1267,9 @@ class TCG_Pro_Container_Extender
             'advanced_border_popover-toggle',
             [
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label' => esc_html__('Custom Border Settings', 'themescamp-elements'),
-                'label_off' => esc_html__('Default', 'themescamp-elements'),
-                'label_on' => esc_html__('Custom', 'themescamp-elements'),
+                'label' => esc_html__('Custom Border Settings', 'element-camp'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
                 'return_value' => 'yes',
             ]
         );
@@ -1264,16 +1278,16 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'advanced_border_top_style',
             [
-                'label' => esc_html__('Border Top Style', 'themescamp-elements'),
+                'label' => esc_html__('Border Top Style', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-elements'),
-                    'none' => esc_html__('None', 'themescamp-elements'),
-                    'solid' => esc_html__('Solid', 'themescamp-elements'),
-                    'double' => esc_html__('Double', 'themescamp-elements'),
-                    'dashed' => esc_html__('Dashed', 'themescamp-elements'),
-                    'dotted' => esc_html__('Dotted', 'themescamp-elements'),
-                    'groove' => esc_html__('Groove', 'themescamp-elements'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                    'solid' => esc_html__('Solid', 'element-camp'),
+                    'double' => esc_html__('Double', 'element-camp'),
+                    'dashed' => esc_html__('Dashed', 'element-camp'),
+                    'dotted' => esc_html__('Dotted', 'element-camp'),
+                    'groove' => esc_html__('Groove', 'element-camp'),
                 ],
                 'default' => '',
                 'selectors' => [
@@ -1284,7 +1298,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'advanced_border_top_color',
             [
-                'label' => esc_html__('Border Top Color', 'themescamp-elements'),
+                'label' => esc_html__('Border Top Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}}' => 'border-top-color: {{VALUE}};',
@@ -1294,7 +1308,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'advanced_border_top_width',
             [
-                'label' => esc_html__('Border Top Width', 'themescamp-elements'),
+                'label' => esc_html__('Border Top Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}}' => 'border-top-width: {{SIZE}}{{UNIT}};',
@@ -1317,16 +1331,16 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'advanced_border_bottom_style',
             [
-                'label' => esc_html__('Border Bottom Style', 'themescamp-elements'),
+                'label' => esc_html__('Border Bottom Style', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-elements'),
-                    'none' => esc_html__('None', 'themescamp-elements'),
-                    'solid' => esc_html__('Solid', 'themescamp-elements'),
-                    'double' => esc_html__('Double', 'themescamp-elements'),
-                    'dashed' => esc_html__('Dashed', 'themescamp-elements'),
-                    'dotted' => esc_html__('Dotted', 'themescamp-elements'),
-                    'groove' => esc_html__('Groove', 'themescamp-elements'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                    'solid' => esc_html__('Solid', 'element-camp'),
+                    'double' => esc_html__('Double', 'element-camp'),
+                    'dashed' => esc_html__('Dashed', 'element-camp'),
+                    'dotted' => esc_html__('Dotted', 'element-camp'),
+                    'groove' => esc_html__('Groove', 'element-camp'),
                 ],
                 'default' => '',
                 'selectors' => [
@@ -1337,7 +1351,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'advanced_border_bottom_color',
             [
-                'label' => esc_html__('Border Bottom Color', 'themescamp-elements'),
+                'label' => esc_html__('Border Bottom Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}}' => 'border-bottom-color: {{VALUE}};',
@@ -1347,7 +1361,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'advanced_border_bottom_width',
             [
-                'label' => esc_html__('Border Bottom Width', 'themescamp-elements'),
+                'label' => esc_html__('Border Bottom Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}}' => 'border-bottom-width: {{SIZE}}{{UNIT}};',
@@ -1370,16 +1384,16 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'advanced_border_right_style',
             [
-                'label' => esc_html__('Border Right Style', 'themescamp-elements'),
+                'label' => esc_html__('Border Right Style', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-elements'),
-                    'none' => esc_html__('None', 'themescamp-elements'),
-                    'solid' => esc_html__('Solid', 'themescamp-elements'),
-                    'double' => esc_html__('Double', 'themescamp-elements'),
-                    'dashed' => esc_html__('Dashed', 'themescamp-elements'),
-                    'dotted' => esc_html__('Dotted', 'themescamp-elements'),
-                    'groove' => esc_html__('Groove', 'themescamp-elements'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                    'solid' => esc_html__('Solid', 'element-camp'),
+                    'double' => esc_html__('Double', 'element-camp'),
+                    'dashed' => esc_html__('Dashed', 'element-camp'),
+                    'dotted' => esc_html__('Dotted', 'element-camp'),
+                    'groove' => esc_html__('Groove', 'element-camp'),
                 ],
                 'default' => '',
                 'selectors' => [
@@ -1390,7 +1404,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'advanced_border_right_color',
             [
-                'label' => esc_html__('Border Right Color', 'themescamp-elements'),
+                'label' => esc_html__('Border Right Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}}' => 'border-right-color: {{VALUE}};',
@@ -1400,7 +1414,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'advanced_border_right_width',
             [
-                'label' => esc_html__('Border Right Width', 'themescamp-elements'),
+                'label' => esc_html__('Border Right Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}}' => 'border-right-width: {{SIZE}}{{UNIT}};',
@@ -1423,16 +1437,16 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'advanced_border_left_style',
             [
-                'label' => esc_html__('Border Left Style', 'themescamp-elements'),
+                'label' => esc_html__('Border Left Style', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-elements'),
-                    'none' => esc_html__('None', 'themescamp-elements'),
-                    'solid' => esc_html__('Solid', 'themescamp-elements'),
-                    'double' => esc_html__('Double', 'themescamp-elements'),
-                    'dashed' => esc_html__('Dashed', 'themescamp-elements'),
-                    'dotted' => esc_html__('Dotted', 'themescamp-elements'),
-                    'groove' => esc_html__('Groove', 'themescamp-elements'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                    'solid' => esc_html__('Solid', 'element-camp'),
+                    'double' => esc_html__('Double', 'element-camp'),
+                    'dashed' => esc_html__('Dashed', 'element-camp'),
+                    'dotted' => esc_html__('Dotted', 'element-camp'),
+                    'groove' => esc_html__('Groove', 'element-camp'),
                 ],
                 'default' => '',
                 'selectors' => [
@@ -1443,7 +1457,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'advanced_border_left_color',
             [
-                'label' => esc_html__('Border Left Color', 'themescamp-elements'),
+                'label' => esc_html__('Border Left Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}}' => 'border-left-color: {{VALUE}};',
@@ -1453,7 +1467,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'advanced_border_left_width',
             [
-                'label' => esc_html__('Border Left Width', 'themescamp-elements'),
+                'label' => esc_html__('Border Left Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}}' => 'border-left-width: {{SIZE}}{{UNIT}};',
@@ -1537,9 +1551,9 @@ class TCG_Pro_Container_Extender
             'tc_container_outline',
             [
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label' => esc_html__('Outline', 'themescamp-elements'),
-                'label_off' => esc_html__('Default', 'themescamp-elements'),
-                'label_on' => esc_html__('Custom', 'themescamp-elements'),
+                'label' => esc_html__('Outline', 'element-camp'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
                 'return_value' => 'yes',
             ]
         );
@@ -1636,13 +1650,13 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'tc_container_pointers_events',
             [
-                'label' => esc_html__('Pointer Events', 'themescamp-elements'),
+                'label' => esc_html__('Pointer Events', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => '',
                 'options' => [
-                    ''  => esc_html__('Default', 'themescamp-elements'),
-                    'auto'  => esc_html__('Auto', 'themescamp-elements'),
-                    'none'  => esc_html__('None', 'themescamp-elements'),
+                    ''  => esc_html__('Default', 'element-camp'),
+                    'auto'  => esc_html__('Auto', 'element-camp'),
+                    'none'  => esc_html__('None', 'element-camp'),
                 ],
                 'selectors' => [
                     '{{WRAPPER}}' => 'pointer-events: {{VALUE}};',
@@ -1662,17 +1676,17 @@ class TCG_Pro_Container_Extender
             ]
         );
 
-        $start = is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
-        $end = !is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
+        $start = is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
+        $end = !is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
 
         $widget->add_control(
             'tc_container_hover_note',
             [
                 'type' => \Elementor\Controls_Manager::ALERT,
                 'alert_type' => 'info',
-                'heading' => esc_html__('How Container Hover Works', 'themescamp-core'),
+                'heading' => esc_html__('How Container Hover Works', 'element-camp'),
                 'content' => __('💡 These hover controls work with the "Choose Selector" option in the Background section: <br>
-                     Perfect for creating interactive card designs and complex hover animations.', 'themescamp-core'),
+                     Perfect for creating interactive card designs and complex hover animations.', 'element-camp'),
             ]
         );
 
@@ -1747,7 +1761,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'tc_container_hover_orientation_h',
             [
-                'label' => esc_html__('Horizontal Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Horizontal Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
@@ -1769,7 +1783,7 @@ class TCG_Pro_Container_Extender
         $widget->add_responsive_control(
             'tc_container_hover_x',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1806,7 +1820,7 @@ class TCG_Pro_Container_Extender
         $widget->add_responsive_control(
             'tc_container_hover_x_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1843,17 +1857,17 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             'tc_container_hover_orientation_v',
             [
-                'label' => esc_html__('Vertical Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Vertical Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
                 'options' => [
                     'start' => [
-                        'title' => esc_html__('Top', 'themescamp-plugin'),
+                        'title' => esc_html__('Top', 'element-camp'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'end' => [
-                        'title' => esc_html__('Bottom', 'themescamp-plugin'),
+                        'title' => esc_html__('Bottom', 'element-camp'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                 ],
@@ -1864,7 +1878,7 @@ class TCG_Pro_Container_Extender
         $widget->add_responsive_control(
             'tc_container_hover_y',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1899,7 +1913,7 @@ class TCG_Pro_Container_Extender
         $widget->add_responsive_control(
             'tc_container_hover_y_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1942,7 +1956,7 @@ class TCG_Pro_Container_Extender
         $widget->add_control(
             "_transform_scale_popover_tc_hover",
             [
-                'label' => esc_html__( 'Scale', 'elementor' ),
+                'label' => esc_html__( 'Scale', 'element-camp' ),
                 'type' => Controls_Manager::POPOVER_TOGGLE,
             ]
         );
@@ -1950,7 +1964,7 @@ class TCG_Pro_Container_Extender
         $widget->add_responsive_control(
             "_transform_scale_effect_tc_hover",
             [
-                'label' => esc_html__( 'Scale', 'elementor' ),
+                'label' => esc_html__( 'Scale', 'element-camp' ),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -2145,5 +2159,111 @@ class TCG_Pro_Container_Extender
     public function before_container_render($widget)
     {
         $this->add_container_double_background_attributes($widget);
+    }
+
+    public function register_tc_container_multi_shadow_controls($widget, $args) {
+
+        $widget->add_control(
+            'tcg_multi_shadow_popover',
+            [
+                'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+                'label' => esc_html__('Multi Shadow', 'element-camp'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
+                'return_value' => 'yes',
+            ]
+        );
+
+        $widget->start_popover();
+
+        $repeater = new \Elementor\Repeater();
+
+        $repeater->add_control('x', [
+            'label' => 'X',
+            'type' => \Elementor\Controls_Manager::SLIDER,
+            'range' => ['px' => ['min' => -100, 'max' => 100]],
+            'default' => ['size' => 0],
+        ]);
+
+        $repeater->add_control('y', [
+            'label' => 'Y',
+            'type' => \Elementor\Controls_Manager::SLIDER,
+            'range' => ['px' => ['min' => -100, 'max' => 100]],
+            'default' => ['size' => 10],
+        ]);
+
+        $repeater->add_control('blur', [
+            'label' => 'Blur',
+            'type' => \Elementor\Controls_Manager::SLIDER,
+            'range' => ['px' => ['min' => 0, 'max' => 200]],
+            'default' => ['size' => 20],
+        ]);
+
+        $repeater->add_control('spread', [
+            'label' => 'Spread',
+            'type' => \Elementor\Controls_Manager::SLIDER,
+            'range' => ['px' => ['min' => -50, 'max' => 50]],
+            'default' => ['size' => 0],
+        ]);
+
+        $repeater->add_control('color', [
+            'label' => 'Color',
+            'type' => \Elementor\Controls_Manager::COLOR,
+            'default' => 'rgba(0,0,0,0.15)',
+        ]);
+
+        $repeater->add_control('inset', [
+            'label' => 'Inset',
+            'type' => \Elementor\Controls_Manager::SWITCHER,
+            'return_value' => 'inset',
+        ]);
+
+        $widget->add_control(
+            'tcg_multi_box_shadow',
+            [
+                'label' => esc_html__('TCG Multi Shadow', 'element-camp'),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => $repeater->get_controls(),
+                'condition' => [
+                    'tcg_multi_shadow_popover' => 'yes',
+                ],
+            ]
+        );
+
+        $widget->end_popover();
+    }
+
+    public function multi_box_shadow_container_render($widget) {
+
+        $settings = $widget->get_settings_for_display();
+
+        if (empty($settings['tcg_multi_box_shadow']) || $settings['tcg_multi_shadow_popover'] !== 'yes') {
+            return;
+        }
+
+        $shadows = [];
+
+        foreach ($settings['tcg_multi_box_shadow'] as $shadow) {
+            $x = $shadow['x']['size'] ?? 0;
+            $y = $shadow['y']['size'] ?? 0;
+            $blur = $shadow['blur']['size'] ?? 0;
+            $spread = $shadow['spread']['size'] ?? 0;
+            $color = $shadow['color'] ?? 'rgba(0,0,0,0.15)';
+            $inset = !empty($shadow['inset']) ? ' inset' : '';
+
+            $shadows[] = "{$x}px {$y}px {$blur}px {$spread}px {$color}{$inset}";
+        }
+
+        if (empty($shadows)) {
+            return;
+        }
+
+        $shadow_value = implode(', ', $shadows);
+
+        $widget->add_render_attribute(
+            '_wrapper',
+            'style',
+            "box-shadow: {$shadow_value};"
+        );
     }
 }

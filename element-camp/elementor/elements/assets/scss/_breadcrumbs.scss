@@ -1,0 +1,21 @@
+.tcgelements-breadcrumbs {
+  .breadcrumb{
+    margin: 0;
+  }
+  span,a{
+    display: inline-block;
+  }
+  .sep{
+    margin-left: 10px;
+    margin-right: 10px;
+    i{
+      color: #fff;
+      font-size: 18px;
+    }
+    svg{
+      fill: #fff;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

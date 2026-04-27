@@ -126,7 +126,7 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
     protected function register_controls()
     {
         $post_types = ControlsHelper::get_post_types();
-        $post_types['by_id'] = __('Manual Selection', 'themescamp-plugin');
+        $post_types['by_id'] = __('Manual Selection', 'element-camp');
         $taxonomies = get_taxonomies([], 'objects');
 
         $this->start_controls_section(
@@ -249,7 +249,7 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
         $this->add_control(
             'posts_ids',
             [
-                'label' => __('Search & Select', 'themescamp-plugin'),
+                'label' => __('Search & Select', 'element-camp'),
                 'type' => 'tcg-select2',
                 'options' => ControlsHelper::get_post_list(),
                 'label_block' => true,
@@ -264,7 +264,7 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
         $this->add_control(
             'posts_per_page',
             [
-                'label' => __('Posts Per Page', 'themescamp-plugin'),
+                'label' => __('Posts Per Page', 'element-camp'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '4',
                 'min' => '1',
@@ -281,7 +281,7 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
         $this->add_control(
             'order',
             [
-                'label' => __('Order', 'themescamp-plugin'),
+                'label' => __('Order', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'asc' => 'Ascending',
@@ -294,7 +294,7 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
         $this->add_control(
             'orderby',
             [
-                'label' => __('Order By', 'themescamp-plugin'),
+                'label' => __('Order By', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => ControlsHelper::get_post_orderby_options(),
                 'default' => 'date',
@@ -304,7 +304,7 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
         $this->add_control(
             'authors',
             [
-                'label' => __('Author', 'themescamp-plugin'),
+                'label' => __('Author', 'element-camp'),
                 'label_block' => true,
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
@@ -318,7 +318,7 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
         $this->add_control(
             'post__not_in',
             [
-                'label'       => __('Exclude', 'themescamp-plugin'),
+                'label'       => __('Exclude', 'element-camp'),
                 'type'        => 'tcg-select2',
                 'label_block' => true,
                 'multiple'    => true,
@@ -2692,13 +2692,13 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
         }
         ?>
 
-        <div class="tcgelements-slideshow-showcase <?=esc_attr($settings['slideshow_style'])?>">
+        <div class="tcgelements-slideshow-showcase <?php echo esc_attr($settings['slideshow_style'])?>">
             <?php if ($settings['slideshow_style']=='full') : ?>
             <div class="slides slides--images">
                 <?php $itemCount=1; if ($query->have_posts()) : while  ($query->have_posts()) : $query->the_post(); global $post ;
                 ?>
                 <div class="slide <?php if ($itemCount==1) echo 'slide--current'?>">
-                    <div class="slide__img bg-img" data-background="<?=esc_url(get_the_post_thumbnail_url())?>"></div>
+                    <div class="slide__img bg-img" data-background="<?php echo esc_url(get_the_post_thumbnail_url())?>"></div>
                 </div>
                 <?php $itemCount++; endwhile;  wp_reset_postdata(); endif; ?>
             </div>
@@ -2720,7 +2720,7 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
                         <div class="slide__title text-center">
                             <span class="taxonomy">
                                 <?php if ($settings['show_date']=='yes') : ?>
-                                    <span class="date"><?=get_the_date($format);?></span>
+                                    <span class="date"><?php echo get_the_date($format);?></span>
                                 <?php endif;?>
                                 <?php
                                 if ($settings['display_terms']=='yes') {
@@ -2728,15 +2728,15 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
                                     $tag_counter = 0;
                                     if ($selected_term_type == 'categories' && $category) {
                                         foreach ($category as $cat) {
-                                            if ($cat_counter >= 1) echo $settings['meta_separator'];
-                                            echo '<span>' . $cat->name . '</span>';
+                                            if ($cat_counter >= 1) echo wp_kses_post($settings['meta_separator']);
+                                            echo '<span>' . wp_kses_post($cat->name) . '</span>';
                                             $cat_counter++;
                                         };
                                     }
                                     if ($selected_term_type == 'tags' && $tags) {
                                         foreach ($tags as $tag) {
-                                            if ($tag_counter >= 1) echo $settings['meta_separator'];
-                                            echo '<span>' . $tag->name . '</span>';
+                                            if ($tag_counter >= 1) echo wp_kses_post($settings['meta_separator']);
+                                            echo '<span>' . wp_kses_post($tag->name) . '</span>';
                                             $tag_counter++;
                                         }
                                     }
@@ -2744,7 +2744,7 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
                                 ?>
                             </span> <br>
                             <span>
-                            <a class="title" href="<?=esc_url(get_the_permalink())?>"><?= esc_html(get_the_title())?></a>
+                            <a class="title" href="<?php echo esc_url(get_the_permalink())?>"><?php echo esc_html(get_the_title())?></a>
                         </span>
                         </div>
                     </div>
@@ -2766,14 +2766,14 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
             ?>
                 <figure class="slide <?php if ($itemCount==1) echo 'slide--current'?>">
                     <div class="slide__img-wrap">
-                        <div class="slide__img bg-img" data-background="<?=esc_url(get_the_post_thumbnail_url())?>"></div>
+                        <div class="slide__img bg-img" data-background="<?php echo esc_url(get_the_post_thumbnail_url())?>"></div>
                     </div>
                     <figcaption class="slide__caption">
                         <h1 class="slides__caption-headline">
                             <span class="text-row taxonomy">
                                 <span>
                                   <?php if ($settings['show_date']=='yes') : ?>
-                                      <?=get_the_date($format);?>
+                                      <?php echo get_the_date($format);?>
                                   <?php endif;?>
                                   <?php
                                   if ($settings['display_terms']=='yes') {
@@ -2781,15 +2781,15 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
                                       $tag_counter = 0;
                                       if ($selected_term_type == 'categories' && $category) {
                                           foreach ($category as $cat) {
-                                              if ($cat_counter >= 1) echo $settings['meta_separator'];
-                                              echo '<span>' . $cat->name . '</span>';
+                                              if ($cat_counter >= 1) echo wp_kses_post($settings['meta_separator']);
+                                              echo '<span>' . wp_kses_post($cat->name) . '</span>';
                                               $cat_counter++;
                                           };
                                       }
                                       if ($selected_term_type == 'tags' && $tags) {
                                           foreach ($tags as $tag) {
-                                              if ($tag_counter >= 1) echo $settings['meta_separator'];
-                                              echo '<span>' . $tag->name . '</span>';
+                                              if ($tag_counter >= 1) echo wp_kses_post($settings['meta_separator']);
+                                              echo '<span>' . wp_kses_post($tag->name) . '</span>';
                                               $tag_counter++;
                                           }
                                       }
@@ -2797,10 +2797,10 @@ class ElementCamp_Slideshow_Showcase extends Widget_Base
                                   ?>
                                 </span>
                             </span>
-                            <span class="text-row title"><span><?= esc_html(get_the_title())?></span></span>
+                            <span class="text-row title"><span><?php echo esc_html(get_the_title())?></span></span>
                         </h1>
                         <a class="slides__caption-link explore-btn"
-                           href="<?=esc_url(get_the_permalink())?>"><span><?=esc_html($settings['btn_text'])?></span></a>
+                           href="<?php echo esc_url(get_the_permalink())?>"><span><?php echo esc_html($settings['btn_text'])?></span></a>
                     </figcaption>
                 </figure>
             <?php $itemCount++; endwhile;  wp_reset_postdata(); endif; ?>

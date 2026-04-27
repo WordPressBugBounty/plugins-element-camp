@@ -96,10 +96,21 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
             ]
         );
         $repeater->add_control(
+            'custom_item_style_controls',
+            [
+                'label' => esc_html__( 'Custom Item Style Controls', 'element-camp' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'yes', 'element-camp' ),
+                'label_off' => esc_html__( 'No', 'element-camp' ),
+                'default' => 'yes',
+            ]
+        );
+        $repeater->add_control(
             'separator_panel_style',
             [
                 'type' => Controls_Manager::DIVIDER,
                 'style' => 'thick',
+                'condition'=>['custom_item_style_controls'=>'yes']
             ]
         );
         $repeater->add_group_control(
@@ -110,6 +121,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 'types' => [ 'classic','gradient' ],
                 'exclude' => ['image'],
                 'selector' => '{{WRAPPER}} .tcgelements-throwable-content {{CURRENT_ITEM}}.item .txt',
+                'condition'=>['custom_item_style_controls'=>'yes']
             ]
         );
         $repeater->add_control(
@@ -125,6 +137,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-throwable-content {{CURRENT_ITEM}}.item .txt' => '{{VALUE}}: blur({{text_blur_value.SIZE}}px);',
                 ],
+                'condition'=>['custom_item_style_controls'=>'yes']
             ]
         );
         $repeater->add_control(
@@ -137,6 +150,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                         'max' => 250,
                     ],
                 ],
+                'condition'=>['custom_item_style_controls'=>'yes']
             ]
         );
         $repeater->add_control(
@@ -147,6 +161,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-throwable-content {{CURRENT_ITEM}}.item .txt' => 'color: {{VALUE}};',
                 ],
+                'condition'=>['custom_item_style_controls'=>'yes']
             ]
         );
         $repeater->add_responsive_control(
@@ -181,6 +196,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-throwable-content {{CURRENT_ITEM}}.item .txt' => 'width: {{SIZE}}{{UNIT}};',
                 ],
+                'condition'=>['custom_item_style_controls'=>'yes']
             ]
         );
         $repeater->add_responsive_control(
@@ -215,6 +231,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-throwable-content {{CURRENT_ITEM}}.item .txt' => 'height: {{SIZE}}{{UNIT}};',
                 ],
+                'condition'=>['custom_item_style_controls'=>'yes']
             ]
         );
         $repeater->add_responsive_control(
@@ -231,7 +248,8 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-throwable-content {{CURRENT_ITEM}}.item .txt' => 'display: {{VALUE}};'
-                ]
+                ],
+                'condition'=>['custom_item_style_controls'=>'yes']
             ]
         );
         $repeater->add_responsive_control(
@@ -270,7 +288,10 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-throwable-content {{CURRENT_ITEM}}.item .txt' => 'justify-content: {{VALUE}};',
                 ],
-                'condition'=> ['text_display'=> ['flex','inline-flex']],
+                'condition'=> [
+                        'text_display'=> ['flex','inline-flex'],
+                    'custom_item_style_controls'=>'yes'
+                ],
                 'responsive' => true,
             ]
         );
@@ -301,7 +322,10 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-throwable-content {{CURRENT_ITEM}}.item .txt' => 'align-items: {{VALUE}};',
                 ],
-                'condition'=> ['text_display'=> ['flex','inline-flex']],
+                'condition'=> [
+                    'text_display'=> ['flex','inline-flex'],
+                    'custom_item_style_controls'=>'yes'
+                ],
                 'responsive' => true,
             ]
         );
@@ -311,6 +335,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 'name' => 'text_border',
                 'label' => esc_html__( 'Text Border', 'element-camp' ),
                 'selector' => '{{WRAPPER}} .tcgelements-throwable-content {{CURRENT_ITEM}}.item .txt',
+                'condition'=>['custom_item_style_controls'=>'yes']
             ]
         );
         $repeater->add_control(
@@ -321,6 +346,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 'separator' => 'before',
                 'condition' => [
                     'image[url]!' => '',
+                    'custom_item_style_controls'=>'yes'
                 ],
             ]
         );
@@ -355,6 +381,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 ],
                 'condition' => [
                     'image[url]!' => '',
+                    'custom_item_style_controls'=>'yes'
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-throwable-content {{CURRENT_ITEM}}.item .img' => 'width: {{SIZE}}{{UNIT}};',
@@ -392,6 +419,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 ],
                 'condition' => [
                     'image[url]!' => '',
+                    'custom_item_style_controls'=>'yes'
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-throwable-content {{CURRENT_ITEM}}.item .img' => 'height: {{SIZE}}{{UNIT}};',
@@ -406,6 +434,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 'separator' => 'before',
                 'condition' => [
                     'icon[value]!' => '',
+                    'custom_item_style_controls'=>'yes'
                 ],
             ]
         );
@@ -420,6 +449,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 ],
                 'condition' => [
                     'icon[value]!' => '',
+                    'custom_item_style_controls'=>'yes'
                 ],
             ]
         );
@@ -433,6 +463,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 'selector' => '{{WRAPPER}} .tcgelements-throwable-content {{CURRENT_ITEM}}.item .icon-wrapper',
                 'condition' => [
                     'icon[value]!' => '',
+                    'custom_item_style_controls'=>'yes'
                 ],
             ]
         );
@@ -598,16 +629,6 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
             ]
         );
         $this->add_group_control(
-            \Elementor\Group_Control_Background::get_type(),
-            [
-                'name' => 'item_background',
-                'label' => esc_html__( 'Background', 'element-camp' ),
-                'types' => [ 'classic','gradient' ],
-                'exclude' => ['image'],
-                'selector' => '{{WRAPPER}} .tcgelements-throwable-content .item',
-            ]
-        );
-        $this->add_group_control(
             \Elementor\Group_Control_Border::get_type(),
             [
                 'name' => 'item_border',
@@ -648,6 +669,23 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-throwable-content .item' => 'user-select: {{VALUE}};'
+                ]
+            ]
+        );
+        $this->add_control(
+            'item_cursor',
+            [
+                'label' => esc_html__('Item Cursor', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    '' => esc_html__('Default', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                    'auto' => esc_html__('Auto', 'element-camp'),
+                    'pointer' => esc_html__('Pointer', 'element-camp'),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-throwable-content .item' => 'cursor: {{VALUE}};'
                 ]
             ]
         );
@@ -855,6 +893,61 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 ],
             ]
         );
+        $this->add_control(
+            'item_transition',
+            [
+                'label' => esc_html__( 'Item Transition', 'element-camp' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 1,
+                        'min' => 0,
+                        'step' => 0.01,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-throwable-content .item' => 'transition: all {{SIZE}}s ease;',
+                ],
+            ]
+        );
+        $this->start_controls_tabs('item_tabs_style');
+
+        $this->start_controls_tab(
+            'item_tab_normal',
+            [
+                'label' => esc_html__('Normal', 'element-camp'),
+            ]
+        );
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'item_background',
+                'label' => esc_html__( 'Background', 'element-camp' ),
+                'types' => [ 'classic','gradient' ],
+                'exclude' => ['image'],
+                'selector' => '{{WRAPPER}} .tcgelements-throwable-content .item',
+            ]
+        );
+        $this->end_controls_tab();
+        $this->start_controls_tab(
+            'item_tab_hover',
+            [
+                'label' => esc_html__('Hover', 'element-camp'),
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name' => 'item_hover_background',
+                'label' => esc_html__( 'Background', 'element-camp' ),
+                'types' => [ 'classic','gradient' ],
+                'exclude' => ['image'],
+                'selector' => '{{WRAPPER}} .tcgelements-throwable-content .item:hover',
+            ]
+        );
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
         $this->end_controls_section();
         $this->start_controls_section(
             'section_style',
@@ -873,16 +966,6 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                     'default' => Global_Typography::TYPOGRAPHY_ACCENT,
                 ],
                 'selector' => '{{WRAPPER}} .tcgelements-throwable-content .item .txt',
-            ]
-        );
-        $this->add_control(
-            'text_color',
-            [
-                'label' => esc_html__('Text Color', 'element-camp'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-throwable-content .item .txt' => 'color: {{VALUE}};',
-                ],
             ]
         );
         $this->add_responsive_control(
@@ -933,6 +1016,60 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                 'selector' => '{{WRAPPER}} .tcgelements-throwable-content .item .txt',
             ]
         );
+        $this->add_control(
+            'item_text_transition',
+            [
+                'label' => esc_html__( 'Text Transition', 'element-camp' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 1,
+                        'min' => 0,
+                        'step' => 0.01,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-throwable-content .item .txt' => 'transition: all {{SIZE}}s ease;',
+                ],
+            ]
+        );
+        $this->start_controls_tabs('text_tabs_style');
+
+        $this->start_controls_tab(
+            'text_tab_normal',
+            [
+                'label' => esc_html__('Normal', 'element-camp'),
+            ]
+        );
+        $this->add_control(
+            'text_color',
+            [
+                'label' => esc_html__('Text Color', 'element-camp'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-throwable-content .item .txt' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->end_controls_tab();
+        $this->start_controls_tab(
+            'text_tab_item_hover',
+            [
+                'label' => esc_html__('Item Hover', 'element-camp'),
+            ]
+        );
+        $this->add_control(
+            'item_hover_text_color',
+            [
+                'label' => esc_html__('Text Color', 'element-camp'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-throwable-content .item:hover .txt' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
         $this->end_controls_section();
         $this->start_controls_section(
             'section_icon_style',
@@ -1374,7 +1511,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                             </span>
                         <?php endif; ?>
                         <?php if (!empty($item['text'])) : ?>
-                            <span class="txt"> <?=esc_html($item['text'])?> </span>
+                            <span class="txt"> <?php echo esc_html($item['text'])?> </span>
                         <?php endif;?>
                         <?php if ($icon_position === 'after' && $has_icon) : ?>
                             <span class="icon-wrapper">
@@ -1382,7 +1519,7 @@ class ElementCamp_Throwable_Content extends \Elementor\Widget_Base
                             </span>
                         <?php endif; ?>
                         <?php if (!empty($item['image']['url'])) : ?>
-                            <img class="img" src="<?= esc_url($item['image']['url']); ?>" alt="<?php if (!empty($item['image']['alt'])) echo esc_attr($item['image']['alt']); ?>" >
+                            <img class="img" src="<?php echo esc_url($item['image']['url']); ?>" alt="<?php if (!empty($item['image']['alt'])) echo esc_attr($item['image']['alt']); ?>" >
                         <?php endif;?>
                 </div>
             <?php endforeach;?>

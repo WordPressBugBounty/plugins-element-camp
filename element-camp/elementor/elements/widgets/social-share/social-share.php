@@ -512,7 +512,7 @@ class ElementCamp_Social_Share extends Widget_Base
 		$settings = $this->get_settings_for_display(); ?>
 		<div class="tcgelements-social-share">
 			<?php if (!empty($settings['share_text'])): ?>
-				<span class="share-text"><?php esc_html_e($settings['share_text'], "element-camp"); ?> </span>
+				<span class="share-text"><?php esc_html($settings['share_text']); ?> </span>
 			<?php endif; ?>
 
 			<?php if ($settings['facebook_share_button'] == 'yes'): ?>
@@ -535,7 +535,7 @@ class ElementCamp_Social_Share extends Widget_Base
 				<a class="pin-bg" href="http://pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>&media=<?php
 																													global $post;
 																													$url = wp_get_attachment_url(get_post_thumbnail_id($post->ID));
-																													echo $url; ?>"
+																													echo esc_url($url); ?>"
 					title="<?php esc_html_e("Pin This", "element-camp"); ?>">
 					<i class="fa fa-pinterest-p"></i>
 				</a>

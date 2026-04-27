@@ -74,7 +74,17 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
     }
      public function get_script_depends()
     {
-        return ['tcgelements-heading','tcgelements-split-text','tcgelements-scroll-end', 'tcgelements-scroll-fill-text','tcgelements-letters-line','tcgelements-fade-text','tcgelements-funky-letters'];
+        return [
+            'tcgelements-heading',
+            'tcgelements-split-text',
+            'tcgelements-scroll-end',
+            'tcgelements-scroll-fill-text',
+            'tcgelements-letters-line',
+            'tcgelements-fade-text',
+            'tcgelements-funky-letters',
+            'SplitText.min',
+            'tcgelements-letters-light',
+        ];
     }
     /**
      * Get widget categories.
@@ -114,8 +124,8 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
      * @access protected
      */
     protected function register_controls() {
-        $start = is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
-        $end = !is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
+        $start = is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
+        $end = !is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
 
         $this->start_controls_section(
             'section_title',
@@ -626,7 +636,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
             [
                 'label' => esc_html__('Text Indent', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'em' ,'rem', 'custom'],
+                'size_units' => ['px', '%', 'em' , 'rem', 'vw', 'custom'],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-heading-text .tcgelements-heading' => 'text-indent: {{SIZE}}{{UNIT}};',
                 ],
@@ -694,6 +704,46 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
             ]
         );
         $this->add_control(
+            'heading_grayscale',
+            [
+                'label' => esc_html__('Grayscale', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1,
+                        'step' => 0.01,
+                    ],
+                ],
+                'default' => [
+                    'size' => 0,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-heading-text .tcgelements-heading' => '--heading-grayscale: {{SIZE}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'heading_brightness',
+            [
+                'label' => esc_html__('Brightness', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 10,
+                        'step' => 0.1,
+                    ],
+                ],
+                'default' => [
+                    'size' => 1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-heading-text .tcgelements-heading' => '--heading-brightness: {{SIZE}}%;',
+                ],
+            ]
+        );
+        $this->add_control(
             'heading_blur_method',
             [
                 'label' => esc_html__('Blur Method', 'element-camp'),
@@ -704,7 +754,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
                 ],
                 'default' => 'backdrop-filter',
                 'selectors' => [
-                    '{{WRAPPER}} .tcgelements-heading-text .tcgelements-heading' => '{{VALUE}}: blur({{blur_value.SIZE}}px);',
+                    '{{WRAPPER}} .tcgelements-heading-text .tcgelements-heading' => '{{VALUE}}: blur({{blur_value.SIZE}}px) grayscale(var(--heading-grayscale, 0)) brightness(var(--heading-brightness, 1));',
                 ],
             ]
         );
@@ -773,7 +823,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
         $this->add_control(
             'scale_heading',
             [
-                'label' => esc_html__('Heading Wrapper Scale', 'themescamp-plugin'),
+                'label' => esc_html__('Heading Wrapper Scale', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -936,6 +986,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
                     '{{WRAPPER}} .tcgelements-heading-text:hover .tcgelements-heading' => 'color: {{VALUE}};',
                     '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-heading-text.tc-heading-container-active' => 'color: {{VALUE}};',
                     '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-heading-text.tc-heading-container-active > *' => 'color: {{VALUE}};',
+                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-heading-text.tc-heading-container-active > * .tcgelements-heading' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -947,8 +998,8 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
                 'selectors' => [
                     '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-heading-text:hover .tcgelements-heading' => 'color: {{VALUE}};',
                     '} body.tcg-dark-mode {{WRAPPER}} .tcgelements-heading-text:hover .tcgelements-heading' => 'color: {{VALUE}};',
-                    '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-heading-text.tc-heading-container-active > *' => 'color: {{VALUE}};',
-                    '} body.tcg-dark-mode {{WRAPPER}} .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-heading-text.tc-heading-container-active > *' => 'color: {{VALUE}};',
+                    '@media (prefers-color-scheme: dark){ body.tcg-auto-mode  .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-heading-text.tc-heading-container-active > *' => 'color: {{VALUE}};',
+                    '} body.tcg-dark-mode .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-heading-text.tc-heading-container-active > *' => 'color: {{VALUE}};',
                 ],
             ]
         );
@@ -993,6 +1044,76 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
                 'selector' => '{{WRAPPER}} .tcgelements-heading-text:hover .tcgelements-heading,{{WRAPPER}} .tcgelements-heading-text:hover svg,.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-heading-text.tc-heading-container-active > *',
             ]
         );
+        $this->add_control(
+            'heading_grayscale_hover',
+            [
+                'label' => esc_html__('Grayscale', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1,
+                        'step' => 0.01,
+                    ],
+                ],
+                'default' => [
+                    'size' => 0,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-heading-text:hover .tcgelements-heading' => '--heading-grayscale-hover: {{SIZE}};',
+                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-heading-text.tc-heading-container-active > *' => '--heading-grayscale-hover: {{SIZE}};',
+                ],
+            ]
+        );
+        $this->add_control(
+            'heading_brightness_hover',
+            [
+                'label' => esc_html__('Brightness', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 10,
+                        'step' => 0.1,
+                    ],
+                ],
+                'default' => [
+                    'size' => 1,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-heading-text:hover .tcgelements-heading' => '--heading-brightness-hover: {{SIZE}}%;',
+                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-heading-text.tc-heading-container-active > *' => '--heading-brightness-hover: {{SIZE}}%;',
+                ],
+            ]
+        );
+        $this->add_control(
+            'heading_blur_method_hover',
+            [
+                'label' => esc_html__('Blur Method', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'backdrop-filter' => 'backdrop-filter',
+                    'filter' => 'filter',
+                ],
+                'default' => 'backdrop-filter',
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-heading-text:hover .tcgelements-heading' => '{{VALUE}}: blur({{blur_value_hover.SIZE}}px) grayscale(var(--heading-grayscale-hover, 0)) brightness(var(--heading-brightness-hover, 1));',
+                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-heading-text.tc-heading-container-active > *' => '{{VALUE}}: blur({{blur_value_hover.SIZE}}px) grayscale(var(--heading-grayscale-hover, 0)) brightness(var(--heading-brightness-hover, 1));',
+                ],
+            ]
+        );
+        $this->add_control(
+            'blur_value_hover',
+            [
+                'label' => esc_html__('Blur', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 250,
+                    ],
+                ],
+            ]
+        );
         $this->add_responsive_control(
             'translate_heading_y_hover',
             [
@@ -1031,7 +1152,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
         $this->add_control(
             'scale_heading_hover',
             [
-                'label' => esc_html__('Heading Wrapper Scale', 'themescamp-plugin'),
+                'label' => esc_html__('Heading Wrapper Scale', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1606,7 +1727,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'styled_display',
             [
                 'label' => esc_html__('Span Display Type', 'element-camp'),
@@ -1711,6 +1832,17 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
             ]
         );
         $this->add_responsive_control(
+            'span_text_indent',
+            [
+                'label' => esc_html__('Text Indent', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'em' , 'rem', 'vw', 'custom'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-heading-text .tcgelements-heading span' => 'text-indent: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
             'styled_margin',
             [
                 'label' => esc_html__('Span Margin', 'element-camp'),
@@ -1783,7 +1915,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
         $this->start_controls_tabs(
             'span_tabs',
         );
-        
+
         $this->start_controls_tab(
             'span_normal_tab',
             [
@@ -2008,10 +2140,10 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
         $this->add_control(
             'heading_span_transform_options',
             [
-                'label' => esc_html__('Span Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Span Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
         $this->start_popover();
@@ -2264,6 +2396,35 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
+        $this->add_responsive_control(
+            'small_align',
+            [
+                'label' => esc_html__( 'Alignment', 'element-camp' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => esc_html__( 'Left', 'element-camp' ),
+                        'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'element-camp' ),
+                        'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                        'title' => esc_html__( 'Right', 'element-camp' ),
+                        'icon' => 'eicon-text-align-right',
+                    ],
+                    'justify' => [
+                        'title' => esc_html__( 'Justified', 'element-camp' ),
+                        'icon' => 'eicon-text-align-justify',
+                    ],
+                ],
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-heading small' => 'text-align: {{VALUE}};',
+                ],
+            ]
+        );
         $this->add_control(
             'small_display',
             [
@@ -2326,6 +2487,17 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
                 'size_units' => ['px', '%', 'em' ,'rem', 'custom'],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-heading-text .tcgelements-heading small' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'small_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'element-camp'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em' ,'rem', 'custom'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-heading-text .tcgelements-heading small' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                 ],
             ]
         );
@@ -2883,7 +3055,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
         $this->start_controls_tabs(
             'icon_heading_tabs',
         );
-        
+
         $this->start_controls_tab(
             'normal_icon_tab',
             [
@@ -2947,7 +3119,28 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
                 ],
             ]
         );
-
+        $this->add_control(
+            'icon_style_dark_mode',
+            [
+                'label' => esc_html__('Dark Mode', 'element-camp'),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+        $this->add_control(
+            'icon_color_dark_mode',
+            [
+                'label' => __('Icon Color', 'element-camp'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-heading-text .heading-icon i' => 'color: {{VALUE}};',
+                    '} body.tcg-dark-mode {{WRAPPER}} .tcgelements-heading-text .heading-icon i' => 'color: {{VALUE}};',
+                    '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-heading-text .heading-icon svg' => 'fill: {{VALUE}};',
+                    '} body.tcg-dark-mode {{WRAPPER}} .tcgelements-heading-text .heading-icon svg' => 'fill: {{VALUE}};',
+                ],
+            ]
+        );
         $this->end_controls_tab();
 
         $this->start_controls_tab(
@@ -3013,7 +3206,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
             ]
         );
         $this->end_controls_tab();
-        
+
         $this->end_controls_tabs();
         $this->end_controls_section();
         $this->start_controls_section(
@@ -3481,7 +3674,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
         $this->start_controls_tabs(
             'image_style_tabs',
         );
-        
+
         $this->start_controls_tab(
             'image_normal_tab',
             [
@@ -3623,9 +3816,9 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
                 ],
             ]
         );
-        
+
         $this->end_controls_tab();
-        
+
         $this->end_controls_tabs();
         $this->end_controls_section();
 
@@ -4314,7 +4507,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
         $this->add_control(
             'wrapper_before_orientation_h',
             [
-                'label' => esc_html__('Horizontal Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Horizontal Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
@@ -4335,7 +4528,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'wrapper_before_x',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -4369,7 +4562,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'wrapper_before_x_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -4403,17 +4596,17 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
         $this->add_control(
             'wrapper_before_orientation_v',
             [
-                'label' => esc_html__('Vertical Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Vertical Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
                 'options' => [
                     'start' => [
-                        'title' => esc_html__('Top', 'themescamp-plugin'),
+                        'title' => esc_html__('Top', 'element-camp'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'end' => [
-                        'title' => esc_html__('Bottom', 'themescamp-plugin'),
+                        'title' => esc_html__('Bottom', 'element-camp'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                 ],
@@ -4423,7 +4616,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'wrapper_before_y',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -4456,7 +4649,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
         $this->add_responsive_control(
             'wrapper_before_y_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -4687,6 +4880,7 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
                     'tce-letters-line' => esc_html__('Letters Line', 'element-camp'),
                     'tce-fade-text' => esc_html__('Fade Text', 'element-camp'),
                     'tce-funky-letters' => esc_html__('Funky Letters', 'element-camp'),
+                    'tce-letters-light' => esc_html__('Letters Light', 'element-camp'),
                 ],
             ]
         );
@@ -5131,6 +5325,21 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
                 ],
             ]
         );
+        $this->add_control(
+            'letters_animate_by',
+            [
+                'label' => esc_html__('Animate By', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'letter',
+                'options' => [
+                    'letter' => esc_html__('Letter', 'element-camp'),
+                    'word'   => esc_html__('Word', 'element-camp'),
+                ],
+                'condition' => [
+                    'heading_animations' => 'tce-letters-line',
+                ],
+            ]
+        );
 
         $this->add_control(
             'letters_trigger_note',
@@ -5213,6 +5422,113 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-heading-text .tcgelements-heading.tcg-moveBg' => 'animation-duration: {{SIZE}}s;',
+                ],
+            ]
+        );
+        $this->add_control(
+            'letters_light_heading',
+            [
+                'label'     => esc_html__('Letters Light Settings', 'element-camp'),
+                'type'      => Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => [
+                    'heading_animations' => 'tce-letters-light',
+                ],
+            ]
+        );
+        $this->add_control(
+            'letters_light_animate_by',
+            [
+                'label'   => esc_html__('Animate By', 'element-camp'),
+                'type'    => Controls_Manager::SELECT,
+                'default' => 'letter',
+                'options' => [
+                    'letter' => esc_html__('Letter', 'element-camp'),
+                    'word'   => esc_html__('Word', 'element-camp'),
+                ],
+                'condition' => [
+                    'heading_animations' => 'tce-letters-light',
+                ],
+            ]
+        );
+        $this->add_control(
+            'letters_light_max_lit',
+            [
+                'label'     => esc_html__('Max Lit Letters', 'element-camp'),
+                'type'      => Controls_Manager::NUMBER,
+                'default'   => 2,
+                'min'       => 1,
+                'max'       => 10,
+                'step'      => 1,
+                'description' => esc_html__('How many letters stay bright at once', 'element-camp'),
+                'condition' => [
+                    'heading_animations' => 'tce-letters-light',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'letters_light_fade_duration',
+            [
+                'label'   => esc_html__('Fade Duration (seconds)', 'element-camp'),
+                'type'    => Controls_Manager::NUMBER,
+                'default' => 0.3,
+                'min'     => 0.05,
+                'max'     => 2,
+                'step'    => 0.05,
+                'condition' => [
+                    'heading_animations' => 'tce-letters-light',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'letters_light_min_interval',
+            [
+                'label'       => esc_html__('Min Interval (ms)', 'element-camp'),
+                'type'        => Controls_Manager::NUMBER,
+                'default'     => 400,
+                'min'         => 50,
+                'max'         => 3000,
+                'step'        => 50,
+                'description' => esc_html__('Minimum delay between letter switches', 'element-camp'),
+                'condition'   => [
+                    'heading_animations' => 'tce-letters-light',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'letters_light_max_interval',
+            [
+                'label'       => esc_html__('Max Interval (ms)', 'element-camp'),
+                'type'        => Controls_Manager::NUMBER,
+                'default'     => 800,
+                'min'         => 100,
+                'max'         => 5000,
+                'step'        => 50,
+                'description' => esc_html__('Maximum delay between letter switches', 'element-camp'),
+                'condition'   => [
+                    'heading_animations' => 'tce-letters-light',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'letters_light_dim_opacity',
+            [
+                'label'   => esc_html__('Dim Opacity', 'element-camp'),
+                'type'    => Controls_Manager::SLIDER,
+                'range'   => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 1,
+                        'step' => 0.01,
+                    ],
+                ],
+                'default' => [ 'size' => 0.1 ],
+                'condition' => [
+                    'heading_animations' => 'tce-letters-light',
                 ],
             ]
         );
@@ -5313,10 +5629,33 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
             if ($settings['heading_animations'] == 'tce-funky-letters') {
                 $this->add_render_attribute('title', 'class', $settings['heading_animations']);
             }
+            if ($settings['heading_animations'] == 'tce-letters-light') {
+                $this->add_render_attribute('title', 'class', $settings['heading_animations']);
+                $this->add_render_attribute('title', 'data-ll-animate-by', $settings['letters_light_animate_by']);
+                if (!empty($settings['letters_light_max_lit'])) {
+                    $this->add_render_attribute('title', 'data-ll-max-lit', $settings['letters_light_max_lit']);
+                }
+                if (!empty($settings['letters_light_fade_duration'])) {
+                    $this->add_render_attribute('title', 'data-ll-fade-duration', $settings['letters_light_fade_duration']);
+                }
+                if (!empty($settings['letters_light_min_interval'])) {
+                    $this->add_render_attribute('title', 'data-ll-min-interval', $settings['letters_light_min_interval']);
+                }
+                if (!empty($settings['letters_light_max_interval'])) {
+                    $this->add_render_attribute('title', 'data-ll-max-interval', $settings['letters_light_max_interval']);
+                }
+                if (isset($settings['letters_light_dim_opacity']['size'])) {
+                    $this->add_render_attribute('title', 'data-ll-dim-opacity', $settings['letters_light_dim_opacity']['size']);
+                }
+            }
             if ($settings['heading_animations'] == 'tce-letters-line') {
                 $this->add_render_attribute('title', 'class', $settings['heading_animations']);
 
                 // Add data attributes for animation settings
+                if (!empty($settings['letters_animate_by'])) {
+                    $this->add_render_attribute('title', 'data-letters-animate-by', $settings['letters_animate_by']);
+                }
+
                 if (!empty($settings['letters_duration'])) {
                     $this->add_render_attribute('title', 'data-letters-duration', $settings['letters_duration']);
                 }
@@ -5364,10 +5703,10 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
             $title_html = sprintf( '<%1$s %2$s>%3$s</%1$s>', Utils::validate_html_tag( $settings['header_size'] ), $this->get_render_attribute_string( 'title' ), $title );
             // PHPCS - the variable $title_html holds safe data.
             ?>
-            <div class="tcgelements-heading-text <?php echo 'heading-selector-type-' . $settings['heading_hover_selector']  ?>" <?php if ($settings['heading_animations']=='scroll-parallax') : ?> data-speed="<?=$settings['parallax_speed']?>" data-lag="<?=$settings['parallax_lag']?>" <?php endif?><?php if ($settings['heading_hover_selector']=='parent-n' && !empty($settings['parent_level'])) echo 'data-parent-level="' . esc_attr($settings['parent_level']) . '"'; ?>>
+            <div class="tcgelements-heading-text <?php echo 'heading-selector-type-' . esc_attr($settings['heading_hover_selector'])  ?>" <?php if ($settings['heading_animations']=='scroll-parallax') : ?> data-speed="<?php echo esc_attr($settings['parallax_speed'])?>" data-lag="<?php echo esc_attr($settings['parallax_lag'])?>" <?php endif?><?php if ($settings['heading_hover_selector']=='parent-n' && !empty($settings['parent_level'])) echo 'data-parent-level="' . esc_attr($settings['parent_level']) . '"'; ?>>
                 <?php
                  if ( ! empty( $settings['link']['url'] ) ) : ?>
-                    <a href="<?= esc_url($settings['link']['url']) ?>" <?php if ( $settings['link']['is_external'] ) echo'target="_blank"'; ?>>
+                    <a href="<?php echo esc_url($settings['link']['url']) ?>" <?php if ( $settings['link']['is_external'] ) echo'target="_blank"'; ?>>
                 <?php endif;
                 if(!empty($settings['selected_icon']['value']) && $settings['icon_position']=='left') {
                     ?>
@@ -5376,13 +5715,13 @@ class ElementCamp_Heading extends \Elementor\Widget_Base {
                 }
                 if ($settings['after_image']=='yes' && $settings['image_position']=='left'){
                     ?>
-                    <img src="<?=esc_url($settings['image']['url'])?>" alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>">
+                    <img src="<?php echo esc_url($settings['image']['url'])?>" alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>">
                     <?php
                 }
                     echo $title_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 if ($settings['after_image']=='yes' && $settings['image_position']=='right'){
                     ?>
-                    <img src="<?=esc_url($settings['image']['url'])?>" alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>">
+                    <img src="<?php echo esc_url($settings['image']['url'])?>" alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>">
                     <?php
                 }
                 if(!empty($settings['selected_icon']['value']) && $settings['icon_position']=='right') {

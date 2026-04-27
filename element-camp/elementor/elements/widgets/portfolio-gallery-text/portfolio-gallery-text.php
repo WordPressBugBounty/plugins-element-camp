@@ -70,7 +70,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
     protected function _register_controls()
     {
         $post_types = ControlsHelper::get_post_types();
-        $post_types['by_id'] = __('Manual Selection', 'themescamp-plugin');
+        $post_types['by_id'] = __('Manual Selection', 'element-camp');
         $taxonomies = get_taxonomies([], 'objects');
 
         $this->start_controls_section(
@@ -113,7 +113,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_control(
             'posts_ids',
             [
-                'label' => __('Search & Select', 'themescamp-plugin'),
+                'label' => __('Search & Select', 'element-camp'),
                 'type' => 'tcg-select2',
                 'options' => ControlsHelper::get_post_list(),
                 'label_block' => true,
@@ -128,7 +128,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_control(
             'posts_per_page',
             [
-                'label' => __('Posts Per Page', 'themescamp-plugin'),
+                'label' => __('Posts Per Page', 'element-camp'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '4',
                 'min' => '1',
@@ -147,7 +147,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_control(
             'order',
             [
-                'label' => __('Order', 'themescamp-plugin'),
+                'label' => __('Order', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'asc' => 'Ascending',
@@ -160,7 +160,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_control(
             'orderby',
             [
-                'label' => __('Order By', 'themescamp-plugin'),
+                'label' => __('Order By', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => ControlsHelper::get_post_orderby_options(),
                 'default' => 'date',
@@ -171,7 +171,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_control(
             'authors',
             [
-                'label' => __('Author', 'themescamp-plugin'),
+                'label' => __('Author', 'element-camp'),
                 'label_block' => true,
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
@@ -185,7 +185,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_control(
             'post__not_in',
             [
-                'label'       => __('Exclude', 'themescamp-plugin'),
+                'label'       => __('Exclude', 'element-camp'),
                 'type'        => 'tcg-select2',
                 'label_block' => true,
                 'multiple'    => true,
@@ -1998,13 +1998,13 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
                 ],
             ]
         );
-        $start = is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
-        $end = !is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
+        $start = is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
+        $end = !is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
 
         $this->add_control(
             'next_arrow_offset_orientation_h',
             [
-                'label' => esc_html__('Horizontal Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Horizontal Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
@@ -2026,7 +2026,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_responsive_control(
             'next_arrow_offset_x',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -2061,7 +2061,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_responsive_control(
             'next_arrow_offset_x_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -2096,17 +2096,17 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_control(
             'next_arrow_offset_orientation_v',
             [
-                'label' => esc_html__('Vertical Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Vertical Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
                 'options' => [
                     'start' => [
-                        'title' => esc_html__('Top', 'themescamp-plugin'),
+                        'title' => esc_html__('Top', 'element-camp'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'end' => [
-                        'title' => esc_html__('Bottom', 'themescamp-plugin'),
+                        'title' => esc_html__('Bottom', 'element-camp'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                 ],
@@ -2117,7 +2117,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_responsive_control(
             'next_arrow_offset_y',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -2151,7 +2151,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_responsive_control(
             'next_arrow_offset_y_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -2203,13 +2203,13 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
                 ],
             ]
         );
-        $start = is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
-        $end = !is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
+        $start = is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
+        $end = !is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
 
         $this->add_control(
             'prev_arrow_offset_orientation_h',
             [
-                'label' => esc_html__('Horizontal Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Horizontal Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
@@ -2231,7 +2231,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_responsive_control(
             'prev_arrow_offset_x',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -2266,7 +2266,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_responsive_control(
             'prev_arrow_offset_x_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -2301,17 +2301,17 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_control(
             'prev_arrow_offset_orientation_v',
             [
-                'label' => esc_html__('Vertical Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Vertical Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
                 'options' => [
                     'start' => [
-                        'title' => esc_html__('Top', 'themescamp-plugin'),
+                        'title' => esc_html__('Top', 'element-camp'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'end' => [
-                        'title' => esc_html__('Bottom', 'themescamp-plugin'),
+                        'title' => esc_html__('Bottom', 'element-camp'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                 ],
@@ -2322,7 +2322,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_responsive_control(
             'prev_arrow_offset_y',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -2356,7 +2356,7 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
         $this->add_responsive_control(
             'prev_arrow_offset_y_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -2439,8 +2439,8 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
                     <div class="swiper-wrapper">
                         <?php if ($query->have_posts()) : while  ($query->have_posts()) : $query->the_post(); global $post ; ?>
                             <div class="swiper-slide">
-                                <div class="bg-img" data-background="<?= esc_url(get_the_post_thumbnail_url()); ?>">
-                                    <a href="<?= esc_url(get_the_permalink()); ?>"></a>
+                                <div class="bg-img" data-background="<?php echo esc_url(get_the_post_thumbnail_url()); ?>">
+                                    <a href="<?php echo esc_url(get_the_permalink()); ?>"></a>
                                 </div>
                             </div>
                         <?php endwhile;  wp_reset_postdata(); endif; ?>
@@ -2474,9 +2474,9 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
                         ?>
                             <div class="swiper-slide">
                                 <div class="text">
-                                    <h4 class="title"><?= get_the_title(); ?></h4>
+                                    <h4 class="title"><?php echo wp_kses_post(get_the_title()); ?></h4>
                                     <h6 class="taxonomy">
-                                        <span><?= esc_html($terms_display) ?></span>
+                                        <span><?php echo esc_html($terms_display) ?></span>
                                     </h6>
                                 </div>
                             </div>
@@ -2489,14 +2489,14 @@ class ElementCamp_Portfolio_Gallery_Text extends Widget_Base
                 <div class="swiper-controls">
                     <div class="swiper-button-next swiper-nav-ctrl cursor-pointer">
                         <div>
-                            <span><?=esc_html($settings['next_btn_text'])?></span>
+                            <span><?php echo esc_html($settings['next_btn_text'])?></span>
                         </div>
                         <div><?php \Elementor\Icons_Manager::render_icon( $settings['next_btn_icon'], [ 'aria-hidden' => 'true' ] );?></div>
                     </div>
                     <div class="swiper-button-prev swiper-nav-ctrl cursor-pointer">
                         <div><?php \Elementor\Icons_Manager::render_icon( $settings['prev_btn_icon'], [ 'aria-hidden' => 'true' ] );?></div>
                         <div>
-                            <span><?=esc_html( $settings['prev_btn_text'])?></span>
+                            <span><?php echo esc_html( $settings['prev_btn_text'])?></span>
                         </div>
                     </div>
                 </div>

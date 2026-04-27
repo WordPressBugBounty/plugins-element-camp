@@ -323,23 +323,23 @@ class ElementCamp_Portfolio_Box extends Widget_Base
         $this->add_responsive_control(
             'box_display_position',
             [
-                'label' => esc_html__('Display Position', 'bazario'),
+                'label' => esc_html__('Display Position', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'before' => [
-                        'title' => esc_html__('Before', 'bazario'),
+                        'title' => esc_html__('Before', 'element-camp'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'after' => [
-                        'title' => esc_html__('After', 'bazario'),
+                        'title' => esc_html__('After', 'element-camp'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                     'start' => [
-                        'title' => esc_html__('Start', 'bazario'),
+                        'title' => esc_html__('Start', 'element-camp'),
                         'icon' => "eicon-h-align-right",
                     ],
                     'end' => [
-                        'title' => esc_html__('End', 'bazario'),
+                        'title' => esc_html__('End', 'element-camp'),
                         'icon' => "eicon-h-align-left",
                     ],
                 ],
@@ -406,7 +406,7 @@ class ElementCamp_Portfolio_Box extends Widget_Base
         $this->add_control(
             'box_border_radius',
             [
-                'label' => esc_html__('Box Border Radius', 'tcgbase_plg'),
+                'label' => esc_html__('Box Border Radius', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -645,23 +645,23 @@ class ElementCamp_Portfolio_Box extends Widget_Base
         $this->add_responsive_control(
             'item_display_position',
             [
-                'label' => esc_html__('Display Position', 'bazario'),
+                'label' => esc_html__('Display Position', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'before' => [
-                        'title' => esc_html__('Before', 'bazario'),
+                        'title' => esc_html__('Before', 'element-camp'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'after' => [
-                        'title' => esc_html__('After', 'bazario'),
+                        'title' => esc_html__('After', 'element-camp'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                     'start' => [
-                        'title' => esc_html__('Start', 'bazario'),
+                        'title' => esc_html__('Start', 'element-camp'),
                         'icon' => "eicon-h-align-right",
                     ],
                     'end' => [
-                        'title' => esc_html__('End', 'bazario'),
+                        'title' => esc_html__('End', 'element-camp'),
                         'icon' => "eicon-h-align-left",
                     ],
                 ],
@@ -817,23 +817,23 @@ class ElementCamp_Portfolio_Box extends Widget_Base
         $this->add_responsive_control(
             'info_display_position',
             [
-                'label' => esc_html__('Display Position', 'bazario'),
+                'label' => esc_html__('Display Position', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'before' => [
-                        'title' => esc_html__('Before', 'bazario'),
+                        'title' => esc_html__('Before', 'element-camp'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'after' => [
-                        'title' => esc_html__('After', 'bazario'),
+                        'title' => esc_html__('After', 'element-camp'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                     'start' => [
-                        'title' => esc_html__('Start', 'bazario'),
+                        'title' => esc_html__('Start', 'element-camp'),
                         'icon' => "eicon-h-align-right",
                     ],
                     'end' => [
-                        'title' => esc_html__('End', 'bazario'),
+                        'title' => esc_html__('End', 'element-camp'),
                         'icon' => "eicon-h-align-left",
                     ],
                 ],
@@ -900,7 +900,7 @@ class ElementCamp_Portfolio_Box extends Widget_Base
         $this->add_responsive_control(
             'item_info_border_radius',
             [
-                'label' => esc_html__('Info Border Radius', 'themescamp-core'),
+                'label' => esc_html__('Info Border Radius', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem', 'custom'],
                 'selectors' => [
@@ -1208,7 +1208,7 @@ class ElementCamp_Portfolio_Box extends Widget_Base
         $this->add_responsive_control(
             'item_title_padding',
             [
-                'label' => esc_html__('Title Padding', 'themescamp-core'),
+                'label' => esc_html__('Title Padding', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -1219,7 +1219,7 @@ class ElementCamp_Portfolio_Box extends Widget_Base
         $this->add_responsive_control(
             'item_title_margin',
             [
-                'label' => esc_html__('Title Margin', 'themescamp-core'),
+                'label' => esc_html__('Title Margin', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [
@@ -1230,7 +1230,7 @@ class ElementCamp_Portfolio_Box extends Widget_Base
         $this->add_responsive_control(
             'item_title_border_radius',
             [
-                'label' => esc_html__('Title Border Radius', 'themescamp-core'),
+                'label' => esc_html__('Title Border Radius', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em'],
                 'selectors' => [

@@ -1,0 +1,134 @@
+.tcgelements-tip-showcase{
+  position: relative;
+  .item{
+    position: relative;
+  }
+  .tcgelements-tip-showcase-arrows {
+    color: #ccc;
+    font-size: 13px;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    text-align: center;
+    margin: 5px 0;
+    border: 1px solid rgba(255, 255, 255, .3);
+    position: absolute;
+    border-radius: 50%;
+    background: none;
+
+    &:after {
+      display: none;
+    }
+
+    &.swiper-button-next {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+
+      .tcgelements-tip-showcase-arrow-text {
+        margin-right: 8px;
+      }
+    }
+
+    &.swiper-button-prev {
+      position: absolute;
+      top: 50%;
+      left: 30px;
+
+      .tcgelements-tip-showcase-arrow-text {
+        margin-left: 8px;
+      }
+    }
+  }
+  .swiper-pagination-bullets {
+    &.swiper-pagination-horizontal {
+      width: auto;
+      display: block;
+      right: 50%;
+      left: unset;
+      transform: translateX(50%);
+    }
+
+    &.swiper-pagination-vertical {
+      width: auto;
+      display: block;
+      top: 50%;
+      bottom: unset;
+      transform: translateY(50%);
+    }
+  }
+  .swiper-pagination-fraction {
+    width: auto;
+    display: block;
+    right: 50%;
+    left: unset;
+    transform: translateX(50%);
+  }
+  .swiper-scrollbar {
+    &.scrollbar-horizontal {
+      position: absolute;
+      bottom: 15px;
+      z-index: 10;
+      left: unset;
+      margin: 0 1%;
+      width: calc(100% - (1% + 1%));
+      height: 4.5px;
+
+      .swiper-scrollbar-drag {
+        height: 4.5px;
+      }
+    }
+
+    &.scrollbar-vertical {
+      position: absolute;
+      right: 15px;
+      z-index: 10;
+      top: 0;
+      margin: 1% 0;
+      display: block;
+      height: calc(100% - ((1% + 1%) * 3));
+      width: 4.5px;
+
+      .swiper-scrollbar-drag {
+        width: 4.5px;
+      }
+    }
+  }
+  .arrows-pagination-container {
+    z-index: 1;
+  }
+  .div-tooltip-sub {
+    display: none;
+    background-color: #fff;
+    padding: 10px;
+    color: #111;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 99999;
+  }
+  .div-tooltip-tit {
+    display: none;
+    background-color: #000;
+    color: #fff;
+    padding: 0 10px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 99999;
+  }
+  &.slider{
+    .div-tooltip-sub, .div-tooltip-tit{
+      position: absolute;
+    }
+  }
+  &.grid{
+    .div-tooltip-sub, .div-tooltip-tit{
+      position: fixed;
+    }
+  }
+}

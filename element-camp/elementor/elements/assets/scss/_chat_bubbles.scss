@@ -1,0 +1,29 @@
+.tcgelements-chat-bubbles {
+  position: relative;
+  .chat-bubble {
+    display: flex;
+    align-items: flex-start;
+    transition: all 0.5s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    .avatar {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      i, svg {
+        display: block;
+      }
+    }
+    .content {
+      position: relative;
+    }
+  }
+}

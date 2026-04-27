@@ -392,12 +392,12 @@ class ElementCamp_Gallery_Stack extends Widget_Base
 
                         if (!empty($item['image_link']['url'])) {
                             $this->add_link_attributes('image_link_' . $index, $item['image_link']);
-                            $link_attr = $this->get_render_attribute_string('image_link_' . $index);
+                            $link_attr = $this->get_render_attribute_string('image_link_' . $index); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                         }
                         ?>
-                        <div class="gallery__item bg-img" data-background="<?= esc_url($image_url); ?>">
+                        <div class="gallery__item bg-img" data-background="<?php echo esc_url($image_url); ?>">
                             <?php if ($link_attr): ?>
-                                <a <?php echo $link_attr; ?>></a>
+                                <a <?php echo $link_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>></a>
                             <?php endif; ?>
                         </div>
                     <?php endforeach; ?>

@@ -1168,7 +1168,7 @@ class ElementCamp_Services_Tabs extends Widget_Base
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'none',
                 'options' => [
-                    'none' => esc_html__('None', 'textdomain'),
+                    'none' => esc_html__('None', 'element-camp'),
                     'circles-line'  => esc_html__('Circles Line', 'element-camp'),
                 ],
             ]
@@ -3364,22 +3364,22 @@ class ElementCamp_Services_Tabs extends Widget_Base
         $id = uniqid();
         $interaction = $settings['services_tabs_controls'];
 ?>
-        <div class="tcgelements-services-tabs <?= esc_attr($interaction); ?><?= ($settings["border_tabs_style"] == "circles-line") ? ' circles-line' : ''; ?>">
+        <div class="tcgelements-services-tabs <?php echo esc_attr($interaction); ?><?php echo ($settings["border_tabs_style"] == "circles-line") ? ' circles-line' : ''; ?>">
             <div class="row justify-content-between">
                 <div class="tab-column col-lg-5">
-                    <ul class="nav nav-pills" id="pills-tab-<?= esc_attr($id) ?>" role="tablist">
+                    <ul class="nav nav-pills" id="pills-tab-<?php echo esc_attr($id) ?>" role="tablist">
                         <?php foreach ($settings['nav_tabs'] as $index => $item) : ?>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link <?php if ($index == 0) echo 'active' ?>" id="pills-tab<?= $index ?>-tab" data-bs-toggle="pill" data-bs-target="#pills-tab<?= $index ?>">
+                                <button class="nav-link <?php if ($index == 0) echo 'active' ?>" id="pills-tab<?php echo esc_attr($index) ?>-tab" data-bs-toggle="pill" data-bs-target="#pills-tab<?php echo esc_attr($index) ?>">
                                     <?php if (!empty($item['service_icon']['url'])) : ?>
                                         <span class="icon">
-                                            <img src="<?= esc_url($item['service_icon']['url']) ?>" alt="<?php if (!empty($item['service_icon']['alt'])) echo esc_attr($item['service_icon']['alt']); ?>">
+                                            <img src="<?php echo esc_url($item['service_icon']['url']) ?>" alt="<?php if (!empty($item['service_icon']['alt'])) echo esc_attr($item['service_icon']['alt']); ?>">
                                         </span>
                                     <?php endif; ?>
                                     <span class="cont">
-                                        <div class="service-title"> <?= esc_html($item['service_title']) ?> </div>
+                                        <div class="service-title"> <?php echo esc_html($item['service_title']) ?> </div>
                                         <?php if ($item['service_description_switcher'] == 'yes') : ?>
-                                            <div class="service-description"> <?= esc_html($item['service_description']) ?> </div>
+                                            <div class="service-description"> <?php echo esc_html($item['service_description']) ?> </div>
                                         <?php endif; ?>
                                     </span>
                                 </button>
@@ -3388,13 +3388,13 @@ class ElementCamp_Services_Tabs extends Widget_Base
                     </ul>
                 </div>
                 <div class="content-column col-lg-6">
-                    <div class="tab-content <?= $settings['services_overlay_enable'] == 'yes' ? 'overlay-enabled' : ''  ?>" id="pills-tabContent-<?= esc_attr($id) ?>">
+                    <div class="tab-content <?php echo $settings['services_overlay_enable'] == 'yes' ? 'overlay-enabled' : ''  ?>" id="pills-tabContent-<?php echo esc_attr($id) ?>">
                         <?php foreach ($settings['nav_content'] as $index => $item) : ?>
-                            <div class="tab-pane fade <?php if ($index == 0) echo 'active show' ?>" id="pills-tab<?= $index ?>">
-                                <div class="service-image <?php echo $settings['animation_option']; ?>">
-                                    <img src="<?= esc_url($item['service_image']['url']) ?>" alt="<?php if (!empty($item['service_image']['alt'])) echo esc_attr($item['service_image']['alt']); ?>">
+                            <div class="tab-pane fade <?php if ($index == 0) echo 'active show' ?>" id="pills-tab<?php echo esc_attr($index) ?>">
+                                <div class="service-image <?php echo esc_attr($settings['animation_option']); ?>">
+                                    <img src="<?php echo esc_url($item['service_image']['url']) ?>" alt="<?php if (!empty($item['service_image']['alt'])) echo esc_attr($item['service_image']['alt']); ?>">
                                     <?php if ($item['button_switcher'] == 'yes') : ?>
-                                        <a class="butn" href="<?= esc_url($item['btn_link']['url']) ?>" <?php if ($item['btn_link']['is_external']) echo 'target="_blank"'; ?>>
+                                        <a class="butn" href="<?php echo esc_url($item['btn_link']['url']) ?>" <?php if ($item['btn_link']['is_external']) echo 'target="_blank"'; ?>>
                                             <?php if (!empty($item['selected_icon']['value']) and ($item['icon_align'] == 'left')) : ?>
                                                 <span class="butn-icon">
                                                     <?php Icons_Manager::render_icon($item['selected_icon'], ['aria-hidden' => 'true']); ?>
@@ -3412,22 +3412,22 @@ class ElementCamp_Services_Tabs extends Widget_Base
                                     <?php endif; ?>
                                 </div>
                                 <?php if ($item['show_title_content'] == "yes" && !empty($item['title_content'])) { ?>
-                                    <span class="title-content d-block"> <?= esc_html($item['title_content']) ?> </span>
+                                    <span class="title-content d-block"> <?php echo esc_html($item['title_content']) ?> </span>
                                 <?php }
                                 if ($item['show_description_content'] == "yes" && !empty($item['description_content'])) { ?>
-                                    <span class="content-description d-block"> <?= esc_html($item['description_content']) ?> </span>
+                                    <span class="content-description d-block"> <?php echo esc_html($item['description_content']) ?> </span>
                                 <?php }
                                 if ($item['right_left_content'] == 'yes') : ?>
                                     <div class="right-left-content">
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="left-content">
-                                                    <?= $item['left_content']; ?>
+                                                    <?php echo wp_kses_post($item['left_content']); ?>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="right-content">
-                                                    <?= $item['right_content']; ?>
+                                                    <?php echo wp_kses_post($item['right_content']); ?>
                                                 </div>
                                             </div>
                                         </div>

@@ -11,12 +11,12 @@
                     data: function ( params ) {
                         return {
                             action: 'tcg_select2_search_post',
-                            security: tcg_select2_localize.security,
                             post_type: obj.data.source_type,
                             source_name: obj.data.source_name,
                             meta_query: obj.data.meta_query,
                             use_taxonomy_slug: obj.data.use_taxonomy_slug,
                             term: params.term,
+                            nonce: tcg_select2_localize.nonce,
                         }
                     },
                 },
@@ -43,12 +43,12 @@
                             url: tcg_select2_localize.ajaxurl,
                             data: {
                                 action: 'tcg_select2_get_title',
-                                security: tcg_select2_localize.security,
                                 post_type: obj.data.source_type, 
                                 source_name: obj.data.source_name, 
                                 meta_query: obj.data.meta_query,
                                 use_taxonomy_slug: obj.data.use_taxonomy_slug,
-                                id: ids
+                                id: ids,
+                                nonce: tcg_select2_localize.nonce
                             }
                         }).done(function (response) {
                             if (response.success && typeof response.data.results != 'undefined') {

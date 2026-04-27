@@ -1,0 +1,34 @@
+.tcg-parallax-slider {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+
+    .parallax-sliders {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3800px;
+        height: 100%;
+    }
+
+    .parallax-slider-inner {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 80%;
+        width: 100%;
+        display: flex;
+        gap: 30px;
+        left: 70px;
+        margin-top: 60px;
+    }
+
+    .parallax-item {
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+    }
+
+}

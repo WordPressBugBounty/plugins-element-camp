@@ -1,0 +1,97 @@
+$color_1: #fff;
+$background-color_1: #eee;
+$background-color_2: #69727d;
+$background-color_3: #5bc0de;
+$background-color_4: #5cb85c;
+$background-color_5: #f0ad4e;
+$background-color_6: #d9534f;
+
+.elementor-widget-tcgelements-progress-bar {
+    text-align: start;
+
+    .tcgelements-progress-wrapper.progress-info {
+        .tcgelements-progress-bar {
+            background-color: $background-color_3;
+        }
+    }
+
+    .tcgelements-progress-wrapper.progress-success {
+        .tcgelements-progress-bar {
+            background-color: $background-color_4;
+        }
+    }
+
+    .tcgelements-progress-wrapper.progress-warning {
+        .tcgelements-progress-bar {
+            background-color: $background-color_5;
+        }
+    }
+
+    .tcgelements-progress-wrapper.progress-danger {
+        .tcgelements-progress-bar {
+            background-color: $background-color_6;
+        }
+    }
+}
+
+.tcgelements-progress-wrapper {
+    background-color: $background-color_1;
+    border-radius: 2px;
+    color: $color_1;
+    height: auto;
+    position: relative;
+}
+
+.tcgelements-progress-bar {
+    position: relative;
+    background-color: $background-color_2;
+    border-radius: 2px;
+    display: flex;
+    font-size: 11px;
+    height: 30px;
+    line-height: 30px;
+    transition: width 1s ease-in-out;
+    width: 0;
+}
+
+.tcgelements-progress-text {
+    flex-grow: 1;
+    overflow: hidden;
+    padding-inline-start: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tcgelements-progress-percentage {
+    padding-inline-end: 15px;
+}
+
+.tcgelements-progress-title {
+    display: block;
+}
+
+
+.elementor-progress {
+    .tcgelements-progress-title {
+        display: block;
+    }
+}
+
+.e-con {
+    .tcgelements-progress-wrapper {
+        height: auto;
+    }
+}
+
+.e-con-inner {
+    .tcgelements-progress-wrapper {
+        height: auto;
+    }
+}
+
+.tce-text-position-after {
+    .tcgelements-progress-bar {
+        flex-direction: row-reverse;
+        justify-content: start;
+    }
+}

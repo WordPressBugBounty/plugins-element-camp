@@ -1,0 +1,101 @@
+.tcg-portfolio-box {
+    .work-boxs {
+        display: flex;
+
+        .item {
+            position: relative;
+            width: 350px;
+            max-height: 90vh;
+            height: 600px;
+            margin: 0 4px;
+            display: flex;
+            flex-shrink: 1;
+            cursor: pointer;
+            transition: all .4s;
+
+            .portfolio-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            .cont {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                padding: 20px 20px 20px 30px;
+                opacity: 0;
+                width: max-content;
+                transition: all .4s;
+                transform: perspective(var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-perspective, 0)) rotate(var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-rotateZ, 0)) rotateX(var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-rotateX, 0)) rotateY(var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-rotateY, 0)) translate(var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-translate, 0)) translateX(var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-translateX, 0)) translateY(var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-translateY, 0)) scaleX(calc(var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-flipX, 1) * var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-scaleX, var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-scale, 1)))) scaleY(calc(var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-flipY, 1) * var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-scaleY, var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-scale, 1)))) skewX(var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-skewX, 0)) skewY(var(--e-transform-tcg-portfolio-box-work-boxs-item-cont-skewY, 0));
+
+                .info {
+                    position: relative;
+                }
+
+                h5,
+                h6 {
+                    opacity: 0;
+                    transition: all .4s;
+                    transition-delay: 0;
+                    padding: 14px 30px;
+                    background: #fff;
+                    border-radius: 50px;
+
+                    a {
+                        color: #1d1d1d;
+                    }
+                }
+
+                h6 {
+                    margin-left: 40px;
+                    margin-top: -10px;
+                }
+                .title{
+                    transform: perspective(var(--e-transform-tcg-portfolio-box-work-boxs-item-title-perspective, 0)) rotate(var(--e-transform-tcg-portfolio-box-work-boxs-item-title-rotateZ, 0)) rotateX(var(--e-transform-tcg-portfolio-box-work-boxs-item-title-rotateX, 0)) rotateY(var(--e-transform-tcg-portfolio-box-work-boxs-item-title-rotateY, 0)) translate(var(--e-transform-tcg-portfolio-box-work-boxs-item-title-translate, 0)) translateX(var(--e-transform-tcg-portfolio-box-work-boxs-item-title-translateX, 0)) translateY(var(--e-transform-tcg-portfolio-box-work-boxs-item-title-translateY, 0)) scaleX(calc(var(--e-transform-tcg-portfolio-box-work-boxs-item-title-flipX, 1) * var(--e-transform-tcg-portfolio-box-work-boxs-item-title-scaleX, var(--e-transform-tcg-portfolio-box-work-boxs-item-title-scale, 1)))) scaleY(calc(var(--e-transform-tcg-portfolio-box-work-boxs-item-title-flipY, 1) * var(--e-transform-tcg-portfolio-box-work-boxs-item-title-scaleY, var(--e-transform-tcg-portfolio-box-work-boxs-item-title-scale, 1)))) skewX(var(--e-transform-tcg-portfolio-box-work-boxs-item-title-skewX, 0)) skewY(var(--e-transform-tcg-portfolio-box-work-boxs-item-title-skewY, 0));
+                }
+                .tag{
+                    transform: perspective(var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-perspective, 0)) rotate(var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-rotateZ, 0)) rotateX(var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-rotateX, 0)) rotateY(var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-rotateY, 0)) translate(var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-translate, 0)) translateX(var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-translateX, 0)) translateY(var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-translateY, 0)) scaleX(calc(var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-flipX, 1) * var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-scaleX, var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-scale, 1)))) scaleY(calc(var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-flipY, 1) * var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-scaleY, var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-scale, 1)))) skewX(var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-skewX, 0)) skewY(var(--e-transform-tcg-portfolio-box-work-boxs-item-tag-skewY, 0));
+                }
+            }
+
+            &.active {
+                width: calc(100vw - 140px*3);
+
+                .inner {
+                    flex-grow: 1;
+                }
+
+                .cont {
+                    opacity: 1;
+
+                    h5,
+                    h6 {
+                        transform: none;
+                        opacity: 1;
+                    }
+
+                    h5 {
+                        transition-delay: .3s;
+                    }
+
+                    h6 {
+                        transition-delay: .6s;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .tcg-portfolio-box {
+        .inner {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

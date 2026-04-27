@@ -2,9 +2,9 @@
 Contributors: wpdive, themescamp
 Tags: widget, Elementor, Addons
 Requires at least: 6.0
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 2.3.6
+Stable tag: 2.3.8
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -50,21 +50,18 @@ You can report issues or request features via the plugin's [support page](https:
 
 == Changelog ==
 
-= 2.3.6 =
-* Data access issue fixed.
+= 1.0.0 =
+* Initial release.
+* Added custom ElementCamp widget.
 
-= 2.3.2 =
+= 2.2.3 =
 * More widgets added.
 
 = 2.2.6 =
 * More widgets added.
 
-= 2.2.3 =
+= 2.3.2 =
 * More widgets added.
-
-= 1.0.0 =
-* Initial release.
-* Added custom ElementCamp widget.
 
 == License ==
 This plugin is licensed under the GPLv2 or later. See the [GPLv2 License](https://www.gnu.org/licenses/gpl-2.0.html) for details.

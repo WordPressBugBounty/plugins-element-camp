@@ -103,6 +103,7 @@ class ElementCamp_Cart_Count extends Widget_Base {
                 'label' => esc_html__( 'Product Settings.', 'element-camp' ),
             ]
         );
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
         if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
             $this->add_control(
                 'cart_count_type',
@@ -177,8 +178,8 @@ class ElementCamp_Cart_Count extends Widget_Base {
                 'woocommerce_warning',
                 [
                     'type' => \Elementor\Controls_Manager::RAW_HTML,
-                    'raw' => '<strong>' . __( 'WooCommerce is not active.', 'element-camp' ) . '</strong><br>'
-                        . sprintf( __( 'Please activate WooCommerce to use this widget. <a href="%s" target="_blank">Go to Plugins Page</a>.', 'element-camp' ), esc_url(admin_url('plugins.php')) ),
+                    // translators: %s is the url to the plugins page
+                    'raw' => '<strong>' . __( 'WooCommerce is not active.', 'element-camp' ) . '</strong><br>' . sprintf( __( 'Please activate WooCommerce to use this widget. <a href="%s" target="_blank">Go to Plugins Page</a>.', 'element-camp' ), esc_url(admin_url('plugins.php')) ),
                     'separator' => 'after',
                     'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
                 ]
@@ -659,6 +660,7 @@ class ElementCamp_Cart_Count extends Widget_Base {
     protected function render() {
         $settings = $this->get_settings();
 
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
         if ( !in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
             return;
         };
@@ -669,7 +671,7 @@ class ElementCamp_Cart_Count extends Widget_Base {
         $cart_count = WC()->cart->get_cart_contents_count();
         ?>
 
-        <a href="<?= esc_url( wc_get_cart_url() );?>" class="tcgelements-cart-count <?php echo esc_attr($settings['cart_count_type']); ?>">
+        <a href="<?php echo esc_url( wc_get_cart_url() );?>" class="tcgelements-cart-count <?php echo esc_attr($settings['cart_count_type']); ?>">
             <?php
             if($settings['cart_count_type'] == 'text') {
                 echo esc_html($settings['cart_count_text']);
@@ -686,7 +688,7 @@ class ElementCamp_Cart_Count extends Widget_Base {
             }
             ?>
             <?php if($settings['show_cart_number'] == 'yes') : ?>
-                <span class="cart-count-number"><?=esc_html($cart_count);?></span>
+                <span class="cart-count-number"><?php echo esc_html($cart_count);?></span>
             <?php endif; ?>
         </a>
 

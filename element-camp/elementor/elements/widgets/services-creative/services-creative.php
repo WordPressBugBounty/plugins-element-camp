@@ -48,8 +48,8 @@ class ElementCamp_Services_Creative extends Widget_Base
     }
     protected function _register_controls()
     {
-        $start = is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
-        $end = !is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
+        $start = is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
+        $end = !is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
 
         $this->start_controls_section(
             'section_content',
@@ -3413,8 +3413,8 @@ class ElementCamp_Services_Creative extends Widget_Base
             [
                 'label' => esc_html__('Clip Path', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'description' => esc_html__('example: polygon(0 0, 100% 0, 100% 100%, 27% 100%) OR you can use unset to disable it'),
-                'placeholder' => esc_html__('example: polygon(0 0, 100% 0, 100% 100%, 27% 100%)'),
+                'description' => esc_html__('example: polygon(0 0, 100% 0, 100% 100%, 27% 100%) OR you can use unset to disable it', 'element-camp'),
+                'placeholder' => esc_html__('example: polygon(0 0, 100% 0, 100% 100%, 27% 100%)', 'element-camp'),
                 'condition' => ['images_image_clip_path' => 'custom'],
                 'language' => 'css',
                 'selectors' => [
@@ -3427,10 +3427,10 @@ class ElementCamp_Services_Creative extends Widget_Base
         $this->add_control(
             'images_image_transform_options',
             [
-                'label' => esc_html__('Image Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Image Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
         $this->start_popover();
@@ -3518,10 +3518,10 @@ class ElementCamp_Services_Creative extends Widget_Base
         $this->add_control(
             'images_image_transform_options_show',
             [
-                'label' => esc_html__('Image Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Image Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
         $this->start_popover();
@@ -4349,9 +4349,9 @@ class ElementCamp_Services_Creative extends Widget_Base
         $useTabContainer = !empty($settings['use_tab_container']) && $settings['use_tab_container'] === 'yes';
         $showConnector = !empty($settings['show_step_connector']) && $settings['show_step_connector'] === 'yes';
         ?>
-    <div class="tcgelements-services-creative <?= $showConnector ? 'show-connector' : '' ?>"
-         data-use-tabs="<?= $useTabContainer ? 'yes' : 'no' ?>"
-         data-remove-on-leave="<?= !empty($settings['remove_active_on_leave']) && $settings['remove_active_on_leave'] === 'yes' ? 'yes' : 'no' ?>">
+    <div class="tcgelements-services-creative <?php echo $showConnector ? 'show-connector' : '' ?>"
+         data-use-tabs="<?php echo $useTabContainer ? 'yes' : 'no' ?>"
+         data-remove-on-leave="<?php echo !empty($settings['remove_active_on_leave']) && $settings['remove_active_on_leave'] === 'yes' ? 'yes' : 'no' ?>">
         <div class="card-column">
         <?php $itemCount = 1;
         foreach ($settings['services_items'] as $item) : ?>
@@ -4389,27 +4389,27 @@ class ElementCamp_Services_Creative extends Widget_Base
                 }
             }
             ?>
-            <<?php echo $cardTagType; ?> <?php echo $link_attrs; ?>
+            <<?php echo esc_attr($cardTagType); ?> <?php echo esc_attr($link_attrs); ?>
             class="service-card <?php if (!empty($settings['first_card_active']) && $settings['first_card_active'] === 'yes' && $itemCount === 1) echo 'active-card'; ?>"
-            data-serv="<?= esc_attr($itemCount) ?>">
+            data-serv="<?php echo esc_attr($itemCount) ?>">
             <div class="service-card-row">
                 <?php if (!empty($item['item_count'])) : ?>
                     <div class="count-column">
-                        <span class="num"> <?= esc_html__($item['item_count'], 'element-camp') ?> </span>
+                        <span class="num"> <?php echo wp_kses_post($item['item_count']) ?> </span>
                     </div>
                 <?php endif;?>
                 <div class="title-column">
-                    <h3 class="title"> <?= esc_html($item['title']) ?> </h3>
+                    <h3 class="title"> <?php echo esc_html($item['title']) ?> </h3>
                 </div>
                 <?php if ( $item['expandable_section'] === 'yes' && (!empty($item['item_expandable_description']) || !empty($item['item_expandable_tags']))) : ?>
                     <div class="expandable-content">
                         <?php if (!empty($item['item_expandable_description'])) : ?>
-                            <div class="description"> <?= wp_kses_post($item['item_expandable_description']) ?> </div>
+                            <div class="description"> <?php echo wp_kses_post($item['item_expandable_description']) ?> </div>
                         <?php endif; ?>
                         <?php if ($item['expandable_tags']==='yes' && !empty($item['item_expandable_tags'])) : ?>
                             <div class="tags">
                                 <?php foreach ($item['item_expandable_tags'] as $tag) : ?>
-                                    <span class="tag"> <?= esc_html($tag['expandable_tag_text']) ?> </span>
+                                    <span class="tag"> <?php echo esc_html($tag['expandable_tag_text']) ?> </span>
                                 <?php endforeach; ?>
                             </div>
                         <?php endif; ?>
@@ -4417,7 +4417,7 @@ class ElementCamp_Services_Creative extends Widget_Base
                 <?php endif; ?>
                 <?php if (!empty($item['title_image']['url'])) : ?>
                     <div class="image-column">
-                        <img src="<?= esc_url($item['title_image']['url']); ?>" alt="<?= !empty($item['title_image']['alt']) ? esc_attr($item['title_image']['alt']) : '' ?>">
+                        <img src="<?php echo esc_url($item['title_image']['url']); ?>" alt="<?php echo !empty($item['title_image']['alt']) ? esc_attr($item['title_image']['alt']) : '' ?>">
                     </div>
                 <?php endif ?>
             <?php if (!empty($item['enable_item_social_icons']) && $item['enable_item_social_icons'] === 'yes' && !empty($item['item_social_icons'])) : ?>
@@ -4454,24 +4454,24 @@ class ElementCamp_Services_Creative extends Widget_Base
                         }
                     }
                     ?>
-                    <<?php echo $socialTag; ?> <?php echo $socialLinkAttrs; ?>>
+                    <<?php echo esc_attr($socialTag); ?> <?php echo esc_attr($socialLinkAttrs); ?>>
                     <?php \Elementor\Icons_Manager::render_icon($social['social_icon'], ['aria-hidden' => 'true']); ?>
-                    </<?php echo $socialTag; ?>>
+                    </<?php echo esc_attr($socialTag); ?>>
                 <?php endforeach; ?>
                 </div>
             <?php endif; ?>
             </div>
             <?php if (!empty($item['item_description'])) : ?>
                 <div class="description-column">
-                    <div class="item-description"> <?= wp_kses_post($item['item_description']) ?> </div>
+                    <div class="item-description"> <?php echo wp_kses_post($item['item_description']) ?> </div>
                 </div>
             <?php endif; ?>
-            </<?php echo $cardTagType; ?>>
+            </<?php echo esc_attr($cardTagType); ?>>
             <?php $itemCount++;
         endforeach; ?>
         <?php if ($settings['exp_section']) : ?>
         <div class="exp-wrapper">
-            <span class="exp-number"><?= esc_html($settings['exp_number']) ?></span> <span class="exp-text"><?= esc_html($settings['exp_text']) ?></span>
+            <span class="exp-number"><?php echo esc_html($settings['exp_number']) ?></span> <span class="exp-text"><?php echo esc_html($settings['exp_text']) ?></span>
         </div>
     <?php endif; ?>
         </div>
@@ -4493,7 +4493,7 @@ class ElementCamp_Services_Creative extends Widget_Base
         <?php if ($hasImages) : ?>
         <div class="images-column">
             <?php if ($settings['images_media'] == 'image' && !empty($settings['images_media_image']['url'])) : ?>
-                <img src="<?= esc_url($settings['images_media_image']['url']); ?>" alt="<?= !empty($settings['images_media_image']['alt']) ? esc_attr($settings['images_media_image']['alt']) : '' ?>" class="media-image">
+                <img src="<?php echo esc_url($settings['images_media_image']['url']); ?>" alt="<?php echo !empty($settings['images_media_image']['alt']) ? esc_attr($settings['images_media_image']['alt']) : '' ?>" class="media-image">
             <?php endif; ?>
 
             <?php
@@ -4514,15 +4514,15 @@ class ElementCamp_Services_Creative extends Widget_Base
                         <?php $itemCount = 1;
                         foreach ($settings['services_items'] as $item) : ?>
                             <?php if (!empty($item['content_image']['url'])) : ?>
-                                <div class="tab-card <?php if ($itemCount === 1) echo "active" ?>" data-tab-item="<?= esc_attr($itemCount) ?>">
+                                <div class="tab-card <?php if ($itemCount === 1) echo "active" ?>" data-tab-item="<?php echo esc_attr($itemCount) ?>">
                                     <div class="img">
-                                        <img src="<?= esc_url($item['content_image']['url']); ?>" alt="<?= !empty($item['content_image']['alt']) ? esc_attr($item['content_image']['alt']) : '' ?>" data-serv="<?= esc_attr($itemCount) ?>" class="<?php if ($itemCount === 1) echo "show" ?>">
+                                        <img src="<?php echo esc_url($item['content_image']['url']); ?>" alt="<?php echo !empty($item['content_image']['alt']) ? esc_attr($item['content_image']['alt']) : '' ?>" data-serv="<?php echo esc_attr($itemCount) ?>" class="<?php if ($itemCount === 1) echo "show" ?>">
                                     </div>
                                     <?php if (!empty($item['progress_section']) && $item['progress_section'] === 'yes') : ?>
                                         <div class="progress-wrapper">
-                                            <div class="txt"><?= esc_html($item['progress_title']) ?></div>
-                                            <div class="progress progress-st1" role="progressbar" aria-label="<?= esc_attr($item['progress_title']) ?>" aria-valuenow="<?= esc_attr($item['progress_value']['size']) ?>" aria-valuemin="0" aria-valuemax="100">
-                                                <div class="progress-bar" data-progress="<?= esc_attr($item['progress_value']['size']) ?>"></div>
+                                            <div class="txt"><?php echo esc_html($item['progress_title']) ?></div>
+                                            <div class="progress progress-st1" role="progressbar" aria-label="<?php echo esc_attr($item['progress_title']) ?>" aria-valuenow="<?php echo esc_attr($item['progress_value']['size']) ?>" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar" data-progress="<?php echo esc_attr($item['progress_value']['size']) ?>"></div>
                                             </div>
                                         </div>
                                     <?php endif; ?>
@@ -4535,7 +4535,7 @@ class ElementCamp_Services_Creative extends Widget_Base
                         <?php $itemCount = 1;
                         foreach ($settings['services_items'] as $item) : ?>
                             <?php if (!empty($item['content_image']['url'])) : ?>
-                                <img src="<?= esc_url($item['content_image']['url']); ?>" alt="<?= !empty($item['content_image']['alt']) ? esc_attr($item['content_image']['alt']) : '' ?>" data-serv="<?= esc_attr($itemCount) ?>" class="<?php if ($itemCount === 1) echo "show" ?>">
+                                <img src="<?php echo esc_url($item['content_image']['url']); ?>" alt="<?php echo !empty($item['content_image']['alt']) ? esc_attr($item['content_image']['alt']) : '' ?>" data-serv="<?php echo esc_attr($itemCount) ?>" class="<?php if ($itemCount === 1) echo "show" ?>">
                             <?php endif; ?>
                             <?php $itemCount++;
                         endforeach; ?>

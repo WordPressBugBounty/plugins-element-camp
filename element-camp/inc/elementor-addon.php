@@ -1,4 +1,5 @@
 <?php
+if (!defined('ABSPATH')) exit;
 //Elementor Editor view
 
 //display menu-list list
@@ -101,7 +102,7 @@ if (! function_exists('themescamp_post_category_choice')) {
         ob_start();
         $cart_count = WC()->cart->cart_contents_count;
 ?>
-        <span class="cart-count-number"><?= esc_html($cart_count); ?></span>
+        <span class="cart-count-number"><?php echo esc_html($cart_count); ?></span>
 <?php
 
         $fragments['span.cart-count-number'] = ob_get_clean();
@@ -221,7 +222,8 @@ if (! function_exists('themescamp_category_choice')) {
 if (! function_exists('themescamp_portfolio_tag_choice')) {
     function themescamp_portfolio_tag_choice()
     {
-        $tags = get_terms('porto_tag', array(
+        $tags = get_terms( array(
+            'taxonomy' => 'porto_tag',
             'hide_empty' => true,
         ));
         $blogs = array();
@@ -241,7 +243,8 @@ if (! function_exists('themescamp_portfolio_tag_choice')) {
 if (! function_exists('themescamp_post_tag_choice')) {
     function themescamp_post_tag_choice()
     {
-        $tags = get_terms('post_tag', array(
+        $tags = get_terms( array(
+            'taxonomy' => 'post_tag',
             'hide_empty' => false,
         ));
         $blogs = array();

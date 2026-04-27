@@ -6,8 +6,8 @@
 
         if (!lettersLineElements.length) return;
 
-        // Process text nodes to wrap words and letters
-        function processTextNodes(element) {
+        // Process text nodes to wrap words and optionally letters
+        function processTextNodes(element, animateBy) {
             const walker = document.createTreeWalker(
                 element,
                 NodeFilter.SHOW_TEXT,
@@ -44,14 +44,19 @@
                         wordSpan.style.display = 'inline-block';
                         wordSpan.style.whiteSpace = 'nowrap';
 
-                        // Split word into letters
-                        word.split("").forEach(char => {
-                            const span = document.createElement('span');
-                            span.className = 'letter';
-                            span.style.display = 'inline-block';
-                            span.textContent = char;
-                            wordSpan.appendChild(span);
-                        });
+                        if (animateBy === 'letter') {
+                            // Split into individual letter spans
+                            word.split("").forEach(char => {
+                                const span = document.createElement('span');
+                                span.className = 'letter';
+                                span.style.display = 'inline-block';
+                                span.textContent = char;
+                                wordSpan.appendChild(span);
+                            });
+                        } else {
+                            // Word mode — no letter splitting
+                            wordSpan.textContent = word;
+                        }
 
                         fragment.appendChild(wordSpan);
                     }
@@ -71,8 +76,11 @@
             // If the element is empty, nothing to do
             if (!title.hasChildNodes()) return;
 
+            // Read animateBy BEFORE processing so we know what DOM to build
+            const animateBy = $(title).data('letters-animate-by') || 'letter';
+
             // Process all text nodes
-            processTextNodes(title);
+            processTextNodes(title, animateBy);
 
             const isInsideSlider = $(title).closest('.swiper-slide').length > 0;
 
@@ -84,7 +92,7 @@
                 const trigger = $(title).data('letters-trigger') || title;
                 const startPosition = $(title).data('letters-start') || "top 80%";
 
-                // NEW: Get blur settings
+                // Get blur settings
                 const enableBlur = $(title).data('letters-blur') === 'yes';
                 const blurAmount = parseFloat($(title).data('letters-blur-amount')) || 100;
                 const initialScale = parseFloat($(title).data('letters-initial-scale')) || 2;
@@ -92,7 +100,7 @@
                 // Apply GSAP animation with ScrollTrigger
                 if (typeof gsap !== 'undefined' && gsap.registerPlugin) {
                     setTimeout(() => {
-                        const letters = title.querySelectorAll(".letter");
+                        const letters = title.querySelectorAll(animateBy === 'word' ? '.word' : '.letter');
 
                         // Build FROM properties
                         const fromProps = {

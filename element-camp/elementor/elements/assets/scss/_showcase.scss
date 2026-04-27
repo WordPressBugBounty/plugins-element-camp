@@ -1,0 +1,263 @@
+.tcgelements-showcase{
+  .item{
+    position: relative;
+    &::before{
+      position: absolute;
+      content: "";
+    }
+    span ,a {
+      display: inline-block;
+    }
+    .img{
+      position: relative;
+      &::before{
+        position: absolute;
+        content: "";
+      }
+    }
+    img{
+      position: relative;
+    }
+    .overlay-link{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+    }
+    .info-duplicate{
+      z-index: 7;
+      .title{
+        .stroke{
+          -webkit-text-stroke: 1px #fff;
+          color: transparent;
+        }
+      }
+    }
+    .copy-info{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      display: flex;
+      align-items: center;
+      .title{
+        .stroke{
+          color: #fff;
+          -webkit-text-stroke: 0;
+        }
+      }
+    }
+    .info-duplicate,.copy-info{
+      .title{
+        color: #ffffff;
+        position: relative;
+        left: -120px;
+        .stroke{
+          transform: skewX(25deg) translateX(-100px);
+          opacity: 0;
+          transition: transform 1.2s, opacity 0.3s;
+          transition-delay: 0.2s;
+        }
+        span{
+          margin-left: 40px;
+          transform: skewX(-25deg) translateX(100px);
+          opacity: 0;
+          transition: transform 1.2s, opacity 0.3s;
+          transition-delay: 0.2s;
+        }
+      }
+    }
+    .info,.copy-info{
+      .icon{
+        display: inline-block;
+        transform : perspective(var(--e-transform-tcgelements-showcase-icon-perspective,0)) rotate(var(--e-transform-tcgelements-showcase-icon-rotateZ,0)) rotateX(var(--e-transform-tcgelements-showcase-icon-rotateX,0)) rotateY(var(--e-transform-tcgelements-showcase-icon-rotateY,0)) translate(var(--e-transform-tcgelements-showcase-icon-translate,0)) translateX(var(--e-transform-tcgelements-showcase-icon-translateX,0)) translateY(var(--e-transform-tcgelements-showcase-icon-translateY,0)) scaleX(calc(var(--e-transform-tcgelements-showcase-icon-flipX, 1) * var(--e-transform-tcgelements-showcase-icon-scaleX, var(--e-transform-tcgelements-showcase-icon-scale, 1)))) scaleY(calc(var(--e-transform-tcgelements-showcase-icon-flipY, 1) * var(--e-transform-tcgelements-showcase-icon-scaleY, var(--e-transform-tcgelements-showcase-icon-scale, 1)))) skewX(var(--e-transform-tcgelements-showcase-icon-skewX,0)) skewY(var(--e-transform-tcgelements-showcase-icon-skewY,0));
+      }
+    }
+  }
+  .swiper-slide-active{
+    .info-duplicate,.copy-info{
+      .title{
+        color: #ffffff;
+        position: relative;
+        .stroke{
+          transform: skewX(0) translateX(0);
+          opacity: 1;
+        }
+        span{
+          transform: skewX(0) translateX(0);
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .tcgelements-showcase-arrows {
+    color: #ccc;
+    font-size: 13px;
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    text-align: center;
+    margin: 5px 0;
+    border: 1px solid rgba(255, 255, 255, .3);
+    position: absolute;
+    border-radius: 50%;
+    background: none;
+
+    &:after {
+      display: none;
+    }
+
+    &.swiper-button-next {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+
+      .tcgelements-showcase-arrow-text {
+        margin-right: 8px;
+      }
+    }
+
+    &.swiper-button-prev {
+      position: absolute;
+      top: 50%;
+      left: 30px;
+
+      .tcgelements-showcase-arrow-text {
+        margin-left: 8px;
+      }
+    }
+  }
+  .swiper-pagination-bullets {
+    &.swiper-pagination-horizontal {
+      width: auto;
+      display: block;
+      right: 50%;
+      left: unset;
+      transform: translateX(50%);
+    }
+
+    &.swiper-pagination-vertical {
+      width: auto;
+      display: block;
+      top: 50%;
+      bottom: unset;
+      transform: translateY(50%);
+    }
+  }
+  .swiper-pagination-fraction {
+    width: auto;
+    display: block;
+    right: 50%;
+    left: unset;
+    transform: translateX(50%);
+  }
+  .swiper-scrollbar {
+    &.scrollbar-horizontal {
+      position: absolute;
+      bottom: 15px;
+      z-index: 10;
+      left: unset;
+      margin: 0 1%;
+      width: calc(100% - (1% + 1%));
+      height: 4.5px;
+
+      .swiper-scrollbar-drag {
+        height: 4.5px;
+      }
+    }
+
+    &.scrollbar-vertical {
+      position: absolute;
+      right: 15px;
+      z-index: 10;
+      top: 0;
+      margin: 1% 0;
+      display: block;
+      height: calc(100% - ((1% + 1%) * 3));
+      width: 4.5px;
+
+      .swiper-scrollbar-drag {
+        width: 4.5px;
+      }
+    }
+  }
+  .arrows-pagination-container {
+    z-index: 1;
+  }
+  .tcgelements-custom-progress{
+    position: relative;
+    .swiper-progress-bar{
+      position: absolute;
+      height: 100%;
+      background-color: var(--color-primary);
+      transition: width 0.5s ease;
+    }
+  }
+  .tcgelements-float-cursor{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    z-index: 30;
+    pointer-events: none;
+    padding: 30px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.4s ease, transform 0.4s ease, all 0.1s linear;
+  }
+  .tce-showcase-filters {
+    margin-bottom: 40px;
+    .filter-btn {
+      display: inline-block;
+      cursor: pointer;
+      background-color: transparent;
+      border: 0;
+      color: #111;
+      opacity: 0.6;
+      font-size: 16px;
+      text-transform: capitalize;
+      margin-inline-end: 16px;
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+  .tcgelements-float-cursor-container{
+    a{
+      cursor: none;
+    }
+    cursor: none;
+  }
+}
+@media screen and (max-width: 991px) {
+  .tcgelements-showcase{
+    .item{
+      .info-duplicate,.copy-info{
+        .title{
+          left: auto;
+          margin-left: 20px;
+        }
+      }
+    }
+    .tcgelements-float-cursor-container{
+      .tcgelements-float-cursor{
+        display: none;
+      }
+    }
+  }
+}

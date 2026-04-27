@@ -1,0 +1,131 @@
+.tcgelements-services-tabs {
+    ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        list-style-type: none;
+        position: relative;
+
+        .nav-link:first-of-type {
+            padding-top: 0;
+        }
+
+        .nav-link:last-of-type {
+            padding-bottom: 0;
+            border: 0;
+        }
+
+        .icon {
+            flex-shrink: 0;
+        }
+    }
+
+    .tab-content {
+        .service-image {
+            position: relative;
+        }
+    }
+
+    .tab-content.overlay-enabled {
+        .service-image {
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                pointer-events: none;
+                opacity: 1;
+                z-index: 1;
+            }
+        }
+    }
+
+
+    &.hover {
+        .tab-content {
+            position: relative;
+
+            .tab-pane {
+                display: block;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                opacity: 0;
+                visibility: hidden;
+
+                &:first-of-type {
+                    position: static;
+                }
+
+                .fade-in-up {
+                    transform: translateY(50px);
+                    transition: all 0.4s;
+                }
+
+                .fade-in {
+                    transform: scale(1.1);
+                    transition: all 0.7s;
+                }
+
+                &.show.active {
+                    opacity: 1;
+                    visibility: visible;
+
+                    .fade-in-up {
+                        transform: translateY(0);
+                    }
+
+                    .fade-in {
+                        transform: scale(1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.tcgelements-services-tabs.circles-line {
+    ul {
+        position: relative;
+
+        &:before {
+            position: absolute;
+            content: "";
+            left: 20px;
+            top: 30px;
+            width: 1px;
+            height: calc(100% - 60px);
+            background-color: #222;
+        }
+
+        .nav-link {
+            position: relative;
+
+            &:before {
+                position: absolute;
+                content: "";
+                left: 15px;
+                top: calc(50% - 5px);
+                width: 10px;
+                height: 10px;
+                background-color: #222;
+                border-radius: 50%;
+            }
+        }
+
+        .icon {
+            scale: 0;
+        }
+
+        .nav-link.active {
+            .icon {
+                scale: 1;
+            }
+        }
+    }
+}

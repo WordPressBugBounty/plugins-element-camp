@@ -1787,6 +1787,56 @@ class ElementCamp_Accordion extends Widget_Base
             ]
         );
         $this->add_responsive_control(
+            'count_display',
+            [
+                'label' => esc_html__('Count Display Type', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    '' => esc_html__('Default', 'element-camp'),
+                    'inline-block' => esc_html__('Inline Block', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-accordion .accordion-item .accordion-button .count' => 'display: {{VALUE}};'
+                ]
+            ]
+        );
+        $this->add_responsive_control(
+            'count_width',
+            [
+                'label' => esc_html__( 'Count Width', 'element-camp' ),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'unit' => '%',
+                ],
+                'tablet_default' => [
+                    'unit' => '%',
+                ],
+                'mobile_default' => [
+                    'unit' => '%',
+                ],
+                'size_units' => [ '%', 'px', 'vw', 'rem', 'custom' ],
+                'range' => [
+                    '%' => [
+                        'min' => 1,
+                        'max' => 150,
+                    ],
+                    'px' => [
+                        'min' => 1,
+                        'max' => 1000,
+                    ],
+                    'vw' => [
+                        'min' => 1,
+                        'max' => 150,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-accordion .accordion-item .accordion-button .count' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
             'count_padding',
             [
                 'label' => esc_html__( 'Count Padding', 'element-camp' ),
@@ -2660,29 +2710,29 @@ class ElementCamp_Accordion extends Widget_Base
         $accordion_id = uniqid('accordion');
         $has_icon = (! empty( $settings['item_icon']['value'] ) );
         ?>
-        <div class="tcgelements-accordion"  id="<?=esc_attr($accordion_id)?>">
+        <div class="tcgelements-accordion"  id="<?php echo esc_attr($accordion_id)?>">
             <?php  $itemCount=1; foreach ($settings['accordion_items'] as $item) : ?>
                 <div class="accordion-item <?php if ($settings['active_item']==$itemCount) echo esc_attr('active')?>">
                     <h2 class="accordion-header">
-                        <button class="accordion-button<?=esc_attr(' '.$settings['icon_style'])?> <?php if ($settings['active_item']!=$itemCount) echo esc_attr('collapsed')?>" data-bs-toggle="collapse" data-bs-target="#collapse<?=$itemCount.$accordion_id?>">
+                        <button class="accordion-button<?php echo esc_attr(' '.$settings['icon_style'])?> <?php if ($settings['active_item']!=$itemCount) echo esc_attr('collapsed')?>" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo esc_attr($itemCount.$accordion_id)?>">
                             <?php if (!empty($item['title_image']['url'])) : ?>
                                 <span class="img">
-                                        <img src="<?= esc_url($item['title_image']['url']); ?>" alt="<?php if (!empty($item['title_image']['alt'])) echo esc_attr($item['title_image']['alt']); ?>" >
+                                        <img src="<?php echo esc_url($item['title_image']['url']); ?>" alt="<?php if (!empty($item['title_image']['alt'])) echo esc_attr($item['title_image']['alt']); ?>" >
                                     </span>
                             <?php endif;
                             if (!empty($item['item_count'])) : ?>
-                                <span class="count"><?=__($item['item_count'])?></span>
+                                <span class="count"><?php echo esc_html($item['item_count'])?></span>
                             <?php endif;?>
-                            <?=__($item['title'],'element-camp')?>
+                            <?php echo esc_html($item['title'])?>
                             <?php if ( $has_icon ) : ?>
                                 <span class="tcgelements-accordion-icon tcgelements-accordion-icon-closed"><?php Icons_Manager::render_icon( $settings['item_icon'] ); ?></span>
                                 <span class="tcgelements-accordion-icon tcgelements-accordion-icon-opened"><?php Icons_Manager::render_icon( $settings['active_item_icon'] ); ?></span>
                             <?php endif; ?>
                         </button>
                     </h2>
-                    <div id="collapse<?=$itemCount.$accordion_id?>" class="accordion-collapse collapse <?php if ($settings['active_item']==$itemCount) echo 'show'?>" data-bs-parent="<?= esc_attr('#' . $accordion_id) ?>">
+                    <div id="collapse<?php echo esc_attr($itemCount.$accordion_id)?>" class="accordion-collapse collapse <?php if ($settings['active_item']==$itemCount) echo esc_attr('show')?>" data-bs-parent="<?php echo esc_attr('#' . $accordion_id) ?>">
                         <div class="accordion-body">
-                            <?= $item['content']; ?>
+                            <?php echo wp_kses_post($item['content']); ?>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,164 @@
+.tcgelements-canvas {
+    .crystal-container {
+        position: absolute;
+        left: 0;
+        bottom: -30%;
+        height: 80%;
+        width: 100%;
+        opacity: 0.5;
+    }
+    .circles {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+
+        .circle1 {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background-color: #e9e4ff;
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+        }
+
+        .circle2 {
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            background-color: #F0F1F9;
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+        }
+
+        .circle3 {
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            background-color: #E7F3F3;
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+        }
+
+        .circle4 {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background-color: #ffeaea;
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+        }
+    }
+
+    .globe-dots {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        canvas {
+            transform: scale(1.3);
+        }
+    }
+
+    .noise-background {
+        position: absolute;
+        content: '';
+        top: -10rem;
+        left: -10rem;
+        width: calc(100% + 20rem);
+        height: calc(100% + 20rem);
+        z-index: 0;
+        pointer-events: none;
+        animation: BgNoise 1s steps(2) infinite;
+    }
+
+    @keyframes BgNoise {
+        0% {
+            transform: translate3d(0, 9rem, 0);
+        }
+
+        10% {
+            transform: translate3d(-1rem, -4rem, 0);
+        }
+
+        20% {
+            transform: translate3d(-8rem, 2rem, 0);
+        }
+
+        30% {
+            transform: translate3d(9rem, -9rem, 0);
+        }
+
+        40% {
+            transform: translate3d(-2rem, 7rem, 0);
+        }
+
+        50% {
+            transform: translate3d(-9rem, -4rem, 0);
+        }
+
+        60% {
+            transform: translate3d(2rem, 6rem, 0);
+        }
+
+        70% {
+            transform: translate3d(7rem, -8rem, 0);
+        }
+
+        80% {
+            transform: translate3d(-9rem, 1rem, 0);
+        }
+
+        90% {
+            transform: translate3d(6rem, -5rem, 0);
+        }
+
+        100% {
+            transform: translate3d(-7rem, 0, 0);
+        }
+    }
+
+    .brush-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        pointer-events: none;
+
+        .maskCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: auto;
+            z-index: 10;
+        }
+    }
+
+    .particles-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+    .floating-lines-container{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}

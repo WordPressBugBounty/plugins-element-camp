@@ -818,8 +818,8 @@ class ElementCamp_Gallery_Text_Sliders extends Widget_Base
                         <?php foreach ($settings['slides_repeater'] as $slide) : ?>
                             <div class="swiper-slide">
                                 <div class="img">
-                                    <img src="<?= esc_url($slide['image']['url']); ?>" alt>
-                                    <a href="<?= esc_url($slide['link']['url']); ?>" <?php if ( $slide['link']['is_external'] ) {echo'target="_blank"';} ?>></a>
+                                    <img src="<?php echo esc_url($slide['image']['url']); ?>" alt>
+                                    <a href="<?php echo esc_url($slide['link']['url']); ?>" <?php if ( $slide['link']['is_external'] ) {echo'target="_blank"';} ?>></a>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -832,10 +832,10 @@ class ElementCamp_Gallery_Text_Sliders extends Widget_Base
                         <?php foreach ($settings['slides_repeater'] as $slide) : ?>
                             <div class="swiper-slide">
                                 <div class="text">
-                                    <h4 class="title"><?= esc_html($slide['title']); ?></h4>
+                                    <h4 class="title"><?php echo esc_html($slide['title']); ?></h4>
                                     <h6 class="sub-title">
                                         <span>
-                                            <?= esc_html($slide['sub_title']); ?>
+                                            <?php echo esc_html($slide['sub_title']); ?>
                                         </span>
                                     </h6>
                                 </div>
@@ -849,14 +849,14 @@ class ElementCamp_Gallery_Text_Sliders extends Widget_Base
                 <div class="swiper-controls">
                     <div class="swiper-button-next swiper-nav-ctrl cursor-pointer">
                         <div>
-                            <span><?=esc_html($settings['next_btn_text'])?></span>
+                            <span><?php echo esc_html($settings['next_btn_text'])?></span>
                         </div>
                         <div><?php \Elementor\Icons_Manager::render_icon( $settings['next_btn_icon'], [ 'aria-hidden' => 'true' ] );?></div>
                     </div>
                     <div class="swiper-button-prev swiper-nav-ctrl cursor-pointer">
                         <div><?php \Elementor\Icons_Manager::render_icon( $settings['prev_btn_icon'], [ 'aria-hidden' => 'true' ] );?></div>
                         <div>
-                            <span><?=esc_html( $settings['prev_btn_text'])?></span>
+                            <span><?php echo esc_html( $settings['prev_btn_text'])?></span>
                         </div>
                     </div>
                 </div>

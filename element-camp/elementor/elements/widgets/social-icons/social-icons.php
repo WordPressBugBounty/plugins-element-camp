@@ -1206,7 +1206,7 @@ class ElementCamp_Social_Icons extends Widget_Base {
                 'types' => ['gradient', 'tcg_gradient','tcg_gradient_4'],
                 'fields_options' => [
                     'background' => [
-                        'label' => esc_html_x('Gradient Background', 'Background Control', 'themescamp-plugin'),
+                        'label' => esc_html_x('Gradient Background', 'Background Control', 'element-camp'),
                     ]
                 ]
             ]
@@ -1354,7 +1354,7 @@ class ElementCamp_Social_Icons extends Widget_Base {
                 'types' => ['gradient', 'tcg_gradient','tcg_gradient_4'],
                 'fields_options' => [
                     'background' => [
-                        'label' => esc_html_x('Gradient Background', 'Background Control', 'themescamp-plugin'),
+                        'label' => esc_html_x('Gradient Background', 'Background Control', 'element-camp'),
                     ]
                 ]
             ]
@@ -1954,6 +1954,18 @@ class ElementCamp_Social_Icons extends Widget_Base {
             ]
         );
 
+        $this->add_responsive_control(
+            'overlay_border_radius',
+            [
+                'label' => esc_html__( 'Border Radius', 'element-camp' ),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-social-icons .tcgelements-social-icon::before' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
         $this->add_control(
             'social_icons_overlay_positioning',
             [
@@ -2231,6 +2243,107 @@ class ElementCamp_Social_Icons extends Widget_Base {
                 ],
             ]
         );
+        $this->add_control(
+            'social_icon_overlay_transition',
+            [
+                'label' => esc_html__( 'Overlay Transition', 'element-camp' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 1,
+                        'min' => 0,
+                        'step' => 0.01,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-social-icons .tcgelements-social-icon::before' => 'transition: all {{SIZE}}s ease;',
+                ],
+            ]
+        );
+        $this->start_controls_tabs('social_icon_overlay_tabs');
+        $this->start_controls_tab(
+            'social_icon_overlay_normal_tab',
+            [
+                'label' => esc_html__('Normal', 'element-camp'),
+            ]
+        );
+        $this->add_control(
+            'social_icons_overlay_opacity',
+            [
+                'label' => esc_html__( 'Opacity', 'element-camp' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 1,
+                        'min' => 0.10,
+                        'step' => 0.01,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-social-icons .tcgelements-social-icon::before' => 'opacity: {{SIZE}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'social_icons_overlay_scale',
+            [
+                'label' => esc_html__('Scale', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 2,
+                        'min' => 0,
+                        'step' => 0.1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-social-icons .tcgelements-social-icon::before' => '--e-transform-tcgelements-social-icons-overlay-scale: {{SIZE}}',
+                ],
+            ]
+        );
+        $this->end_controls_tab();
+        $this->start_controls_tab(
+            'social_icon_overlay_hover_tab',
+            [
+                'label' => esc_html__('Hover', 'element-camp'),
+            ]
+        );
+        $this->add_control(
+            'social_icons_overlay_opacity_hover',
+            [
+                'label' => esc_html__( 'Opacity', 'element-camp' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 1,
+                        'min' => 0.10,
+                        'step' => 0.01,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-social-icons .tcgelements-social-icon:hover::before' => 'opacity: {{SIZE}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'social_icons_overlay_scale_hover',
+            [
+                'label' => esc_html__('Scale', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 2,
+                        'min' => 0,
+                        'step' => 0.1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-social-icons .tcgelements-social-icon:hover::before' => '--e-transform-tcgelements-social-icons-overlay-scale: {{SIZE}}',
+                ],
+            ]
+        );
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
         $this->end_controls_section();
     }
 
@@ -2275,17 +2388,17 @@ class ElementCamp_Social_Icons extends Widget_Base {
 
         $animation_class = isset($settings['animation_hover_selector']) ? 'animation-hover-type-' . $settings['animation_hover_selector'] : 'animation-hover-type-widget';
         ?>
-        <div class="tcgelements-social-icons <?php echo esc_attr('social-icons-selector-type-'.$settings['container_hover_selector']); ?> <?php echo esc_attr($animation_class); ?>" <?php echo $data_attributes; ?>>
+        <div class="tcgelements-social-icons <?php echo esc_attr('social-icons-selector-type-'.$settings['container_hover_selector']); ?> <?php echo esc_attr($animation_class); ?>" <?php echo esc_attr($data_attributes); ?>>
             <?php if (
                 $settings['display_list_on_hover'] === 'yes' &&
                 in_array($settings['display_list_on_hover_animation'], ['animation1', 'animation3','animation4'], true)
             ) : ?>
-                <a class="show-icon" href="<?= esc_url($settings['show_icon_link']['url']); ?>" <?php if ($settings['show_icon_link']['is_external']) echo 'target="_blank"'; ?>>
+                <a class="show-icon" href="<?php echo esc_url($settings['show_icon_link']['url']); ?>" <?php if ($settings['show_icon_link']['is_external']) echo 'target="_blank"'; ?>>
                     <?php Icons_Manager::render_icon($settings['show_icon']); ?>
                 </a>
             <?php endif; ?>
             <?php if ($settings['display_list_on_hover'] === 'yes') : ?>
-            <div class="share-icons <?=esc_attr($settings['display_list_on_hover_animation'])?>">
+            <div class="share-icons <?php echo esc_attr($settings['display_list_on_hover_animation'])?>">
                 <?php endif; ?>
                 <?php foreach ($settings['social_icon_list'] as $index => $item) {
                     $migrated = isset($item['__fa4_migrated']['social_icon']);
@@ -2347,7 +2460,7 @@ class ElementCamp_Social_Icons extends Widget_Base {
                     <a <?php $this->print_render_attribute_string($link_key); ?>>
                         <span class="elementor-screen-only"><?php echo esc_html(ucwords($social)); ?></span>
                         <?php if (!empty($item['social_text'])) : ?>
-                            <span class="social-text"><?= esc_html($item['social_text']) ?></span>
+                            <span class="social-text"><?php echo esc_html($item['social_text']) ?></span>
                         <?php endif; ?>
                         <?php
                         if ($is_new || $migrated) {

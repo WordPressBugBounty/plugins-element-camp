@@ -44,6 +44,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
     private function is_woocommerce_active() {
         return in_array(
             'woocommerce/woocommerce.php',
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
             apply_filters('active_plugins', get_option('active_plugins'))
         );
     }
@@ -53,7 +54,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
     }
 
     public function get_title() {
-        return esc_html__('Shop Categories', 'elementcamp_plg');
+        return esc_html__('Shop Categories', 'element-camp');
     }
 
     public function get_icon() {
@@ -119,7 +120,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
             $this->start_controls_section(
                 'section_woocommerce_notice',
                 [
-                    'label' => esc_html__('Notice', 'elementcamp_plg'),
+                    'label' => esc_html__('Notice', 'element-camp'),
                 ]
             );
 
@@ -127,7 +128,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
                 'woocommerce_notice',
                 [
                     'type' => Controls_Manager::RAW_HTML,
-                    'raw' => esc_html__('WooCommerce is not active. Please install and activate WooCommerce to use this widget.', 'elementcamp_plg'),
+                    'raw' => esc_html__('WooCommerce is not active. Please install and activate WooCommerce to use this widget.', 'element-camp'),
                     'content_classes' => 'elementor-panel-alert elementor-panel-alert-warning',
                 ]
             );
@@ -140,19 +141,19 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_section(
             'section_content',
             [
-                'label' => esc_html__('Content', 'elementcamp_plg'),
+                'label' => esc_html__('Content', 'element-camp'),
             ]
         );
 
         $this->add_control(
             'display_mode',
             [
-                'label' => esc_html__('Display Mode', 'elementcamp_plg'),
+                'label' => esc_html__('Display Mode', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'grid',
                 'options' => [
-                    'grid' => esc_html__('Grid (Columns)', 'elementcamp_plg'),
-                    'slider' => esc_html__('Slider', 'elementcamp_plg'),
+                    'grid' => esc_html__('Grid (Columns)', 'element-camp'),
+                    'slider' => esc_html__('Slider', 'element-camp'),
                 ],
             ]
         );
@@ -160,7 +161,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'columns',
             [
-                'label' => esc_html__('Columns', 'elementcamp_plg'),
+                'label' => esc_html__('Columns', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'default' => '6',
                 'options' => [
@@ -178,7 +179,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'number',
             [
-                'label' => esc_html__('Number of Categories', 'elementcamp_plg'),
+                'label' => esc_html__('Number of Categories', 'element-camp'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => 6,
                 'min' => 1,
@@ -189,13 +190,13 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'orderby',
             [
-                'label' => esc_html__('Order By', 'elementcamp_plg'),
+                'label' => esc_html__('Order By', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'name',
                 'options' => [
-                    'name' => esc_html__('Name', 'elementcamp_plg'),
-                    'id' => esc_html__('ID', 'elementcamp_plg'),
-                    'count' => esc_html__('Product Count', 'elementcamp_plg'),
+                    'name' => esc_html__('Name', 'element-camp'),
+                    'id' => esc_html__('ID', 'element-camp'),
+                    'count' => esc_html__('Product Count', 'element-camp'),
                 ],
             ]
         );
@@ -203,12 +204,12 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'order',
             [
-                'label' => esc_html__('Order', 'elementcamp_plg'),
+                'label' => esc_html__('Order', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'ASC',
                 'options' => [
-                    'ASC' => esc_html__('Ascending', 'elementcamp_plg'),
-                    'DESC' => esc_html__('Descending', 'elementcamp_plg'),
+                    'ASC' => esc_html__('Ascending', 'element-camp'),
+                    'DESC' => esc_html__('Descending', 'element-camp'),
                 ],
             ]
         );
@@ -216,52 +217,52 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'hide_empty',
             [
-                'label' => esc_html__('Hide Empty Categories', 'elementcamp_plg'),
+                'label' => esc_html__('Hide Empty Categories', 'element-camp'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
-                'label_on' => esc_html__('Yes', 'elementcamp_plg'),
-                'label_off' => esc_html__('No', 'elementcamp_plg'),
+                'label_on' => esc_html__('Yes', 'element-camp'),
+                'label_off' => esc_html__('No', 'element-camp'),
             ]
         );
 
         $this->add_control(
             'exclude_categories',
             [
-                'label' => esc_html__('Exclude Categories', 'elementcamp_plg'),
+                'label' => esc_html__('Exclude Categories', 'element-camp'),
                 'type' => Controls_Manager::SELECT2,
                 'options' => $this->get_product_categories(),
                 'multiple' => true,
-                'description' => esc_html__('Select specific categories to exclude from the list.', 'elementcamp_plg'),
+                'description' => esc_html__('Select specific categories to exclude from the list.', 'element-camp'),
             ]
         );
         $this->add_control(
             'include_categories',
             [
-                'label' => esc_html__('Include Specific Categories', 'elementcamp_plg'),
+                'label' => esc_html__('Include Specific Categories', 'element-camp'),
                 'type' => Controls_Manager::SELECT2,
                 'options' => $this->get_product_categories(),
                 'multiple' => true,
-                'description' => esc_html__('Select specific categories to display. Leave empty to display all categories.', 'elementcamp_plg'),
+                'description' => esc_html__('Select specific categories to display. Leave empty to display all categories.', 'element-camp'),
             ]
         );
 
         $this->add_control(
             'show_count',
             [
-                'label' => esc_html__('Show Product Count', 'elementcamp_plg'),
+                'label' => esc_html__('Show Product Count', 'element-camp'),
                 'type' => Controls_Manager::SWITCHER,
                 'default' => 'yes',
-                'label_on' => esc_html__('Yes', 'elementcamp_plg'),
-                'label_off' => esc_html__('No', 'elementcamp_plg'),
+                'label_on' => esc_html__('Yes', 'element-camp'),
+                'label_off' => esc_html__('No', 'element-camp'),
             ]
         );
 
         $this->add_control(
             'count_before_text',
             [
-                'label' => esc_html__('Before Count Text', 'elementcamp_plg'),
+                'label' => esc_html__('Before Count Text', 'element-camp'),
                 'type' => Controls_Manager::TEXT,
-                'placeholder' => esc_html__('/', 'elementcamp_plg'),
+                'placeholder' => esc_html__('/', 'element-camp'),
                 'condition' => [
                     'show_count' => 'yes',
                 ],
@@ -271,10 +272,10 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'count_text',
             [
-                'label' => esc_html__('Count Text', 'elementcamp_plg'),
+                'label' => esc_html__('Count Text', 'element-camp'),
                 'type' => Controls_Manager::TEXT,
-                'default' => esc_html__('Products', 'elementcamp_plg'),
-                'placeholder' => esc_html__('Products', 'elementcamp_plg'),
+                'default' => esc_html__('Products', 'element-camp'),
+                'placeholder' => esc_html__('Products', 'element-camp'),
                 'condition' => [
                     'show_count' => 'yes',
                 ],
@@ -286,7 +287,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_section(
             'slider_settings',
             [
-                'label' => __('Slider Settings', 'elementcamp_plg'),
+                'label' => __('Slider Settings', 'element-camp'),
                 'condition' => [
                     'display_mode' => 'slider',
                 ]
@@ -296,7 +297,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'speed',
             [
-                'label' => esc_html__('Speed', 'elementcamp_plg'),
+                'label' => esc_html__('Speed', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
                 'max' => 50000,
@@ -308,11 +309,11 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'direction',
             [
-                'label' => esc_html__('Direction', 'elementcamp_plg'),
+                'label' => esc_html__('Direction', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'horizontal' => esc_html__('Horizontal', 'elementcamp_plg'),
-                    'vertical' => esc_html__('Vertical', 'elementcamp_plg'),
+                    'horizontal' => esc_html__('Horizontal', 'element-camp'),
+                    'vertical' => esc_html__('Vertical', 'element-camp'),
                 ],
                 'label_block' => true,
                 'default' => 'horizontal',
@@ -322,15 +323,15 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'effect',
             [
-                'label' => esc_html__('Effect', 'elementcamp_plg'),
+                'label' => esc_html__('Effect', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'slide' => esc_html__('Slide', 'elementcamp_plg'),
-                    'fade' => esc_html__('Fade', 'elementcamp_plg'),
-                    'cube' => esc_html__('Cube', 'elementcamp_plg'),
-                    'coverflow' => esc_html__('Cover flow', 'elementcamp_plg'),
-                    'flip' => esc_html__('Flip', 'elementcamp_plg'),
-                    'cards' => esc_html__('Cards', 'elementcamp_plg'),
+                    'slide' => esc_html__('Slide', 'element-camp'),
+                    'fade' => esc_html__('Fade', 'element-camp'),
+                    'cube' => esc_html__('Cube', 'element-camp'),
+                    'coverflow' => esc_html__('Cover flow', 'element-camp'),
+                    'flip' => esc_html__('Flip', 'element-camp'),
+                    'cards' => esc_html__('Cards', 'element-camp'),
                 ],
                 'label_block' => true,
                 'default' => 'slide',
@@ -340,10 +341,10 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'loop',
             [
-                'label' => esc_html__('Loop', 'elementcamp_plg'),
+                'label' => esc_html__('Loop', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('On', 'elementcamp_plg'),
-                'label_off' => esc_html__('Off', 'elementcamp_plg'),
+                'label_on' => esc_html__('On', 'element-camp'),
+                'label_off' => esc_html__('Off', 'element-camp'),
                 'return_value' => 'true',
                 'default' => 'false',
             ]
@@ -352,10 +353,10 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'autoplay',
             [
-                'label' => esc_html__('Autoplay', 'elementcamp_plg'),
+                'label' => esc_html__('Autoplay', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('On', 'elementcamp_plg'),
-                'label_off' => esc_html__('Off', 'elementcamp_plg'),
+                'label_on' => esc_html__('On', 'element-camp'),
+                'label_off' => esc_html__('Off', 'element-camp'),
                 'return_value' => 'true',
                 'default' => 'false',
             ]
@@ -364,7 +365,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'autoplay_delay',
             [
-                'label' => esc_html__('Autoplay Delay', 'elementcamp_plg'),
+                'label' => esc_html__('Autoplay Delay', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
                 'max' => 50000,
@@ -379,10 +380,10 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'centeredSlides',
             [
-                'label' => esc_html__('Centered Slides', 'elementcamp_plg'),
+                'label' => esc_html__('Centered Slides', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('On', 'elementcamp_plg'),
-                'label_off' => esc_html__('Off', 'elementcamp_plg'),
+                'label_on' => esc_html__('On', 'element-camp'),
+                'label_off' => esc_html__('Off', 'element-camp'),
                 'return_value' => 'true',
                 'default' => 'false',
             ]
@@ -391,10 +392,10 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'arrows',
             [
-                'label' => esc_html__('Slider Arrows', 'elementcamp_plg'),
+                'label' => esc_html__('Slider Arrows', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('On', 'elementcamp_plg'),
-                'label_off' => esc_html__('Off', 'elementcamp_plg'),
+                'label_on' => esc_html__('On', 'element-camp'),
+                'label_off' => esc_html__('Off', 'element-camp'),
                 'return_value' => 'true',
                 'default' => 'false',
             ]
@@ -403,10 +404,10 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'pagination',
             [
-                'label' => esc_html__('Slider Pagination', 'elementcamp_plg'),
+                'label' => esc_html__('Slider Pagination', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('On', 'elementcamp_plg'),
-                'label_off' => esc_html__('Off', 'elementcamp_plg'),
+                'label_on' => esc_html__('On', 'element-camp'),
+                'label_off' => esc_html__('Off', 'element-camp'),
                 'return_value' => 'true',
                 'default' => 'false',
             ]
@@ -415,12 +416,12 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'paginationType',
             [
-                'label' => esc_html__('Pagination Type', 'elementcamp_plg'),
+                'label' => esc_html__('Pagination Type', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'bullets' => esc_html__('Bullets', 'elementcamp_plg'),
-                    'fraction' => esc_html__('Fraction', 'elementcamp_plg'),
-                    'progressbar' => esc_html__('Progress Bar', 'elementcamp_plg'),
+                    'bullets' => esc_html__('Bullets', 'element-camp'),
+                    'fraction' => esc_html__('Fraction', 'element-camp'),
+                    'progressbar' => esc_html__('Progress Bar', 'element-camp'),
                 ],
                 'label_block' => true,
                 'default' => 'bullets',
@@ -435,7 +436,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_section(
             'section_slider_responsive',
             [
-                'label' => __('Slider Responsive', 'elementcamp_plg'),
+                'label' => __('Slider Responsive', 'element-camp'),
                 'condition' => [
                     'display_mode' => 'slider',
                 ]
@@ -447,7 +448,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $repeater->add_control(
             'breakpoint',
             [
-                'label' => esc_html__('Break Point', 'elementcamp_plg'),
+                'label' => esc_html__('Break Point', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 0,
                 'step' => 1,
@@ -458,7 +459,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $repeater->add_control(
             'spaceBetween',
             [
-                'label' => esc_html__('Space Between', 'elementcamp_plg'),
+                'label' => esc_html__('Space Between', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 0,
                 'max' => 550,
@@ -470,7 +471,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $repeater->add_control(
             'slidesPerView',
             [
-                'label' => esc_html__('Slides Per View', 'elementcamp_plg'),
+                'label' => esc_html__('Slides Per View', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
                 'max' => 100,
@@ -482,7 +483,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'responsive_settings',
             [
-                'label' => esc_html__('Custom Break Points', 'elementcamp_plg'),
+                'label' => esc_html__('Custom Break Points', 'element-camp'),
                 'type' => Controls_Manager::REPEATER,
                 'fields' => $repeater->get_controls(),
                 'default' => [
@@ -625,7 +626,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_section(
             'section_style_general',
             [
-                'label' => esc_html__('General', 'elementcamp_plg'),
+                'label' => esc_html__('General', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'display_mode' => 'grid',
@@ -636,7 +637,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'column_gap',
             [
-                'label' => esc_html__('Columns Gap', 'elementcamp_plg'),
+                'label' => esc_html__('Columns Gap', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 12,
@@ -660,7 +661,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_section(
             'section_style_card',
             [
-                'label' => esc_html__('Card', 'elementcamp_plg'),
+                'label' => esc_html__('Card', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -668,19 +669,19 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'card_alignment',
             [
-                'label' => esc_html__('Card Alignment', 'elementcamp_plg'),
+                'label' => esc_html__('Card Alignment', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                        'title' => esc_html__('Left', 'elementcamp_plg'),
+                        'title' => esc_html__('Left', 'element-camp'),
                         'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'elementcamp_plg'),
+                        'title' => esc_html__('Center', 'element-camp'),
                         'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                        'title' => esc_html__('Right', 'elementcamp_plg'),
+                        'title' => esc_html__('Right', 'element-camp'),
                         'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -691,12 +692,135 @@ class ElementCamp_Shop_Categories extends Widget_Base {
             ]
         );
 
+        $this->add_responsive_control(
+            'card_display',
+            [
+                'label' => esc_html__('Card Display Type', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'block',
+                'options' => [
+                    'block' => esc_html__('Block', 'element-camp'),
+                    'inline-block' => esc_html__('Inline Block', 'element-camp'),
+                    'flex' => esc_html__('Flex', 'element-camp'),
+                    'inline-flex' => esc_html__('Inline Flex', 'element-camp'),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-shop-categories .shop-category' => 'display: {{VALUE}};',
+                ]
+            ]
+        );
+        $this->add_responsive_control(
+            'card_justify_content',
+            [
+                'label' => esc_html__( 'Justify Content', 'element-camp' ),
+                'type' => Controls_Manager::CHOOSE,
+                'label_block' => true,
+                'default' => '',
+                'options' => [
+                    'flex-start' => [
+                        'title' => esc_html__( 'Start','element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-start-h',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-center-h',
+                    ],
+                    'flex-end' => [
+                        'title' => esc_html__( 'End', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-end-h',
+                    ],
+                    'space-between' => [
+                        'title' => esc_html__( 'Space Between', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-space-between-h',
+                    ],
+                    'space-around' => [
+                        'title' => esc_html__( 'Space Around', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-space-around-h',
+                    ],
+                    'space-evenly' => [
+                        'title' => esc_html__( 'Space Evenly', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-space-evenly-h',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-shop-categories .shop-category' => 'justify-content: {{VALUE}};',
+                ],
+                'condition'=> ['card_display'=> ['flex','inline-flex']],
+                'responsive' => true,
+            ]
+        );
+        $this->add_responsive_control(
+            'card_align_items',
+            [
+                'label' => esc_html__( 'Align Items', 'element-camp' ),
+                'type' => Controls_Manager::CHOOSE,
+                'default' => '',
+                'options' => [
+                    'flex-start' => [
+                        'title' => esc_html__( 'Start', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-align-start-v',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-align-center-v',
+                    ],
+                    'flex-end' => [
+                        'title' => esc_html__( 'End', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-align-end-v',
+                    ],
+                    'stretch' => [
+                        'title' => esc_html__( 'Stretch', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-align-stretch-v',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-shop-categories .shop-category' => 'align-items: {{VALUE}};',
+                ],
+                'condition'=> ['card_display'=> ['flex','inline-flex']],
+                'responsive' => true,
+            ]
+        );
+        $this->add_responsive_control(
+            'card_display_position',
+            [
+                'label' => esc_html__( 'Card Display Position', 'element-camp' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'before' => [
+                        'title' => esc_html__( 'Before', 'element-camp' ),
+                        'icon' => 'eicon-v-align-top',
+                    ],
+                    'after' => [
+                        'title' => esc_html__( 'After', 'element-camp' ),
+                        'icon' => 'eicon-v-align-bottom',
+                    ],
+                    'start' => [
+                        'title' => esc_html__( 'Start', 'element-camp' ),
+                        'icon' => "eicon-h-align-right",
+                    ],
+                    'end' => [
+                        'title' => esc_html__( 'End', 'element-camp' ),
+                        'icon' => "eicon-h-align-left",
+                    ],
+                ],
+                'selectors_dictionary' => [
+                    'before' => 'flex-direction: column;',
+                    'after' => 'flex-direction: column-reverse;',
+                    'start' => 'flex-direction: row;',
+                    'end' => 'flex-direction: row-reverse;',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-shop-categories .shop-category' => '{{VALUE}}',
+                ],
+                'condition'=> ['card_display'=> ['flex','inline-flex']],
+            ]
+        );
         $this->start_controls_tabs('card_style_tabs');
 
         $this->start_controls_tab(
             'card_style_normal',
             [
-                'label' => esc_html__('Normal', 'elementcamp_plg'),
+                'label' => esc_html__('Normal', 'element-camp'),
             ]
         );
 
@@ -704,7 +828,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'card_background',
-                'label' => esc_html__('Background', 'elementcamp_plg'),
+                'label' => esc_html__('Background', 'element-camp'),
                 'types' => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .tcgelements-shop-categories .shop-category',
             ]
@@ -714,7 +838,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
             Group_Control_Border::get_type(),
             [
                 'name' => 'card_border',
-                'label' => esc_html__('Border', 'elementcamp_plg'),
+                'label' => esc_html__('Border', 'element-camp'),
                 'selector' => '{{WRAPPER}} .tcgelements-shop-categories .shop-category',
             ]
         );
@@ -722,7 +846,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'card_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'elementcamp_plg'),
+                'label' => esc_html__('Border Radius', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%'],
                 'selectors' => [
@@ -734,7 +858,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'card_padding',
             [
-                'label' => esc_html__('Padding', 'elementcamp_plg'),
+                'label' => esc_html__('Padding', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -746,7 +870,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'card_margin',
             [
-                'label' => esc_html__('Margin', 'elementcamp_plg'),
+                'label' => esc_html__('Margin', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', 'em', '%'],
                 'selectors' => [
@@ -768,7 +892,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_tab(
             'card_style_hover',
             [
-                'label' => esc_html__('Hover', 'elementcamp_plg'),
+                'label' => esc_html__('Hover', 'element-camp'),
             ]
         );
 
@@ -776,7 +900,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
             Group_Control_Background::get_type(),
             [
                 'name' => 'card_background_hover',
-                'label' => esc_html__('Background', 'elementcamp_plg'),
+                'label' => esc_html__('Background', 'element-camp'),
                 'types' => ['classic', 'gradient'],
                 'selector' => '{{WRAPPER}} .tcgelements-shop-categories .shop-category:hover',
             ]
@@ -793,7 +917,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'card_hover_transition',
             [
-                'label' => esc_html__('Transition Duration', 'elementcamp_plg'),
+                'label' => esc_html__('Transition Duration', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0.3,
@@ -820,7 +944,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_section(
             'section_style_image',
             [
-                'label' => esc_html__('Image', 'elementcamp_plg'),
+                'label' => esc_html__('Image', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -828,7 +952,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'img_container_heading_separator',
             [
-                'label'     => esc_html__('Image Container', 'elementcamp_plg'),
+                'label'     => esc_html__('Image Container', 'element-camp'),
                 'type'      => Controls_Manager::HEADING,
             ]
         );
@@ -836,11 +960,11 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'image_container_overflow',
             [
-                'label' => esc_html__('Image Container Overflow', 'elementcamp_plg'),
+                'label' => esc_html__('Image Container Overflow', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'hidden' => esc_html__('Hidden', 'elementcamp_plg'),
-                    'visible' => esc_html__('Visible', 'elementcamp_plg'),
+                    'hidden' => esc_html__('Hidden', 'element-camp'),
+                    'visible' => esc_html__('Visible', 'element-camp'),
                 ],
                 'label_block' => true,
                 'default' => 'visible',
@@ -855,7 +979,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'img_container_width',
             [
-                'label' => esc_html__( 'Image Container Width', 'elementcamp_plg' ),
+                'label' => esc_html__( 'Image Container Width', 'element-camp' ),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'unit' => '%',
@@ -890,7 +1014,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'img_container_height',
             [
-                'label' => esc_html__( 'Image Container Height', 'elementcamp_plg' ),
+                'label' => esc_html__( 'Image Container Height', 'element-camp' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%', 'em', 'rem', 'vh', 'custom' ],
                 'range' => [
@@ -912,7 +1036,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'image_container_margin',
             [
-                'label' => esc_html__('Margin', 'elementcamp_plg'),
+                'label' => esc_html__('Margin', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'rem', 'custom'],
                 'selectors' => [
@@ -925,7 +1049,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'img_heading_separator',
             [
-                'label'     => esc_html__('Image', 'elementcamp_plg'),
+                'label'     => esc_html__('Image', 'element-camp'),
                 'type'      => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -935,7 +1059,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'img_width',
             [
-                'label' => esc_html__( 'Image Width', 'elementcamp_plg' ),
+                'label' => esc_html__( 'Image Width', 'element-camp' ),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'unit' => '%',
@@ -970,7 +1094,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'img_max_width',
             [
-                'label' => esc_html__( 'Image Max Width', 'elementcamp_plg' ),
+                'label' => esc_html__( 'Image Max Width', 'element-camp' ),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'unit' => '%',
@@ -1005,7 +1129,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'img_height',
             [
-                'label' => esc_html__( 'Image Height', 'elementcamp_plg' ),
+                'label' => esc_html__( 'Image Height', 'element-camp' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%', 'em', 'rem', 'vh', 'custom' ],
                 'range' => [
@@ -1027,7 +1151,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'img_max_height',
             [
-                'label' => esc_html__( 'Image Max Height', 'elementcamp_plg' ),
+                'label' => esc_html__( 'Image Max Height', 'element-camp' ),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => [ 'px', '%', 'em', 'rem', 'vh', 'custom' ],
                 'range' => [
@@ -1049,17 +1173,17 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'img_object-fit',
             [
-                'label' => esc_html__( 'Object Fit', 'elementcamp_plg' ),
+                'label' => esc_html__( 'Object Fit', 'element-camp' ),
                 'type' => Controls_Manager::SELECT,
                 'condition' => [
                     'img_height[size]!' => '',
                 ],
                 'options' => [
-                    '' => esc_html__( 'Default', 'elementcamp_plg' ),
-                    'fill' => esc_html__( 'Fill', 'elementcamp_plg' ),
-                    'cover' => esc_html__( 'Cover', 'elementcamp_plg' ),
-                    'contain' => esc_html__( 'Contain', 'elementcamp_plg' ),
-                    'scale-down' => esc_html__( 'Scale Down', 'elementcamp_plg' ),
+                    '' => esc_html__( 'Default', 'element-camp' ),
+                    'fill' => esc_html__( 'Fill', 'element-camp' ),
+                    'cover' => esc_html__( 'Cover', 'element-camp' ),
+                    'contain' => esc_html__( 'Contain', 'element-camp' ),
+                    'scale-down' => esc_html__( 'Scale Down', 'element-camp' ),
                 ],
                 'default' => '',
                 'selectors' => [
@@ -1071,18 +1195,18 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'img_object-position',
             [
-                'label' => esc_html__( 'Object Position', 'elementcamp_plg' ),
+                'label' => esc_html__( 'Object Position', 'element-camp' ),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'center center' => esc_html__( 'Center Center', 'elementcamp_plg' ),
-                    'center left' => esc_html__( 'Center Left', 'elementcamp_plg' ),
-                    'center right' => esc_html__( 'Center Right', 'elementcamp_plg' ),
-                    'top center' => esc_html__( 'Top Center', 'elementcamp_plg' ),
-                    'top left' => esc_html__( 'Top Left', 'elementcamp_plg' ),
-                    'top right' => esc_html__( 'Top Right', 'elementcamp_plg' ),
-                    'bottom center' => esc_html__( 'Bottom Center', 'elementcamp_plg' ),
-                    'bottom left' => esc_html__( 'Bottom Left', 'elementcamp_plg' ),
-                    'bottom right' => esc_html__( 'Bottom Right', 'elementcamp_plg' ),
+                    'center center' => esc_html__( 'Center Center', 'element-camp' ),
+                    'center left' => esc_html__( 'Center Left', 'element-camp' ),
+                    'center right' => esc_html__( 'Center Right', 'element-camp' ),
+                    'top center' => esc_html__( 'Top Center', 'element-camp' ),
+                    'top left' => esc_html__( 'Top Left', 'element-camp' ),
+                    'top right' => esc_html__( 'Top Right', 'element-camp' ),
+                    'bottom center' => esc_html__( 'Bottom Center', 'element-camp' ),
+                    'bottom left' => esc_html__( 'Bottom Left', 'element-camp' ),
+                    'bottom right' => esc_html__( 'Bottom Right', 'element-camp' ),
                 ],
                 'default' => 'center center',
                 'selectors' => [
@@ -1123,7 +1247,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_tab(
             'image_normal_tab',
             [
-                'label'   => esc_html__( 'Normal', 'elementcamp_plg' ),
+                'label'   => esc_html__( 'Normal', 'element-camp' ),
             ]
         );
         $this->add_group_control(
@@ -1139,13 +1263,13 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_tab(
             'image_hover_tab',
             [
-                'label'   => esc_html__( 'Hover', 'elementcamp_plg' ),
+                'label'   => esc_html__( 'Hover', 'element-camp' ),
             ]
         );
         $this->add_control(
             'image_transition',
             [
-                'label' => esc_html__( 'Transition', 'elementcamp_plg' ),
+                'label' => esc_html__( 'Transition', 'element-camp' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -1175,7 +1299,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_section(
             'section_style_title',
             [
-                'label' => esc_html__('Title', 'elementcamp_plg'),
+                'label' => esc_html__('Title', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1209,7 +1333,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_responsive_control(
             'title_margin',
             [
-                'label' => esc_html__('Margin', 'elementcamp_plg'),
+                'label' => esc_html__('Margin', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => [ 'px', 'em', '%', 'rem', 'custom' ],
                 'selectors' => [
@@ -1230,13 +1354,13 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_tab(
             'title_normal_tab',
             [
-                'label'   => esc_html__( 'Normal', 'elementcamp_plg' ),
+                'label'   => esc_html__( 'Normal', 'element-camp' ),
             ]
         );
         $this->add_control(
             'title_color',
             [
-                'label' => esc_html__('Title Color', 'elementcamp_plg'),
+                'label' => esc_html__('Title Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-shop-categories .shop-category .title' => 'color: {{VALUE}};',
@@ -1247,13 +1371,13 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_tab(
             'title_card_hover_tab',
             [
-                'label'   => esc_html__( 'Hover', 'elementcamp_plg' ),
+                'label'   => esc_html__( 'Hover', 'element-camp' ),
             ]
         );
         $this->add_control(
             'title_card_hover_color',
             [
-                'label' => esc_html__('Title Color', 'elementcamp_plg'),
+                'label' => esc_html__('Title Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-shop-categories .shop-category:hover .title' => 'color: {{VALUE}};',
@@ -1263,7 +1387,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'title_hover_transition',
             [
-                'label' => esc_html__('Transition Duration', 'elementcamp_plg'),
+                'label' => esc_html__('Transition Duration', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0.3,
@@ -1288,14 +1412,25 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_section(
             'section_style_count',
             [
-                'label' => esc_html__('Count', 'elementcamp_plg'),
+                'label' => esc_html__('Count', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'show_count' => 'yes',
                 ],
             ]
         );
-
+        $this->add_responsive_control(
+            'count_breakline_tag_display',
+            [
+                'label' => esc_html__('Break Line Tag Display Hidden', 'element-camp'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('Yes', 'element-camp'),
+                'label_off' => esc_html__('No', 'element-camp'),
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-shop-categories .shop-category .count br' => 'display: none;'
+                ]
+            ]
+        );
         $this->add_responsive_control(
             'count_display',
             [
@@ -1326,13 +1461,13 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_tab(
             'count_normal_tab',
             [
-                'label'   => esc_html__( 'Normal', 'elementcamp_plg' ),
+                'label'   => esc_html__( 'Normal', 'element-camp' ),
             ]
         );
         $this->add_control(
             'count_color',
             [
-                'label' => esc_html__('Text Color', 'elementcamp_plg'),
+                'label' => esc_html__('Text Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-shop-categories .shop-category .count' => 'color: {{VALUE}};',
@@ -1343,13 +1478,13 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->start_controls_tab(
             'count_card_hover_tab',
             [
-                'label'   => esc_html__( 'hover', 'elementcamp_plg' ),
+                'label'   => esc_html__( 'hover', 'element-camp' ),
             ]
         );
         $this->add_control(
             'count_card_hover_color',
             [
-                'label' => esc_html__('Text Color', 'elementcamp_plg'),
+                'label' => esc_html__('Text Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-shop-categories .shop-category:hover .count' => 'color: {{VALUE}};',
@@ -1359,7 +1494,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         $this->add_control(
             'count_hover_transition',
             [
-                'label' => esc_html__('Transition Duration', 'elementcamp_plg'),
+                'label' => esc_html__('Transition Duration', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 0.3,
@@ -5216,7 +5351,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
         // Check if WooCommerce is active
         if (!$this->is_woocommerce_active()) {
             echo '<div class="elementor-alert elementor-alert-warning">';
-            echo esc_html__('WooCommerce is not active. Please install and activate WooCommerce to use this widget.', 'elementcamp_plg');
+            echo esc_html__('WooCommerce is not active. Please install and activate WooCommerce to use this widget.', 'element-camp');
             echo '</div>';
             return;
         }
@@ -5242,7 +5377,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
 
         if (empty($product_categories) || is_wp_error($product_categories)) {
             echo '<div class="elementor-alert elementor-alert-info">';
-            echo esc_html__('No product categories found.', 'elementcamp_plg');
+            echo esc_html__('No product categories found.', 'element-camp');
             echo '</div>';
             return;
         }
@@ -5292,7 +5427,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
                                     </div>
                                     <h6 class="title"><?php echo esc_html($category->name); ?></h6>
                                     <?php if ($settings['show_count'] === 'yes') : ?>
-                                        <div class="count"><?php echo __($settings['count_before_text'],'element-camp'); ?><?php echo esc_html($category->count); ?> <?php echo __($settings['count_text'],'element-camp'); ?></div>
+                                        <div class="count"><?php echo wp_kses_post($settings['count_before_text']); ?><?php echo esc_html($category->count); ?> <?php echo wp_kses_post($settings['count_text']); ?></div>
                                     <?php endif; ?>
                                 </a>
                             </div>
@@ -5328,7 +5463,7 @@ class ElementCamp_Shop_Categories extends Widget_Base {
                                 </div>
                                 <h6 class="title"><?php echo esc_html($category->name); ?></h6>
                                 <?php if ($settings['show_count'] === 'yes') : ?>
-                                    <div class="count"><?php echo __($settings['count_before_text'],'element-camp'); ?><?php echo esc_html($category->count); ?> <?php echo __($settings['count_text'],'element-camp'); ?></div>
+                                    <div class="count"><?php echo wp_kses_post($settings['count_before_text']); ?><?php echo esc_html($category->count); ?> <?php echo wp_kses_post($settings['count_text']); ?></div>
                                 <?php endif; ?>
                             </a>
                         </div>

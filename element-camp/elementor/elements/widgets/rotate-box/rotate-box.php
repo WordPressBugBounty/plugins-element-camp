@@ -225,10 +225,10 @@ class ElementCamp_Rotate_Box extends \Elementor\Widget_Base
         $this->add_control(
             'rotate_outline',
             [
-                'label' => esc_html__('Outline', 'themescamp-plugin'),
+                'label' => esc_html__('Outline', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
                 'return_value' => 'yes',
                 'default' => 'yes',
             ]
@@ -239,16 +239,16 @@ class ElementCamp_Rotate_Box extends \Elementor\Widget_Base
         $this->add_control(
             'rotate_outline_type',
             [
-                'label' => esc_html__('Border Type', 'themescamp-plugin'),
+                'label' => esc_html__('Border Type', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-plugin'),
-                    'none' => esc_html__('None', 'themescamp-plugin'),
-                    'solid' => esc_html__('Solid', 'themescamp-plugin'),
-                    'double' => esc_html__('Double', 'themescamp-plugin'),
-                    'dotted' => esc_html__('Dotted', 'themescamp-plugin'),
-                    'dashed' => esc_html__('Dashed', 'themescamp-plugin'),
-                    'groove' => esc_html__('Groove', 'themescamp-plugin'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                    'solid' => esc_html__('Solid', 'element-camp'),
+                    'double' => esc_html__('Double', 'element-camp'),
+                    'dotted' => esc_html__('Dotted', 'element-camp'),
+                    'dashed' => esc_html__('Dashed', 'element-camp'),
+                    'groove' => esc_html__('Groove', 'element-camp'),
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-rotate-box' => 'outline-style: {{VALUE}};',
@@ -259,7 +259,7 @@ class ElementCamp_Rotate_Box extends \Elementor\Widget_Base
         $this->add_responsive_control(
             'rotate_outline_width',
             [
-                'label' => esc_html__('Width', 'themescamp-plugin'),
+                'label' => esc_html__('Width', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem', 'vw', 'custom'],
                 'range' => [
@@ -281,7 +281,7 @@ class ElementCamp_Rotate_Box extends \Elementor\Widget_Base
         $this->add_responsive_control(
             'rotate_outline_color',
             [
-                'label' => esc_html__('Border Color', 'themescamp-plugin'),
+                'label' => esc_html__('Border Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -296,7 +296,7 @@ class ElementCamp_Rotate_Box extends \Elementor\Widget_Base
         $this->add_responsive_control(
             'rotate_outline_offset',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -1090,22 +1090,22 @@ class ElementCamp_Rotate_Box extends \Elementor\Widget_Base
         $unique_id=uniqid();
         $animation = $settings['rotate_box_animations'];
         ?>
-        <a href="<?= esc_url($settings['link']['url']) ?>" class="tcgelements-rotate-box" <?php if($settings['play_button']=='yes') echo esc_attr('data-lity="video"') ?> <?php if ( $settings['link']['is_external'] ) echo'target="_blank"'; ?> <?php if ($animation=='parallax') : ?> data-speed="<?=$settings['parallax_speed']?>" data-lag="<?=$settings['parallax_lag']?>" <?php endif?> <?php if (is_rtl()) echo esc_attr("dir=ltr")?>>
+        <a href="<?php echo esc_url($settings['link']['url']) ?>" class="tcgelements-rotate-box" <?php if($settings['play_button']=='yes') echo esc_attr('data-lity="video"') ?> <?php if ( $settings['link']['is_external'] ) echo'target="_blank"'; ?> <?php if ($animation=='parallax') : ?> data-speed="<?php echo esc_attr($settings['parallax_speed'])?>" data-lag="<?php echo esc_attr($settings['parallax_lag'])?>" <?php endif?> <?php if (is_rtl()) echo esc_attr("dir=ltr")?>>
             <div class="rotate-circle rotate-text <?php echo esc_attr($settings['rotate_option']); ?>">
                 <svg class="textcircle" viewBox="0 0 500 500">
                     <defs>
-                        <path id="textcircle<?=$unique_id?>" d="M250,400 a150,150 0 0,1 0,-300a150,150 0 0,1 0,300Z">
+                        <path id="textcircle<?php echo esc_attr($unique_id)?>" d="M250,400 a150,150 0 0,1 0,-300a150,150 0 0,1 0,300Z">
                         </path>
                     </defs>
                     <text>
-                        <textPath xlink:href="#textcircle<?=$unique_id?>" textLength="900"> <?=esc_html($settings['text'])?> </textPath>
+                        <textPath xlink:href="#textcircle<?php echo esc_attr($unique_id)?>" textLength="900"> <?php echo esc_html($settings['text'])?> </textPath>
                     </text>
                 </svg>
             </div>
             <?php if($settings['center_object']=='image' && !empty($settings['image']['url'])) : ?>
-                <img src="<?=esc_url($settings['image']['url'])?>" alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>" class="image">
+                <img src="<?php echo esc_url($settings['image']['url'])?>" alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>" class="image">
             <?php elseif($settings['center_object']=='text' && !empty($settings['center_text'])) :?>
-                <span class="center-text"><?=esc_html($settings['center_text'])?></span>
+                <span class="center-text"><?php echo esc_html($settings['center_text'])?></span>
             <?php elseif($settings['center_object']=='icon' && !empty($settings['selected_icon'])) :?>
                 <span class="icon"><?php Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']); ?></span>
             <?php endif;?>

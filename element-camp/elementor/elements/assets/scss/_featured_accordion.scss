@@ -1,0 +1,136 @@
+.tcgelements-featured-accordion{
+  .accordion-item-wrapper{
+    margin-bottom: 50px;
+    .bg-img{
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+    .accordion-item{
+      border: 0;
+      border-radius: 0;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      padding: 50px 0 0;
+      background: transparent;
+      .accordion-header{
+        .accordion-button{
+          .btn{
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 1px solid transparent;
+            border-radius: 50%;
+            font-size: 18px;
+            color: #000;
+            svg{
+              fill: #000;
+              width: 18px;
+            }
+          }
+        }
+        .accordion-button,.accordion-button:not(.collapsed){
+          color: inherit;
+          background: transparent;
+          box-shadow: none;
+          width: 100%;
+          padding: 0;
+          border: 0;
+          border-radius: 0;
+          .row{
+            width: 100%;
+          }
+          &:after{
+            display: none;
+          }
+        }
+      }
+      &.active{
+        .accordion-header{
+          .accordion-button{
+            .btn{
+              border-color: rgba(0, 0, 0, 0.5);
+            }
+          }
+        }
+      }
+      .accordion-body {
+        .tags{
+          a{
+            display: block;
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+}
+// Dark Mode
+body.tcg-dark-mode {
+  .tcgelements-featured-accordion {
+    .accordion-item-wrapper {
+      .accordion-item {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+        .accordion-header {
+          .accordion-button {
+            .btn {
+              color: #fff;
+
+              svg {
+                fill: #fff;
+              }
+            }
+          }
+        }
+
+        &.active {
+          .accordion-header {
+            .accordion-button {
+              .btn {
+                border-color: rgba(255, 255, 255, 0.5);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Auto Mode
+@media (prefers-color-scheme: dark) {
+  body.tcg-auto-mode {
+    .tcgelements-featured-accordion {
+      .accordion-item-wrapper {
+        .accordion-item {
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          .accordion-header {
+            .accordion-button {
+              .btn {
+                color: #fff;
+                svg {
+                  fill: #fff;
+                }
+              }
+            }
+          }
+          &.active {
+            .accordion-header {
+              .accordion-button {
+                .btn {
+                  border-color: rgba(255, 255, 255, 0.5);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

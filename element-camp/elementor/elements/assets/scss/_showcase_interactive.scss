@@ -1,0 +1,72 @@
+.tcgelements-showcase-interactive{
+  .item{
+    a{
+      display: inline-block;
+      padding: 20px 0;
+      &:hover{
+        .title{
+          color: #fff;
+          -webkit-text-stroke-color: transparent;
+          padding-left: 40px;
+        }
+
+        .taxonomy{
+          opacity: 1;
+        }
+      }
+    }
+
+    .cont{
+      position: relative;
+      z-index: 3;
+    }
+
+    .title{
+      font-size: 90px;
+      font-weight: 600;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px #fff;
+      transition: all .4s;
+    }
+
+    .taxonomy{
+      color: #dedede;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: rotate(180deg) translateY(50%);
+      writing-mode: vertical-lr;
+      text-wrap: nowrap;
+      opacity: 0;
+      transition: all .4s;
+    }
+
+    .hover-reveal{
+      position: fixed;
+      pointer-events: none;
+      opacity: 0;
+      top: 6vh !important;
+      right: 10vw !important;
+      left: auto !important;
+      width: 40vw;
+      height: 88vh;
+      .hover-reveal__inner{
+        width: 100%;
+        height: 100%;
+        position: relative;
+        .hover-reveal__img{
+          width: 100%;
+          height: 100%;
+          position: relative;
+          background-size: cover;
+          background-position: 50% 50%;
+        }
+      }
+    }
+  }
+}

@@ -1,20 +1,39 @@
 (function ($) {
     "use strict";
 
-    // Split Text Animation Manager
+    // Debounce utility for performance
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // Split Text Animation Manager with performance optimizations
     window.TCGSplitTextAnimation = window.TCGSplitTextAnimation || {
         currentSplits: [],
         isAnimating: false,
         animationTimeout: null,
+        // Batch animations to prevent overlapping
+        pendingAnimations: [],
 
         animateSplitText: function(slide) {
             if (typeof gsap === 'undefined' || typeof SplitText === 'undefined' || !slide) {
-                console.warn('GSAP or SplitText not available');
-                return;
+                return; // Silently fail in production
             }
 
+            // Prevent overlapping animations
             if (this.isAnimating) {
-                clearTimeout(this.animationTimeout);
+                // Queue this animation if not already queued
+                if (!this.pendingAnimations.includes(slide)) {
+                    this.pendingAnimations.push(slide);
+                }
+                return;
             }
 
             this.isAnimating = true;
@@ -24,6 +43,7 @@
 
             if (animationContainers.length === 0) {
                 this.isAnimating = false;
+                this.processQueue();
                 return;
             }
 
@@ -38,10 +58,11 @@
 
             if (textElements.length === 0) {
                 this.isAnimating = false;
+                this.processQueue();
                 return;
             }
 
-            // Use requestAnimationFrame to ensure DOM is ready
+            // Use requestAnimationFrame for smoother performance
             requestAnimationFrame(() => {
                 textElements.forEach((element, index) => {
                     try {
@@ -51,33 +72,39 @@
 
                         this.currentSplits.push(splitInstance);
 
-                        // Set initial state
+                        // Set initial state using gsap.set for better performance
                         gsap.set(splitInstance.chars, {
                             opacity: 0,
                             y: 50
                         });
 
-                        // Animate
+                        // Batch animations with stagger
                         gsap.to(splitInstance.chars, {
                             opacity: 1,
                             y: 0,
                             duration: 0.6,
                             stagger: 0.05,
                             ease: "power2.out",
-                            delay: index * 0.1,
-                            onComplete: () => {
-                                console.log('Animation complete for element', index);
-                            }
+                            delay: index * 0.1
                         });
                     } catch (error) {
-                        console.error('Split text error:', error);
+                        // Silently handle errors in production
                     }
                 });
             });
 
+            // Release lock after animation duration
             setTimeout(() => {
                 this.isAnimating = false;
+                this.processQueue();
             }, 100);
+        },
+
+        processQueue: function() {
+            if (this.pendingAnimations.length > 0) {
+                const nextSlide = this.pendingAnimations.shift();
+                this.animateSplitText(nextSlide);
+            }
         },
 
         cleanup: function() {
@@ -91,33 +118,34 @@
                             split.revert();
                         }
                     } catch (error) {
-                        console.error('Cleanup error:', error);
+                        // Silently handle cleanup errors
                     }
                 });
             }
-
             this.currentSplits = [];
         },
 
         initialize: function(swiper) {
             if (!swiper || typeof gsap === 'undefined' || typeof SplitText === 'undefined') {
-                console.warn('Cannot initialize: missing swiper, GSAP, or SplitText');
-                return;
+                return; // Silently fail in production
             }
 
             this.destroy();
 
             const activeSlide = swiper.slides[swiper.activeIndex];
             if (activeSlide) {
-                console.log('Initializing animation for active slide');
                 this.animateSplitText(activeSlide);
             }
+
+            // Debounced slide change handler
+            const debouncedAnimate = debounce((currentSlide) => {
+                this.animateSplitText(currentSlide);
+            }, 50);
 
             swiper.on('slideChangeTransitionStart', () => {
                 const currentSlide = swiper.slides[swiper.activeIndex];
                 if (currentSlide) {
-                    console.log('Slide changed, animating new slide');
-                    this.animateSplitText(currentSlide);
+                    debouncedAnimate(currentSlide);
                 }
             });
         },
@@ -125,6 +153,7 @@
         destroy: function() {
             clearTimeout(this.animationTimeout);
             this.isAnimating = false;
+            this.pendingAnimations = [];
             this.cleanup();
         }
     };
@@ -213,9 +242,15 @@
             const currentSlide = swiper.slides[swiper.activeIndex];
             const newHeight = $(currentSlide).height();
 
+            // Batch CSS updates
             $swiperContainer.find('.swiper-wrapper, .swiper-slide').css({ height: newHeight });
             swiper.update();
         }
+
+        // Debounced version for resize events
+        const debouncedSetSlideHeight = debounce(function(swiper) {
+            setSlideHeight(swiper);
+        }, 100);
 
         // set slidesPerView to 1
         function oneSlideView(breakpoints) {
@@ -259,7 +294,6 @@
                     handleNthSlides(this);
 
                     // Initialize split text animation
-                    console.log('Swiper initialized, starting animation manager');
                     window.TCGSplitTextAnimation.initialize(this);
                 },
                 slideChangeTransitionStart: function () {
@@ -269,7 +303,7 @@
                     handleNthSlides(this);
                 },
                 resize: function () {
-                    setSlideHeight(this);
+                    debouncedSetSlideHeight(this);
                     this.update();
                 },
             },
@@ -322,6 +356,12 @@
         }
 
         const swiper = new Swiper($swiperContainer.get(0), swiperOptions);
+
+        // Cleanup on widget destroy
+        $scope.data('servicesSliderCleanup', function() {
+            window.TCGSplitTextAnimation.destroy();
+            swiper.destroy();
+        });
     }
 
     $(window).on('elementor/frontend/init', function () {

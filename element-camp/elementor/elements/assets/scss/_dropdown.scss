@@ -1,0 +1,41 @@
+.tcgelements-dropdown {
+  .flag{
+    margin-right: 10px;
+    height: 20px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .dropdown-menu{
+    min-width: 200px;
+    padding: 0;
+    border-radius: 12px;
+    border: 0;
+    box-shadow: 0 0 20px #0001;
+    top: 100%;
+    overflow: hidden;
+    left: 50px;
+  }
+  li{
+    list-style-type: none;
+  }
+  &::before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: calc(50% - 10px);
+    height: 20px;
+    width: 1px;
+    background-color: #9995;
+  }
+  .dropdown-toggle::after {
+    position: relative;
+    top: 3px;
+    opacity: 0.8;
+    content: "\f078";
+    display: inline-block;
+    font-family: "Font Awesome 5 Pro";
+    border: 0;
+    line-height: 1;
+    font-size: 0.8em;
+  }
+}

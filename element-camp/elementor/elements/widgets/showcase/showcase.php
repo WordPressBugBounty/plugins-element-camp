@@ -142,7 +142,7 @@ class ElementCamp_Showcase extends Widget_Base
     protected function register_controls()
     {
         $post_types = ControlsHelper::get_post_types();
-        $post_types['by_id'] = __('Manual Selection', 'themescamp-plugin');
+        $post_types['by_id'] = __('Manual Selection', 'element-camp');
         $taxonomies = get_taxonomies([], 'objects');
 
         $this->start_controls_section(
@@ -199,11 +199,11 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_control(
             'number_format',
             [
-                'label' => esc_html__('Number Format', 'elementcamp_plg'),
+                'label' => esc_html__('Number Format', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'normal' => esc_html__('Normal', 'elementcamp_plg'),
-                    'leading_zero' => esc_html__('01 Format', 'elementcamp_plg'),
+                    'normal' => esc_html__('Normal', 'element-camp'),
+                    'leading_zero' => esc_html__('01 Format', 'element-camp'),
                 ],
                 'default' => 'normal',
                 'condition' => ['show_count' => 'yes'],
@@ -319,7 +319,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_control(
             'posts_ids',
             [
-                'label' => __('Search & Select', 'themescamp-plugin'),
+                'label' => __('Search & Select', 'element-camp'),
                 'type' => 'tcg-select2',
                 'options' => ControlsHelper::get_post_list(),
                 'label_block' => true,
@@ -334,7 +334,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_control(
             'posts_per_page',
             [
-                'label' => __('Posts Per Page', 'themescamp-plugin'),
+                'label' => __('Posts Per Page', 'element-camp'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '4',
                 'min' => '1',
@@ -351,7 +351,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_control(
             'order',
             [
-                'label' => __('Order', 'themescamp-plugin'),
+                'label' => __('Order', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'asc' => 'Ascending',
@@ -364,7 +364,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_control(
             'orderby',
             [
-                'label' => __('Order By', 'themescamp-plugin'),
+                'label' => __('Order By', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => ControlsHelper::get_post_orderby_options(),
                 'default' => 'date',
@@ -374,7 +374,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_control(
             'authors',
             [
-                'label' => __('Author', 'themescamp-plugin'),
+                'label' => __('Author', 'element-camp'),
                 'label_block' => true,
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
@@ -388,7 +388,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_control(
             'post__not_in',
             [
-                'label'       => __('Exclude', 'themescamp-plugin'),
+                'label'       => __('Exclude', 'element-camp'),
                 'type'        => 'tcg-select2',
                 'label_block' => true,
                 'multiple'    => true,
@@ -4739,9 +4739,9 @@ class ElementCamp_Showcase extends Widget_Base
             'info_overlay_clip_path_popover_toggle',
             [
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label' => esc_html__( 'Clip Path', 'textdomain' ),
-                'label_off' => esc_html__( 'Default', 'textdomain' ),
-                'label_on' => esc_html__( 'Custom', 'textdomain' ),
+                'label' => esc_html__( 'Clip Path', 'element-camp' ),
+                'label_off' => esc_html__( 'Default', 'element-camp' ),
+                'label_on' => esc_html__( 'Custom', 'element-camp' ),
                 'return_value' => 'yes',
             ]
         );
@@ -6437,15 +6437,189 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_control(
             'taxonomy_text_options',
             [
-                'label' => esc_html__( 'Taxonomy Text', 'element-camp' ),
+                'label' => esc_html__( 'Taxonomy Text Wrapper', 'element-camp' ),
                 'type' => \Elementor\Controls_Manager::HEADING,
                 'separator'=>'before'
+            ]
+        );
+
+        $this->add_responsive_control(
+            'taxonomy_text_wrapper_display',
+            [
+                'label' => esc_html__('Taxonomy Text Wrapper Display Type', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    '' => esc_html__('Default', 'element-camp'),
+                    'inline-block' => esc_html__('Inline Block', 'element-camp'),
+                    'inline-flex' => esc_html__('Inline Flex', 'element-camp'),
+                    'flex' => esc_html__('Flex', 'element-camp'),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .info .taxonomy .taxonomy-text' => 'display: {{VALUE}};',
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .copy-info .taxonomy .taxonomy-text' => 'display: {{VALUE}};',
+                ]
+            ]
+        );
+        $this->add_responsive_control(
+            'taxonomy_text_wrapper_display_position',
+            [
+                'label' => esc_html__( 'Display Position', 'element-camp' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'before' => [
+                        'title' => esc_html__( 'Before', 'element-camp' ),
+                        'icon' => 'eicon-v-align-top',
+                    ],
+                    'after' => [
+                        'title' => esc_html__( 'After', 'element-camp' ),
+                        'icon' => 'eicon-v-align-bottom',
+                    ],
+                    'start' => [
+                        'title' => esc_html__( 'Start', 'element-camp' ),
+                        'icon' => "eicon-h-align-right",
+                    ],
+                    'end' => [
+                        'title' => esc_html__( 'End', 'element-camp' ),
+                        'icon' => "eicon-h-align-left",
+                    ],
+                ],
+                'selectors_dictionary' => [
+                    'before' => 'flex-direction: column;',
+                    'after' => 'flex-direction: column-reverse;',
+                    'start' => 'flex-direction: row;',
+                    'end' => 'flex-direction: row-reverse;',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .info .taxonomy .taxonomy-text' => '{{VALUE}}',
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .copy-info .taxonomy .taxonomy-text' => '{{VALUE}}',
+                ],
+                'condition' => [ 'taxonomy_text_wrapper_display' => ['flex','inline-flex'] ],
+            ]
+        );
+        $this->add_responsive_control(
+            'taxonomy_text_wrapper_justify_content',
+            [
+                'label' => esc_html__( 'Justify Content', 'element-camp' ),
+                'type' => Controls_Manager::CHOOSE,
+                'label_block' => true,
+                'default' => '',
+                'options' => [
+                    'flex-start' => [
+                        'title' => esc_html__( 'Start','element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-start-h',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-center-h',
+                    ],
+                    'flex-end' => [
+                        'title' => esc_html__( 'End', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-end-h',
+                    ],
+                    'space-between' => [
+                        'title' => esc_html__( 'Space Between', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-space-between-h',
+                    ],
+                    'space-around' => [
+                        'title' => esc_html__( 'Space Around', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-space-around-h',
+                    ],
+                    'space-evenly' => [
+                        'title' => esc_html__( 'Space Evenly', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-space-evenly-h',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .info .taxonomy .taxonomy-text' => 'justify-content: {{VALUE}};',
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .copy-info .taxonomy .taxonomy-text' => 'justify-content: {{VALUE}};',
+                ],
+                'condition'=> ['taxonomy_text_wrapper_display'=> ['flex','inline-flex']],
+                'responsive' => true,
+            ]
+        );
+        $this->add_responsive_control(
+            'taxonomy_text_wrapper_align_items',
+            [
+                'label' => esc_html__( 'Align Items', 'element-camp' ),
+                'type' => Controls_Manager::CHOOSE,
+                'default' => '',
+                'options' => [
+                    'flex-start' => [
+                        'title' => esc_html__( 'Start', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-align-start-v',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-align-center-v',
+                    ],
+                    'flex-end' => [
+                        'title' => esc_html__( 'End', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-align-end-v',
+                    ],
+                    'stretch' => [
+                        'title' => esc_html__( 'Stretch', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-align-stretch-v',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .info .taxonomy .taxonomy-text' => 'align-items: {{VALUE}};',
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .copy-info .taxonomy .taxonomy-text' => 'align-items: {{VALUE}};',
+                ],
+                'condition'=> ['taxonomy_text_wrapper_display'=> ['flex','inline-flex']],
+                'responsive' => true,
+            ]
+        );
+        $this->add_responsive_control(
+            'taxonomy_text_wrapper_flex_wrap',
+            [
+                'label' => esc_html__( 'Wrap', 'element-camp' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'nowrap' => [
+                        'title' => esc_html__( 'No Wrap', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-nowrap',
+                    ],
+                    'wrap' => [
+                        'title' => esc_html__( 'Wrap', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-wrap',
+                    ],
+                ],
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .info .taxonomy .taxonomy-text' => 'flex-wrap: {{VALUE}};',
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .copy-info .taxonomy .taxonomy-text' => 'flex-wrap: {{VALUE}};',
+                ],
+                'condition'=> ['taxonomy_text_wrapper_display'=> ['flex','inline-flex']],
+            ]
+        );
+        $this->add_responsive_control(
+            'taxonomy_text_wrapper_flex_gap',
+            [
+                'label' => esc_html__('Gap', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', 'rem', '%', 'custom'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 10,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .info .taxonomy .taxonomy-text' => 'gap: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .copy-info .taxonomy .taxonomy-text' => 'gap: {{SIZE}}{{UNIT}};',
+                ],
+                'condition'=> ['taxonomy_text_wrapper_display'=> ['flex','inline-flex']],
             ]
         );
         $this->add_responsive_control(
             'taxonomy_text_margin',
             [
-                'label' => esc_html__('Taxonomy Text Margin', 'element-camp'),
+                'label' => esc_html__('Taxonomy Text Wrapper Margin', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'custom'],
                 'selectors' => [
@@ -6457,7 +6631,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_responsive_control(
             'taxonomy_text_padding',
             [
-                'label' => esc_html__('Taxonomy Text Padding', 'element-camp'),
+                'label' => esc_html__('Taxonomy Text Wrapper Padding', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'custom'],
                 'selectors' => [
@@ -6469,7 +6643,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_responsive_control(
             'taxonomy_text_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'element-camp'),
+                'label' => esc_html__('Taxonomy Text Wrapper Border Radius', 'element-camp'),
                 'type' => Controls_Manager::DIMENSIONS,
                 'size_units' => ['px', '%', 'em', 'custom'],
                 'selectors' => [
@@ -6539,7 +6713,7 @@ class ElementCamp_Showcase extends Widget_Base
                 'name' => 'taxonomy_text_background_color',
                 'fields_options' => [
                     'background' => [
-                        'label' => esc_html_x('Taxonomy Background', 'Background Control', 'element-camp'),
+                        'label' => esc_html_x('Taxonomy Text Wrapper Background', 'Background Control', 'element-camp'),
                     ]
                 ],
                 'types' => [ 'classic', 'gradient', 'tcg_gradient' ],
@@ -6643,6 +6817,45 @@ class ElementCamp_Showcase extends Widget_Base
         );
         $this->end_controls_tab();
         $this->end_controls_tabs();
+        $this->add_control(
+            'inner_taxonomy_text_heading',
+            [
+                'label' => esc_html__('Taxonomy Text', 'element-camp'),
+                'type' => \Elementor\Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+        $this->add_responsive_control(
+            'inner_taxonomy_text_padding',
+            [
+                'label' => esc_html__('Taxonomy Text Padding', 'element-camp'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em', 'custom'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .info .taxonomy .taxonomy-text span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .copy-info .taxonony .taxonomy-text span' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'inner_taxonomy_text_border_radius',
+            [
+                'label' => esc_html__('Taxonomy Text Border Radius', 'element-camp'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em', 'custom'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .info .taxonomy .taxonomy-text span' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .copy-info .taxonomy .taxonomy-text span' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',                ],
+                'separator' => 'before'
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'inner_taxonomy_text_border',
+                'selector' => '{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .info .taxonomy .taxonomy-text span,{{WRAPPER}} .tcgelements-showcase .swiper-container .swiper-slide .item .copy-info .taxonomy .taxonomy-text span',
+            ]
+        );
         $this->end_controls_section();
         $this->start_controls_section(
             'section_date_style',
@@ -9219,7 +9432,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_responsive_control(
             'pagination_progressbar_width',
             [
-                'label' => esc_html__('Progressbar Width', 'themescamp-plugin'),
+                'label' => esc_html__('Progressbar Width', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'em', 'rem', 'custom'],
                 'range' => [
@@ -9238,12 +9451,12 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_control(
             'progressbar_positioning',
             [
-                'label' => esc_html__('Position', 'themescamp-plugin'),
+                'label' => esc_html__('Position', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'unset' => esc_html__('unset', 'themescamp-plugin'),
-                    'absolute' => esc_html__('absolute', 'themescamp-plugin'),
-                    'relative' => esc_html__('relative', 'themescamp-plugin'),
+                    'unset' => esc_html__('unset', 'element-camp'),
+                    'absolute' => esc_html__('absolute', 'element-camp'),
+                    'relative' => esc_html__('relative', 'element-camp'),
                 ],
                 'label_block' => true,
                 'default' => 'absolute',
@@ -9257,7 +9470,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_control(
             'progressbar_offset_orientation_h',
             [
-                'label' => esc_html__('Horizontal Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Horizontal Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
@@ -9279,7 +9492,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_responsive_control(
             'progressbar_offset_x',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -9316,7 +9529,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_responsive_control(
             'progressbar_offset_x_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -9353,17 +9566,17 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_control(
             'progressbar_offset_orientation_v',
             [
-                'label' => esc_html__('Vertical Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Vertical Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
                 'options' => [
                     'start' => [
-                        'title' => esc_html__('Top', 'themescamp-plugin'),
+                        'title' => esc_html__('Top', 'element-camp'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'end' => [
-                        'title' => esc_html__('Bottom', 'themescamp-plugin'),
+                        'title' => esc_html__('Bottom', 'element-camp'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                 ],
@@ -9374,7 +9587,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_responsive_control(
             'progressbar_offset_y',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -9409,7 +9622,7 @@ class ElementCamp_Showcase extends Widget_Base
         $this->add_responsive_control(
             'progressbar_offset_y_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -11884,7 +12097,7 @@ class ElementCamp_Showcase extends Widget_Base
                 'selector' => '{{WRAPPER}} .tcgelements-showcase .tcgelements-custom-progress',
                 'fields_options' => [
                     'background' => [
-                        'label' => esc_html_x('Bar Color', 'Background Control', 'themescamp-plugin'),
+                        'label' => esc_html_x('Bar Color', 'Background Control', 'element-camp'),
                     ]
                 ]
             ]
@@ -11897,7 +12110,7 @@ class ElementCamp_Showcase extends Widget_Base
                 'selector' => '{{WRAPPER}} .tcgelements-showcase .tcgelements-custom-progress .swiper-progress-bar',
                 'fields_options' => [
                     'background' => [
-                        'label' => esc_html_x('Progress Color', 'Background Control', 'themescamp-plugin'),
+                        'label' => esc_html_x('Progress Color', 'Background Control', 'element-camp'),
                     ]
                 ]
             ]
@@ -11917,7 +12130,7 @@ class ElementCamp_Showcase extends Widget_Base
                 'types' => ['classic', 'gradient', 'tcg_gradient'],
                 'fields_options' => [
                     'background' => [
-                        'label' => esc_html_x('Bar Color', 'Background Control', 'themescamp-plugin'),
+                        'label' => esc_html_x('Bar Color', 'Background Control', 'element-camp'),
                     ],
                     'color' => [
                         'selectors' => [
@@ -12289,11 +12502,11 @@ class ElementCamp_Showcase extends Widget_Base
                             ?>
                             <div class="swiper-slide">
                                 <div class="item">
-                                    <a class="overlay-link" href="<?= esc_url(get_the_permalink()); ?>"></a>
+                                    <a class="overlay-link" href="<?php echo esc_url(get_the_permalink()); ?>"></a>
                                     <?php if ($settings['image_container']=='yes') : ?>
                                     <div class="img">
                                         <?php endif;?>
-                                        <img src="<?=esc_url(get_the_post_thumbnail_url())?>" alt="">
+                                        <img src="<?php echo esc_url(get_the_post_thumbnail_url())?>" alt="">
                                         <?php if ($settings['image_container']=='yes') : ?>
                                     </div>
                                 <?php endif;?>
@@ -12301,7 +12514,7 @@ class ElementCamp_Showcase extends Widget_Base
                                         <?php
                                         $count = $settings['number_format'] === 'leading_zero' ? sprintf('%02d', $itemCount) : $itemCount;
                                         ?>
-                                        <span class="num"><?= esc_html($count) ?></span>
+                                        <span class="num"><?php echo esc_html($count) ?></span>
                                     <?php endif; ?>
                                     <div class="info <?php if ($settings['info_animations']=='duplicate') echo esc_attr('info-duplicate')?>">
                                         <?php if ($settings['info_icon']=='yes') : ?>
@@ -12310,9 +12523,9 @@ class ElementCamp_Showcase extends Widget_Base
                                         </span>
                                         <?php endif;?>
                                         <?php if ($settings['display_terms'] == 'yes' || $settings['show_date']=='yes') : ?>
-                                            <span class="taxonomy" <?php if ($settings['effect']=='parallax') : ?> data-swiper-parallax="<?=esc_attr($settings['parallax_taxonomy_date_speed'])?>" <?php endif;?>>
+                                            <span class="taxonomy" <?php if ($settings['effect']=='parallax') : ?> data-swiper-parallax="<?php echo esc_attr($settings['parallax_taxonomy_date_speed'])?>" <?php endif;?>>
                                         <?php if ($settings['show_date']=='yes' && $settings['date_position']=='before') : ?>
-                                            <span class="date"><?=get_the_date($format);?></span>
+                                            <span class="date"><?php echo get_the_date($format);?></span>
                                         <?php endif;?>
                                                 <?php
                                                 if ($settings['display_terms'] === 'yes' &&
@@ -12323,17 +12536,17 @@ class ElementCamp_Showcase extends Widget_Base
                                                 <?php
                                                 $cat_counter = 0;
                                                 $tag_counter = 0;
-                                                if($selected_term_type == 'categories' && $category){
+                                                if($selected_term_type === 'categories' && $category){
                                                     foreach ($category as $cat) {
-                                                        if ($cat_counter >= 1) echo $settings['meta_separator'];
-                                                        echo '<span>' . $cat->name . '</span>';
+                                                        if ($cat_counter >= 1) echo wp_kses_post($settings['meta_separator']);
+                                                        echo '<span>' . wp_kses_post($cat->name) . '</span>';
                                                         $cat_counter++;
                                                     };
                                                 }
-                                                if($selected_term_type == 'tags' && $tags){
+                                                if($selected_term_type === 'tags' && $tags){
                                                     foreach ($tags as $tag) {
-                                                        if ($tag_counter >= 1) echo $settings['meta_separator'];
-                                                        echo '<span>' . $tag->name . '</span>';
+                                                        if ($tag_counter >= 1) echo wp_kses_post($settings['meta_separator']);
+                                                        echo '<span>' . wp_kses_post($tag->name) . '</span>';
                                                         $tag_counter++;
                                                     }
                                                 }
@@ -12341,20 +12554,20 @@ class ElementCamp_Showcase extends Widget_Base
                                             </span>
                                                 <?php endif;?>
                                                 <?php if ($settings['show_date']=='yes' && $settings['date_position']=='after') : ?>
-                                                    <span class="date"><?=get_the_date($format);?></span>
+                                                    <span class="date"><?php echo get_the_date($format);?></span>
                                                 <?php endif;?>
                                     </span>
                                         <?php endif;?>
-                                        <h3 class="title" <?php if ($settings['effect']=='parallax') : ?> data-swiper-parallax="<?=esc_attr($settings['parallax_title_speed'])?>" <?php endif;?>>
+                                        <h3 class="title" <?php if ($settings['effect']=='parallax') : ?> data-swiper-parallax="<?php echo esc_attr($settings['parallax_title_speed'])?>" <?php endif;?>>
                                             <?php if ($settings['info_animations']=='duplicate') : ?>
                                                 <?php
                                                 $title = get_the_title();
                                                 $title_words = explode(' ', $title, 2);
                                                 ?>
-                                                <div class="stroke"><?= esc_html($title_words[0]) ?></div>
-                                                <span><?= esc_html($title_words[1] ?? '') ?></span>
+                                                <div class="stroke"><?php echo esc_html($title_words[0]) ?></div>
+                                                <span><?php echo esc_html($title_words[1] ?? '') ?></span>
                                             <?php else : ?>
-                                                <?= esc_html(get_the_title())?>
+                                                <?php echo esc_html(get_the_title())?>
                                             <?php endif;?>
                                         </h3>
                                         <?php if ($settings['button_switcher']=='yes') : ?>
@@ -12383,9 +12596,9 @@ class ElementCamp_Showcase extends Widget_Base
                                         </span>
                                             <?php endif;?>
                                             <?php if ($settings['display_terms'] == 'yes' || $settings['show_date']=='yes') : ?>
-                                                <span class="taxonomy" <?php if ($settings['effect']=='parallax') : ?> data-swiper-parallax="<?=esc_attr($settings['parallax_taxonomy_date_speed'])?>" <?php endif;?>>
+                                                <span class="taxonomy" <?php if ($settings['effect']=='parallax') : ?> data-swiper-parallax="<?php echo esc_attr($settings['parallax_taxonomy_date_speed'])?>" <?php endif;?>>
                                         <?php if ($settings['show_date']=='yes' && $settings['date_position']=='before') : ?>
-                                            <span class="date"><?=get_the_date($format);?></span>
+                                            <span class="date"><?php echo get_the_date($format);?></span>
                                         <?php endif;?>
                                                 <?php
                                                 if ($settings['display_terms'] === 'yes' &&
@@ -12398,15 +12611,15 @@ class ElementCamp_Showcase extends Widget_Base
                                                 $tag_counter = 0;
                                                 if($selected_term_type == 'categories' && $category){
                                                     foreach ($category as $cat) {
-                                                        if ($cat_counter >= 1) echo $settings['meta_separator'];
-                                                        echo '<span>' . $cat->name . '</span>';
+                                                        if ($cat_counter >= 1) echo wp_kses_post($settings['meta_separator']);
+                                                        echo '<span>' . wp_kses_post($cat->name) . '</span>';
                                                         $cat_counter++;
                                                     };
                                                 }
                                                 if($selected_term_type == 'tags' && $tags){
                                                     foreach ($tags as $tag) {
-                                                        if ($tag_counter >= 1) echo $settings['meta_separator'];
-                                                        echo '<span>' . $tag->name . '</span>';
+                                                        if ($tag_counter >= 1) echo wp_kses_post($settings['meta_separator']);
+                                                        echo '<span>' . wp_kses_post($tag->name) . '</span>';
                                                         $tag_counter++;
                                                     }
                                                 }
@@ -12414,20 +12627,20 @@ class ElementCamp_Showcase extends Widget_Base
                                             </span>
                                                     <?php endif;?>
                                                     <?php if ($settings['show_date']=='yes' && $settings['date_position']=='after') : ?>
-                                                        <span class="date"><?=get_the_date($format);?></span>
+                                                        <span class="date"><?php echo get_the_date($format);?></span>
                                                     <?php endif;?>
                                     </span>
                                             <?php endif;?>
-                                            <h3 class="title" <?php if ($settings['effect']=='parallax') : ?> data-swiper-parallax="<?=esc_attr($settings['parallax_title_speed'])?>" <?php endif;?>>
+                                            <h3 class="title" <?php if ($settings['effect']=='parallax') : ?> data-swiper-parallax="<?php echo esc_attr($settings['parallax_title_speed'])?>" <?php endif;?>>
                                                 <?php if ($settings['info_animations']=='duplicate') : ?>
                                                     <?php
                                                     $title = get_the_title();
                                                     $title_words = explode(' ', $title, 2);
                                                     ?>
-                                                    <div class="stroke"><?= esc_html($title_words[0]) ?></div>
-                                                    <span><?= esc_html($title_words[1] ?? '') ?></span>
+                                                    <div class="stroke"><?php echo esc_html($title_words[0]) ?></div>
+                                                    <span><?php echo esc_html($title_words[1] ?? '') ?></span>
                                                 <?php else : ?>
-                                                    <?= esc_html(get_the_title())?>
+                                                    <?php echo esc_html(get_the_title())?>
                                                 <?php endif;?>
                                             </h3>
                                             <?php if ($settings['button_switcher']=='yes') : ?>
@@ -12454,7 +12667,7 @@ class ElementCamp_Showcase extends Widget_Base
                         <?php $itemCount++; endwhile;  wp_reset_postdata(); endif; ?>
                     </div>
                     <?php if ($settings['float_cursor_animation']=='yes') : ?>
-                        <div class="tcgelements-float-cursor"><?=esc_html($settings['float_cursor_animation_text'])?></div>
+                        <div class="tcgelements-float-cursor"><?php echo esc_html($settings['float_cursor_animation_text'])?></div>
                     <?php endif;?>
                 </div>
 
@@ -12463,7 +12676,7 @@ class ElementCamp_Showcase extends Widget_Base
 
                 <?php if ($settings['pagination'] === 'true') : ?>
                     <!-- If we need pagination -->
-                    <div class="swiper-pagination swiper-pagination-<?= $settings['direction'] ?>"></div>
+                    <div class="swiper-pagination swiper-pagination-<?php echo esc_attr($settings['direction']) ?>"></div>
                 <?php endif; ?>
 
                 <?php if ($settings['arrows'] === 'true') : ?>
@@ -12495,7 +12708,7 @@ class ElementCamp_Showcase extends Widget_Base
 
                 <?php if ($settings['scrollbar'] === 'true') : ?>
                     <!-- If we need scrollbar -->
-                    <div class="swiper-scrollbar scrollbar-<?= $settings['direction'] ?>"></div>
+                    <div class="swiper-scrollbar scrollbar-<?php echo esc_attr($settings['direction']) ?>"></div>
                 <?php endif; ?>
                 <?php if ($settings['float_cursor_animation']=='yes') : ?>
             </div>

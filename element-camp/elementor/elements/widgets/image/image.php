@@ -127,7 +127,7 @@ class ElementCamp_Image extends Widget_Base
      */
     public function get_script_depends()
     {
-        return ['wow.min', 'tcgelements-image', 'tcgelements-image-parallax', 'tcgelements-float-cursor-animation', 'tcgelements-image-scroll-trigger', 'simpleParallax.min', 'tcgelements-simple-parallax'];
+        return ['wow.min', 'tcgelements-image', 'tcgelements-image-parallax', 'tcgelements-float-cursor-animation', 'tcgelements-image-scroll-trigger', 'simpleParallax.min', 'tcgelements-simple-parallax','tcgelements-gsap-parallax',];
     }
 
     /**
@@ -391,6 +391,32 @@ class ElementCamp_Image extends Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
+        $this->add_control(
+            'image_widget_blend_mode',
+            [
+                'label' => esc_html__( 'Blend Mode', 'element-camp' ),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    '' => esc_html__( 'Normal', 'element-camp' ),
+                    'multiply' => esc_html__( 'Multiply', 'element-camp' ),
+                    'screen' => esc_html__( 'Screen', 'element-camp' ),
+                    'overlay' => esc_html__( 'Overlay', 'element-camp' ),
+                    'darken' => esc_html__( 'Darken', 'element-camp' ),
+                    'lighten' => esc_html__( 'Lighten', 'element-camp' ),
+                    'color-dodge' => esc_html__( 'Color Dodge', 'element-camp' ),
+                    'saturation' => esc_html__( 'Saturation', 'element-camp' ),
+                    'color' => esc_html__( 'Color', 'element-camp' ),
+                    'difference' => esc_html__( 'Difference', 'element-camp' ),
+                    'exclusion' => esc_html__( 'Exclusion', 'element-camp' ),
+                    'hue' => esc_html__( 'Hue', 'element-camp' ),
+                    'luminosity' => esc_html__( 'Luminosity', 'element-camp' ),
+                    'hard-light' => esc_html__( 'Hard Light', 'element-camp' ),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}}' => 'mix-blend-mode: {{VALUE}}',
+                ],
+            ]
+        );
         $this->add_responsive_control(
             'widget_wrapper_height',
             [
@@ -644,10 +670,10 @@ class ElementCamp_Image extends Widget_Base
         $this->add_control(
             'image_container_outline',
             [
-                'label' => esc_html__('Outline', 'themescamp-plugin'),
+                'label' => esc_html__('Outline', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
                 'return_value' => 'yes',
                 'default' => 'yes',
             ]
@@ -658,16 +684,16 @@ class ElementCamp_Image extends Widget_Base
         $this->add_control(
             'image_container_outline_type',
             [
-                'label' => esc_html__('Border Type', 'themescamp-plugin'),
+                'label' => esc_html__('Border Type', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-plugin'),
-                    'none' => esc_html__('None', 'themescamp-plugin'),
-                    'solid' => esc_html__('Solid', 'themescamp-plugin'),
-                    'double' => esc_html__('Double', 'themescamp-plugin'),
-                    'dotted' => esc_html__('Dotted', 'themescamp-plugin'),
-                    'dashed' => esc_html__('Dashed', 'themescamp-plugin'),
-                    'groove' => esc_html__('Groove', 'themescamp-plugin'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                    'solid' => esc_html__('Solid', 'element-camp'),
+                    'double' => esc_html__('Double', 'element-camp'),
+                    'dotted' => esc_html__('Dotted', 'element-camp'),
+                    'dashed' => esc_html__('Dashed', 'element-camp'),
+                    'groove' => esc_html__('Groove', 'element-camp'),
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-image' => 'outline-style: {{VALUE}};',
@@ -678,7 +704,7 @@ class ElementCamp_Image extends Widget_Base
         $this->add_responsive_control(
             'image_container_outline_width',
             [
-                'label' => esc_html__('Bullet Width', 'themescamp-plugin'),
+                'label' => esc_html__('Bullet Width', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem', 'vw', 'custom'],
                 'range' => [
@@ -700,7 +726,7 @@ class ElementCamp_Image extends Widget_Base
         $this->add_responsive_control(
             'image_container_outline_color',
             [
-                'label' => esc_html__('Border Color', 'themescamp-plugin'),
+                'label' => esc_html__('Border Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -715,7 +741,7 @@ class ElementCamp_Image extends Widget_Base
         $this->add_responsive_control(
             'image_container_outline_offset',
             [
-                'label' => esc_html__('Bullet Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Bullet Offset', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -935,7 +961,18 @@ class ElementCamp_Image extends Widget_Base
                 ],
             ]
         );
-
+        $this->add_control(
+            'height_same_as_width',
+            [
+                'label' => esc_html__( 'Height Same as Width', 'element-camp' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'element-camp' ),
+                'label_off' => esc_html__( 'No', 'element-camp' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'description' => esc_html__( 'Make image height equal to its width (square aspect ratio). Note: This will override the Height controller above.', 'element-camp' ),
+            ]
+        );
         $this->add_responsive_control(
             'object-fit',
             [
@@ -1150,6 +1187,9 @@ class ElementCamp_Image extends Widget_Base
                     'unit' => '%',
                     'size' => 0,
                 ],
+                'default' => [
+                    'unit' => '%',
+                ],
             ]
         );
 
@@ -1169,6 +1209,9 @@ class ElementCamp_Image extends Widget_Base
                 'placeholder' => [
                     'unit' => '%',
                     'size' => 0,
+                ],
+                'default' => [
+                    'unit' => '%',
                 ],
             ]
         );
@@ -1190,6 +1233,9 @@ class ElementCamp_Image extends Widget_Base
                     'unit' => '%',
                     'size' => 100,
                 ],
+                'default' => [
+                    'unit' => '%',
+                ],
             ]
         );
 
@@ -1209,6 +1255,9 @@ class ElementCamp_Image extends Widget_Base
                 'placeholder' => [
                     'unit' => 'deg',
                     'size' => 0,
+                ],
+                'default' => [
+                    'unit' => 'deg',
                 ],
             ]
         );
@@ -1230,6 +1279,9 @@ class ElementCamp_Image extends Widget_Base
                     'unit' => '%',
                     'size' => 100,
                 ],
+                'default' => [
+                    'unit' => '%',
+                ],
             ]
         );
 
@@ -1250,8 +1302,11 @@ class ElementCamp_Image extends Widget_Base
                     'unit' => '%',
                     'size' => 100,
                 ],
+                'default' => [
+                    'unit' => '%',
+                ],
                 'selectors' => [
-                    '{{WRAPPER}} .tcgelements-image img' => 'filter: invert({{filter_invert.SIZE}}{{filter_invert.UNIT}}) sepia({{filter_sepia.SIZE}}{{filter_sepia.UNIT}}) saturate({{filter_saturate.SIZE}}{{filter_saturate.UNIT}}) hue-rotate({{filter_hue_rotate.SIZE}}{{filter_hue_rotate.UNIT}}) brightness({{filter_brightness.SIZE}}{{filter_brightness.UNIT}}) contrast({{filter_contrast.SIZE}}{{filter_contrast.UNIT}});',
+                    '{{WRAPPER}} .tcgelements-image img' => 'filter: invert({{filter_invert.SIZE}}%) sepia({{filter_sepia.SIZE}}%) saturate({{filter_saturate.SIZE}}%) hue-rotate({{filter_hue_rotate.SIZE}}deg) brightness({{filter_brightness.SIZE}}%) contrast({{filter_contrast.SIZE}}%);',
                 ],
             ]
         );
@@ -1580,6 +1635,23 @@ class ElementCamp_Image extends Widget_Base
                 'return_value' => 'yes',
                 'default' => 'no',
                 'frontend_available' => true,
+            ]
+        );
+
+        $this->add_control(
+            'image_hover_overlay_animation',
+            [
+                'label' => esc_html__('Overlay Animation', 'element-camp'),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none' => esc_html__('None', 'element-camp'),
+                    'pulse-move'  => esc_html__('Pulse Move', 'element-camp'),
+                ],
+                'condition' => [
+                    'image_hover_overlay' => 'yes'
+                ],
+                'description' => esc_html__('Select animation for the overlay effect', 'element-camp'),
             ]
         );
 
@@ -4206,7 +4278,7 @@ class ElementCamp_Image extends Widget_Base
         $this->add_control(
             'image_mask_switch',
             [
-                'label' => esc_html__('Mask', 'elementor'),
+                'label' => esc_html__('Mask', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'default' => '',
                 'options' => [
@@ -4222,7 +4294,7 @@ class ElementCamp_Image extends Widget_Base
         $this->add_control(
             'image_mask_image',
             [
-                'label' => esc_html__('Image', 'elementor'),
+                'label' => esc_html__('Image', 'element-camp'),
                 'type' => Controls_Manager::MEDIA,
                 'media_types' => ['image'],
                 'should_include_svg_inline_option' => true,
@@ -4241,19 +4313,19 @@ class ElementCamp_Image extends Widget_Base
         $this->add_responsive_control(
             'image_mask_position',
             [
-                'label' => esc_html__('Position', 'elementor'),
+                'label' => esc_html__('Position', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'center center' => esc_html__('Center Center', 'elementor'),
-                    'center left' => esc_html__('Center Left', 'elementor'),
-                    'center right' => esc_html__('Center Right', 'elementor'),
-                    'top center' => esc_html__('Top Center', 'elementor'),
-                    'top left' => esc_html__('Top Left', 'elementor'),
-                    'top right' => esc_html__('Top Right', 'elementor'),
-                    'bottom center' => esc_html__('Bottom Center', 'elementor'),
-                    'bottom left' => esc_html__('Bottom Left', 'elementor'),
-                    'bottom right' => esc_html__('Bottom Right', 'elementor'),
-                    'custom' => esc_html__('Custom', 'elementor'),
+                    'center center' => esc_html__('Center Center', 'element-camp'),
+                    'center left' => esc_html__('Center Left', 'element-camp'),
+                    'center right' => esc_html__('Center Right', 'element-camp'),
+                    'top center' => esc_html__('Top Center', 'element-camp'),
+                    'top left' => esc_html__('Top Left', 'element-camp'),
+                    'top right' => esc_html__('Top Right', 'element-camp'),
+                    'bottom center' => esc_html__('Bottom Center', 'element-camp'),
+                    'bottom left' => esc_html__('Bottom Left', 'element-camp'),
+                    'bottom right' => esc_html__('Bottom Right', 'element-camp'),
+                    'custom' => esc_html__('Custom', 'element-camp'),
                 ],
                 'default' => 'center center',
                 'selectors' => [
@@ -4267,15 +4339,15 @@ class ElementCamp_Image extends Widget_Base
         $this->add_responsive_control(
             'image_mask_repeat',
             [
-                'label' => esc_html__('Repeat', 'elementor'),
+                'label' => esc_html__('Repeat', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'no-repeat' => esc_html__('No-repeat', 'elementor'),
-                    'repeat' => esc_html__('Repeat', 'elementor'),
-                    'repeat-x' => esc_html__('Repeat-x', 'elementor'),
-                    'repeat-Y' => esc_html__('Repeat-y', 'elementor'),
-                    'round' => esc_html__('Round', 'elementor'),
-                    'space' => esc_html__('Space', 'elementor'),
+                    'no-repeat' => esc_html__('No-repeat', 'element-camp'),
+                    'repeat' => esc_html__('Repeat', 'element-camp'),
+                    'repeat-x' => esc_html__('Repeat-x', 'element-camp'),
+                    'repeat-Y' => esc_html__('Repeat-y', 'element-camp'),
+                    'round' => esc_html__('Round', 'element-camp'),
+                    'space' => esc_html__('Space', 'element-camp'),
                 ],
                 'default' => 'no-repeat',
                 'selectors' => [
@@ -4504,6 +4576,9 @@ class ElementCamp_Image extends Widget_Base
                     'unit' => '%',
                     'size' => 0,
                 ],
+                'default' => [
+                    'unit' => '%',
+                ],
             ]
         );
 
@@ -4523,6 +4598,9 @@ class ElementCamp_Image extends Widget_Base
                 'placeholder' => [
                     'unit' => '%',
                     'size' => 0,
+                ],
+                'default' => [
+                    'unit' => '%',
                 ],
             ]
         );
@@ -4544,6 +4622,9 @@ class ElementCamp_Image extends Widget_Base
                     'unit' => '%',
                     'size' => 100,
                 ],
+                'default' => [
+                    'unit' => '%',
+                ],
             ]
         );
 
@@ -4563,6 +4644,9 @@ class ElementCamp_Image extends Widget_Base
                 'placeholder' => [
                     'unit' => 'deg',
                     'size' => 0,
+                ],
+                'default' => [
+                    'unit' => 'deg',
                 ],
             ]
         );
@@ -4584,6 +4668,9 @@ class ElementCamp_Image extends Widget_Base
                     'unit' => '%',
                     'size' => 100,
                 ],
+                'default' => [
+                    'unit' => '%',
+                ],
             ]
         );
 
@@ -4604,8 +4691,11 @@ class ElementCamp_Image extends Widget_Base
                     'unit' => '%',
                     'size' => 100,
                 ],
+                'default' => [
+                    'unit' => '%',
+                ],
                 'selectors' => [
-                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-image.tcgelements-image-container-active img' => 'filter: invert({{filter_invert_on_container_hover.SIZE}}{{filter_invert_on_container_hover.UNIT}}) sepia({{filter_sepia_on_container_hover.SIZE}}{{filter_sepia_on_container_hover.UNIT}}) saturate({{filter_saturate_on_container_hover.SIZE}}{{filter_saturate_on_container_hover.UNIT}}) hue-rotate({{filter_hue_rotate_on_container_hover.SIZE}}{{filter_hue_rotate_on_container_hover.UNIT}}) brightness({{filter_brightness_on_container_hover.SIZE}}{{filter_brightness_on_container_hover.UNIT}}) contrast({{filter_contrast_on_container_hover.SIZE}}{{filter_contrast_on_container_hover.UNIT}});',
+                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-image.tcgelements-image-container-active img' => 'filter: invert({{filter_invert_on_container_hover.SIZE}}%) sepia({{filter_sepia_on_container_hover.SIZE}}%) saturate({{filter_saturate_on_container_hover.SIZE}}%) hue-rotate({{filter_hue_rotate_on_container_hover.SIZE}}deg) brightness({{filter_brightness_on_container_hover.SIZE}}%) contrast({{filter_contrast_on_container_hover.SIZE}}%);',
                 ],
             ]
         );
@@ -4672,7 +4762,7 @@ class ElementCamp_Image extends Widget_Base
         $this->add_control(
             'image_mask_switch_hover',
             [
-                'label' => esc_html__('Mask', 'elementor'),
+                'label' => esc_html__('Mask', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'default' => '',
                 'options' => [
@@ -4689,7 +4779,7 @@ class ElementCamp_Image extends Widget_Base
         $this->add_control(
             'image_mask_image_hover',
             [
-                'label' => esc_html__('Image', 'elementor'),
+                'label' => esc_html__('Image', 'element-camp'),
                 'type' => Controls_Manager::MEDIA,
                 'media_types' => ['image'],
                 'should_include_svg_inline_option' => true,
@@ -4729,10 +4819,12 @@ class ElementCamp_Image extends Widget_Base
                     'tce-mouse-parallax' => esc_html__('Mouse Parallax', 'element-camp'),
                     'scroll-parallax' => esc_html__('Scroll Parallax', 'element-camp'),
                     'tce-simple-parallax' => esc_html__('Simple Parallax', 'element-camp'),
+                    'tce-gsap-parallax' => esc_html__('GSAP Scroll Parallax', 'element-camp'),
                     'line wow' => esc_html__('Line', 'element-camp'),
                     'clippy-img wow' => esc_html__('Clippy Image', 'element-camp'),
                     'clip-up-to-down wow' => esc_html__('Clip Up to Down', 'element-camp'),
                     'tce-scroll-trigger-scale' => esc_html__('Scroll Scale', 'element-camp'),
+                    'tce-float-animation' => esc_html__('Float', 'element-camp'),
                 ],
             ]
         );
@@ -4877,6 +4969,22 @@ class ElementCamp_Image extends Widget_Base
             ]
         );
         $this->add_control(
+            'container_parallax_direction',
+            [
+                'label' => esc_html__('Parallax Direction', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'default',
+                'options' => [
+                    'default' => esc_html__('Default (Follow Mouse)', 'element-camp'),
+                    'inverse' => esc_html__('Inverse (Opposite)', 'element-camp'),
+                ],
+                'condition' => [
+                    'image_animations' => 'tce-mouse-parallax',
+                    'parallax_mode' => 'container',
+                ],
+            ]
+        );
+        $this->add_control(
             'rotate_animation_speed',
             [
                 'label' => esc_html__('Rotate Animation Speed', 'element-camp'),
@@ -4936,8 +5044,8 @@ class ElementCamp_Image extends Widget_Base
             [
                 'label' => esc_html__('Clip Path', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'description' => esc_html__('example: polygon(0 0, 100% 5%, 100% 95%, 0% 100%)'),
-                'placeholder' => esc_html__('example: polygon(0 0, 100% 5%, 100% 95%, 0% 100%)'),
+                'description' => esc_html__('example: polygon(0 0, 100% 5%, 100% 95%, 0% 100%)', 'element-camp'),
+                'placeholder' => esc_html__('example: polygon(0 0, 100% 5%, 100% 95%, 0% 100%)', 'element-camp'),
                 'language' => 'css',
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-image' => 'clip-path: {{VALUE}};',
@@ -6289,17 +6397,24 @@ class ElementCamp_Image extends Widget_Base
         $container_scale = ($settings['container_parallax_scale'] === 'yes') ? 'true' : 'false';
         $container_scale_factor = !empty($settings['container_parallax_scale_factor']['size']) ? $settings['container_parallax_scale_factor']['size'] : 0.15;
         $parallax_direction = !empty($settings['parallax_direction']) ? $settings['parallax_direction'] : 'default';
+        $container_parallax_direction = !empty($settings['container_parallax_direction']) ? $settings['container_parallax_direction'] : 'default';
 
-?>
+        if ($settings['height_same_as_width'] === 'yes') {
+            $img_class = 'img-h-w';
+        }
+        ?>
 
-        <div class="tcgelements-image <?php echo 'selector-type-' . esc_attr($settings['image_hover_overlay_selector']) ?><?php echo esc_attr($container_class); ?> <?php if (!empty($settings['image_animations'])) echo esc_attr($settings['image_animations']) ?> <?php if ($settings['rotate_animation_reverse'] === 'yes') echo esc_attr("reverse"); ?><?php if ($settings['image_hover_overlay_content'] === 'float-cursor') echo ' ' . esc_attr("tcgelements-float-cursor-container"); ?><?php if ($parallax_mode === 'container') echo ' parallaxed'; ?>"
+        <div class="tcgelements-image <?php echo 'selector-type-' . esc_attr($settings['image_hover_overlay_selector']) ?><?php echo esc_attr($container_class); ?> <?php if (!empty($settings['image_animations'])) echo esc_attr($settings['image_animations']) ?> <?php if ($settings['rotate_animation_reverse'] === 'yes') echo esc_attr("reverse"); ?><?php if ($settings['image_hover_overlay_content'] === 'float-cursor') echo ' ' . esc_attr("tcgelements-float-cursor-container"); ?><?php if ($parallax_mode === 'container') echo ' parallaxed'; ?><?php if (!empty($settings['image_hover_overlay_animation']) && $settings['image_hover_overlay_animation'] !== 'none') echo ' ' . esc_attr($settings['image_hover_overlay_animation'] . '-overlay'); ?>"
             <?php if ($settings['image_hover_overlay_selector'] === 'parent-n') : ?>
                 data-parent-level="<?php echo esc_attr($settings['parent_level']); ?>"
             <?php endif; ?>
             <?php if ($settings['image_animations'] === 'tce-mouse-parallax') : ?>
                 data-parallax-speed="<?php echo esc_attr($parallax_speed); ?>"
-                data-parallax-direction="<?php echo esc_attr($parallax_direction); ?>"
+                <?php if ($parallax_mode === 'global') : ?>
+                    data-parallax-direction="<?php echo esc_attr($parallax_direction); ?>"
+                <?php endif; ?>
                 <?php if ($parallax_mode === 'container') : ?>
+                    data-parallax-direction="<?php echo esc_attr($container_parallax_direction); ?>"
                     data-parallax-intensity="<?php echo esc_attr($container_intensity); ?>"
                     data-parallax-range="<?php echo esc_attr($container_range); ?>"
                     data-parallax-scale="<?php echo esc_attr($container_scale); ?>"
@@ -6323,27 +6438,27 @@ class ElementCamp_Image extends Widget_Base
             } ?>
 
             <?php if (! Plugin::$instance->experiments->is_feature_active('e_dom_optimization')) { ?>
-                <div <?php $this->print_render_attribute_string('wrapper'); ?>>
+            <div <?php $this->print_render_attribute_string('wrapper'); ?>>
                 <?php } ?>
 
                 <?php if ($has_caption) : ?>
-                    <figure class="wp-caption">
+                <figure class="wp-caption">
                     <?php endif; ?>
 
                     <?php if ($link && $settings['link_to'] != 'video-popup') : ?>
-                        <a <?php $this->print_render_attribute_string('link'); ?>>
+                    <a <?php $this->print_render_attribute_string('link'); ?>>
                         <?php endif; ?>
 
-                        <?php
-                        // Print the image tag with dynamic attributes
-                        if ($settings['image_animations'] == 'scroll-parallax') : ?>
-                            <img src="<?php echo esc_url($settings['image']['url']); ?>"
-                                alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>"
-                                data-lag="<?php echo esc_attr($settings['parallax_lag']); ?>"
-                                data-speed="<?php echo esc_attr($settings['parallax_speed']); ?>">
+                        <?php if ($settings['image_animations'] == 'scroll-parallax') : ?>
+                            <img class="<?php echo isset($img_class) ? esc_attr($img_class) : ''; ?>"
+                                 src="<?php echo esc_url($settings['image']['url']); ?>"
+                                 alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>"
+                                 data-lag="<?php echo esc_attr($settings['parallax_lag']); ?>"
+                                 data-speed="<?php echo esc_attr($settings['parallax_speed']); ?>">
                         <?php else: ?>
-                            <img src="<?php echo esc_url($settings['image']['url']); ?>"
-                                alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>">
+                            <img class="<?php echo isset($img_class) ? esc_attr($img_class) : ''; ?>"
+                                 src="<?php echo esc_url($settings['image']['url']); ?>"
+                                 alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>">
                         <?php endif; ?>
 
                         <?php if ($settings['link_to'] == 'video-popup'): ?>
@@ -6355,18 +6470,18 @@ class ElementCamp_Image extends Widget_Base
                                 <div class="butn-content">
                                     <?php if (!empty($settings['btn_icon']['value']) && ($settings['icon_align'] == 'left')) : ?>
                                         <span class="butn-icon">
-                                            <?php Icons_Manager::render_icon($settings['btn_icon'], ['aria-hidden' => 'true']); ?>
-                                        </span>
+                                        <?php Icons_Manager::render_icon($settings['btn_icon'], ['aria-hidden' => 'true']); ?>
+                                    </span>
                                     <?php endif; ?>
                                     <?php if (!empty($settings['btn_text'])) : ?>
-                                    <span class="text">
-                                        <?php $this->print_unescaped_setting('btn_text'); ?>
-                                    </span>
+                                        <span class="text">
+                                    <?php $this->print_unescaped_setting('btn_text'); ?>
+                                </span>
                                     <?php endif;?>
                                     <?php if (!empty($settings['btn_icon']['value']) && ($settings['icon_align'] == 'right')) : ?>
                                         <span class="butn-icon">
-                                            <?php Icons_Manager::render_icon($settings['btn_icon'], ['aria-hidden' => 'true']); ?>
-                                        </span>
+                                        <?php Icons_Manager::render_icon($settings['btn_icon'], ['aria-hidden' => 'true']); ?>
+                                    </span>
                                     <?php endif; ?>
                                 </div>
                                 <?php if ($settings['shapes'] == 'yes') : ?>
@@ -6381,8 +6496,8 @@ class ElementCamp_Image extends Widget_Base
                         <?php endif; ?>
 
                         <?php if ($link && $settings['link_to'] != 'video-popup') : ?>
-                        </a>
-                    <?php endif; ?>
+                    </a>
+                <?php endif; ?>
 
                     <?php if ($has_caption) : ?>
                         <figcaption class="widget-image-caption wp-caption-text">
@@ -6391,26 +6506,26 @@ class ElementCamp_Image extends Widget_Base
                     <?php endif; ?>
 
                     <?php if ($has_caption) : ?>
-                    </figure>
-                <?php endif; ?>
+                </figure>
+            <?php endif; ?>
 
                 <?php if (! Plugin::$instance->experiments->is_feature_active('e_dom_optimization')) { ?>
-                </div>
-            <?php } ?>
+            </div>
+        <?php } ?>
 
             <?php if ($settings['image_hover_overlay_content'] != 'none') : ?>
                 <div class="image-hover-container">
                     <?php if ($settings['image_hover_overlay_content'] == 'media' && $settings['media_type'] == 'icon') : ?>
-                        <a class="tc-hover-media" href="<?= $settings['media_type_link']['url'] ?>" <?php if ($settings['media_type_link']['is_external']) echo 'target="_blank"'; ?>>
+                        <a class="tc-hover-media" href="<?php echo esc_url($settings['media_type_link']['url']) ?>" <?php if ($settings['media_type_link']['is_external']) echo esc_attr('target="_blank"'); ?>>
                             <?php \Elementor\Icons_Manager::render_icon($settings['media_type_icon'], ['aria-hidden' => 'true']); ?>
                             <?php if (!empty($settings['media_type_text'])) : ?>
-                                <span class="media-icon-text"><?= $settings['media_type_text'] ?></span>
+                                <span class="media-icon-text"><?php echo esc_html($settings['media_type_text']) ?></span>
                             <?php endif; ?>
                         </a>
                     <?php endif; ?>
                     <?php if ($settings['image_hover_overlay_content'] == 'media' && $settings['media_type'] == 'image') : ?>
                         <div class="tc-hover-media">
-                            <?php echo '<img src="' . $settings['media_type_image']['url'] . '">'; ?>
+                            <?php echo '<img src="' . esc_url($settings['media_type_image']['url']) . '">'; ?>
                         </div>
                     <?php endif; ?>
                     <?php if ($settings['image_hover_overlay_content'] == 'social') : ?>
@@ -6428,11 +6543,11 @@ class ElementCamp_Image extends Widget_Base
                             <div class="cont">
                                 <?php if (!empty($settings['float_cursor_icon']['value'])) : ?>
                                     <span class="icon">
-                                        <?php \Elementor\Icons_Manager::render_icon($settings['float_cursor_icon'], ['aria-hidden' => 'true']); ?>
-                                    </span>
+                                    <?php \Elementor\Icons_Manager::render_icon($settings['float_cursor_icon'], ['aria-hidden' => 'true']); ?>
+                                </span>
                                 <?php endif; ?>
                                 <?php if (!empty($settings['float_cursor_text'])) : ?>
-                                    <span class="text"><?= $settings['float_cursor_text'] ?></span>
+                                    <span class="text"><?php echo wp_kses_post($settings['float_cursor_text']) ?></span>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -6441,7 +6556,7 @@ class ElementCamp_Image extends Widget_Base
             <?php endif; ?>
         </div>
 
-<?php
+        <?php
     }
     /**
      * Retrieve image widget link URL.

@@ -41,7 +41,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
 
     public function get_title()
     {
-        return esc_html__('Progress Bar', 'elementcamp_plg');
+        return esc_html__('Progress Bar', 'element-camp');
     }
 
     public function get_icon()
@@ -81,20 +81,20 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->start_controls_section(
             'section_progress',
             [
-                'label' => esc_html__('Progress Bar', 'elementor'),
+                'label' => esc_html__('Progress Bar', 'element-camp'),
             ]
         );
 
         $this->add_control(
             'title',
             [
-                'label' => esc_html__('Title', 'elementor'),
+                'label' => esc_html__('Title', 'element-camp'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => [
                     'active' => true,
                 ],
-                'placeholder' => esc_html__('Enter your title', 'elementor'),
-                'default' => esc_html__('My Skill', 'elementor'),
+                'placeholder' => esc_html__('Enter your title', 'element-camp'),
+                'default' => esc_html__('My Skill', 'element-camp'),
                 'label_block' => true,
             ]
         );
@@ -102,7 +102,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'title_tag',
             [
-                'label' => esc_html__('Title HTML Tag', 'elementor'),
+                'label' => esc_html__('Title HTML Tag', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'h1' => 'H1',
@@ -125,14 +125,14 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_type',
             [
-                'label' => esc_html__('Type', 'elementor'),
+                'label' => esc_html__('Type', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'elementor'),
-                    'info' => esc_html__('Info', 'elementor'),
-                    'success' => esc_html__('Success', 'elementor'),
-                    'warning' => esc_html__('Warning', 'elementor'),
-                    'danger' => esc_html__('Danger', 'elementor'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'info' => esc_html__('Info', 'element-camp'),
+                    'success' => esc_html__('Success', 'element-camp'),
+                    'warning' => esc_html__('Warning', 'element-camp'),
+                    'danger' => esc_html__('Danger', 'element-camp'),
                 ],
                 'default' => '',
                 'condition' => [
@@ -145,7 +145,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'percent',
             [
-                'label' => esc_html__('Percentage', 'elementor'),
+                'label' => esc_html__('Percentage', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 50,
@@ -160,10 +160,10 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'display_percentage',
             [
-                'label' => esc_html__('Display Percentage', 'elementor'),
+                'label' => esc_html__('Display Percentage', 'element-camp'),
                 'type' => Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('Show', 'elementor'),
-                'label_off' => esc_html__('Hide', 'elementor'),
+                'label_on' => esc_html__('Show', 'element-camp'),
+                'label_off' => esc_html__('Hide', 'element-camp'),
                 'return_value' => 'show',
                 'default' => 'show',
             ]
@@ -188,13 +188,13 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'inner_text',
             [
-                'label' => esc_html__('Inner Text', 'elementor'),
+                'label' => esc_html__('Inner Text', 'element-camp'),
                 'type' => Controls_Manager::TEXT,
                 'dynamic' => [
                     'active' => true,
                 ],
-                'placeholder' => esc_html__('e.g. Web Designer', 'elementor'),
-                'default' => esc_html__('Web Designer', 'elementor'),
+                'placeholder' => esc_html__('e.g. Web Designer', 'element-camp'),
+                'default' => esc_html__('Web Designer', 'element-camp'),
                 'label_block' => true,
             ]
         );
@@ -204,7 +204,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->start_controls_section(
             'section_progress_style',
             [
-                'label' => esc_html__('Progress Bar', 'elementor'),
+                'label' => esc_html__('Progress Bar', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -230,7 +230,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'bar_color',
             [
-                'label' => esc_html__('Color', 'elementor'),
+                'label' => esc_html__('Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'global' => [
                     'default' => Global_Colors::COLOR_PRIMARY,
@@ -249,7 +249,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
                 'types' => ['gradient', 'tcg_gradient','tcg_gradient_4'],
                 'fields_options' => [
                     'background' => [
-                        'label' => esc_html_x('Gradient Color', 'Background Control', 'themescamp-plugin'),
+                        'label' => esc_html_x('Gradient Color', 'Background Control', 'element-camp'),
                     ]
                 ]
             ]
@@ -270,10 +270,10 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'bar_dotted_color',
             [
-                'label' => esc_html__('First Color', 'Background Control', 'element-camp'),
+                'label' => esc_html__('First Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#A9997A',
-                'title' => esc_html__('Background Color', 'Background Control', 'element-camp'),
+                'title' => esc_html__('Background Color', 'element-camp'),
                 'condition' => [
                     'bar_dotted_color_switch' => ['yes'],
                 ],
@@ -283,7 +283,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'bar_dotted_color_b',
             [
-                'label' => esc_html__('Second Color', 'Background Control', 'element-camp'),
+                'label' => esc_html__('Second Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#A9997A',
                 'render_type' => 'ui',
@@ -313,7 +313,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'bar_dotted_color_c',
             [
-                'label' => esc_html__('Third Color', 'Background Control', 'element-camp'),
+                'label' => esc_html__('Third Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => 'transparent',
                 'render_type' => 'ui',
@@ -343,7 +343,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'bar_dotted_color_d',
             [
-                'label' => esc_html__('Fourth Color', 'Background Control', 'element-camp'),
+                'label' => esc_html__('Fourth Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => 'transparent',
                 'render_type' => 'ui',
@@ -398,7 +398,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'bar_bg_color',
             [
-                'label' => esc_html__('Background Color', 'elementor'),
+                'label' => esc_html__('Background Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-progress-wrapper' => 'background-color: {{VALUE}};',
@@ -421,10 +421,10 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_dotted_color',
             [
-                'label' => esc_html__('First Color', 'Background Control', 'element-camp'),
+                'label' => esc_html__('First Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ccc5',
-                'title' => esc_html__('Background Color', 'Background Control', 'element-camp'),
+                'title' => esc_html__('Background Color', 'element-camp'),
                 'condition' => [
                     'progress_bar_dotted_background' => ['yes'],
                 ],
@@ -434,7 +434,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_dotted_color_b',
             [
-                'label' => esc_html__('Second Color', 'Background Control', 'element-camp'),
+                'label' => esc_html__('Second Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '#ccc5',
                 'render_type' => 'ui',
@@ -464,7 +464,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_dotted_color_c',
             [
-                'label' => esc_html__('Third Color', 'Background Control', 'element-camp'),
+                'label' => esc_html__('Third Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => 'transparent',
                 'render_type' => 'ui',
@@ -494,7 +494,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'progress_bar_dotted_color_d',
             [
-                'label' => esc_html__('Fourth Color', 'Background Control', 'element-camp'),
+                'label' => esc_html__('Fourth Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => 'transparent',
                 'render_type' => 'ui',
@@ -549,7 +549,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'bar_height',
             [
-                'label' => esc_html__('Height', 'elementor'),
+                'label' => esc_html__('Height', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem', 'custom'],
                 'selectors' => [
@@ -561,7 +561,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'bar_border_radius',
             [
-                'label' => esc_html__('Border Radius', 'elementor'),
+                'label' => esc_html__('Border Radius', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'em', 'rem', 'custom'],
                 'selectors' => [
@@ -573,7 +573,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'bar_inline_border_radius',
             [
-                'label' => esc_html__('Inline Border Radius', 'elementor'),
+                'label' => esc_html__('Inline Border Radius', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'em', 'rem', 'custom'],
                 'selectors' => [
@@ -603,7 +603,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'inner_text_heading',
             [
-                'label' => esc_html__('Inner Text', 'elementor'),
+                'label' => esc_html__('Inner Text', 'element-camp'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -654,7 +654,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'bar_inline_color',
             [
-                'label' => esc_html__('Color', 'elementor'),
+                'label' => esc_html__('Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-progress-bar' => 'color: {{VALUE}};',
@@ -990,7 +990,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->start_controls_section(
             'section_title',
             [
-                'label' => esc_html__('Title Style', 'elementor'),
+                'label' => esc_html__('Title Style', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
@@ -1010,7 +1010,7 @@ class ElementCamp_Progress_Bar extends Widget_Base
         $this->add_control(
             'title_color',
             [
-                'label' => esc_html__('Text Color', 'elementor'),
+                'label' => esc_html__('Text Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-progress-title' => 'color: {{VALUE}};',

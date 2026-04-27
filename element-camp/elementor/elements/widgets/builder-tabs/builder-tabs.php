@@ -1701,11 +1701,11 @@ class ElementCamp_Builder_Tabs extends Widget_Base
         $id = uniqid();
         ?>
         <div class="tcgelements-builder-tabs">
-            <ul class="nav nav-pills" id="pills-tab-<?=esc_attr($id)?>" role="tablist">
+            <ul class="nav nav-pills" id="pills-tab-<?php echo esc_attr($id)?>" role="tablist">
                 <?php foreach ($settings['nav_tabs'] as $index=>$item) : ?>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link <?php if ($index==0)echo 'active'?>" id="pills-tab<?=$index?>-tab" data-bs-toggle="pill" data-bs-target="#pills-tab<?=$index?>">
-                            <?=__($item['nav_tab'])?>
+                        <button class="nav-link <?php if ($index==0)echo 'active'?>" id="pills-tab<?php echo esc_attr($index)?>-tab" data-bs-toggle="pill" data-bs-target="#pills-tab<?php echo esc_attr($index)?>">
+                            <?php echo esc_html($item['nav_tab'])?>
                             <?php if (!empty($item['nav_tab_icon']['value'])) : ?>
                                 <?php \Elementor\Icons_Manager::render_icon( $item['nav_tab_icon'], [ 'aria-hidden' => 'true' ] ); ?>
                             <?php endif;?>
@@ -1713,28 +1713,28 @@ class ElementCamp_Builder_Tabs extends Widget_Base
                     </li>
                 <?php endforeach; ?>
             </ul>
-            <div class="tab-content" id="pills-tabContent-<?=esc_attr($id)?>">
+            <div class="tab-content" id="pills-tabContent-<?php echo esc_attr($id)?>">
                 <?php foreach ($settings['nav_content'] as $index=>$item) :
                     $has_image = !empty($item['image']['url']);
                     $image_col_class = $this->get_column_classes($settings, 'image');
                     $info_col_class = $this->get_column_classes($settings, 'info');
                     ?>
-                    <div class="tab-pane fade <?php echo 'elementor-repeater-item-' . esc_attr( $item['_id'] ) . ''; ?> <?php if ($index==0)echo 'active show'?>" id="pills-tab<?=$index?>">
+                    <div class="tab-pane fade <?php echo 'elementor-repeater-item-' . esc_attr( $item['_id'] ) . ''; ?> <?php if ($index==0)echo 'active show'?>" id="pills-tab<?php echo esc_attr($index)?>">
                         <div class="builder-content">
                             <div class="row align-items-center">
                                 <?php if ($has_image) : ?>
                                     <div class="<?php echo esc_attr($image_col_class); ?>">
                                         <div class="img">
-                                            <img src="<?=esc_url($item['image']['url'])?>" alt="<?php if (!empty($item['image']['alt'])) echo esc_attr($item['image']['alt']); ?>">
+                                            <img src="<?php echo esc_url($item['image']['url'])?>" alt="<?php if (!empty($item['image']['alt'])) echo esc_attr($item['image']['alt']); ?>">
                                         </div>
                                     </div>
                                 <?php endif; ?>
                                 <div class="<?php echo esc_attr($info_col_class); ?>">
                                     <div class="info">
-                                        <p class="sub-title"> <?=esc_html($item['sub_title'])?> </p>
-                                        <h2 class="title"> <?=esc_html($item['title'])?> </h2>
-                                        <div class="description"> <?=esc_html($item['description'])?> </div>
-                                        <div class="body"><?=__($item['body'],'element-camp')?></div>
+                                        <p class="sub-title"> <?php echo esc_html($item['sub_title'])?> </p>
+                                        <h2 class="title"> <?php echo esc_html($item['title'])?> </h2>
+                                        <div class="description"> <?php echo esc_html($item['description'])?> </div>
+                                        <div class="body"><?php echo wp_kses_post($item['body'])?></div>
                                     </div>
                                 </div>
                             </div>

@@ -145,7 +145,7 @@ function elementcamp_breadcrumbs($separator = '', $pages_text) {
         # 404 ----------
         elseif (is_404()) {
             $breadcrumbs[] = array(
-                'name' => esc_html__(' ', 'element-camp'),
+                'name' => esc_html(' '),
             );
         }
 
@@ -229,7 +229,7 @@ function elementcamp_breadcrumbs($separator = '', $pages_text) {
 
                 $breadcrumbs[] = array(
                     'url' => $home_url . $slug,
-                    'name' => esc_html__($post_type->labels->singular_name, 'element-camp'),
+                    'name' => esc_html($post_type->labels->singular_name),
                 );
             }
 
@@ -257,9 +257,9 @@ function elementcamp_breadcrumbs($separator = '', $pages_text) {
                 $counter++;
 
                 if (!empty($item['url'])) {
-                    echo '<span class="breadcrumb breadcrumb-' . esc_attr($counter) . '"><a href="' . esc_url($item['url']) . '">' . esc_html($item['name']) . '</a></span>' . $sep . ' ';
+                    echo '<span class="breadcrumb breadcrumb-' . esc_attr($counter) . '"><a href="' . esc_url($item['url']) . '">' . esc_html($item['name']) . '</a></span>' . wp_kses_post($sep) . ' ';
                 } else {
-                    echo $before . esc_html($item['name']) . $after;
+                    echo wp_kses_post($before) . esc_html($item['name']) . wp_kses_post($after);
                     global $wp;
                     $item['url'] = esc_url(home_url(add_query_arg(array(), $wp->request)));
                 }
@@ -368,7 +368,7 @@ class ElementCamp_Breadcrumbs extends Widget_Base {
 				'label' => esc_html__( 'Custom Text for Pages', 'element-camp' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
                 'label_block' => true,
-				'default' => esc_html__( '', 'element-camp' ),
+				'default' => esc_html( '' ),
 				'placeholder' => __( 'The default text is "Pages" and "الصفحات"', 'element-camp' ),
 			]
 		);

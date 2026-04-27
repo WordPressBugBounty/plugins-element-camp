@@ -1,0 +1,195 @@
+.tcgelements-social-icons {
+  position: relative;
+
+  a, span {
+    display: inline-block;
+  }
+
+  &:hover {
+    .share-icons {
+      &.animation1 {
+        opacity: 1;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      }
+      &.animation3 {
+        opacity: 1;
+        transform: scale(1);
+      }
+      &.animation4 {
+        a {
+          opacity: 1;
+          transform: translateY(0) !important;
+        }
+      }
+    }
+
+    &:has(.share-icons.animation3) .show-icon {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    &:has(.share-icons.animation4) .show-icon {
+      opacity: 0;
+    }
+  }
+
+  &.tc-animation-hover-active {
+    .share-icons {
+      &.animation1 {
+        opacity: 1;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+      }
+      &.animation3 {
+        opacity: 1;
+        transform: scale(1);
+      }
+      &.animation4 {
+        a {
+          opacity: 1;
+          transform: translateY(0) !important;
+        }
+      }
+    }
+
+    &:has(.share-icons.animation3) .show-icon {
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    &:has(.share-icons.animation4) .show-icon {
+      opacity: 0;
+    }
+
+    // For animation2 when triggered by parent
+    .share-icons.animation2 {
+      a {
+        margin-bottom: 0;
+        opacity: 1;
+      }
+    }
+  }
+
+  .show-icon {
+    line-height: 0;
+    position: relative;
+    z-index: 2;
+    padding: 15px;
+    background-color: #000;
+    color: #fff;
+    transition: all 0.3s ease;
+
+    i {
+      font-size: 16px;
+    }
+
+    svg {
+      fill: #fff;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .share-icons {
+    &.animation1 {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      transition: opacity 0.4s linear;
+      opacity: 0;
+      z-index: 20;
+
+      a {
+        transition: all 0.3s linear;
+      }
+    }
+
+    &.animation2 {
+      position: absolute;
+
+      a {
+        position: relative;
+        margin-top: 10px;
+
+        &:not(:last-of-type) {
+          margin-bottom: -50px;
+          opacity: 0;
+        }
+      }
+
+      &:hover {
+        a {
+          margin-bottom: 0;
+          opacity: 1;
+        }
+      }
+    }
+
+    &.animation3 {
+      position: relative;
+      padding-top: 5px;
+      transform: scale(0);
+      transform-origin: left bottom;
+      opacity: 0;
+      transition: all 0.3s ease;
+      transition-delay: 0.2s;
+
+      a {
+        transition: all 0.3s ease;
+      }
+    }
+
+    &.animation4 {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      z-index: 2;
+
+      a {
+        position: relative;
+        opacity: 0;
+        transition: all 0.3s ease;
+        @for $i from 1 through 20 {
+          &:nth-last-of-type(#{$i}) {
+            transform: translateY(calc(#{$i} * 100%));
+            transition-delay: #{($i - 1) * 0.1}s;
+          }
+        }
+      }
+    }
+  }
+
+  .social-icons-wrapper {
+    display: inline-block;
+  }
+
+  .tcgelements-social-icon {
+    position: relative;
+    padding: 15px;
+    background-color: #000;
+    color: #fff;
+
+    i {
+      font-size: 16px;
+    }
+
+    svg {
+      fill: #fff;
+      width: 16px;
+      height: 16px;
+    }
+
+    .tcgelements-hover-this {
+      cursor: pointer;
+
+      .tcgelements-hover-anim {
+        transition: transform 0.2s linear;
+      }
+    }
+
+    &::before {
+      content: "";
+      z-index: 0;
+      transform : perspective(var(--e-transform-tcgelements-social-icons-overlay-perspective,0)) rotate(var(--e-transform-tcgelements-social-icons-overlay-rotateZ,0)) rotateX(var(--e-transform-tcgelements-social-icons-overlay-rotateX,0)) rotateY(var(--e-transform-tcgelements-social-icons-overlay-rotateY,0)) translate(var(--e-transform-tcgelements-social-icons-overlay-translate,0)) translateX(var(--e-transform-tcgelements-social-icons-overlay-translateX,0)) translateY(var(--e-transform-tcgelements-social-icons-overlay-translateY,0)) scaleX(calc(var(--e-transform-tcgelements-social-icons-overlay-flipX, 1) * var(--e-transform-tcgelements-social-icons-overlay-scaleX, var(--e-transform-tcgelements-social-icons-overlay-scale, 1)))) scaleY(calc(var(--e-transform-tcgelements-social-icons-overlay-flipY, 1) * var(--e-transform-tcgelements-social-icons-overlay-scaleY, var(--e-transform-tcgelements-social-icons-overlay-scale, 1)))) skewX(var(--e-transform-tcgelements-social-icons-overlay-skewX,0)) skewY(var(--e-transform-tcgelements-social-icons-overlay-skewY,0));
+    }
+  }
+}

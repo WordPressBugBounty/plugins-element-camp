@@ -1,7 +1,52 @@
 (function ($) {
     "use strict";
 
+    // Debounce utility
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    // Throttle utility
+    function throttle(func, limit) {
+        let inThrottle;
+        return function executedFunction(...args) {
+            if (!inThrottle) {
+                func(...args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    }
+
     function tcElementsButton($scope, $) {
+
+        function setImageHeightSameAsWidth() {
+            $(".tcgelements-button.img-h-w").each(function() {
+                var imgWidth = $(this).width();
+                $(this).css("height", imgWidth);
+            });
+        }
+
+        // Initialize on load
+        setImageHeightSameAsWidth();
+
+        // Handle on window resize with debouncing
+        let resizeTimer;
+        $(window).on('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                setImageHeightSameAsWidth();
+            }, 100);
+        });
+
         // Existing button hover functionality
         $('.e-parent .elementor-widget-tcgelements-button').parent().on('mouseenter', function () {
             $(this).find('.btn-text-selector-type-container').addClass('tc-button-text-container-active');
@@ -135,11 +180,13 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Enhanced mouse effects handler
+        // Enhanced mouse effects handler with optimizations
         function initMouseEffects() {
             const parallaxStrength = 40;
             let parallaxTargets = [];
             let glowTargets = [];
+            let isAnimating = false;
+            let rafId = null;
 
             function initButtons() {
                 // Initialize parallax buttons
@@ -147,16 +194,23 @@
                     const $btn = $(this);
                     if (!$btn.data('parallaxInit')) {
                         $btn.data('parallaxInit', true);
+                        
+                        // Pre-compute center position
+                        const rect = $btn[0].getBoundingClientRect();
+                        
                         parallaxTargets.push({
                             $el: $btn,
                             targetX: 0,
                             targetY: 0,
                             currentX: 0,
-                            currentY: 0
+                            currentY: 0,
+                            centerX: rect.left + rect.width / 2,
+                            centerY: rect.top + rect.height / 2,
+                            width: rect.width,
+                            height: rect.height
                         });
 
                         $btn.css({
-                            // transition: 'transform 0s',
                             willChange: 'transform'
                         });
                     }
@@ -175,7 +229,10 @@
                             $btn: $btn,
                             $glow: $glow,
                             speed: speed,
-                            leaveSpeed: speed + 0.2
+                            leaveSpeed: speed + 0.2,
+                            // Use quickSetter for better performance
+                            xSetter: gsap.quickSetter($glow[0], 'x', 'px'),
+                            ySetter: gsap.quickSetter($glow[0], 'y', 'px')
                         };
 
                         glowTargets.push(glowData);
@@ -185,28 +242,20 @@
             }
 
             function initGlowEffect(glowData) {
-                const { $btn, $glow, speed, leaveSpeed } = glowData;
+                const { $btn, $glow, speed, leaveSpeed, xSetter, ySetter } = glowData;
 
-                // Set initial position
-                $glow.css({
-                    transform: 'translate(-50%, -50%)',
-                    transition: 'opacity 0.3s ease'
-                });
+                // Set initial position using quickSetter
+                gsap.set($glow[0], { x: 0, y: 0 });
 
                 $btn.on('mousemove.glowEffect', function (e) {
                     const rect = this.getBoundingClientRect();
                     const x = e.clientX - rect.left - rect.width / 2;
                     const y = e.clientY - rect.top - rect.height / 2;
 
-                    if (window.gsap) {
-                        gsap.to($glow[0], {
-                            x: x,
-                            y: y,
-                            duration: speed,
-                            ease: "power3.out"
-                        });
+                    if (window.gsap && xSetter && ySetter) {
+                        xSetter(x);
+                        ySetter(y);
                     } else {
-                        // Fallback for non-GSAP
                         $glow.css({
                             transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
                             transition: `transform ${speed}s cubic-bezier(0.215, 0.61, 0.355, 1)`
@@ -215,15 +264,10 @@
                 });
 
                 $btn.on('mouseleave.glowEffect', function () {
-                    if (window.gsap) {
-                        gsap.to($glow[0], {
-                            x: 0,
-                            y: 0,
-                            duration: leaveSpeed,
-                            ease: "power3.out"
-                        });
+                    if (window.gsap && xSetter && ySetter) {
+                        xSetter(0);
+                        ySetter(0);
                     } else {
-                        // Fallback for non-GSAP
                         $glow.css({
                             transform: 'translate(-50%, -50%)',
                             transition: `transform ${leaveSpeed}s cubic-bezier(0.215, 0.61, 0.355, 1)`
@@ -232,44 +276,90 @@
                 });
             }
 
-            // Mouse move handler for parallax effect
-            $(document).on('mousemove', function (e) {
-                parallaxTargets.forEach(t => {
-                    const rect = t.$el[0].getBoundingClientRect();
-                    const btnX = rect.left + rect.width / 2;
-                    const btnY = rect.top + rect.height / 2;
+            // Throttled mouse move handler
+            const throttledMouseMove = throttle(function(e) {
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
 
-                    const distanceX = e.clientX - btnX;
-                    const distanceY = e.clientY - btnY;
-                    const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
+                parallaxTargets.forEach(t => {
+                    const distanceX = mouseX - t.centerX;
+                    const distanceY = mouseY - t.centerY;
+                    const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
                     if (distance < 200) {
-                        t.targetX = (distanceX / rect.width) * parallaxStrength;
-                        t.targetY = (distanceY / rect.height) * parallaxStrength;
+                        t.targetX = (distanceX / t.width) * parallaxStrength;
+                        t.targetY = (distanceY / t.height) * parallaxStrength;
                     } else {
                         t.targetX = 0;
                         t.targetY = 0;
                     }
                 });
-            });
+            }, 16);
 
-            // Animation loop for parallax
+            // Animation loop for parallax - only runs when there are targets
             function animateParallax() {
+                if (parallaxTargets.length === 0) {
+                    isAnimating = false;
+                    return;
+                }
+
+                if (!isAnimating) {
+                    isAnimating = true;
+                }
+
                 parallaxTargets.forEach(t => {
                     t.currentX += (t.targetX - t.currentX) * 0.1;
                     t.currentY += (t.targetY - t.currentY) * 0.1;
                     t.$el.css('transform', `translate(${t.currentX}px, ${t.currentY}px) scale(1.05)`);
                 });
-                requestAnimationFrame(animateParallax);
+
+                rafId = requestAnimationFrame(animateParallax);
             }
 
-            // Initialize and start
-            setInterval(initButtons, 300);
-            animateParallax();
+            // Initialize and start only if there are parallax targets
+            function startParallax() {
+                initButtons();
+                if (parallaxTargets.length > 0 && !isAnimating) {
+                    isAnimating = true;
+                    $(document).on('mousemove.parallax', throttledMouseMove);
+                    animateParallax();
+                }
+            }
+
+            // Use MutationObserver to detect when new buttons are added
+            if ('MutationObserver' in window) {
+                const observer = new MutationObserver(debounce(function() {
+                    initButtons();
+                }, 500));
+
+                observer.observe(document.body, { childList: true, subtree: true });
+                
+                // Start after a short delay
+                setTimeout(startParallax, 100);
+            } else {
+                // Fallback for older browsers
+                setInterval(initButtons, 1000);
+                setTimeout(startParallax, 100);
+            }
+
+            // Cleanup function
+            return function cleanup() {
+                if (rafId) {
+                    cancelAnimationFrame(rafId);
+                }
+                $(document).off('mousemove.parallax', throttledMouseMove);
+                glowTargets.forEach(glowData => {
+                    glowData.$btn.off('mousemove.glowEffect');
+                    glowData.$btn.off('mouseleave.glowEffect');
+                });
+            };
         }
 
         // Initialize mouse effects
-        initMouseEffects();
+        const cleanupMouseEffects = initMouseEffects();
+
+        // Store cleanup for Elementor
+        $scope.data('buttonCleanup', cleanupMouseEffects);
     }
 
     // Initialize
@@ -279,6 +369,23 @@
 
     // Fallback initialization
     $(document).ready(function () {
+        function setImageHeightSameAsWidth() {
+            $(".img-h-w").each(function() {
+                var imgWidth = $(this).width();
+                $(this).css("height", imgWidth);
+            });
+        }
+
+        setImageHeightSameAsWidth();
+
+        // Handle resize for fallback elements
+        let fallbackResizeTimer;
+        $(window).on('resize', function() {
+            clearTimeout(fallbackResizeTimer);
+            fallbackResizeTimer = setTimeout(function() {
+                setImageHeightSameAsWidth();
+            }, 100);
+        });
         setTimeout(function () {
             // NEW: Fallback for before button hover selector
             $('.tcgelements-button[data-before-selector]:not([data-before-bound])').each(function() {

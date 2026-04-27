@@ -8,7 +8,6 @@ if (! defined('ABSPATH')) {
 
 use Elementor\Widget_Base;
 use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
-
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Text_Stroke;
@@ -24,6 +23,8 @@ use Elementor\Core\Schemes;
 use Elementor\Group_Control_Image_Size;
 use Elementor\Scheme_Base;
 use Elementor\Group_Control_Background;
+use Elementor\Group_Control_Box_Shadow;
+
 
 
 /**
@@ -147,6 +148,47 @@ class ElementCamp_Search extends Widget_Base
             ]
         );
         $this->add_control(
+            'button_type',
+            [
+                'label'   => esc_html__('Button Type', 'element-camp'),
+                'type'    => Controls_Manager::SELECT,
+                'options' => [
+                    'icon_only' => esc_html__('Icon Only', 'element-camp'),
+                    'text_icon' => esc_html__('Text + Icon', 'element-camp'),
+                ],
+                'default' => 'icon_only',
+                'condition' => ['search_style' => 'field'],
+            ]
+        );
+        $this->add_control(
+            'button_text',
+            [
+                'label' => esc_html__('Button Text', 'element-camp'),
+                'type' => Controls_Manager::TEXT,
+                'default' => esc_html__('Search', 'element-camp'),
+                'condition' => [
+                    'button_type' => 'text_icon',
+                    'search_style' => 'field',
+                ],
+            ]
+        );
+        $this->add_control(
+            'icon_position',
+            [
+                'label'   => esc_html__('Icon Position', 'element-camp'),
+                'type'    => Controls_Manager::SELECT,
+                'options' => [
+                    'before' => esc_html__('Before Text', 'element-camp'),
+                    'after'  => esc_html__('After Text', 'element-camp'),
+                ],
+                'default' => 'before',
+                'condition' => [
+                    'button_type' => 'text_icon',
+                    'search_style' => 'field',
+                ],
+            ]
+        );
+        $this->add_control(
             'selected_icon',
             [
                 'label' => esc_html__('Icon', 'element-camp'),
@@ -222,6 +264,52 @@ class ElementCamp_Search extends Widget_Base
             );
         }
 
+        $this->add_control(
+            'button_animations',
+            [
+                'label' => esc_html__('Button Animations', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    '' => esc_html__('None', 'element-camp'),
+                    'text-transform' => esc_html__('Text Transform', 'element-camp'),
+                ],
+                'condition' => [
+                    'button_type' => 'text_icon',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'text_transform_type',
+            [
+                'label' => esc_html__('Text Transform Type', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'same',
+                'options' => [
+                    'same' => esc_html__('Same as Button Text', 'element-camp'),
+                    'custom' => esc_html__('Custom Text', 'element-camp'),
+                ],
+                'condition' => [
+                    'button_animations' => 'text-transform',
+                    'button_type' => 'text_icon',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'text_transform_custom',
+            [
+                'label' => esc_html__('Custom Transform Text', 'element-camp'),
+                'type' => Controls_Manager::TEXT,
+                'default' => '',
+                'condition' => [
+                    'button_animations' => 'text-transform',
+                    'text_transform_type' => 'custom',
+                    'button_type' => 'text_icon',
+                ],
+            ]
+        );
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -653,7 +741,7 @@ class ElementCamp_Search extends Widget_Base
                 'types' => ['gradient', 'tcg_gradient'],
                 'fields_options' => [
                     'background' => [
-                        'label' => esc_html_x('Gradient Background', 'Background Control', 'themescamp-plugin'),
+                        'label' => esc_html_x('Gradient Background', 'Background Control', 'element-camp'),
                     ]
                 ]
             ]
@@ -716,7 +804,7 @@ class ElementCamp_Search extends Widget_Base
         $this->add_control(
             'field_text_dark_mode',
             [
-                'label' => esc_html__('Text Color', 'elementcamp_plg'),
+                'label' => esc_html__('Text Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-search-field .searchform input' => 'color: {{VALUE}};',
@@ -729,7 +817,7 @@ class ElementCamp_Search extends Widget_Base
         $this->add_control(
             'field_text_placeholder_dark_mode',
             [
-                'label' => esc_html__('Placeholder Color', 'elementcamp_plg'),
+                'label' => esc_html__('Placeholder Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-search-field .searchform input::placeholder' => 'color: {{VALUE}};',
@@ -742,7 +830,7 @@ class ElementCamp_Search extends Widget_Base
         $this->add_control(
             'field_border_color_dark_mode',
             [
-                'label' => esc_html__('Focus Border Color', 'elementcamp_plg'),
+                'label' => esc_html__('Focus Border Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-search-field .searchform input' => 'border-color: {{VALUE}};',
@@ -755,7 +843,7 @@ class ElementCamp_Search extends Widget_Base
         $this->add_control(
             'field_focus_border_color_dark_mode',
             [
-                'label' => esc_html__('Border Color', 'elementcamp_plg'),
+                'label' => esc_html__('Border Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-search-field .searchform input:focus' => 'border-color: {{VALUE}};',
@@ -1039,11 +1127,78 @@ class ElementCamp_Search extends Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
+        // NEW: Button Text Style Controls
+        $this->add_control(
+            'button_text_heading',
+            [
+                'label' => esc_html__('Button Text', 'element-camp'),
+                'type' => Controls_Manager::HEADING,
+                'condition' => [
+                    'button_type' => 'text_icon',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'button_text_color',
+            [
+                'label' => esc_html__('Text Color', 'element-camp'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-search-field .searchsubmit .button-text' => 'color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'button_type' => 'text_icon',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'button_text_typography',
+                'selector' => '{{WRAPPER}} .tcgelements-search-field .searchsubmit',
+                'condition' => [
+                    'button_type' => 'text_icon',
+                ],
+            ]
+        );
+
         $this->add_control(
             'icon_heading',
             [
                 'label' => esc_html__('Icon', 'element-camp'),
                 'type' => Controls_Manager::HEADING,
+            ]
+        );
+        $this->add_responsive_control(
+            'button_icon_spacing',
+            [
+                'label' => esc_html__('Icon Spacing', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', 'rem', 'custom'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 50,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-search-field .searchform .icon-before .button-icon' => 'margin-right: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .tcgelements-search-field .searchform .icon-after .button-icon' => 'margin-left: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'button_type' => 'text_icon',
+                ],
+            ]
+        );
+        $this->start_controls_tabs(
+            'field_icon_tabs',
+        );
+        $this->start_controls_tab(
+            'field_icon_normal_tab',
+            [
+                'label'   => esc_html__( 'Normal', 'element-camp' ),
             ]
         );
         $this->add_control(
@@ -1059,6 +1214,28 @@ class ElementCamp_Search extends Widget_Base
                 ],
             ]
         );
+        $this->end_controls_tab();
+        $this->start_controls_tab(
+            'field_icon_hover_tab',
+            [
+                'label'   => esc_html__( 'Hover', 'element-camp' ),
+            ]
+        );
+        $this->add_control(
+            'field_icon_hover_color',
+            [
+                'label' => esc_html__('Icon Color', 'element-camp'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-search-field .searchform .searchsubmit:hover svg' => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .tcgelements-search-icon .searchsubmit:hover svg' => 'fill: {{VALUE}};',
+                    '{{WRAPPER}} .tcgelements-search-field .searchform .searchsubmit:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tcgelements-search-icon .searchsubmit:hover' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
         $this->add_control(
             'button_icon_dark_mode',
             [
@@ -1070,7 +1247,7 @@ class ElementCamp_Search extends Widget_Base
         $this->add_control(
             'button_icon_color_dark_mode',
             [
-                'label' => esc_html__('Icon Color', 'elementcamp_plg'),
+                'label' => esc_html__('Icon Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-search-field .searchform .searchsubmit svg' => 'fill: {{VALUE}};',
@@ -1233,15 +1410,6 @@ class ElementCamp_Search extends Widget_Base
                 'condition' => [
                     'button_size_options' => 'custom',
                 ],
-            ]
-        );
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
-            [
-                'name' => 'button_background',
-                'label' => esc_html__('Background', 'element-camp'),
-                'types' => ['classic', 'gradient'],
-                'selector' => '{{WRAPPER}} .tcgelements-search-field .searchsubmit,{{WRAPPER}} .tcgelements-search-icon .searchsubmit',
             ]
         );
         $this->add_responsive_control(
@@ -1532,6 +1700,57 @@ class ElementCamp_Search extends Widget_Base
                 ],
             ]
         );
+        $this->add_responsive_control(
+            'button_padding',
+            [
+                'label' => esc_html__('Padding', 'element-camp'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'rem', 'custom'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-search-field .searchsubmit' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'button_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'element-camp'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'rem', 'custom'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-search-field .searchsubmit' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'button_margin',
+            [
+                'label' => esc_html__('Margin', 'element-camp'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'rem', 'custom'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-search-field .searchsubmit' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+        $this->start_controls_tabs(
+            'button_advanced_tabs',
+        );
+        $this->start_controls_tab(
+            'button_advanced_normal_tab',
+            [
+                'label'   => esc_html__( 'Normal', 'element-camp' ),
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'button_background',
+                'label' => esc_html__('Background', 'element-camp'),
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .tcgelements-search-field .searchsubmit,{{WRAPPER}} .tcgelements-search-icon .searchsubmit',
+            ]
+        );
         $this->add_control(
             'button_translate_y',
             [
@@ -1558,17 +1777,50 @@ class ElementCamp_Search extends Widget_Base
                 ],
             ]
         );
-        $this->add_responsive_control(
-            'button_border_radius',
+        $this->end_controls_tab();
+        $this->start_controls_tab(
+            'button_advanced_hover_tab',
             [
-                'label' => esc_html__('Border Radius', 'element-camp'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%', 'rem', 'custom'],
+                'label'   => esc_html__( 'Hover', 'element-camp' ),
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'button_hover_background',
+                'label' => esc_html__('Background', 'element-camp'),
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .tcgelements-search-field .searchsubmit:hover,{{WRAPPER}} .tcgelements-search-icon .searchsubmit:hover',
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Box_Shadow::get_type(),
+            [
+                'name' => 'button_hover_box_shadow',
+                'selector' => '{{WRAPPER}} .tcgelements-search-field .searchsubmit:hover,{{WRAPPER}} .tcgelements-search-icon .searchsubmit:hover',
+            ]
+        );
+        $this->add_control(
+            'button_hover_translate_y',
+            [
+                'label' => esc_html__('Translate Y', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'custom'],
+            ]
+        );
+        $this->add_control(
+            'button_hover_translate_x',
+            [
+                'label' => esc_html__('Translate X', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'custom'],
                 'selectors' => [
-                    '{{WRAPPER}} .tcgelements-search-field .searchsubmit' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                    '{{WRAPPER}} .tcgelements-search-field .searchsubmit:hover' => 'transform: translate({{button_hover_translate_x.SIZE}}{{button_hover_translate_x.UNIT}},{{button_hover_translate_y.SIZE}}{{button_hover_translate_y.UNIT}})',
                 ],
             ]
         );
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
         $this->end_controls_section();
     }
     /**
@@ -1583,8 +1835,10 @@ class ElementCamp_Search extends Widget_Base
     {
         $settings = $this->get_settings_for_display();
         $show_categories = (isset($settings['show_categories']) && $settings['show_categories'] === 'yes') && class_exists('WooCommerce');
+        $button_type = isset($settings['button_type']) ? $settings['button_type'] : 'icon_only';
+        $icon_position = isset($settings['icon_position']) ? $settings['icon_position'] : 'before';
         ?>
-        <?php if ($settings['search_style'] == 'field'): ?>
+        <?php if ($settings['search_style'] === 'field'): ?>
         <div class="tcgelements-search-field <?php echo $show_categories ? 'has-categories' : ''; ?>">
             <?php $elementcamp_unique_id = uniqid('search-form-'); ?>
             <form role="search" method="get" id="<?php echo esc_attr($elementcamp_unique_id); ?>" class="searchform" action="<?php echo esc_url(home_url('/')); ?>">
@@ -1595,7 +1849,7 @@ class ElementCamp_Search extends Widget_Base
                         <select name="product_cat" class="product-categories form-select">
                             <option value=""><?php echo esc_html($settings['categories_placeholder']); ?></option>
                             <?php foreach ($categories as $category): ?>
-                                <option value="<?php echo esc_attr($category->slug); ?>" <?php selected(isset($_GET['product_cat']) ? $_GET['product_cat'] : '', $category->slug); ?>>
+                                <option value="<?php echo esc_attr($category->slug); ?>" <?php selected(isset($_GET['product_cat']) ? sanitize_text_field(wp_unslash($_GET['product_cat'])) : '', $category->slug); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>>
                                     <?php echo esc_html($category->name); ?>
                                 </option>
                             <?php endforeach; ?>
@@ -1604,12 +1858,39 @@ class ElementCamp_Search extends Widget_Base
                     endif;
                 endif;
                 ?>
-                <input type="search" placeholder="<?php echo esc_attr__($settings['place_holder_text'], 'tcgelements'); ?>" value="<?php echo get_search_query(); ?>" name="s">
+                <input type="search" placeholder="<?php echo esc_attr($settings['place_holder_text']); ?>" value="<?php echo get_search_query(); ?>" name="s">
                 <?php if ($show_categories): ?>
                     <input type="hidden" name="post_type" value="product">
                 <?php endif; ?>
-                <button type="submit" class="searchsubmit right">
-                    <?php \Elementor\Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true', 'class' => 'features-icon']); ?>
+
+                <button type="submit" class="searchsubmit right icon-<?php echo esc_attr($icon_position); ?><?php if($button_type === 'text_icon' && $settings['button_animations'] === 'text-transform') echo ' tce-hvr-txt-trans'; ?>">
+                    <?php if ($button_type === 'text_icon'): ?>
+                        <?php if ($icon_position === 'before'): ?>
+                            <span class="button-icon">
+                                <?php \Elementor\Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']); ?>
+                            </span>
+                            <?php if ($settings['button_animations'] === 'text-transform'): ?>
+                                <span class="hvr-txt" data-text="<?php echo esc_attr($settings['text_transform_type'] === 'custom' ? $settings['text_transform_custom'] : $settings['button_text']); ?>">
+                                    <span class="button-text"><?php echo esc_html($settings['button_text']); ?></span>
+                                </span>
+                            <?php else: ?>
+                                <span class="button-text"><?php echo esc_html($settings['button_text']); ?></span>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <?php if ($settings['button_animations'] === 'text-transform'): ?>
+                                <span class="hvr-txt" data-text="<?php echo esc_attr($settings['text_transform_type'] === 'custom' ? $settings['text_transform_custom'] : $settings['button_text']); ?>">
+                                    <span class="button-text"><?php echo esc_html($settings['button_text']); ?></span>
+                                </span>
+                            <?php else: ?>
+                                <span class="button-text"><?php echo esc_html($settings['button_text']); ?></span>
+                            <?php endif; ?>
+                            <span class="button-icon">
+                                <?php \Elementor\Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']); ?>
+                            </span>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <?php \Elementor\Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true', 'class' => 'features-icon']); ?>
+                    <?php endif; ?>
                 </button>
             </form>
         </div>
@@ -1619,7 +1900,7 @@ class ElementCamp_Search extends Widget_Base
                 <div class="form-group">
                     <?php $elementcamp_unique_id = uniqid('search-form-'); ?>
                     <form role="search" method="get" id="<?php echo esc_attr($elementcamp_unique_id); ?>" class="searchform" action="<?php echo esc_url(home_url('/')); ?>">
-                        <input type="text" name="s" placeholder="<?php echo esc_attr__($settings['place_holder_text'], 'tcgelements'); ?>" value="<?php echo get_search_query(); ?>">
+                        <input type="text" name="s" placeholder="<?php echo esc_attr($settings['place_holder_text']); ?>" value="<?php echo get_search_query(); ?>">
                         <button type="submit" class="searchsubmit">
                             <?php \Elementor\Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true', 'class' => 'features-icon']); ?>
                         </button>

@@ -1,5 +1,6 @@
 <?php
 namespace Elementor;
+if (!defined('ABSPATH')) exit;
 
 class ElementCamp_Extend_section {
 

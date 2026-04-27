@@ -1,0 +1,80 @@
+.tcgelements-heading-text{
+  a{
+    transition: all 0.3s ease;
+  }
+  >a,a:hover{
+    color: inherit;
+  }
+  .tcgelements-heading{
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    transform : perspective(var(--e-transform-tcgelements-heading-perspective,0)) rotate(var(--e-transform-tcgelements-heading-rotateZ,0)) rotateX(var(--e-transform-tcgelements-heading-rotateX,0)) rotateY(var(--e-transform-tcgelements-heading-rotateY,0)) translate(var(--e-transform-tcgelements-heading-translate,0)) translateX(var(--e-transform-tcgelements-heading-translateX,0)) translateY(var(--e-transform-tcgelements-heading-translateY,0)) scaleX(calc(var(--e-transform-tcgelements-heading-flipX, 1) * var(--e-transform-tcgelements-heading-scaleX, var(--e-transform-tcgelements-heading-scale, 1)))) scaleY(calc(var(--e-transform-tcgelements-heading-flipY, 1) * var(--e-transform-tcgelements-heading-scaleY, var(--e-transform-tcgelements-heading-scale, 1)))) skewX(var(--e-transform-tcgelements-heading-skewX,0)) skewY(var(--e-transform-tcgelements-heading-skewY,0));
+    &::before{
+      position: absolute;
+      content: "";
+      z-index: -1;
+    }
+    &.tce-funky-letters span {
+      display: inline-block;
+      opacity: 0;
+      transform: scaleY(0.5);
+    }
+    &.tcg-gradient-shift {
+      background-size: 300% 100%;
+      animation: gradient-shift 8s ease infinite;
+    }
+    &.tcg-moveBg {
+      animation: moveBg 5s linear infinite;
+    }
+  }
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  @keyframes moveBg {
+    0% {
+      background-position: 0 0;
+    }
+    50% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: 0 0;
+    }
+  }
+  .heading-icon{
+    transform : perspective(var(--e-transform-tcgelements-heading-icon-perspective,0)) rotate(var(--e-transform-tcgelements-heading-icon-rotateZ,0)) rotateX(var(--e-transform-tcgelements-heading-icon-rotateX,0)) rotateY(var(--e-transform-tcgelements-heading-icon-rotateY,0)) translate(var(--e-transform-tcgelements-heading-icon-translate,0)) translateX(var(--e-transform-tcgelements-heading-icon-translateX,0)) translateY(var(--e-transform-tcgelements-heading-icon-translateY,0)) scaleX(calc(var(--e-transform-tcgelements-heading-icon-flipX, 1) * var(--e-transform-tcgelements-heading-icon-scaleX, var(--e-transform-tcgelements-heading-icon-scale, 1)))) scaleY(calc(var(--e-transform-tcgelements-heading-icon-flipY, 1) * var(--e-transform-tcgelements-heading-icon-scaleY, var(--e-transform-tcgelements-heading-icon-scale, 1)))) skewX(var(--e-transform-tcgelements-heading-icon-skewX,0)) skewY(var(--e-transform-tcgelements-heading-icon-skewY,0));
+  }
+}
+.tcgelements-heading-text{
+  span{
+    display: inline-block;
+    transform : perspective(var(--e-transform-tcgelements-heading-span-perspective,0)) rotate(var(--e-transform-tcgelements-heading-span-rotateZ,0)) rotateX(var(--e-transform-tcgelements-heading-span-rotateX,0)) rotateY(var(--e-transform-tcgelements-heading-span-rotateY,0)) translate(var(--e-transform-tcgelements-heading-span-translate,0)) translateX(var(--e-transform-tcgelements-heading-span-translateX,0)) translateY(var(--e-transform-tcgelements-heading-span-translateY,0)) scaleX(calc(var(--e-transform-tcgelements-heading-span-flipX, 1) * var(--e-transform-tcgelements-heading-span-scaleX, var(--e-transform-tcgelements-heading-span-scale, 1)))) scaleY(calc(var(--e-transform-tcgelements-heading-span-flipY, 1) * var(--e-transform-tcgelements-heading-span-scaleY, var(--e-transform-tcgelements-heading-span-scale, 1)))) skewX(var(--e-transform-tcgelements-heading-span-skewX,0)) skewY(var(--e-transform-tcgelements-heading-span-skewY,0))
+  }
+}
+.tcgelements-heading.tce-scroll-fill {
+    div {
+      display: inline !important;
+      background: linear-gradient(to right, var(--fill-color-active) 50%, var(--fill-color-inactive) 50%);
+      background-size: 200% 100%;
+      background-position-x: 100%;
+      color: transparent !important;
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+}
+@media screen and (max-width: 991px) {
+  .tcgelements-heading-text {
+    .tcgelements-heading.tcgelements-text-breakline br {
+      display: none;
+    }
+  }
+}

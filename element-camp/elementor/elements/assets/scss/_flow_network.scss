@@ -1,0 +1,126 @@
+.flow-wrapper {
+  --cr-main: #0055ff;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  aspect-ratio: 16 / 13;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .nodes-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .node {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    will-change: transform; // Optimize for animations
+  }
+
+  .node.central {
+    width: 120px;
+    height: 120px;
+    background: #0d153a;
+    border: 2px solid var(--cr-main);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 60px #000dff66, inset 0 0 20px #1100ff33;
+    animation: pulseHub 3s infinite ease-in-out;
+    transition: all 0.3s ease;
+    z-index: 3;
+
+    img {
+      width: 60%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    i {
+      font-size: 2rem;
+      color: var(--cr-main);
+    }
+  }
+
+  .node.satellite {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(74, 70, 81, 0.231);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    will-change: transform; // Optimize for scale animations
+
+    .ico {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 21px;
+        height: auto;
+        object-fit: contain;
+      }
+    }
+
+    i {
+      font-size: 21px;
+      color: #aaa;
+      transition: color 0.3s ease;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: var(--cr-main);
+      border-radius: 50%;
+      box-shadow: 0 0 15px var(--cr-main);
+      opacity: 0.4;
+    }
+  }
+
+  .flow-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .connection-path {
+    fill: none;
+    stroke: rgba(0, 85, 255, 0.2);
+    stroke-width: 1.5;
+    transition: stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease;
+  }
+
+  .light-particle {
+    fill: var(--cr-main);
+    filter: blur(2px);
+  }
+
+  @keyframes pulseHub {
+    0%, 100% { box-shadow: 0 0 50px #000dff66, inset 0 0 20px #1100ff33; }
+    50% { box-shadow: 0 0 80px #000dff66, inset 0 0 30px #1100ff33; }
+  }
+}

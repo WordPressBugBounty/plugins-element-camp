@@ -1869,8 +1869,8 @@ class ElementCamp_Services_Accordion extends Widget_Base
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
-        $start = is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
-        $end = !is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
+        $start = is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
+        $end = !is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
 
         $this->add_control(
             'button_column_position_positioning',
@@ -2383,30 +2383,30 @@ class ElementCamp_Services_Accordion extends Widget_Base
         $settings = $this->get_settings_for_display();
         $accordion_id = uniqid('accordion');
         ?>
-        <div class="tcgelements-services-accordion"  id="<?=esc_attr($accordion_id)?>">
+        <div class="tcgelements-services-accordion"  id="<?php echo esc_attr($accordion_id)?>">
             <?php  $itemCount=1; foreach ($settings['accordion_items'] as $item) : ?>
                 <div class="accordion-item <?php if ($settings['active_item']==$itemCount) echo esc_attr('active')?>">
                     <div class="accordion-header">
-                        <div class="accordion-title <?php if ($settings['active_item']!=$itemCount) echo esc_attr('collapsed')?>" data-bs-toggle="collapse" data-bs-target="#collapse<?=$itemCount.$accordion_id?>">
+                        <div class="accordion-title <?php if ($settings['active_item']!=$itemCount) echo esc_attr('collapsed')?>" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo esc_attr($itemCount.$accordion_id)?>">
                             <?php if (!empty($item['item_count'])) : ?>
-                                <div class="count"><?=esc_html($item['item_count'])?></div>
+                                <div class="count"><?php echo esc_html($item['item_count'])?></div>
                             <?php endif;?>
                             <?php if ($item['enable_tags'] === 'yes') : ?>
                                 <div class="tags">
                                     <?php
                                     $tags = explode(',', $item['tags']);
                                     foreach ($tags as $tag) : ?>
-                                        <span class="tag"><?= esc_html(trim($tag)); ?></span>
+                                        <span class="tag"><?php echo esc_html(trim($tag)); ?></span>
                                     <?php endforeach; ?>
                                 </div>
                             <?php endif; ?>
                             <div class="title">
-                                <?=__($item['title'],'element-camp')?>
+                                <?php echo wp_kses_post($item['title'])?>
                             </div>
                             <?php if ($item['title_media'] != 'none') : ?>
                                 <div class="media">
                                     <?php if (!empty($item['title_image']['url'])) : ?>
-                                        <img src="<?= esc_url($item['title_image']['url']); ?>" alt="<?php if (!empty($item['title_image']['alt'])) echo esc_attr($item['title_image']['alt']); ?>" >
+                                        <img src="<?php echo esc_url($item['title_image']['url']); ?>" alt="<?php if (!empty($item['title_image']['alt'])) echo esc_attr($item['title_image']['alt']); ?>" >
                                     <?php endif;?>
                                     <?php
                                     if (!empty($item['title_icon']['value'])) {
@@ -2417,18 +2417,18 @@ class ElementCamp_Services_Accordion extends Widget_Base
                             <?php endif;?>
                         </div>
                     </div>
-                    <div id="collapse<?=$itemCount.$accordion_id?>" class="accordion-collapse collapse <?php if ($settings['active_item']==$itemCount) echo 'show'?>" data-bs-parent="<?= esc_attr('#' . $accordion_id) ?>">
+                    <div id="collapse<?php echo esc_attr($itemCount.$accordion_id)?>" class="accordion-collapse collapse <?php if ($settings['active_item']==$itemCount) echo 'show'?>" data-bs-parent="<?php echo esc_attr('#' . $accordion_id) ?>">
                         <div class="accordion-body">
                             <div class="row">
                                 <div class="col-md-4">
                                     <?php if ($item['btn_type']=='custom') :?>
-                                        <a href="<?=esc_url($item['btn_link']['url'])?>" class="butn" <?php if ( $item['btn_link']['is_external'] ) {echo'target="_blank"';} ?>>
+                                        <a href="<?php echo esc_url($item['btn_link']['url'])?>" class="butn" <?php if ( $item['btn_link']['is_external'] ) {echo'target="_blank"';} ?>>
                                     <?php elseif ($item['btn_type']=='none') : ?>
                                         <div class="butn">
                                     <?php endif;?>
                                         <div class="btn-media">
                                             <?php if (!empty($item['btn_media_image']['url'])) : ?>
-                                                <img src="<?= esc_url($item['btn_media_image']['url']); ?>" alt="<?php if (!empty($item['btn_media_image']['alt'])) echo esc_attr($item['btn_media_image']['alt']); ?>" >
+                                                <img src="<?php echo esc_url($item['btn_media_image']['url']); ?>" alt="<?php if (!empty($item['btn_media_image']['alt'])) echo esc_attr($item['btn_media_image']['alt']); ?>" >
                                             <?php endif;?>
                                             <?php
                                             if (!empty($item['btn_media_icon']['value'])) {
@@ -2436,7 +2436,7 @@ class ElementCamp_Services_Accordion extends Widget_Base
                                             }
                                             ?>
                                         </div>
-                                        <span class="btn-text"><?=esc_html($item['btn_text'])?></span>
+                                        <span class="btn-text"><?php echo esc_html($item['btn_text'])?></span>
                                     <?php if ($item['btn_type']=='custom') :?>
                                         </a>
                                     <?php elseif ($item['btn_type']=='none') : ?>
@@ -2448,11 +2448,11 @@ class ElementCamp_Services_Accordion extends Widget_Base
                                         <div class="col-lg-7">
                                             <?php if ($item['content_media'] != 'none') : ?>
                                                 <div class="content-image">
-                                                    <img src="<?=esc_url($item['content_image']['url'])?>" alt="<?php if (!empty($item['content_image']['alt'])) echo esc_attr($item['content_image']['alt']); ?>" />
+                                                    <img src="<?php echo esc_url($item['content_image']['url'])?>" alt="<?php if (!empty($item['content_image']['alt'])) echo esc_attr($item['content_image']['alt']); ?>" />
                                                 </div>
                                             <?php endif;?>
                                             <div class="text">
-                                                <?=__($item['content'])?>
+                                                <?php echo wp_kses_post($item['content'])?>
                                             </div>
                                         </div>
                                     </div>

@@ -1,0 +1,109 @@
+.tcgelements-creative-cards{
+  position: relative;
+  height: 100%;
+  a,span{
+    display: inline-block;
+  }
+  .perspective {
+    perspective: 2000px;
+  }
+  .links-card {
+    position: relative;
+    padding: 60px 50px 60px 100px;
+    background: #fff1;
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    transform-style: preserve-3d;
+    transform: rotateY(45deg) translateX(-4%);
+    z-index: 20;
+    background-size: cover;
+    box-shadow: 0 0 100px #FF532E33;
+    .links {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      li{
+        list-style-type: none;
+      }
+      a {
+        position: relative;
+        margin: 10px 0;
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: capitalize;
+        letter-spacing: 8px;
+      }
+    }
+    .bg {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: -1;
+      opacity: 0.3;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  .demos-imgs {
+    position: absolute;
+    top: 8%;
+    right: 30px;
+    width: 40%;
+    height: 90%;
+    .img {
+      position: absolute;
+      display: block;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 480px;
+      padding: 30px;
+      background-color: #9997;
+      border-radius: 15px;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.5s ease;
+      &.active {
+        opacity: 1;
+        transform: scale(1);
+        transition: all 0.5s ease;
+      }
+      img {
+        position: relative;
+        border-radius: 30px;
+        overflow: hidden;
+        background-color: #000;
+        box-shadow: -2px 2px 0 var(--color-primary);
+        height: calc(100% - 50px);
+        width: 100%;
+        object-fit: cover;
+        object-position: top;
+      }
+    }
+    .pages-list {
+      list-style-type: none;
+      margin: 0;
+      position: relative;
+      background-color: #000;
+      border-radius: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 50px;
+      height: 360px;
+      background-size: cover;
+      li {
+        list-style-type: none;
+        position: relative;
+        width: 50%;
+        a {
+          position: relative;
+          margin: 10px;
+          font-size: 16px;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+}

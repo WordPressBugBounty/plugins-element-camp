@@ -44,7 +44,7 @@ class ElementCamp_Canvas extends Widget_Base
 
     public function get_icon()
     {
-        return 'eicon-canvas';
+        return 'eicon-animation tce-widget-badge';
     }
 
     public function get_categories()
@@ -65,7 +65,7 @@ class ElementCamp_Canvas extends Widget_Base
      */
     public function get_script_depends()
     {
-        return ['three.min', 'ogl-bundle.min', 'tcgelements-canvas'];
+        return ['three.min', 'ogl-bundle.min', 'tcgelements-canvas', 'tcgelements-particles', 'tcgelements-floating-lines'];
     }
 
     protected function _register_controls()
@@ -93,6 +93,8 @@ class ElementCamp_Canvas extends Widget_Base
                     'noise' => esc_html__('Noise', 'element-camp'),
                     'blur' => esc_html__('Blur', 'element-camp'),
                     'video' => esc_html__('Video Frames', 'element-camp'),
+                    'particles' => esc_html__('Particles', 'element-camp'),
+                    'floating-lines' => esc_html__('Floating Lines', 'element-camp'),
                 ],
             ]
         );
@@ -711,7 +713,7 @@ class ElementCamp_Canvas extends Widget_Base
                         'max' => 100,
                     ],
                 ],
-                'size_units' => ['px', '%'],
+                'size_units' => ['px', '%', 'em', 'rem', 'vw', 'vh', 'custom'],
                 'selectors' => [
                     '{{WRAPPER}}' => 'height: {{SIZE}}{{UNIT}};',
                 ],
@@ -723,7 +725,7 @@ class ElementCamp_Canvas extends Widget_Base
             [
                 'label' => __('Max Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'custom'],
+                'size_units' => ['px', '%', 'em', 'rem', 'vw', 'vh', 'custom'],
                 'selectors' => [
                     '{{WRAPPER}}' => 'max-width: {{SIZE}}{{UNIT}} !important;',
                 ],
@@ -749,7 +751,7 @@ class ElementCamp_Canvas extends Widget_Base
                         'max' => 100,
                     ],
                 ],
-                'size_units' => ['px', '%'],
+                'size_units' => ['px', '%', 'em', 'rem', 'vw', 'vh', 'custom'],
                 'selectors' => [
                     '{{WRAPPER}}' => 'width: {{SIZE}}{{UNIT}};',
                 ],
@@ -787,6 +789,9 @@ class ElementCamp_Canvas extends Widget_Base
                     '{{WRAPPER}} .tcgelements-canvas .crystal-container' => 'opacity: {{SIZE}};',
                     '{{WRAPPER}} .tcgelements-canvas .circles' => 'opacity: {{SIZE}};',
                     '{{WRAPPER}} .tcgelements-canvas .globe-dots' => 'opacity: {{SIZE}};',
+                    '{{WRAPPER}} .tcgelements-canvas .sacred-geometry-container' => 'opacity: {{SIZE}};',
+                    '{{WRAPPER}} .tcgelements-canvas .floating-lines-container' => 'opacity: {{SIZE}};',
+                    '{{WRAPPER}} .tcgelements-canvas .particles-container' => 'opacity: {{SIZE}};',
                 ],
             ]
         );
@@ -877,6 +882,7 @@ class ElementCamp_Canvas extends Widget_Base
             $this->add_control(
                 "circle{$i}_heading",
                 [
+                    // translators: %d is the circle number (e.g. Circle 1, Circle 2, etc.)
                     'label' => sprintf(esc_html__('Circle %d', 'element-camp'), $i),
                     'type' => Controls_Manager::HEADING,
                     'separator' => 'before',
@@ -1163,7 +1169,7 @@ class ElementCamp_Canvas extends Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}}' => 'mask-image: linear-gradient({{SIZE}}{{UNIT}}, {{mask_color1.VALUE}} {{mask_color1_stop.SIZE}}{{mask_color1_stop.UNIT}},{{mask_color2.VALUE}} {{mask_color2_stop.SIZE}}{{mask_color2_stop.UNIT}}) {{mask_composite.VALUE}}; -webkit-mask: linear-gradient({{SIZE}}{{UNIT}}, {{mask_color1.VALUE}} {{mask_color1_stop.SIZE}}{{mask_color1_stop.UNIT}},{{mask_color2.VALUE}} {{mask_color2_stop.SIZE}}{{mask_color2_stop.UNIT}}) {{mask_composite.VALUE}};',
+                    '{{WRAPPER}}' => 'mask-image: linear-gradient({{SIZE}}{{UNIT}}, {{mask_color1.VALUE}} {{mask_color1_stop.SIZE}}{{mask_color1_stop.UNIT}},{{mask_color2.VALUE}} {{mask_color2_stop.SIZE}}{{mask_color2_stop.UNIT}}); -webkit-mask-image: linear-gradient({{SIZE}}{{UNIT}}, {{mask_color1.VALUE}} {{mask_color1_stop.SIZE}}{{mask_color1_stop.UNIT}},{{mask_color2.VALUE}} {{mask_color2_stop.SIZE}}{{mask_color2_stop.UNIT}});',
                 ],
             ]
         );
@@ -1174,15 +1180,23 @@ class ElementCamp_Canvas extends Widget_Base
                 'label' => esc_html__('Mask Composite', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'add' => 'add',
-                    'subtract' => 'subtract',
+                    'add'       => 'add',
+                    'subtract'  => 'subtract',
                     'intersect' => 'intersect',
-                    'exclude' => 'exclude',
+                    'exclude'   => 'exclude',
                 ],
                 'default' => 'add',
+                'selectors' => [
+                    '{{WRAPPER}}' => '{{VALUE}};',
+                ],
+                'selectors_dictionary' => [
+                    'add'       => 'mask-composite: add; -webkit-mask-composite: source-over',
+                    'subtract'  => 'mask-composite: subtract; -webkit-mask-composite: source-out',
+                    'intersect' => 'mask-composite: intersect; -webkit-mask-composite: source-in',
+                    'exclude'   => 'mask-composite: exclude; -webkit-mask-composite: xor',
+                ],
             ]
         );
-
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -1203,6 +1217,68 @@ class ElementCamp_Canvas extends Widget_Base
                 'type' => Controls_Manager::COLOR,
                 'default' => '#2a51e6',
                 'description' => __('Main color of the dots', 'element-camp'),
+            ]
+        );
+
+        $this->add_control(
+            'globe_dots_particle_count',
+            [
+                'label'       => __('Particle Count', 'element-camp'),
+                'type'        => Controls_Manager::NUMBER,
+                'default'     => 400,
+                'min'         => 50,
+                'max'         => 1200,
+                'step'        => 50,
+                'description' => __('Number of dots on the globe. Default: 400 (original). 800 = sample style.', 'element-camp'),
+            ]
+        );
+
+        $this->add_control(
+            'globe_dots_particle_size_base',
+            [
+                'label'       => __('Particle Size', 'element-camp'),
+                'type'        => Controls_Manager::SLIDER,
+                'default'     => [ 'size' => 0.2 ],
+                'range'       => [ 'px' => [ 'min' => 0.05, 'max' => 1, 'step' => 0.01 ] ],
+                'description' => __('Base size of each dot. Default: 0.2 (original). 0.4 = sample style.', 'element-camp'),
+            ]
+        );
+
+        $this->add_control(
+            'globe_dots_particle_size_variation',
+            [
+                'label'       => __('Size Pulse Variation', 'element-camp'),
+                'type'        => Controls_Manager::SLIDER,
+                'default'     => [ 'size' => 0.04 ],
+                'range'       => [ 'px' => [ 'min' => 0, 'max' => 0.2, 'step' => 0.005 ] ],
+                'description' => __('How much the size pulses/animates. 0 = no pulse. Default: 0.04.', 'element-camp'),
+            ]
+        );
+
+        $this->add_control(
+            'globe_dots_texture_shape',
+            [
+                'label'       => __('Dot Shape', 'element-camp'),
+                'type'        => Controls_Manager::SELECT,
+                'default'     => 'circle',
+                'options'     => [
+                    'circle'  => __('Circle (default)', 'element-camp'),
+                    'capsule' => __('Capsule / Dash (sample style)', 'element-camp'),
+                ],
+                'description' => __('Circle = original widget style. Capsule = elongated dash like the standalone sample.', 'element-camp'),
+            ]
+        );
+
+        $this->add_control(
+            'globe_dots_vertex_colors',
+            [
+                'label'        => __('Use Vertex Colors', 'element-camp'),
+                'type'         => Controls_Manager::SWITCHER,
+                'label_on'     => __('Yes', 'element-camp'),
+                'label_off'    => __('No', 'element-camp'),
+                'return_value' => 'yes',
+                'default'      => 'no',
+                'description'  => __('Enable to use the color buffer attribute (required for external color scripts). Default: No (original behavior).', 'element-camp'),
             ]
         );
 
@@ -1233,7 +1309,7 @@ class ElementCamp_Canvas extends Widget_Base
                         'max' => 100,
                     ],
                 ],
-                'size_units' => ['px', '%'],
+                'size_units' => ['px', '%', 'em', 'rem', 'vw', 'vh', 'custom'],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-canvas' => 'height: {{SIZE}}{{UNIT}};',
                 ],
@@ -1255,7 +1331,7 @@ class ElementCamp_Canvas extends Widget_Base
                         'max' => 100,
                     ],
                 ],
-                'size_units' => ['px', '%'],
+                'size_units' => ['px', '%', 'em', 'rem', 'vw', 'vh', 'custom'],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-canvas' => 'width: {{SIZE}}{{UNIT}};',
                 ],
@@ -1298,6 +1374,68 @@ class ElementCamp_Canvas extends Widget_Base
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-canvas .sacred-geometry-container' => 'filter: brightness({{SIZE}}{{UNIT}});',
+                ],
+            ]
+        );
+
+        $this->end_controls_section();
+        $this->start_controls_section(
+            'section_sacred_geometry_animation',
+            [
+                'label' => __('Scroll Animation', 'element-camp'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'condition' => [
+                    'canvas_type' => 'sacred-geometry',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'enable_scroll_animation',
+            [
+                'label' => esc_html__('Enable Scroll Animation', 'element-camp'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('Yes', 'element-camp'),
+                'label_off' => esc_html__('No', 'element-camp'),
+                'return_value' => 'yes',
+                'default' => 'no',
+            ]
+        );
+
+        $this->add_control(
+            'animation_trigger',
+            [
+                'label' => __('Trigger Element Class', 'element-camp'),
+                'type' => Controls_Manager::TEXT,
+                'default' => '.tc-demos-preview',
+                'placeholder' => '.tc-demos-preview',
+                'condition' => [
+                    'enable_scroll_animation' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'animation_end_trigger',
+            [
+                'label' => __('End Trigger Element Class', 'element-camp'),
+                'type' => Controls_Manager::TEXT,
+                'default' => '.tc-inner-preview',
+                'placeholder' => '.tc-inner-preview',
+                'condition' => [
+                    'enable_scroll_animation' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'animation_note',
+            [
+                'type' => Controls_Manager::RAW_HTML,
+                'raw' => __('Animation: Scale 1→3 then 3→1, Move X: 0→-90vw then -90vw→-25vw', 'element-camp'),
+                'content_classes' => 'elementor-descriptor',
+                'condition' => [
+                    'enable_scroll_animation' => 'yes',
                 ],
             ]
         );
@@ -1372,6 +1510,26 @@ class ElementCamp_Canvas extends Widget_Base
         );
 
         $this->end_controls_section();
+        $this->start_controls_section(
+            'section_floating_lines_style',
+            [
+                'label'     => __('Floating Lines Style', 'element-camp'),
+                'tab'       => Controls_Manager::TAB_STYLE,
+                'condition' => ['canvas_type' => 'floating-lines'],
+            ]
+        );
+
+        $this->add_group_control(
+            \Elementor\Group_Control_Background::get_type(),
+            [
+                'name'     => 'fl_background',
+                'label'    => __('Container Background', 'element-camp'),
+                'types'    => ['classic', 'gradient', 'tcg_gradient'],
+                'selector' => '{{WRAPPER}} .tcgelements-canvas .floating-lines-container',
+            ]
+        );
+
+        $this->end_controls_section();
     }
 
     protected function render()
@@ -1399,15 +1557,23 @@ class ElementCamp_Canvas extends Widget_Base
                 esc_attr($keep_original_y)
             );
         } elseif ($settings['canvas_type'] === 'sacred-geometry') {
-            // Sacred Geometry data attributes
             $color1 = $settings['sacred_geometry_color1'] ?: '#00ccff';
             $color2 = $settings['sacred_geometry_color2'] ?: '#8000ff';
 
             $animation_data = sprintf(
                 'data-sg-color1="%s" data-sg-color2="%s"',
                 esc_attr($color1),
-                esc_attr($color2),
+                esc_attr($color2)
             );
+
+            // Add animation data if enabled
+            if ($settings['enable_scroll_animation'] === 'yes') {
+                $animation_data .= sprintf(
+                    ' data-enable-animation="true" data-trigger="%s" data-end-trigger="%s"',
+                    esc_attr($settings['animation_trigger'] ?: '.tc-demos-preview'),
+                    esc_attr($settings['animation_end_trigger'] ?: '.tc-inner-preview')
+                );
+            }
         } elseif ($settings['canvas_type'] === 'brush') {
             // Brush effect data attributes
             $brush_radius = $settings['brush_radius']['size'] ?? 80;
@@ -1424,7 +1590,7 @@ class ElementCamp_Canvas extends Widget_Base
             );
         }
         ?>
-        <div class="tcgelements-canvas" <?php echo $animation_data; ?>>
+        <div class="tcgelements-canvas" <?php echo esc_attr($animation_data); ?>>
             <?php switch ($settings['canvas_type']) {
                 case 'crystal':
                     ?>
@@ -1438,7 +1604,7 @@ class ElementCamp_Canvas extends Widget_Base
                 break;
                 case 'image-hover':
                     ?>
-                    <div class="image-hover-container" data-image="<?= esc_url($settings['image_hover_image']['url']) ?>"></div>
+                    <div class="image-hover-container" data-image="<?php echo esc_url($settings['image_hover_image']['url']) ?>"></div>
                     <?php
                 break;
                 case 'circles':
@@ -1446,18 +1612,29 @@ class ElementCamp_Canvas extends Widget_Base
                     ?>
                     <div class="circles">
                         <?php for ($i = 1; $i <= $circles_count; $i++): ?>
-                            <span class="circle<?php echo $i; ?>"></span>
+                            <span class="circle<?php echo esc_html($i); ?>"></span>
                         <?php endfor; ?>
                     </div>
                     <?php
                 break;
                 case 'globe-dots':
-                    // Get color settings
                     $dots_color = $settings['globe_dots_color'] ?: '#2a51e6';
-                    $dots_rgb = $this->hex_to_rgb($dots_color);
-                    ?>
-                    <div class="globe-dots" data-dots-color="<?php echo esc_attr($dots_rgb); ?>"></div>
+                    $dots_rgb   = $this->hex_to_rgb($dots_color);
 
+                    $particle_count   = (int) ( $settings['globe_dots_particle_count']              ?? 400 );
+                    $size_base        = (float)( $settings['globe_dots_particle_size_base']['size']  ?? 0.2 );
+                    $size_variation   = (float)( $settings['globe_dots_particle_size_variation']['size'] ?? 0.04 );
+                    $texture_shape    = $settings['globe_dots_texture_shape']                        ?? 'circle';
+                    $vertex_colors    = ( $settings['globe_dots_vertex_colors'] === 'yes' ) ? 'true' : 'false';
+                    ?>
+                    <div class="globe-dots"
+                         data-dots-color="<?php echo esc_attr($dots_rgb); ?>"
+                         data-particle-count="<?php echo esc_attr($particle_count); ?>"
+                         data-particle-size-base="<?php echo esc_attr($size_base); ?>"
+                         data-particle-size-variation="<?php echo esc_attr($size_variation); ?>"
+                         data-texture-shape="<?php echo esc_attr($texture_shape); ?>"
+                         data-vertex-colors="<?php echo esc_attr($vertex_colors); ?>">
+                    </div>
                     <?php
                 break;
                 case 'noise':
@@ -1468,7 +1645,7 @@ class ElementCamp_Canvas extends Widget_Base
                 case 'brush':
                     ?>
                     <div class="brush-container">
-                        <canvas class="maskCanvas" data-overlay="<?= esc_url($settings['brush_overlay_image']['url']) ?>"></canvas>
+                        <canvas class="maskCanvas" data-overlay="<?php echo esc_url($settings['brush_overlay_image']['url']) ?>"></canvas>
                     </div>
                     <?php
                 break;
@@ -1504,7 +1681,7 @@ class ElementCamp_Canvas extends Widget_Base
 
                     // Use the video animation data directly on the container
                     ?>
-                    <div class="video-canvas-container" <?php echo $video_animation_data; ?>>
+                    <div class="video-canvas-container" <?php echo esc_attr($video_animation_data); ?>>
                         <?php if ($show_loading): ?>
                             <div class="video-loading"><?php echo esc_html__('Loading frames...', 'element-camp'); ?></div>
                         <?php endif; ?>
@@ -1512,6 +1689,15 @@ class ElementCamp_Canvas extends Widget_Base
                     </div>
                     <?php
                     break;
+                case 'particles':
+                    ?>
+                    <div class="particles-container"></div>
+                    <?php
+                    break;
+                case 'floating-lines':
+                    ?>
+                    <div class="floating-lines-container"></div>
+                    <?php break;
             } ?>
         </div>
         <?php

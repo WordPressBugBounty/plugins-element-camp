@@ -678,10 +678,10 @@ class ElementCamp_Gallery_Slider extends Widget_Base
         $this->add_control(
             'float_cursor',
             [
-                'label' => esc_html__('Float Cursor', 'themescamp-plugin'),
+                'label' => esc_html__('Float Cursor', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('On', 'themescamp-plugin'),
-                'label_off' => esc_html__('Off', 'themescamp-plugin'),
+                'label_on' => esc_html__('On', 'element-camp'),
+                'label_off' => esc_html__('Off', 'element-camp'),
                 'return_value' => 'true',
                 'default' => 'false',
             ]
@@ -1051,10 +1051,10 @@ class ElementCamp_Gallery_Slider extends Widget_Base
         $this->add_control(
             'slider_prev_slide_transform_options',
             [
-                'label' => esc_html__('Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
         $this->start_popover();
@@ -1080,10 +1080,10 @@ class ElementCamp_Gallery_Slider extends Widget_Base
         $this->add_control(
             'slider_active_slide_transform_options',
             [
-                'label' => esc_html__('Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
         $this->start_popover();
@@ -1109,10 +1109,10 @@ class ElementCamp_Gallery_Slider extends Widget_Base
         $this->add_control(
             'slider_next_slide_transform_options',
             [
-                'label' => esc_html__('Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
         $this->start_popover();
@@ -1149,6 +1149,7 @@ class ElementCamp_Gallery_Slider extends Widget_Base
                     'block' => esc_html__('Block', 'element-camp'),
                     'inline-block' => esc_html__('Inline Block', 'element-camp'),
                     'flex' => esc_html__('Flex', 'element-camp'),
+                    'inline-flex' => esc_html__('Inline Flex', 'element-camp'),
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-gallery-slider .item' => 'display: {{VALUE}};',
@@ -6104,7 +6105,7 @@ class ElementCamp_Gallery_Slider extends Widget_Base
         $this->start_controls_section(
             'section_float_cursor_style',
             [
-                'label' => esc_html__('Float Cursor Style', 'themescamp-elements'),
+                'label' => esc_html__('Float Cursor Style', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'float_cursor' => 'true',
@@ -6114,7 +6115,7 @@ class ElementCamp_Gallery_Slider extends Widget_Base
         $this->add_control(
             'float_cursor_width',
             [
-                'label' => esc_html__('Width', 'themescamp-plugin'),
+                'label' => esc_html__('Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -6141,7 +6142,7 @@ class ElementCamp_Gallery_Slider extends Widget_Base
         $this->add_control(
             'float_cursor_height',
             [
-                'label' => esc_html__('Height', 'themescamp-plugin'),
+                'label' => esc_html__('Height', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -6168,7 +6169,7 @@ class ElementCamp_Gallery_Slider extends Widget_Base
         $this->add_control(
             'float_cursor_text_color',
             [
-                'label' => esc_html__( 'Content Color', 'themescamp-elements' ),
+                'label' => esc_html__( 'Content Color', 'element-camp' ),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-gallery-slider .tce-float-cursor' => 'color: {{VALUE}};',
@@ -6189,7 +6190,7 @@ class ElementCamp_Gallery_Slider extends Widget_Base
         $this->add_control(
             'float_cursor_icon_size',
             [
-                'label' => esc_html__('Icon Size', 'themescamp-plugin'),
+                'label' => esc_html__('Icon Size', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem'],
                 'range' => [
@@ -6311,15 +6312,15 @@ class ElementCamp_Gallery_Slider extends Widget_Base
                 ?>
                 <div class="swiper-slide">
                     <?php if ($is_linked) : ?>
-                    <a class="item" href="<?= esc_url($slide['link']['url']) ?>" <?= $target ?>>
+                    <a class="item" href="<?php echo esc_url($slide['link']['url']) ?>" <?php echo esc_attr($target) ?>>
                         <?php else : ?>
                         <div class="item">
                             <?php endif; ?>
-                            <img src="<?= esc_url($slide['image']['url']) ?>" alt="<?= $img_alt ?>">
+                            <img src="<?php echo esc_url($slide['image']['url']) ?>" alt="<?php echo esc_attr($img_alt) ?>">
                             <?php if ($has_icon) : ?>
                                 <span class="icon"><?php \Elementor\Icons_Manager::render_icon($slide['selected_icon'], ['aria-hidden' => 'true']); ?></span>
                             <?php endif; ?>
-                            <?= $is_linked ? '</a>' : '</div>' ?>
+                            <?php echo $is_linked ? '</a>' : '</div>' ?>
                         </div>
                         <?php endforeach; ?>
                 </div>
@@ -6328,7 +6329,7 @@ class ElementCamp_Gallery_Slider extends Widget_Base
             <?php if ($settings['arrows_pagination_container'] === 'true') echo '<div class="arrows-pagination-container">'; ?>
 
             <?php if ($settings['pagination'] === 'true') : ?>
-                <div class="swiper-pagination swiper-pagination-<?= $settings['direction'] ?>"></div>
+                <div class="swiper-pagination swiper-pagination-<?php echo esc_attr($settings['direction']) ?>"></div>
             <?php endif; ?>
 
             <?php if ($settings['arrows'] === 'true') : ?>
@@ -6357,7 +6358,7 @@ class ElementCamp_Gallery_Slider extends Widget_Base
             <?php if ($settings['arrows_pagination_container'] === 'true') echo '</div>'; ?>
 
             <?php if ($settings['scrollbar'] === 'true') : ?>
-                <div class="swiper-scrollbar scrollbar-<?= $settings['direction'] ?>"></div>
+                <div class="swiper-scrollbar scrollbar-<?php echo esc_attr($settings['direction']) ?>"></div>
             <?php endif; ?>
 
             <?php if($settings['float_cursor'] === 'true'): ?>

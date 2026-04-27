@@ -7,7 +7,7 @@
  * Author URI: https://wpdive.com
  * License: GPLv3 or later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
- * Version: 2.3.6
+ * Version: 2.3.8
  * Text Domain: element-camp
  * Domain Path: /lang
  */
@@ -41,8 +41,6 @@ register_activation_hook( __FILE__, 'elementcamp_upgrade_check' );
  * @since 1.0.0
  */
 function elementcamp_plg_load() {
-	// Load localization file
-	load_plugin_textdomain( 'element-camp' );
 
 	// Require the main plugin file 
 	require( __DIR__ . '/init.php' );
@@ -62,7 +60,7 @@ function elementcamp_plg_fail_load_out_of_date() {
 	$message = '<p>' . __( 'Tcgelements Plugin is not working because you are using an old version of Elementor.', 'element-camp' ) . '</p>';
 	$message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $upgrade_link, __( 'Update Elementor Now', 'element-camp' ) ) . '</p>';
 
-	echo '<div class="error">' . $message . '</div>';
+	echo '<div class="error">' . wp_kses_post($message) . '</div>';
 }
 
 //include elementor addon
@@ -70,12 +68,6 @@ include('inc/elementor-addon.php');
 
 //include elementor addon
 include('inc/elemntor-extras.php');
-
-//plugin translation
-function elementcamp_textdomain_translation() {
-    load_plugin_textdomain('element-camp', false, dirname(plugin_basename(__FILE__)) . '/lang/');
-} // end custom_theme_setup
-add_action('after_setup_theme', 'elementcamp_textdomain_translation');
 
 // TCE Badge
 function elementcamp_badge_style() {

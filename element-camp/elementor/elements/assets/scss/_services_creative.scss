@@ -1,0 +1,271 @@
+.tcgelements-services-creative {
+  .card-column {
+    .service-card {
+      position: relative;
+      display: block;
+      padding: 30px 0;
+
+      .service-card-row {
+        .image-column {
+          text-align: right;
+          transform: perspective(var(--e-transform-tcgelements-services-creative-image-column-perspective, 0))
+          rotate(var(--e-transform-tcgelements-services-creative-image-column-rotateZ, 0))
+          rotateX(var(--e-transform-tcgelements-services-creative-image-column-rotateX, 0))
+          rotateY(var(--e-transform-tcgelements-services-creative-image-column-rotateY, 0))
+          translate(var(--e-transform-tcgelements-services-creative-image-column-translate, 0))
+          translateX(var(--e-transform-tcgelements-services-creative-image-column-translateX, 0))
+          translateY(var(--e-transform-tcgelements-services-creative-image-column-translateY, 0))
+          scaleX(calc(var(--e-transform-tcgelements-services-creative-image-column-flipX, 1) * var(--e-transform-tcgelements-services-creative-image-column-scaleX, var(--e-transform-tcgelements-services-creative-image-column-scale, 1))))
+          scaleY(calc(var(--e-transform-tcgelements-services-creative-image-column-flipY, 1) * var(--e-transform-tcgelements-services-creative-image-column-scaleY, var(--e-transform-tcgelements-services-creative-image-column-scale, 1))))
+          skewX(var(--e-transform-tcgelements-services-creative-image-column-skewX, 0))
+          skewY(var(--e-transform-tcgelements-services-creative-image-column-skewY, 0));
+
+          img {
+            opacity: 0;
+            transition: all 0.3s ease;
+          }
+        }
+
+        .title {
+          margin: 0;
+        }
+        .social-icons{
+          span,a{
+            display: inline-block;
+          }
+        }
+      }
+      .expandable-content {
+        position: relative;
+        opacity: 0;
+        overflow: hidden;
+        height: 1px;
+        transition: all 0.3s ease;
+
+        .description {
+          font-size: 16px;
+          color: #888;
+        }
+      }
+
+      &:hover {
+        .image-column {
+          img {
+            opacity: 1;
+          }
+        }
+
+        .title-column {
+          .title {
+            text-decoration: underline;
+          }
+        }
+      }
+      &.active-card {
+        .expandable-content {
+          opacity: 1;
+          height: 120px;
+        }
+      }
+    }
+
+    .exp-wrapper {
+      display: flex;
+      align-items: center;
+      margin-top: 80px;
+
+      .exp-number {
+        display: inline-block;
+        margin-right: 30px;
+      }
+
+      .exp-text {
+        display: inline-block;
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .images-column {
+    .media-image {
+      height: 140px;
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .imgs {
+      position: relative;
+      height: 500px;
+      margin-top: 40px;
+    }
+  }
+
+  &[data-use-tabs="no"],
+  &:not([data-use-tabs]) {
+    .images-column .imgs {
+      img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transform: perspective(var(--e-transform-tcgelements-services-creative-images-image-perspective, 0))
+        rotate(var(--e-transform-tcgelements-services-creative-images-image-rotateZ, 0))
+        rotateX(var(--e-transform-tcgelements-services-creative-images-image-rotateX, 0))
+        rotateY(var(--e-transform-tcgelements-services-creative-images-image-rotateY, 0))
+        translate(var(--e-transform-tcgelements-services-creative-images-image-translate, 0))
+        translateX(var(--e-transform-tcgelements-services-creative-images-image-translateX, 0))
+        translateY(var(--e-transform-tcgelements-services-creative-images-image-translateY, 0))
+        scaleX(calc(var(--e-transform-tcgelements-services-creative-images-image-flipX, 1) * var(--e-transform-tcgelements-services-creative-images-image-scaleX, var(--e-transform-tcgelements-services-creative-images-image-scale, 1))))
+        scaleY(calc(var(--e-transform-tcgelements-services-creative-images-image-flipY, 1) * var(--e-transform-tcgelements-services-creative-images-image-scaleY, var(--e-transform-tcgelements-services-creative-images-image-scale, 1))))
+        skewX(var(--e-transform-tcgelements-services-creative-images-image-skewX, 0))
+        skewY(var(--e-transform-tcgelements-services-creative-images-image-skewY, 0));
+        object-fit: cover;
+        opacity: 0;
+        clip-path: polygon(25% 0, 75% 0, 75% 100%, 25% 100%);
+        transition: all 1s ease;
+        max-width: 100%;
+        max-height: 100%;
+
+        &.show {
+          opacity: 1;
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+      }
+    }
+  }
+
+  &[data-use-tabs="yes"] {
+    .images-column .imgs {
+      .tab-card {
+        position: absolute;
+        width: 100%;
+        inset: 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(0.8);
+        transition: all 0.5s ease;
+
+        &.active {
+          opacity: 1;
+          visibility: visible;
+          transform: scale(1);
+        }
+
+        .img {
+          position: relative;
+          img {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+            transform: perspective(var(--e-transform-tcgelements-services-creative-images-image-perspective, 0))
+            rotate(var(--e-transform-tcgelements-services-creative-images-image-rotateZ, 0))
+            rotateX(var(--e-transform-tcgelements-services-creative-images-image-rotateX, 0))
+            rotateY(var(--e-transform-tcgelements-services-creative-images-image-rotateY, 0))
+            translate(var(--e-transform-tcgelements-services-creative-images-image-translate, 0))
+            translateX(var(--e-transform-tcgelements-services-creative-images-image-translateX, 0))
+            translateY(var(--e-transform-tcgelements-services-creative-images-image-translateY, 0))
+            scaleX(calc(var(--e-transform-tcgelements-services-creative-images-image-flipX, 1) * var(--e-transform-tcgelements-services-creative-images-image-scaleX, var(--e-transform-tcgelements-services-creative-images-image-scale, 1))))
+            scaleY(calc(var(--e-transform-tcgelements-services-creative-images-image-flipY, 1) * var(--e-transform-tcgelements-services-creative-images-image-scaleY, var(--e-transform-tcgelements-services-creative-images-image-scale, 1))))
+            skewX(var(--e-transform-tcgelements-services-creative-images-image-skewX, 0))
+            skewY(var(--e-transform-tcgelements-services-creative-images-image-skewY, 0));
+          }
+        }
+
+        .progress-wrapper {
+          margin-top: 40px;
+          .txt {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            line-height: 1.4;
+          }
+
+          .progress {
+            position: relative;
+            height: 2px;
+            background-color: #9993;
+
+            .progress-bar {
+              background-color: #000;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &.show-connector {
+    .card-column {
+      .service-card {
+        &::after {
+          position: absolute;
+          content: "";
+          left: 19%;
+          top: 17px;
+          width: 1px;
+          height: 100%;
+          border-left: 1px dashed #000;
+          transition: all 0.5s ease;
+          opacity: 1;
+        }
+
+        .service-card-row {
+            position: relative;
+            &::after {
+              position: absolute;
+              content: "";
+              left: calc(19% - 4.5px);
+              top: 15px;
+              width: 10px;
+              height: 10px;
+              background-color: #000;
+              border-radius: 50%;
+              z-index: 1;
+              transition: all 0.3s ease;
+            }
+        }
+
+        &:last-of-type {
+          &::after {
+            display: none;
+          }
+        }
+
+        &.active-card,
+        &:hover {
+          &::after {
+            opacity: 0.1;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 991px) {
+  .tcgelements-services-creative {
+    .card-column {
+      .service-card {
+        .service-card-row {
+          .image-column {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .images-column {
+      .imgs {
+        position: relative;
+        height: 300px;
+        width: 80%;
+        left: 10%;
+      }
+    }
+  }
+}

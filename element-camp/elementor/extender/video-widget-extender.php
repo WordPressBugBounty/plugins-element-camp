@@ -240,6 +240,33 @@ class TCG_Pro_Video_Widget_Extender
             ]
         );
 
+        $widget->add_control(
+            'tc_video_widget_blend_mode',
+            [
+                'label' => esc_html__( 'Blend Mode', 'element-camp' ),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    '' => esc_html__( 'Normal', 'element-camp' ),
+                    'multiply' => esc_html__( 'Multiply', 'element-camp' ),
+                    'screen' => esc_html__( 'Screen', 'element-camp' ),
+                    'overlay' => esc_html__( 'Overlay', 'element-camp' ),
+                    'darken' => esc_html__( 'Darken', 'element-camp' ),
+                    'lighten' => esc_html__( 'Lighten', 'element-camp' ),
+                    'color-dodge' => esc_html__( 'Color Dodge', 'element-camp' ),
+                    'saturation' => esc_html__( 'Saturation', 'element-camp' ),
+                    'color' => esc_html__( 'Color', 'element-camp' ),
+                    'difference' => esc_html__( 'Difference', 'element-camp' ),
+                    'exclusion' => esc_html__( 'Exclusion', 'element-camp' ),
+                    'hue' => esc_html__( 'Hue', 'element-camp' ),
+                    'luminosity' => esc_html__( 'Luminosity', 'element-camp' ),
+                    'hard-light' => esc_html__( 'Hard Light', 'element-camp' ),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}}' => 'mix-blend-mode: {{VALUE}}',
+                ],
+            ]
+        );
+
         $widget->end_controls_section();
     }
 }

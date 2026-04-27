@@ -163,6 +163,52 @@ class ElementCamp_Services_Slider extends Widget_Base
             ]
         );
 
+        // Image Link Option
+        $slides_repeater->add_control(
+            'image_link_switcher',
+            [
+                'label' => esc_html__('Image Link', 'element-camp'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('Yes', 'element-camp'),
+                'label_off' => esc_html__('No', 'element-camp'),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'condition' => [
+                    'card_link_switcher!' => 'yes',
+                ],
+            ]
+        );
+
+        $slides_repeater->add_control(
+            'image_link',
+            [
+                'label' => esc_html__('Image Link', 'element-camp'),
+                'type' => Controls_Manager::URL,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'default' => [
+                    'url' => '',
+                ],
+                'condition' => [
+                    'image_link_switcher' => 'yes',
+                    'card_link_switcher!' => 'yes',
+                ],
+            ]
+        );
+
+        $slides_repeater->add_control(
+            'card_link_switcher',
+            [
+                'label' => esc_html__('Card Link', 'element-camp'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('Yes', 'element-camp'),
+                'label_off' => esc_html__('No', 'element-camp'),
+                'return_value' => 'yes',
+                'default' => 'yes',
+            ]
+        );
+
         $slides_repeater->add_control(
             'link',
             [
@@ -174,6 +220,7 @@ class ElementCamp_Services_Slider extends Widget_Base
                 'default' => [
                     'url' => '',
                 ],
+                'condition'=>['card_link_switcher' =>'yes'],
                 'separator' => 'before',
             ]
         );
@@ -189,6 +236,7 @@ class ElementCamp_Services_Slider extends Widget_Base
                 ],
                 'default' => 'card',
                 'condition' => [
+                    'card_link_switcher' =>'yes',
                     'button_switcher' => 'yes',
                 ],
                 'description' => esc_html__('Choose whether the link applies to the entire card or only the button.', 'element-camp'),
@@ -202,6 +250,39 @@ class ElementCamp_Services_Slider extends Widget_Base
                 'default' => esc_html__('Business Strategy Development', 'element-camp'),
                 'description' => esc_html__( 'You can use <span></span> and <small></small> to set different style', 'element-camp' ),
                 'type' => Controls_Manager::TEXTAREA,
+            ]
+        );
+
+        $slides_repeater->add_control(
+            'title_link_switcher',
+            [
+                'label' => esc_html__('Title Link', 'element-camp'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('Yes', 'element-camp'),
+                'label_off' => esc_html__('No', 'element-camp'),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'condition' => [
+                    'card_link_switcher!' => 'yes',
+                ],
+            ]
+        );
+
+        $slides_repeater->add_control(
+            'title_link',
+            [
+                'label' => esc_html__('Title Link', 'element-camp'),
+                'type' => Controls_Manager::URL,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'default' => [
+                    'url' => '',
+                ],
+                'condition' => [
+                    'title_link_switcher' => 'yes',
+                    'card_link_switcher!' => 'yes',
+                ],
             ]
         );
 
@@ -222,6 +303,41 @@ class ElementCamp_Services_Slider extends Widget_Base
                 'default' => esc_html__('Add Text Here.', 'element-camp'),
                 'type' => Controls_Manager::TEXTAREA,
                 'condition' => ['description_switcher'=>'yes'],
+            ]
+        );
+
+        $slides_repeater->add_control(
+            'description_link_switcher',
+            [
+                'label' => esc_html__('Description Link', 'element-camp'),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('Yes', 'element-camp'),
+                'label_off' => esc_html__('No', 'element-camp'),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'condition' => [
+                    'description_switcher' => 'yes',
+                    'card_link_switcher!' => 'yes',
+                ],
+            ]
+        );
+
+        $slides_repeater->add_control(
+            'description_link',
+            [
+                'label' => esc_html__('Description Link', 'element-camp'),
+                'type' => Controls_Manager::URL,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'default' => [
+                    'url' => '',
+                ],
+                'condition' => [
+                    'description_switcher' => 'yes',
+                    'description_link_switcher' => 'yes',
+                    'card_link_switcher!' => 'yes',
+                ],
             ]
         );
 
@@ -264,6 +380,24 @@ class ElementCamp_Services_Slider extends Widget_Base
         );
 
         $slides_repeater->add_control(
+            'button_link',
+            [
+                'label' => esc_html__('Button Link', 'element-camp'),
+                'type' => Controls_Manager::URL,
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'default' => [
+                    'url' => '',
+                ],
+                'condition' => [
+                    'button_switcher' => 'yes',
+                    'card_link_switcher!' => 'yes',
+                ],
+            ]
+        );
+
+        $slides_repeater->add_control(
             'selected_icon',
             [
                 'label' => esc_html__('Icon', 'element-camp'),
@@ -288,6 +422,136 @@ class ElementCamp_Services_Slider extends Widget_Base
                 'condition' => [
                     'selected_icon[value]!' => '',
                 ],
+            ]
+        );
+
+        $slides_repeater->add_control(
+            'social_icons_switcher',
+            [
+                'label' => esc_html__( 'Social Icons', 'element-camp' ),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'element-camp' ),
+                'label_off' => esc_html__( 'No', 'element-camp' ),
+                'separator' => 'before',
+            ]
+        );
+
+        $slides_repeater->add_control(
+            'social_icons_position',
+            [
+                'label' => esc_html__('Position', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'outside-info' => esc_html__('Outside Info', 'element-camp'),
+                    'inside-info' => esc_html__('Inside Info', 'element-camp'),
+                ],
+                'default' => 'outside-info',
+                'condition' => ['social_icons_switcher' => 'yes'],
+            ]
+        );
+
+        $slides_repeater->add_control(
+            'social_icons_list',
+            [
+                'label' => esc_html__('Social Icons', 'element-camp'),
+                'type' => \Elementor\Controls_Manager::REPEATER,
+                'fields' => [
+                    [
+                        'name' => 'social_icon',
+                        'label' => esc_html__('Icon', 'element-camp'),
+                        'type' => Controls_Manager::ICONS,
+                        'fa4compatibility' => 'social',
+                        'default' => [
+                            'value' => 'fab fa-facebook',
+                            'library' => 'fa-brands',
+                        ],
+                        'recommended' => [
+                            'fa-brands' => [
+                                'android',
+                                'apple',
+                                'behance',
+                                'bitbucket',
+                                'codepen',
+                                'delicious',
+                                'deviantart',
+                                'digg',
+                                'dribbble',
+                                'elementor',
+                                'facebook',
+                                'flickr',
+                                'foursquare',
+                                'free-code-camp',
+                                'github',
+                                'gitlab',
+                                'globe',
+                                'houzz',
+                                'instagram',
+                                'jsfiddle',
+                                'linkedin',
+                                'medium',
+                                'meetup',
+                                'mix',
+                                'mixcloud',
+                                'odnoklassniki',
+                                'pinterest',
+                                'product-hunt',
+                                'reddit',
+                                'shopping-cart',
+                                'skype',
+                                'slideshare',
+                                'snapchat',
+                                'soundcloud',
+                                'spotify',
+                                'stack-overflow',
+                                'steam',
+                                'telegram',
+                                'thumb-tack',
+                                'tripadvisor',
+                                'tumblr',
+                                'twitch',
+                                'twitter',
+                                'viber',
+                                'vimeo',
+                                'vk',
+                                'weibo',
+                                'weixin',
+                                'whatsapp',
+                                'wordpress',
+                                'xing',
+                                'yelp',
+                                'youtube',
+                                '500px',
+                            ],
+                            'fa-solid' => [
+                                'envelope',
+                                'link',
+                                'rss',
+                            ],
+                        ],
+                    ],
+                    [
+                        'name' => 'social_link',
+                        'label' => esc_html__('Link', 'element-camp'),
+                        'type' => Controls_Manager::URL,
+                        'default' => [
+                            'is_external' => 'true',
+                        ],
+                        'dynamic' => [
+                            'active' => true,
+                        ],
+                        'placeholder' => esc_html__('https://your-link.com', 'element-camp'),
+                    ],
+                ],
+                'default' => [
+                    [
+                        'social_icon' => [
+                            'value' => 'fab fa-facebook',
+                            'library' => 'fa-brands',
+                        ],
+                    ],
+                ],
+                'title_field' => '<# var migrated = "undefined" !== typeof __fa4_migrated, social = ( "undefined" === typeof social ) ? false : social; #>{{{ elementor.helpers.getSocialNetworkNameFromIcon( social_icon, social, true, migrated, true ) }}}',
+                'condition' => ['social_icons_switcher' => 'yes'],
             ]
         );
 
@@ -655,13 +919,13 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_control(
             'enable_nth_slides',
             [
-                'label' => esc_html__('Enable Nth Slide Classes', 'themescamp-plugin'),
+                'label' => esc_html__('Enable Nth Slide Classes', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('On', 'themescamp-plugin'),
-                'label_off' => esc_html__('Off', 'themescamp-plugin'),
+                'label_on' => esc_html__('On', 'element-camp'),
+                'label_off' => esc_html__('Off', 'element-camp'),
                 'return_value' => 'true',
                 'default' => 'false',
-                'description' => esc_html__('Enable nth-prev-2 and nth-next-2 slide classes for advanced styling', 'themescamp-plugin'),
+                'description' => esc_html__('Enable nth-prev-2 and nth-next-2 slide classes for advanced styling', 'element-camp'),
             ]
         );
         $this->end_controls_section();
@@ -986,7 +1250,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->start_controls_section(
             'section_slides_nth_content_style',
             [
-                'label' => __('Nth Slides Style', 'themescamp-plugin'),
+                'label' => __('Nth Slides Style', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'condition' => [
                     'enable_nth_slides' => 'true',
@@ -998,8 +1262,8 @@ class ElementCamp_Services_Slider extends Widget_Base
             [
                 'type' => \Elementor\Controls_Manager::ALERT,
                 'alert_type' => 'info',
-                'heading' => esc_html__('Nth Slides Info', 'themescamp-core'),
-                'content' => esc_html__('These controls apply to slides that are 2 or 3 positions away from the active slide (nth-prev-2, nth-next-2, nth-prev-3, nth-next-3).', 'themescamp-core'),
+                'heading' => esc_html__('Nth Slides Info', 'element-camp'),
+                'content' => esc_html__('These controls apply to slides that are 2 or 3 positions away from the active slide (nth-prev-2, nth-next-2, nth-prev-3, nth-next-3).', 'element-camp'),
             ]
         );
         $this->add_control(
@@ -1016,7 +1280,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->start_controls_tab(
             'style_nth_slides_swiper_slide_image_height_prev_2_tab',
             [
-                'label' => esc_html__('Nth Prev 2', 'themescamp-plugin'),
+                'label' => esc_html__('Nth Prev 2', 'element-camp'),
             ]
         );
         $this->add_responsive_control(
@@ -1041,7 +1305,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->start_controls_tab(
             'style_nth_slides_swiper_slide_image_height_next_2_tab',
             [
-                'label' => esc_html__('Nth Next 2', 'themescamp-plugin'),
+                'label' => esc_html__('Nth Next 2', 'element-camp'),
             ]
         );
         $this->add_responsive_control(
@@ -1066,7 +1330,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->start_controls_tab(
             'style_nth_slides_swiper_slide_image_height_prev_3_tab',
             [
-                'label' => esc_html__('Nth Prev 3', 'themescamp-plugin'),
+                'label' => esc_html__('Nth Prev 3', 'element-camp'),
             ]
         );
         $this->add_responsive_control(
@@ -1093,7 +1357,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->start_controls_tab(
             'style_nth_slides_swiper_slide_next_3_tab',
             [
-                'label' => esc_html__('Nth Next 3', 'themescamp-plugin'),
+                'label' => esc_html__('Nth Next 3', 'element-camp'),
             ]
         );
 
@@ -1777,10 +2041,10 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_control(
             'card_transform_options',
             [
-                'label' => esc_html__('Card Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Card Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
         $this->start_popover();
@@ -1985,10 +2249,10 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_control(
             'active_card_transform_options',
             [
-                'label' => esc_html__('Card Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Card Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
         $this->start_popover();
@@ -2186,10 +2450,10 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_control(
             'prev_next_card_transform_options',
             [
-                'label' => esc_html__('Card Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Card Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
         $this->start_popover();
@@ -2374,10 +2638,10 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_control(
             'prev_card_transform_options',
             [
-                'label' => esc_html__('Card Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Card Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
 
@@ -2558,10 +2822,10 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_control(
             'next_card_transform_options',
             [
-                'label' => esc_html__('Card Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Card Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
 
@@ -3043,10 +3307,10 @@ class ElementCamp_Services_Slider extends Widget_Base
             [
                 'name' => 'card_overlay_bg',
                 'selector' => '{{WRAPPER}} .tcgelements-services-slider .card::after',
-                'types' => [ 'classic', 'gradient', 'tcg_gradient' ],
+                'types' => [ 'classic', 'gradient', 'tcg_gradient', 'tcg_gradient_4' ],
             ]
         );
-        $this->add_control(
+        $this->add_responsive_control(
             'card_overlay_opacity',
             [
                 'label' => esc_html__( 'Opacity', 'element-camp' ),
@@ -3063,6 +3327,28 @@ class ElementCamp_Services_Slider extends Widget_Base
                 ],
             ]
         );
+        $this->add_control(
+            'card_overlay_transform_options',
+            [
+                'label' => esc_html__('Overlay Transform', 'element-camp'),
+                'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
+            ]
+        );
+        $this->start_popover();
+        $this->add_responsive_control(
+            'card_overlay_scale',
+            [
+                'label' => esc_html__('Scale', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'custom'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .card::after' => '--e-transform-tcgelements-services-slider-card-overlay-scale: {{SIZE}}',
+                ],
+            ]
+        );
+        $this->end_popover();
         $this->end_controls_tab();
 
         $this->start_controls_tab(
@@ -3140,6 +3426,28 @@ class ElementCamp_Services_Slider extends Widget_Base
                 ],
             ]
         );
+        $this->add_control(
+            'card_overlay_transform_options_hover',
+            [
+                'label' => esc_html__('Overlay Transform', 'element-camp'),
+                'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
+            ]
+        );
+        $this->start_popover();
+        $this->add_responsive_control(
+            'card_overlay_scale_hover',
+            [
+                'label' => esc_html__('Scale', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%', 'custom'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .card:hover::after' => '--e-transform-tcgelements-services-slider-card-overlay-scale: {{SIZE}}',
+                ],
+            ]
+        );
+        $this->end_popover();
         $this->end_controls_tab();
 
         $this->end_controls_tabs();
@@ -4705,7 +5013,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->start_controls_tabs(
             'after_title_tabs',
         );
-        
+
         $this->start_controls_tab(
             'after_title_normal_tab',
             [
@@ -4721,7 +5029,7 @@ class ElementCamp_Services_Slider extends Widget_Base
             ]
         );
         $this->end_controls_tab();
-        
+
         $this->start_controls_tab(
             'after_title_hover_tab',
             [
@@ -6247,6 +6555,33 @@ class ElementCamp_Services_Slider extends Widget_Base
             ]
         );
         $this->add_control(
+            'image_blur_method',
+            [
+                'label' => esc_html__('Blur Method', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'backdrop-filter' => 'backdrop-filter',
+                    'filter' => 'filter',
+                ],
+                'default' => 'backdrop-filter',
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .card .icon img' => '{{VALUE}}: blur({{image_blur_value.SIZE}}px);',
+                ],
+            ]
+        );
+        $this->add_control(
+            'image_blur_value',
+            [
+                'label' => esc_html__('Blur', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 250,
+                    ],
+                ],
+            ]
+        );
+        $this->add_control(
             'custom_css_filter',
             [
                 'label' => esc_html__('Custom CSS Filter', 'element-camp'),
@@ -6461,6 +6796,33 @@ class ElementCamp_Services_Slider extends Widget_Base
             [
                 'name' => 'image_css_filters_hover',
                 'selector' => '{{WRAPPER}} .tcgelements-services-slider .card:hover .icon img',
+            ]
+        );
+        $this->add_control(
+            'card_hover_image_blur_method',
+            [
+                'label' => esc_html__('Blur Method', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'options' => [
+                    'backdrop-filter' => 'backdrop-filter',
+                    'filter' => 'filter',
+                ],
+                'default' => 'backdrop-filter',
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .card:hover .icon img' => '{{VALUE}}: blur({{card_hover_image_blur_value.SIZE}}px);',
+                ],
+            ]
+        );
+        $this->add_control(
+            'card_hover_image_blur_value',
+            [
+                'label' => esc_html__('Blur', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 250,
+                    ],
+                ],
             ]
         );
         $this->add_control(
@@ -7301,6 +7663,14 @@ class ElementCamp_Services_Slider extends Widget_Base
                 ],
             ]
         );
+        $this->start_controls_tabs('tabs_button_style');
+
+        $this->start_controls_tab(
+            'tab_button_normal',
+            [
+                'label' => esc_html__('Normal', 'element-camp'),
+            ]
+        );
         $this->add_group_control(
             Group_Control_Typography::get_type(),
             [
@@ -7308,15 +7678,7 @@ class ElementCamp_Services_Slider extends Widget_Base
                 'global' => [
                     'default' => Global_Typography::TYPOGRAPHY_ACCENT,
                 ],
-                'selector' => '{{WRAPPER}} .tcgelements-services-slider .card .butn',
-            ]
-        );
-        $this->start_controls_tabs('tabs_button_style');
-
-        $this->start_controls_tab(
-            'tab_button_normal',
-            [
-                'label' => esc_html__('Normal', 'element-camp'),
+                'selector' => '{{WRAPPER}} .tcgelements-services-slider .card .butn,{{WRAPPER}} .tcgelements-services-slider .card .butn .text',
             ]
         );
         $this->add_control(
@@ -7577,6 +7939,16 @@ class ElementCamp_Services_Slider extends Widget_Base
                 'label' => esc_html__('Card Hover', 'element-camp'),
             ]
         );
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'butn_typography_card_hover',
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+                ],
+                'selector' => '{{WRAPPER}} .tcgelements-services-slider .card:hover .butn,,{{WRAPPER}} .tcgelements-services-slider .card:hover .butn .text',
+            ]
+        );
         $this->add_control(
             'button_display_hover',
             [
@@ -7831,6 +8203,16 @@ class ElementCamp_Services_Slider extends Widget_Base
             'tab_button_btn_hover',
             [
                 'label' => esc_html__('Button Hover', 'element-camp'),
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'butn_typography_button_hover',
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_ACCENT,
+                ],
+                'selector' => '{{WRAPPER}} .tcgelements-services-slider .card .butn:hover,{{WRAPPER}} .tcgelements-services-slider .card .butn:hover .text',
             ]
         );
         $this->add_control(
@@ -8480,13 +8862,351 @@ class ElementCamp_Services_Slider extends Widget_Base
         );
         $this->end_controls_section();
 
+        $this->start_controls_section(
+            'social_icons_style',
+            [
+                'label' => esc_html__('Social Icons Style', 'element-camp'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->add_control(
+            'social_icons_wrapper_heading',
+            [
+                'label' => esc_html__('Wrapper Heading', 'element-camp'),
+                'type' => \Elementor\Controls_Manager::HEADING,
+            ]
+        );
+
+        $this->add_responsive_control(
+            'social_icons_wrapper_width',
+            [
+                'label' => esc_html__( 'Wrapper Width', 'element-camp' ),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'unit' => 'px',
+                ],
+                'tablet_default' => [
+                    'unit' => 'px',
+                ],
+                'mobile_default' => [
+                    'unit' => 'px',
+                ],
+                'size_units' => [ 'px', 'vh', '%', 'vw', 'rem', 'custom'],
+                'range' => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 500,
+                    ],
+                    'vh' => [
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                    '%' => [
+                        'min' => 1,
+                        'max' => 200,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'social_icons_wrapper_display',
+            [
+                'label' => esc_html__('Wrapper Display', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'inline-flex',
+                'options' => [
+                    'block' => esc_html__('Block', 'element-camp'),
+                    'inline-block' => esc_html__('Inline Block', 'element-camp'),
+                    'flex' => esc_html__('Flex', 'element-camp'),
+                    'inline-flex' => esc_html__('Inline Flex', 'element-camp'),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons' => 'display: {{VALUE}};'
+                ]
+            ]
+        );
+        $this->add_responsive_control(
+            'social_icons_wrapper_justify_content',
+            [
+                'label' => esc_html__( 'Justify Content', 'element-camp' ),
+                'type' => Controls_Manager::CHOOSE,
+                'label_block' => true,
+                'default' => '',
+                'options' => [
+                    'flex-start' => [
+                        'title' => esc_html__( 'Start','element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-start-h',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-center-h',
+                    ],
+                    'flex-end' => [
+                        'title' => esc_html__( 'End', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-end-h',
+                    ],
+                    'space-between' => [
+                        'title' => esc_html__( 'Space Between', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-space-between-h',
+                    ],
+                    'space-around' => [
+                        'title' => esc_html__( 'Space Around', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-space-around-h',
+                    ],
+                    'space-evenly' => [
+                        'title' => esc_html__( 'Space Evenly', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-justify-space-evenly-h',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons' => 'justify-content: {{VALUE}};',
+                ],
+                'condition'=>['social_icons_wrapper_display'=> ['flex','inline-flex']],
+                'responsive' => true,
+            ]);
+        $this->add_responsive_control(
+            'social_icons_wrapper_align_items',
+            [
+                'label' => esc_html__( 'Align Items', 'element-camp' ),
+                'type' => Controls_Manager::CHOOSE,
+                'default' => '',
+                'options' => [
+                    'flex-start' => [
+                        'title' => esc_html__( 'Start', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-align-start-v',
+                    ],
+                    'center' => [
+                        'title' => esc_html__( 'Center', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-align-center-v',
+                    ],
+                    'flex-end' => [
+                        'title' => esc_html__( 'End', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-align-end-v',
+                    ],
+                    'stretch' => [
+                        'title' => esc_html__( 'Stretch', 'element-camp' ),
+                        'icon' => 'eicon-flex eicon-align-stretch-v',
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons' => 'align-items: {{VALUE}};',
+                ],
+                'condition'=>['social_icons_wrapper_display'=> ['flex','inline-flex']],
+                'responsive' => true,
+            ]
+        );
+        $this->add_responsive_control(
+            'social_icons_wrapper_gap',
+            [
+                'label' => esc_html__('Wrapper Gap', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', 'rem'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 100,
+                    ],
+                ],
+                'condition' => ['social_icons_wrapper_display' => ['flex','inline-flex']],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons' => 'gap: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'social_icons_wrapper_padding',
+            [
+                'label' => esc_html__('Wrapper Padding', 'element-camp'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em', 'rem'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'social_icons_wrapper_margin',
+            [
+                'label' => esc_html__('Wrapper Margin', 'element-camp'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em', 'rem'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+                'separator' => 'after',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'social_icon_size',
+            [
+                'label' => esc_html__('Icon Size', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', 'em', 'rem'],
+                'range' => [
+                    'px' => [
+                        'min' => 10,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons a i' => 'font-size: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons a svg' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'social_icon_padding',
+            [
+                'label' => esc_html__('Padding', 'element-camp'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%', 'em', 'rem'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons a' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->start_controls_tabs('social_icons_tabs');
+
+        $this->start_controls_tab(
+            'social_icons_normal',
+            [
+                'label' => esc_html__('Normal', 'element-camp'),
+            ]
+        );
+
+        $this->add_control(
+            'social_icon_color',
+            [
+                'label' => esc_html__('Icon Color', 'element-camp'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons a svg' => 'fill: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'social_icon_background',
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .tcgelements-services-slider .social-icons a',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'social_icon_border',
+                'selector' => '{{WRAPPER}} .tcgelements-services-slider .social-icons a',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'social_icon_border_radius',
+            [
+                'label' => esc_html__('Border Radius', 'element-camp'),
+                'type' => Controls_Manager::DIMENSIONS,
+                'size_units' => ['px', '%'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+
+        $this->start_controls_tab(
+            'social_icons_hover',
+            [
+                'label' => esc_html__('Hover', 'element-camp'),
+            ]
+        );
+
+        $this->add_control(
+            'social_icon_color_hover',
+            [
+                'label' => esc_html__('Icon Color', 'element-camp'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons a:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tcgelements-services-slider .social-icons a:hover svg' => 'fill: {{VALUE}};',
+                ],
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'social_icon_background_hover',
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .tcgelements-services-slider .social-icons a:hover',
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'social_icon_border_hover',
+                'selector' => '{{WRAPPER}} .tcgelements-services-slider .social-icons a:hover',
+            ]
+        );
+
+        $this->end_controls_tab();
 
 
+        $this->start_controls_tab(
+            'social_icons_card_hover',
+            [
+                'label' => esc_html__('Card Hover', 'element-camp'),
+            ]
+        );
 
+        $this->add_control(
+            'social_icon_color_card_hover',
+            [
+                'label' => esc_html__('Icon Color', 'element-camp'),
+                'type' => Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-services-slider .card:hover .social-icons a' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .tcgelements-services-slider .card:hover .social-icons a svg' => 'fill: {{VALUE}};',
+                ],
+            ]
+        );
 
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'social_icon_background_card_hover',
+                'types' => ['classic', 'gradient'],
+                'selector' => '{{WRAPPER}} .tcgelements-services-slider .card:hover .social-icons a',
+            ]
+        );
 
+        $this->add_group_control(
+            Group_Control_Border::get_type(),
+            [
+                'name' => 'social_icon_border_card_hover',
+                'selector' => '{{WRAPPER}} .tcgelements-services-slider .card:hover .social-icons a',
+            ]
+        );
 
-//        end
+        $this->end_controls_tab();
+
+        $this->end_controls_tabs();
+
+        $this->end_controls_section();
         $this->start_controls_section(
             'section_arrows_style',
             [
@@ -9205,7 +9925,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $start = is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
         $end = !is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
 
-        $this->add_control(
+        $this->add_responsive_control(
             'next_arrow_offset_orientation_h',
             [
                 'label' => esc_html__('Horizontal Orientation', 'element-camp'),
@@ -9689,7 +10409,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $start = is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
         $end = !is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
 
-        $this->add_control(
+        $this->add_responsive_control(
             'prev_arrow_offset_orientation_h',
             [
                 'label' => esc_html__('Horizontal Orientation', 'element-camp'),
@@ -11160,7 +11880,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_control(
             'fraction_fraction_pagination_position',
             [
-                'label' => esc_html__( 'Fraction Position', 'themescamp-elements' ),
+                'label' => esc_html__( 'Fraction Position', 'element-camp' ),
                 'type' => \Elementor\Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -11169,7 +11889,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_responsive_control(
             'section_pagination_fraction_fraction_width',
             [
-                'label' => esc_html__( 'Pagination Fraction Width', 'themescamp-elements' ),
+                'label' => esc_html__( 'Pagination Fraction Width', 'element-camp' ),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'em', 'rem', 'custom'],
                 'range' => [
@@ -11188,7 +11908,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_control(
             'pagination_fraction_fraction_offset_orientation_h',
             [
-                'label' => esc_html__('Horizontal Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Horizontal Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
@@ -11210,7 +11930,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_responsive_control(
             'pagination_fraction_fraction_offset_x',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -11245,7 +11965,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_responsive_control(
             'pagination_fraction_fraction_offset_x_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -11280,17 +12000,17 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_control(
             'pagination_fraction_fraction_offset_orientation_v',
             [
-                'label' => esc_html__('Vertical Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Vertical Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
                 'options' => [
                     'start' => [
-                        'title' => esc_html__('Top', 'themescamp-plugin'),
+                        'title' => esc_html__('Top', 'element-camp'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'end' => [
-                        'title' => esc_html__('Bottom', 'themescamp-plugin'),
+                        'title' => esc_html__('Bottom', 'element-camp'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                 ],
@@ -11301,7 +12021,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_responsive_control(
             'pagination_fraction_fraction_offset_y',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -11335,7 +12055,7 @@ class ElementCamp_Services_Slider extends Widget_Base
         $this->add_responsive_control(
             'pagination_fraction_fraction_offset_y_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -12436,96 +13156,217 @@ class ElementCamp_Services_Slider extends Widget_Base
 
         ?>
 
-    <div id="<?php echo esc_attr($max_slider_id) ?>" class="tcgelements-services-slider" data-tcgelements-services-slider='<?php echo esc_attr(json_encode($slider_settings)); ?>' <?php if($settings['effect']=='gl'):?> data-shader-option="<?=$settings['shader_picker']?>" <?php endif;?>>
+    <div id="<?php echo esc_attr($max_slider_id) ?>" class="tcgelements-services-slider" data-tcgelements-services-slider='<?php echo esc_attr(json_encode($slider_settings)); ?>' <?php if($settings['effect']=='gl'):?> data-shader-option="<?php echo esc_attr($settings['shader_picker'])?>" <?php endif;?>>
     <div class="swiper-container <?php if ($settings['effect'] == 'parallax') echo esc_attr('tcg-dynamic-parallax-slider'); ?>">
         <div class="swiper-wrapper">
         <?php foreach ($settings['tcg_dynamic_slides_repeater'] as $index => $slide) : ?>
         <?php
         $element_class = 'card';
-        $link_url = $slide['link']['url'];
-        $is_external = $slide['link']['is_external'] ? 'target="_blank"' : '';
-        $nofollow = $slide['link']['nofollow'] ? 'rel="nofollow"' : '';
+
+        // Get link settings with backward compatibility
+        $link_url = isset($slide['link']['url']) ? $slide['link']['url'] : '';
+        $is_external = isset($slide['link']['is_external']) && $slide['link']['is_external'] ? 'target="_blank"' : '';
+        $nofollow = isset($slide['link']['nofollow']) && $slide['link']['nofollow'] ? 'rel="nofollow"' : '';
+
+        // Check individual link settings (with backward compatibility)
+        $has_card_link = !empty($link_url) && (!isset($slide['card_link_switcher']) || $slide['card_link_switcher'] === 'yes');
+
+        // Image link settings
+        $image_link_url = isset($slide['image_link']['url']) ? $slide['image_link']['url'] : '';
+        $image_is_external = isset($slide['image_link']['is_external']) && $slide['image_link']['is_external'] ? 'target="_blank"' : '';
+        $image_nofollow = isset($slide['image_link']['nofollow']) && $slide['image_link']['nofollow'] ? 'rel="nofollow"' : '';
+        $has_image_link = !empty($image_link_url) && isset($slide['image_link_switcher']) && $slide['image_link_switcher'] === 'yes';
+
+        // Title link settings
+        $title_link_url = isset($slide['title_link']['url']) ? $slide['title_link']['url'] : '';
+        $title_is_external = isset($slide['title_link']['is_external']) && $slide['title_link']['is_external'] ? 'target="_blank"' : '';
+        $title_nofollow = isset($slide['title_link']['nofollow']) && $slide['title_link']['nofollow'] ? 'rel="nofollow"' : '';
+        $has_title_link = !empty($title_link_url) && isset($slide['title_link_switcher']) && $slide['title_link_switcher'] === 'yes';
+
+        // Description link settings
+        $description_link_url = isset($slide['description_link']['url']) ? $slide['description_link']['url'] : '';
+        $description_is_external = isset($slide['description_link']['is_external']) && $slide['description_link']['is_external'] ? 'target="_blank"' : '';
+        $description_nofollow = isset($slide['description_link']['nofollow']) && $slide['description_link']['nofollow'] ? 'rel="nofollow"' : '';
+        $has_description_link = !empty($description_link_url) && isset($slide['description_link_switcher']) && $slide['description_link_switcher'] === 'yes';
 
         // Determine link placement
         $link_placement = !empty($slide['link_placement']) ? $slide['link_placement'] : 'card';
 
-        // Set tag based on link placement
-        $card_tag = (!empty($link_url) && $link_placement === 'card') ? 'a' : 'div';
-        $card_href = (!empty($link_url) && $link_placement === 'card') ? 'href="' . esc_url($link_url) . '"' : '';
+        // Set card tag based on link placement
+        $card_tag = ($has_card_link && $link_placement === 'card') ? 'a' : 'div';
+        $card_href = ($has_card_link && $link_placement === 'card') ? 'href="' . esc_url($link_url) . '"' : '';
 
-        $button_tag = (!empty($link_url) && $link_placement === 'button') ? 'a' : 'div';
-        $button_href = (!empty($link_url) && $link_placement === 'button') ? 'href="' . esc_url($link_url) . '"' : '';
+        // Button link: use card link (if placement=button) OR dedicated button_link when card link is off
+        $button_link_url = '';
+        $button_is_external = '';
+        $button_nofollow = '';
+
+        if (!empty($link_url) && $link_placement === 'button') {
+            // Card link scoped to button only
+            $button_link_url = $link_url;
+            $button_is_external = $is_external;
+            $button_nofollow = $nofollow;
+        } elseif (!$has_card_link && !empty($slide['button_link']['url'])) {
+            // Dedicated button link (only available when card link is off)
+            $button_link_url = $slide['button_link']['url'];
+            $button_is_external = isset($slide['button_link']['is_external']) && $slide['button_link']['is_external'] ? 'target="_blank"' : '';
+            $button_nofollow = isset($slide['button_link']['nofollow']) && $slide['button_link']['nofollow'] ? 'rel="nofollow"' : '';
+        }
+
+        $button_tag = !empty($button_link_url) ? 'a' : 'div';
+        $button_href = !empty($button_link_url) ? 'href="' . esc_url($button_link_url) . '"' : '';
+
+        // Check switchers with backward compatibility
+        $show_image = !isset($slide['image_switcher']) || $slide['image_switcher'] === 'yes';
+        $show_title = !isset($slide['title_switcher']) || $slide['title_switcher'] === 'yes';
+        $show_description = isset($slide['description_switcher']) && $slide['description_switcher'] === 'yes';
+        $show_button = isset($slide['button_switcher']) && $slide['button_switcher'] === 'yes';
+        $show_social = isset($slide['social_icons_switcher']) && $slide['social_icons_switcher'] === 'yes';
         ?>
         <div class="swiper-slide">
-            <<?= $card_tag ?> class="<?= esc_attr($element_class) ?>" <?= $card_href ?> <?= $is_external ?>>
-            <?php if (!empty($slide['service_image']['url'])) : ?>
-                <div class="icon">
-                    <img <?php if ($settings['effect']=='gl') :?> class="swiper-gl-image" <?php endif;?> src="<?= esc_url($slide['service_image']['url']); ?>" alt="<?php if (!empty($slide['service_image']['alt'])) echo esc_attr($slide['service_image']['alt']); ?>" >
-                </div>
-            <?php endif;?>
-            <div class="inf">
-                <?php if ($settings['title_split_text_animation'] === 'yes') : ?>
-                    <div class="tcg-split-text-animation">
-                        <div class="title">
-                            <?= __($slide['title'],'element-camp'); ?>
-                        </div>
-                    </div>
+            <<?php echo wp_kses_post($card_tag) ?> class="<?php echo esc_attr($element_class) ?>" <?php echo wp_kses_post($card_href) ?> <?php echo wp_kses_post($is_external) ?> <?php echo wp_kses_post($nofollow) ?>>
+
+            <?php if ($show_image && !empty($slide['service_image']['url'])) : ?>
+                <?php if ($has_image_link && !$has_card_link) : ?>
+                    <a href="<?php echo esc_url($image_link_url) ?>" <?php echo wp_kses_post($image_is_external) ?> <?php echo wp_kses_post($image_nofollow) ?> class="icon">
+                        <img <?php if ($settings['effect']=='gl') :?> class="swiper-gl-image" <?php endif;?> src="<?php echo esc_url($slide['service_image']['url']); ?>" alt="<?php if (!empty($slide['service_image']['alt'])) echo esc_attr($slide['service_image']['alt']); ?>" >
+                    </a>
                 <?php else : ?>
-                    <div class="title">
-                        <?= __($slide['title'],'element-camp'); ?>
+                    <div class="icon">
+                        <img <?php if ($settings['effect']=='gl') :?> class="swiper-gl-image" <?php endif;?> src="<?php echo esc_url($slide['service_image']['url']); ?>" alt="<?php if (!empty($slide['service_image']['alt'])) echo esc_attr($slide['service_image']['alt']); ?>" >
                     </div>
                 <?php endif; ?>
+            <?php endif;?>
 
-                <?php if ($slide['description_switcher']=='yes') : ?>
-                    <?php if ($settings['description_split_text_animation'] === 'yes') : ?>
-                        <div class="tcg-split-text-animation">
-                            <p class="description">
-                                <?=$slide['description']?>
-                            </p>
-                        </div>
+            <div class="inf">
+                <?php if ($show_title && !empty($slide['title'])) : ?>
+                    <?php if ($has_title_link && !$has_card_link) : ?>
+                        <a href="<?php echo esc_url($title_link_url) ?>" <?php echo wp_kses_post($title_is_external) ?> <?php echo wp_kses_post($title_nofollow) ?>>
+                            <?php if ($settings['title_split_text_animation'] === 'yes') : ?>
+                                <div class="tcg-split-text-animation">
+                                    <div class="title">
+                                        <?php echo wp_kses_post($slide['title']); ?>
+                                    </div>
+                                </div>
+                            <?php else : ?>
+                                <div class="title">
+                                    <?php echo wp_kses_post($slide['title']); ?>
+                                </div>
+                            <?php endif; ?>
+                        </a>
                     <?php else : ?>
-                        <p class="description">
-                            <?=$slide['description']?>
-                        </p>
+                        <?php if ($settings['title_split_text_animation'] === 'yes') : ?>
+                            <div class="tcg-split-text-animation">
+                                <div class="title">
+                                    <?php echo wp_kses_post($slide['title']); ?>
+                                </div>
+                            </div>
+                        <?php else : ?>
+                            <div class="title">
+                                <?php echo wp_kses_post($slide['title']); ?>
+                            </div>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                <?php endif; ?>
+
+                <?php if ($show_description && !empty($slide['description'])) : ?>
+                    <?php if ($has_description_link && !$has_card_link) : ?>
+                        <a href="<?php echo esc_url($description_link_url) ?>" <?php echo wp_kses_post($description_is_external) ?> <?php echo wp_kses_post($description_nofollow) ?>>
+                            <?php if ($settings['description_split_text_animation'] === 'yes') : ?>
+                                <div class="tcg-split-text-animation">
+                                    <p class="description">
+                                        <?php echo wp_kses_post($slide['description']) ?>
+                                    </p>
+                                </div>
+                            <?php else : ?>
+                                <p class="description">
+                                    <?php echo wp_kses_post($slide['description']) ?>
+                                </p>
+                            <?php endif; ?>
+                        </a>
+                    <?php else : ?>
+                        <?php if ($settings['description_split_text_animation'] === 'yes') : ?>
+                            <div class="tcg-split-text-animation">
+                                <p class="description">
+                                    <?php echo wp_kses_post($slide['description']) ?>
+                                </p>
+                            </div>
+                        <?php else : ?>
+                            <p class="description">
+                                <?php echo wp_kses_post($slide['description']) ?>
+                            </p>
+                        <?php endif; ?>
                     <?php endif; ?>
                 <?php endif;?>
 
-                <?php if ($slide['button_switcher'] ==='yes' && $slide['btn_position']==='inside-info') : ?>
-                <<?= $button_tag ?> class="butn" <?= $button_href ?> <?= $is_external ?> <?= $nofollow ?>>
+                <?php if ($show_button && $slide['btn_position']==='inside-info') : ?>
+                <<?php echo wp_kses_post($button_tag) ?> class="butn" <?php echo wp_kses_post($button_href) ?> <?php echo wp_kses_post($button_is_external) ?> <?php echo wp_kses_post($button_nofollow) ?>>
                 <?php if (!empty($slide['selected_icon']['value']) and ($slide['icon_align'] == 'left')) : ?>
                     <span class="butn-icon">
-                                        <?php Icons_Manager::render_icon($slide['selected_icon'], ['aria-hidden' => 'true']);?>
-                                    </span>
+                            <?php Icons_Manager::render_icon($slide['selected_icon'], ['aria-hidden' => 'true']);?>
+                        </span>
                 <?php endif; ?>
                 <span class="text">
-                                    <?= $slide['btn_text']; ?>
-                                </span>
+                        <?php echo wp_kses_post($slide['btn_text']) ?>
+                    </span>
                 <?php if (!empty($slide['selected_icon']['value'])  and ($slide['icon_align'] == 'right')) : ?>
                     <span class="butn-icon">
-                                        <?php Icons_Manager::render_icon($slide['selected_icon'], ['aria-hidden' => 'true']);?>
-                                    </span>
+                            <?php Icons_Manager::render_icon($slide['selected_icon'], ['aria-hidden' => 'true']);?>
+                        </span>
                 <?php endif; ?>
-            </<?= $button_tag ?>>
+            </<?php echo wp_kses_post($button_tag) ?>>
         <?php endif;?>
+
+            <?php if ($show_social && isset($slide['social_icons_list']) && $slide['social_icons_position'] === 'inside-info') : ?>
+                <div class="social-icons">
+                    <?php foreach ($slide['social_icons_list'] as $social_icon) : ?>
+                        <?php
+                        $social_link = isset($social_icon['social_link']['url']) ? $social_icon['social_link']['url'] : '#';
+                        $social_target = isset($social_icon['social_link']['is_external']) && $social_icon['social_link']['is_external'] ? 'target="_blank"' : '';
+                        $social_nofollow = isset($social_icon['social_link']['nofollow']) && $social_icon['social_link']['nofollow'] ? 'rel="nofollow"' : '';
+                        ?>
+                        <a href="<?php echo esc_url($social_link) ?>" <?php echo wp_kses_post($social_target) ?> <?php echo wp_kses_post($social_nofollow) ?>>
+                            <?php Icons_Manager::render_icon($social_icon['social_icon'], ['aria-hidden' => 'true']); ?>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
         </div>
-        <?php if ($slide['button_switcher'] ==='yes' && $slide['btn_position']==='outside-info') : ?>
-            <<?= $button_tag ?> class="butn" <?= $button_href ?> <?= $is_external ?> <?= $nofollow ?>>
+
+        <?php if ($show_button && $slide['btn_position']==='outside-info') : ?>
+            <<?php echo wp_kses_post($button_tag) ?> class="butn" <?php echo wp_kses_post($button_href) ?> <?php echo wp_kses_post($button_is_external) ?> <?php echo wp_kses_post($button_nofollow) ?>>
             <?php if (!empty($slide['selected_icon']['value']) and ($slide['icon_align'] == 'left')) : ?>
                 <span class="butn-icon">
-                                        <?php Icons_Manager::render_icon($slide['selected_icon'], ['aria-hidden' => 'true']);?>
-                                    </span>
+                        <?php Icons_Manager::render_icon($slide['selected_icon'], ['aria-hidden' => 'true']);?>
+                    </span>
             <?php endif; ?>
             <span class="text">
-                                    <?= $slide['btn_text']; ?>
-                                </span>
+                    <?php echo wp_kses_post($slide['btn_text']) ?>
+                </span>
             <?php if (!empty($slide['selected_icon']['value'])  and ($slide['icon_align'] == 'right')) : ?>
                 <span class="butn-icon">
-                                        <?php Icons_Manager::render_icon($slide['selected_icon'], ['aria-hidden' => 'true']);?>
-                                    </span>
+                        <?php Icons_Manager::render_icon($slide['selected_icon'], ['aria-hidden' => 'true']);?>
+                    </span>
             <?php endif; ?>
-            </<?= $button_tag ?>>
+            </<?php echo wp_kses_post($button_tag) ?>>
         <?php endif;?>
-        </<?= $card_tag ?>>
+
+        <?php if ($show_social && isset($slide['social_icons_list']) && $slide['social_icons_position'] === 'outside-info') : ?>
+            <div class="social-icons">
+                <?php foreach ($slide['social_icons_list'] as $social_icon) : ?>
+                    <?php
+                    $social_link = isset($social_icon['social_link']['url']) ? $social_icon['social_link']['url'] : '#';
+                    $social_target = isset($social_icon['social_link']['is_external']) && $social_icon['social_link']['is_external'] ? 'target="_blank"' : '';
+                    $social_nofollow = isset($social_icon['social_link']['nofollow']) && $social_icon['social_link']['nofollow'] ? 'rel="nofollow"' : '';
+                    ?>
+                    <a href="<?php echo esc_url($social_link) ?>" <?php echo wp_kses_post($social_target) ?> <?php echo wp_kses_post($social_nofollow) ?>>
+                        <?php Icons_Manager::render_icon($social_icon['social_icon'], ['aria-hidden' => 'true']); ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        </<?php echo wp_kses_post($card_tag) ?>>
         </div>
     <?php endforeach; ?>
         </div>
@@ -12536,7 +13377,7 @@ class ElementCamp_Services_Slider extends Widget_Base
 
         <?php if ($settings['pagination'] === 'true') : ?>
         <!-- If we need pagination -->
-        <div class="swiper-pagination swiper-pagination-<?= $settings['direction'] ?>"></div>
+        <div class="swiper-pagination swiper-pagination-<?php echo esc_attr($settings['direction']) ?>"></div>
     <?php endif; ?>
 
         <?php if ($settings['arrows'] === 'true') : ?>
@@ -12568,7 +13409,7 @@ class ElementCamp_Services_Slider extends Widget_Base
 
         <?php if ($settings['scrollbar'] === 'true') : ?>
         <!-- If we need scrollbar -->
-        <div class="swiper-scrollbar scrollbar-<?= $settings['direction'] ?>"></div>
+        <div class="swiper-scrollbar scrollbar-<?php echo esc_attr($settings['direction']) ?>"></div>
     <?php endif; ?>
 
         </div>

@@ -120,6 +120,7 @@ class ElementCamp_Menu_List extends Widget_Base {
                 'menu',
                 [
                     'type' => Controls_Manager::RAW_HTML,
+                    // translators: %s is the url to the menus screen
                     'raw' => '<strong>' . __( 'There are no menus in your site.', 'element-camp' ) . '</strong><br>' . sprintf( __( 'Go to the <a href="%s" target="_blank">Menus screen</a> to create one.', 'element-camp' ), admin_url( 'nav-menus.php?action=edit&menu=0' ) ),
                     'separator' => 'after',
                     'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
@@ -1091,6 +1092,8 @@ class ElementCamp_Menu_List extends Widget_Base {
                 ],
             ]
         );
+        $this->start_controls_tabs('tabs_dropdown_icon_style');
+        $this->start_controls_tab('tab_dropdown_icon_normal', ['label' => esc_html__('Normal', 'element-camp')]);
         $this->add_control(
             'translate_icon_y',
             [
@@ -1099,6 +1102,25 @@ class ElementCamp_Menu_List extends Widget_Base {
                 'size_units' => [ 'px', '%', 'custom'],
                 'default' => [
                     'size' => 0,
+                ],
+            ]
+        );
+        $this->add_control(
+            'dropdown_icon_rotate',
+            [
+                'label'        => esc_html__( 'Rotate Icon on Open', 'element-camp' ),
+                'type'         => Controls_Manager::SLIDER,
+                'size_units'   => [ 'deg', 'custom' ],
+                'default'      => [
+                    'size' => 0,
+                    'unit' => 'deg',
+                ],
+                'range'        => [
+                    'deg' => [
+                        'min'  => -360,
+                        'max'  => 360,
+                        'step' => 1,
+                    ],
                 ],
             ]
         );
@@ -1112,11 +1134,84 @@ class ElementCamp_Menu_List extends Widget_Base {
                     'size' => 0,
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .tcgelements-menu-list ul .menu-item .dropdown-icon i' => 'transform: translate({{translate_icon_x.SIZE}}{{translate_icon_x.UNIT}},{{translate_icon_y.SIZE}}{{translate_icon_y.UNIT}})',
-                    '{{WRAPPER}} .tcgelements-menu-list ul .menu-item .dropdown-icon svg' => 'transform: translate({{translate_icon_x.SIZE}}{{translate_icon_x.UNIT}},{{translate_icon_y.SIZE}}{{translate_icon_y.UNIT}})',
+                    '{{WRAPPER}} .tcgelements-menu-list ul .menu-item .dropdown-icon i' => 'transform: translate({{translate_icon_x.SIZE}}{{translate_icon_x.UNIT}},{{translate_icon_y.SIZE}}{{translate_icon_y.UNIT}}) rotate({{dropdown_icon_rotate.SIZE}}deg)',
+                    '{{WRAPPER}} .tcgelements-menu-list ul .menu-item .dropdown-icon svg' => 'transform: translate({{translate_icon_x.SIZE}}{{translate_icon_x.UNIT}},{{translate_icon_y.SIZE}}{{translate_icon_y.UNIT}}) rotate({{dropdown_icon_rotate.SIZE}}deg)',
                 ],
             ]
         );
+
+        $this->add_control(
+            'dropdown_icon_rotate_transition',
+            [
+                'label'     => esc_html__( 'Rotation Transition (s)', 'element-camp' ),
+                'type'      => Controls_Manager::SLIDER,
+                'default'   => [
+                    'size' => 0.3,
+                ],
+                'range'     => [
+                    'px' => [
+                        'min'  => 0,
+                        'max'  => 2,
+                        'step' => 0.1,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-menu-list ul .menu-item > a .dropdown-icon i'   => 'transition: transform {{SIZE}}s ease;',
+                    '{{WRAPPER}} .tcgelements-menu-list ul .menu-item > a .dropdown-icon svg' => 'transition: transform {{SIZE}}s ease;',
+                ],
+            ]
+        );
+        $this->end_controls_tab();
+        $this->start_controls_tab('tab_dropdown_icon_opened', ['label' => esc_html__('Opened', 'element-camp')]);
+        $this->add_control(
+            'translate_icon_y_opened',
+            [
+                'label' => esc_html__( 'Translate Y', 'element-camp' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'custom'],
+                'default' => [
+                    'size' => 0,
+                ],
+            ]
+        );
+        $this->add_control(
+            'dropdown_icon_rotate_opened',
+            [
+                'label'        => esc_html__( 'Rotate Icon on Open', 'element-camp' ),
+                'type'         => Controls_Manager::SLIDER,
+                'size_units'   => [ 'deg', 'custom' ],
+                'default'      => [
+                    'size' => 0,
+                    'unit' => 'deg',
+                ],
+                'range'        => [
+                    'deg' => [
+                        'min'  => -360,
+                        'max'  => 360,
+                        'step' => 1,
+                    ],
+                ],
+            ]
+        );
+        $this->add_control(
+            'translate_icon_x_opened',
+            [
+                'label' => esc_html__( 'Translate X', 'element-camp' ),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => [ 'px', '%', 'custom'],
+                'default' => [
+                    'size' => 0,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-menu-list ul .sub-menu-open .dropdown-icon i' => 'transform: translate({{translate_icon_x_opened.SIZE}}{{translate_icon_x_opened.UNIT}},{{translate_icon_y_opened.SIZE}}{{translate_icon_y_opened.UNIT}}) rotate({{dropdown_icon_rotate_opened.SIZE}}deg)',
+                    '{{WRAPPER}} .tcgelements-menu-list ul .sub-menu-open .dropdown-icon svg' => 'transform: translate({{translate_icon_x_opened.SIZE}}{{translate_icon_x_opened.UNIT}},{{translate_icon_y_opened.SIZE}}{{translate_icon_y_opened.UNIT}}) rotate({{dropdown_icon_rotate_opened.SIZE}}deg)',
+                ],
+            ]
+        );
+
+        $this->end_controls_tab();
+        $this->end_controls_tabs();
+
         $this->end_controls_section();
         $this->start_controls_section(
             'section_style_drop',
@@ -1334,6 +1429,16 @@ class ElementCamp_Menu_List extends Widget_Base {
                 'label'   => esc_html__( 'Hover', 'element-camp' ),
             ]
         );
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'name' => 'drop_down_typography_hover',
+                'global' => [
+                    'default' => Global_Typography::TYPOGRAPHY_PRIMARY,
+                ],
+                'selector' => '{{WRAPPER}} .tcgelements-menu-list ul .menu-item .sub-menu a:hover',
+            ]
+        );
         $this->add_responsive_control(
             'drop_items_padding_hover',
             [
@@ -1374,8 +1479,144 @@ class ElementCamp_Menu_List extends Widget_Base {
             ]
         );
         $this->end_controls_tab();
-        
         $this->end_controls_tabs();
+        $this->add_control(
+            'submenu_overlay_style',
+            [
+                'label' => esc_html__('Sub-menu Overlay', 'element-camp'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('Show', 'element-camp'),
+                'label_off' => esc_html__('Hide', 'element-camp'),
+                'return_value' => 'yes',
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-menu-list ul .menu-item .sub-menu .menu-item a::after' => 'position: absolute;content: "";',
+                ],
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_control(
+            'submenu_line_style_heading',
+            [
+                'label' => esc_html__('Sub-menu Line Options', 'element-camp'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+                'condition' => [
+                    'submenu_overlay_style' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_group_control(
+            Group_Control_Background::get_type(),
+            [
+                'name' => 'submenu_line_color',
+                'label' => esc_html__('Line Color', 'element-camp'),
+                'types' => ['classic', 'gradient'],
+                'exclude' => ['image'],
+                'selector' => '{{WRAPPER}} .tcgelements-menu-list ul .menu-item .sub-menu .menu-item a::after',
+                'condition' => [
+                    'submenu_overlay_style' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'submenu_line_width',
+            [
+                'label' => esc_html__( 'Line Width', 'element-camp' ),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'unit' => '%',
+                ],
+                'tablet_default' => [
+                    'unit' => '%',
+                ],
+                'mobile_default' => [
+                    'unit' => '%',
+                ],
+                'size_units' => [ '%', 'px', 'vw','custom' ],
+                'range' => [
+                    '%' => [
+                        'min' => 1,
+                        'max' => 150,
+                    ],
+                    'px' => [
+                        'min' => 1,
+                        'max' => 1000,
+                    ],
+                    'vw' => [
+                        'min' => 1,
+                        'max' => 150,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-menu-list ul .menu-item .sub-menu .menu-item a::after' => 'width: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'submenu_overlay_style' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_responsive_control(
+            'submenu_line_height',
+            [
+                'label' => esc_html__( 'Line Height', 'element-camp' ),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'unit' => 'px',
+                ],
+                'tablet_default' => [
+                    'unit' => 'px',
+                ],
+                'mobile_default' => [
+                    'unit' => 'px',
+                ],
+                'size_units' => [ 'px', 'vh', '%','custom' ],
+                'range' => [
+                    'px' => [
+                        'min' => 1,
+                        'max' => 500,
+                    ],
+                    'vh' => [
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                    '%' => [
+                        'min' => 1,
+                        'max' => 200,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-menu-list ul .menu-item .sub-menu .menu-item a::after' => 'height: {{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'submenu_overlay_style' => 'yes'
+                ]
+            ]
+        );
+
+        $this->add_control(
+            'submenu_line_opacity',
+            [
+                'label' => esc_html__( 'Line Opacity', 'element-camp' ),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'max' => 1,
+                        'min' => 0.10,
+                        'step' => 0.01,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-menu-list ul .menu-item .sub-menu .menu-item a::after' => 'opacity: {{SIZE}};',
+                ],
+                'condition' => [
+                    'submenu_overlay_style' => 'yes'
+                ]
+            ]
+        );
         $this->end_controls_section();
         $this->start_controls_section(
             'section_menu_icon_style',
@@ -1500,15 +1741,15 @@ class ElementCamp_Menu_List extends Widget_Base {
             );
             $menu_html = wp_nav_menu($menu_args);
             ?>
-            <div class="tcgelements-menu-list <?=esc_attr($animations)?>"
+            <div class="tcgelements-menu-list <?php echo esc_attr($animations)?>"
                 <?php if (!empty($settings['dropdown_icon']['value']) && !empty($settings['dropdown_icon_active']['value'])) : ?>
-                    data-dropdown-icon="<?= esc_attr($dropdown_icon) ?>"
-                    data-dropdown-icon-active="<?= esc_attr($dropdown_icon_active) ?>"
+                    data-dropdown-icon="<?php echo esc_attr($dropdown_icon) ?>"
+                    data-dropdown-icon-active="<?php echo esc_attr($dropdown_icon_active) ?>"
                 <?php endif; ?>
                 <?php if (!empty($menu_item_icon)) : ?>
-                    data-menu-item-icon="<?= esc_attr($menu_item_icon) ?>"
+                    data-menu-item-icon="<?php echo esc_attr($menu_item_icon) ?>"
                 <?php endif; ?>>
-                <?=$menu_html?>
+                <?php echo wp_kses_post($menu_html)?>
             </div>
             <?php
         }

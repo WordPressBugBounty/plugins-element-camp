@@ -1198,11 +1198,11 @@ class ElementCamp_Cards extends Widget_Base
                 <?php endif;?>
                     <div class="card-item">
                         <div class="img">
-                            <img src="<?=esc_url($card['image']['url'])?>" alt="<?php if (!empty($card['image']['alt'])) echo esc_attr($card['image']['alt']); ?>">
+                            <img src="<?php echo esc_url($card['image']['url'])?>" alt="<?php if (!empty($card['image']['alt'])) echo esc_attr($card['image']['alt']); ?>">
                         </div>
                         <div class="cont">
-                            <h5 class="title"><?=esc_html($card['title'])?></h5>
-                            <span class="description"><?=esc_html($card['description'])?></span>
+                            <h5 class="title"><?php echo esc_html($card['title'])?></h5>
+                            <span class="description"><?php echo esc_html($card['description'])?></span>
                         </div>
                     </div>
                 <?php if ($settings['cards_animations']=='scroll-animation') : ?>

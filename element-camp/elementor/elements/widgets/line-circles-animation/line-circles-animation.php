@@ -150,7 +150,7 @@ class ElementCamp_Line_Circles_Animation extends \Elementor\Widget_Base
         $direction = $settings['line_circle_animation_direction'];
         $class .= $direction;
         ?>
-        <div class="tcgelements-line-circles-animation <?=esc_attr($class)?>">
+        <div class="tcgelements-line-circles-animation <?php echo esc_attr($class)?>">
             <span class="line"></span>
             <span class="circle1"></span>
             <span class="circle2"></span>

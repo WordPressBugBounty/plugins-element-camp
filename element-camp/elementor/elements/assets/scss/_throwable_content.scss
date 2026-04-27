@@ -1,0 +1,18 @@
+.tcgelements-throwable-content{
+  position: relative;
+  .item{
+    position: relative;
+    bottom: 50px;
+    user-select: none;
+    .txt{
+      display: inline-block;
+      position: relative;
+      padding: 5px 15px;
+      background-color: #000;
+      border-radius: 30px;
+      color: #fff;
+      font-size: 16px;
+      text-transform: capitalize;
+    }
+  }
+}

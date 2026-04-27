@@ -827,7 +827,8 @@ class ElementCamp_Creative_Cards extends Widget_Base
                                     $demo_class = 'home' . $counter;
                                     ?>
                                     <li>
-                                        <a <?php echo $this->get_render_attribute_string($link_key); ?>
+                                        <a <?php
+                                                echo $this->get_render_attribute_string($link_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                                                 class="link-item"
                                                 data-demo="<?php echo esc_attr($demo_class); ?>">
                                             <?php echo esc_html($item['card_title']); ?>
@@ -866,7 +867,8 @@ class ElementCamp_Creative_Cards extends Widget_Base
                                             $this->add_link_attributes($page_link_key, $page['page_link']);
                                             ?>
                                             <li>
-                                                <a <?php echo $this->get_render_attribute_string($page_link_key); ?>>
+                                                <a <?php 
+                                                echo $this->get_render_attribute_string($page_link_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
                                                     <?php echo esc_html($page['page_title']); ?>
                                                 </a>
                                             </li>
@@ -882,7 +884,8 @@ class ElementCamp_Creative_Cards extends Widget_Base
                             $link_key = 'demo_link_' . $index;
                             $this->add_link_attributes($link_key, $item['card_link']);
                             ?>
-                            <a <?php echo $this->get_render_attribute_string($link_key); ?>
+                            <a <?php 
+                            echo $this->get_render_attribute_string($link_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                                     class="img <?php echo esc_attr($demo_class . ' ' . $active_class); ?>">
                                 <h5 class="title">
                                     <?php echo esc_html($item['card_title']); ?>

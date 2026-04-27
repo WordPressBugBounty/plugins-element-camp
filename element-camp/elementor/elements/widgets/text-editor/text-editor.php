@@ -679,6 +679,33 @@ class ElementCamp_Text_Editor extends Widget_Base {
         $this->end_controls_tabs();
         $this->end_controls_section();
 
+        $this->start_controls_section(
+            'section_style_strong',
+            [
+                'label' => __( 'Strong Tag Style', 'element-camp' ),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+        $this->add_group_control(
+            Group_Control_Typography::get_type(),
+            [
+                'label' => esc_html__('Strong Typography', 'element-camp'),
+                'name' => 'strong_typography',
+                'selector' => '{{WRAPPER}} .tcgelements-text-editor strong',
+            ]
+        );
+        $this->add_control(
+            'strong_color',
+            [
+                'label' => esc_html__( 'Strong Color', 'element-camp' ),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-text-editor strong' => 'color: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->end_controls_section();
     }
 
     /**
@@ -710,7 +737,7 @@ class ElementCamp_Text_Editor extends Widget_Base {
             <div <?php $this->print_render_attribute_string( 'editor' ); ?>>
                 <?php } ?>
                 <?php // PHPCS - the main text of a widget should not be escaped.
-                echo $editor_content;
+                echo wp_kses_post($editor_content);
                 // phpcs:ignore WordPress.Security.EscapeOutput ?>
                 <?php if ( $should_render_inline_editing ) { ?>
             </div>

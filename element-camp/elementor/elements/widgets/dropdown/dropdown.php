@@ -520,7 +520,7 @@ class ElementCamp_Dropdown extends Widget_Base
                 'selector' => '{{WRAPPER}} .tcgelements-dropdown .dropdown-toggle',
                 'fields_options' => [
                     'background' => [
-                        'label' => esc_html_x('Toggle Background', 'Background Control', 'bazario'),
+                        'label' => esc_html_x('Toggle Background', 'Background Control', 'element-camp'),
                     ],
                 ],
             ]
@@ -545,7 +545,7 @@ class ElementCamp_Dropdown extends Widget_Base
                 'selector' => '{{WRAPPER}} .tcgelements-dropdown .dropdown-item',
                 'fields_options' => [
                     'background' => [
-                        'label' => esc_html_x('Item Background', 'Background Control', 'bazario'),
+                        'label' => esc_html_x('Item Background', 'Background Control', 'element-camp'),
                     ],
                 ],
             ]
@@ -579,7 +579,7 @@ class ElementCamp_Dropdown extends Widget_Base
                 'selector' => '{{WRAPPER}} .tcgelements-dropdown .dropdown-toggle:hover',
                 'fields_options' => [
                     'background' => [
-                        'label' => esc_html_x('Toggle Hover Background', 'Background Control', 'bazario'),
+                        'label' => esc_html_x('Toggle Hover Background', 'Background Control', 'element-camp'),
                     ],
                 ],
             ]
@@ -604,7 +604,7 @@ class ElementCamp_Dropdown extends Widget_Base
                 'selector' => '{{WRAPPER}} .tcgelements-dropdown .dropdown-item:hover',
                 'fields_options' => [
                     'background' => [
-                        'label' => esc_html_x('Item Hover Background', 'Background Control', 'bazario'),
+                        'label' => esc_html_x('Item Hover Background', 'Background Control', 'element-camp'),
                     ],
                 ],
             ]
@@ -1215,24 +1215,24 @@ class ElementCamp_Dropdown extends Widget_Base
         $settings = $this->get_settings_for_display();
         $interaction = $settings['dropdown_controls'];
         ?>
-        <div class="tcgelements-dropdown dropdown <?=esc_attr($interaction)?>">
+        <div class="tcgelements-dropdown dropdown <?php echo esc_attr($interaction)?>">
             <?php
             $firstItem = reset($settings['dropdown']); // Get the first item
             ?>
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <?php if (!empty($firstItem['image']['url'])) : ?>
-                    <img class="flag" src="<?= esc_url($firstItem['image']['url']) ?>" alt="<?php if (!empty($firstItem['image']['alt'])) echo esc_attr($firstItem['image']['alt']); ?>">
+                    <img class="flag" src="<?php echo esc_url($firstItem['image']['url']) ?>" alt="<?php if (!empty($firstItem['image']['alt'])) echo esc_attr($firstItem['image']['alt']); ?>">
                 <?php endif;?>
-                <span class="txt"><?= esc_html($firstItem['text']) ?></span>
+                <span class="txt"><?php echo esc_html($firstItem['text']) ?></span>
             </a>
             <ul class="dropdown-menu">
                 <?php foreach (array_slice($settings['dropdown'], 1) as $index => $item) : ?>
                     <li>
-                        <a class="dropdown-item" href="<?= esc_url($item['link']['url']) ?>" <?php if ( $item['link']['is_external'] ) echo'target="_blank"'; ?>>
+                        <a class="dropdown-item" href="<?php echo esc_url($item['link']['url']) ?>" <?php if ( $item['link']['is_external'] ) echo'target="_blank"'; ?>>
                             <?php if (!empty($item['image']['url'])) : ?>
-                                <img class="flag" src="<?= esc_url($item['image']['url']) ?>" alt="<?php if (!empty($item['image']['alt'])) echo esc_attr($item['image']['alt']); ?>">
+                                <img class="flag" src="<?php echo esc_url($item['image']['url']) ?>" alt="<?php if (!empty($item['image']['alt'])) echo esc_attr($item['image']['alt']); ?>">
                             <?php endif;?>
-                            <span class="txt"><?= esc_html($item['text']) ?></span>
+                            <span class="txt"><?php echo esc_html($item['text']) ?></span>
                         </a>
                     </li>
                 <?php endforeach; ?>

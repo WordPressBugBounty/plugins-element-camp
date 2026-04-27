@@ -17,9 +17,12 @@ class TCG_Pro_Theme_Builder_Controls
     {
 
         // theme builder controls
-        if ((isset($_GET['post']) && get_post_type($_GET['post']) === 'tcg_teb') || !isset($_GET['action'])) :
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended
+        $post_id = isset($_GET['post']) ? absint(wp_unslash($_GET['post'])) : 0;
+        if (($post_id && get_post_type($post_id) === 'tcg_teb') || !isset($_GET['action'])) :
             add_action('elementor/element/container/section_background/after_section_end', [$this, 'register_tc_theme_builder_header_controls'], 10, 3);
         endif;
+        // phpcs:enable WordPress.Security.NonceVerification.Recommended
         //add_action('elementor/element/container/section_background/after_section_end', [$this, 'register_tcg_sliding_container'], 10, 3);
     }
 

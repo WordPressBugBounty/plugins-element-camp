@@ -62,11 +62,11 @@ class ElementCamp_Blog_Modern extends Widget_Base
         $this->add_control(
             'number_format',
             [
-                'label' => esc_html__('Number Format', 'elementcamp_plg'),
+                'label' => esc_html__('Number Format', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'normal' => esc_html__('Normal', 'elementcamp_plg'),
-                    'leading_zero' => esc_html__('01 Format', 'elementcamp_plg'),
+                    'normal' => esc_html__('Normal', 'element-camp'),
+                    'leading_zero' => esc_html__('01 Format', 'element-camp'),
                 ],
                 'default' => 'normal',
             ]
@@ -302,7 +302,7 @@ class ElementCamp_Blog_Modern extends Widget_Base
                 'type' => \Elementor\Controls_Manager::ALERT,
                 'alert_type' => 'warning',
                 'heading' => esc_html__('Warning', 'element-camp'),
-                'content' => __('<strong>This Will Override Any Color Choosen In Text Style</strong>', 'element-camp'),
+                'content' => wp_kses_post('<strong>') . esc_html__('This Will Override Any Color Choosen In Text Style', 'element-camp') . wp_kses_post('</strong>'),
                 'condition' => [
                     'post_card_content_color!' => '',
                 ]
@@ -352,7 +352,7 @@ class ElementCamp_Blog_Modern extends Widget_Base
                 'type' => \Elementor\Controls_Manager::ALERT,
                 'alert_type' => 'warning',
                 'heading' => esc_html__('Warning', 'element-camp'),
-                'content' => __('<strong>This Will Override Any Color Choosen In Text Style</strong>', 'element-camp'),
+                'content' => wp_kses_post('<strong>') . esc_html__('This Will Override Any Color Choosen In Text Style', 'element-camp') . wp_kses_post('</strong>'),
                 'condition' => [
                     'post_card_content_color_hover!' => '',
                 ]
@@ -1816,7 +1816,7 @@ class ElementCamp_Blog_Modern extends Widget_Base
                     $terms_display = implode($separator, $term_names);
                 }
             ?>
-                <a class="post-card" href="<?=esc_url(get_the_permalink())?>">
+                <a class="post-card" href="<?php echo esc_url(get_the_permalink())?>">
                     <div class="row gx-5">
                         <div class="col-lg-1 col-2">
                             <div class="number"> <?php
@@ -1829,16 +1829,16 @@ class ElementCamp_Blog_Modern extends Widget_Base
                             </div>
                         </div>
                         <div class="col-lg-4 col-10">
-                            <h3 class="title"> <?= esc_html(get_the_title()) ?> </h3>
+                            <h3 class="title"> <?php echo esc_html(get_the_title()) ?> </h3>
                         </div>
                         <div class="col-lg-4 col-12">
                             <div class="excerpt"> <?php the_excerpt()?> </div>
                         </div>
                         <div class="col-lg-3 col-12 d-flex align-items-center justify-content-lg-end">
                             <div class="date">
-                                <span class="taxonomy"><?= esc_html($terms_display) ?> | </span>
+                                <span class="taxonomy"><?php echo esc_html($terms_display) ?> | </span>
                                 <span class="date-text">
-                                    <?php $custom_date_format = empty($settings['custom_date_format']) ? 'F j, Y' : $settings['custom_date_format']; echo get_the_time($custom_date_format)?>
+                                    <?php $custom_date_format = empty($settings['custom_date_format']) ? 'F j, Y' : $settings['custom_date_format']; echo esc_html(get_the_time($custom_date_format)); ?>
                                 </span>
                             </div>
                         </div>
@@ -1851,7 +1851,7 @@ class ElementCamp_Blog_Modern extends Widget_Base
                                 </span>
                             <?php endif; ?>
                             <span class="text">
-                                <?= $settings['btn_text']; ?>
+                                <?php echo wp_kses_post($settings['btn_text']); ?>
                             </span>
                             <?php if (!empty($settings['selected_icon']['value']) and ($settings['icon_align'] == 'right')) : ?>
                                 <span class="butn-icon">
@@ -1860,7 +1860,7 @@ class ElementCamp_Blog_Modern extends Widget_Base
                             <?php endif; ?>
                         </div>
                     <?php endif;?>
-                    <img src="<?= esc_url(get_the_post_thumbnail_url()); ?>" alt="" class="bg">
+                    <img src="<?php echo esc_url(get_the_post_thumbnail_url()); ?>" alt="" class="bg">
                 </a>
             <?php $itemCount++; endwhile;  wp_reset_postdata(); endif; ?>
         </div>

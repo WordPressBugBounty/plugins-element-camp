@@ -413,13 +413,17 @@ class ElementCamp_Button extends Widget_Base
 
         $this->end_controls_section();
 
+// ==========================================
+// SECTION 1: Layout & Dimensions
+// ==========================================
         $this->start_controls_section(
-            'section_style',
+            'section_style_layout',
             [
-                'label' => esc_html__('Button', 'element-camp'),
+                'label' => esc_html__('Layout & Dimensions', 'element-camp'),
                 'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
+
         $this->add_control(
             'button_style_heading',
             [
@@ -446,170 +450,113 @@ class ElementCamp_Button extends Widget_Base
             ]
         );
 
+        $this->add_control(
+            'height_same_as_width',
+            [
+                'label' => esc_html__( 'Height Same as Width', 'element-camp' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'element-camp' ),
+                'label_off' => esc_html__( 'No', 'element-camp' ),
+                'return_value' => 'yes',
+                'default' => 'no',
+                'description' => esc_html__( 'Make image height equal to its width (square aspect ratio). Note: This will override the Height controllers.', 'element-camp' ),
+                'prefix_class' => 'img-h-w-',
+            ]
+        );
+
         $this->add_responsive_control(
             'button_width',
             [
                 'label' => esc_html__('Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'unit' => '%',
-                ],
-                'tablet_default' => [
-                    'unit' => '%',
-                ],
-                'mobile_default' => [
-                    'unit' => '%',
-                ],
+                'default' => ['unit' => '%'],
+                'tablet_default' => ['unit' => '%'],
+                'mobile_default' => ['unit' => '%'],
                 'size_units' => ['%', 'px', 'vw', 'custom'],
                 'range' => [
-                    '%' => [
-                        'min' => 1,
-                        'max' => 150,
-                    ],
-                    'px' => [
-                        'min' => 1,
-                        'max' => 1000,
-                    ],
-                    'vw' => [
-                        'min' => 1,
-                        'max' => 150,
-                    ],
+                    '%' => ['min' => 1, 'max' => 150],
+                    'px' => ['min' => 1, 'max' => 1000],
+                    'vw' => ['min' => 1, 'max' => 150],
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button' => 'width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
+
         $this->add_responsive_control(
             'button_max_width',
             [
                 'label' => esc_html__('Max Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'unit' => '%',
-                ],
-                'tablet_default' => [
-                    'unit' => '%',
-                ],
-                'mobile_default' => [
-                    'unit' => '%',
-                ],
+                'default' => ['unit' => '%'],
+                'tablet_default' => ['unit' => '%'],
+                'mobile_default' => ['unit' => '%'],
                 'size_units' => ['%', 'px', 'vw', 'custom'],
                 'range' => [
-                    '%' => [
-                        'min' => 1,
-                        'max' => 150,
-                    ],
-                    'px' => [
-                        'min' => 1,
-                        'max' => 1000,
-                    ],
-                    'vw' => [
-                        'min' => 1,
-                        'max' => 150,
-                    ],
+                    '%' => ['min' => 1, 'max' => 150],
+                    'px' => ['min' => 1, 'max' => 1000],
+                    'vw' => ['min' => 1, 'max' => 150],
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button' => 'max-width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
+
         $this->add_responsive_control(
             'button_max_height',
             [
                 'label' => esc_html__('Max Height', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'unit' => '%',
-                ],
-                'tablet_default' => [
-                    'unit' => '%',
-                ],
-                'mobile_default' => [
-                    'unit' => '%',
-                ],
+                'default' => ['unit' => '%'],
+                'tablet_default' => ['unit' => '%'],
+                'mobile_default' => ['unit' => '%'],
                 'size_units' => ['%', 'px', 'vw', 'custom'],
                 'range' => [
-                    '%' => [
-                        'min' => 1,
-                        'max' => 150,
-                    ],
-                    'px' => [
-                        'min' => 1,
-                        'max' => 1000,
-                    ],
-                    'vw' => [
-                        'min' => 1,
-                        'max' => 150,
-                    ],
+                    '%' => ['min' => 1, 'max' => 150],
+                    'px' => ['min' => 1, 'max' => 1000],
+                    'vw' => ['min' => 1, 'max' => 150],
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button' => 'max-height: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
+
         $this->add_responsive_control(
             'button_width_hover',
             [
                 'label' => esc_html__('Width Hover', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'unit' => '%',
-                ],
-                'tablet_default' => [
-                    'unit' => '%',
-                ],
-                'mobile_default' => [
-                    'unit' => '%',
-                ],
+                'default' => ['unit' => '%'],
+                'tablet_default' => ['unit' => '%'],
+                'mobile_default' => ['unit' => '%'],
                 'size_units' => ['%', 'px', 'vw', 'custom'],
                 'range' => [
-                    '%' => [
-                        'min' => 1,
-                        'max' => 150,
-                    ],
-                    'px' => [
-                        'min' => 1,
-                        'max' => 1000,
-                    ],
-                    'vw' => [
-                        'min' => 1,
-                        'max' => 150,
-                    ],
+                    '%' => ['min' => 1, 'max' => 150],
+                    'px' => ['min' => 1, 'max' => 1000],
+                    'vw' => ['min' => 1, 'max' => 150],
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button:hover' => 'width: {{SIZE}}{{UNIT}}; max-width: {{SIZE}}{{UNIT}};',
                 ],
             ]
         );
+
         $this->add_responsive_control(
             'button_height',
             [
                 'label' => esc_html__('Height', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'unit' => 'px',
-                ],
-                'tablet_default' => [
-                    'unit' => 'px',
-                ],
-                'mobile_default' => [
-                    'unit' => 'px',
-                ],
+                'default' => ['unit' => 'px'],
+                'tablet_default' => ['unit' => 'px'],
+                'mobile_default' => ['unit' => 'px'],
                 'size_units' => ['px', 'vh', '%', 'custom'],
                 'range' => [
-                    'px' => [
-                        'min' => 1,
-                        'max' => 500,
-                    ],
-                    'vh' => [
-                        'min' => 1,
-                        'max' => 100,
-                    ],
-                    '%' => [
-                        'min' => 1,
-                        'max' => 200,
-                    ],
+                    'px' => ['min' => 1, 'max' => 500],
+                    'vh' => ['min' => 1, 'max' => 100],
+                    '%' => ['min' => 1, 'max' => 200],
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button' => 'height: {{SIZE}}{{UNIT}};',
@@ -640,6 +587,7 @@ class ElementCamp_Button extends Widget_Base
                     'block' => esc_html__('Block', 'element-camp'),
                     'inline-block' => esc_html__('Inline Block', 'element-camp'),
                     'flex' => esc_html__('Flex', 'element-camp'),
+                    'inline-flex' => esc_html__('Inline Flex', 'element-camp'),
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button' => 'display: {{VALUE}};'
@@ -655,35 +603,17 @@ class ElementCamp_Button extends Widget_Base
                 'label_block' => true,
                 'default' => '',
                 'options' => [
-                    'flex-start' => [
-                        'title' => esc_html__('Start', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-justify-start-h',
-                    ],
-                    'center' => [
-                        'title' => esc_html__('Center', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-justify-center-h',
-                    ],
-                    'flex-end' => [
-                        'title' => esc_html__('End', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-justify-end-h',
-                    ],
-                    'space-between' => [
-                        'title' => esc_html__('Space Between', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-justify-space-between-h',
-                    ],
-                    'space-around' => [
-                        'title' => esc_html__('Space Around', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-justify-space-around-h',
-                    ],
-                    'space-evenly' => [
-                        'title' => esc_html__('Space Evenly', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-justify-space-evenly-h',
-                    ],
+                    'flex-start' => ['title' => esc_html__('Start', 'element-camp'), 'icon' => 'eicon-flex eicon-justify-start-h'],
+                    'center' => ['title' => esc_html__('Center', 'element-camp'), 'icon' => 'eicon-flex eicon-justify-center-h'],
+                    'flex-end' => ['title' => esc_html__('End', 'element-camp'), 'icon' => 'eicon-flex eicon-justify-end-h'],
+                    'space-between' => ['title' => esc_html__('Space Between', 'element-camp'), 'icon' => 'eicon-flex eicon-justify-space-between-h'],
+                    'space-around' => ['title' => esc_html__('Space Around', 'element-camp'), 'icon' => 'eicon-flex eicon-justify-space-around-h'],
+                    'space-evenly' => ['title' => esc_html__('Space Evenly', 'element-camp'), 'icon' => 'eicon-flex eicon-justify-space-evenly-h'],
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button' => 'justify-content: {{VALUE}};',
                 ],
-                'condition' => ['button_display' => 'flex'],
+                'condition' => ['button_display' => ['flex','inline-flex']],
                 'responsive' => true,
             ]
         );
@@ -695,28 +625,29 @@ class ElementCamp_Button extends Widget_Base
                 'type' => Controls_Manager::CHOOSE,
                 'default' => '',
                 'options' => [
-                    'flex-start' => [
-                        'title' => esc_html__('Start', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-align-start-v',
-                    ],
-                    'center' => [
-                        'title' => esc_html__('Center', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-align-center-v',
-                    ],
-                    'flex-end' => [
-                        'title' => esc_html__('End', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-align-end-v',
-                    ],
-                    'stretch' => [
-                        'title' => esc_html__('Stretch', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-align-stretch-v',
-                    ],
+                    'flex-start' => ['title' => esc_html__('Start', 'element-camp'), 'icon' => 'eicon-flex eicon-align-start-v'],
+                    'center' => ['title' => esc_html__('Center', 'element-camp'), 'icon' => 'eicon-flex eicon-align-center-v'],
+                    'flex-end' => ['title' => esc_html__('End', 'element-camp'), 'icon' => 'eicon-flex eicon-align-end-v'],
+                    'stretch' => ['title' => esc_html__('Stretch', 'element-camp'), 'icon' => 'eicon-flex eicon-align-stretch-v'],
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button' => 'align-items: {{VALUE}};',
                 ],
-                'condition' => ['button_display' => 'flex'],
+                'condition' => ['button_display' => ['flex','inline-flex']],
                 'responsive' => true,
+            ]
+        );
+
+        $this->end_controls_section();
+
+// ==========================================
+// SECTION 2: Content Wrapper
+// ==========================================
+        $this->start_controls_section(
+            'section_style_content_wrapper',
+            [
+                'label' => esc_html__('Content Wrapper', 'element-camp'),
+                'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
 
@@ -762,30 +693,12 @@ class ElementCamp_Button extends Widget_Base
                 'label_block' => true,
                 'default' => '',
                 'options' => [
-                    'flex-start' => [
-                        'title' => esc_html__('Start', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-justify-start-h',
-                    ],
-                    'center' => [
-                        'title' => esc_html__('Center', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-justify-center-h',
-                    ],
-                    'flex-end' => [
-                        'title' => esc_html__('End', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-justify-end-h',
-                    ],
-                    'space-between' => [
-                        'title' => esc_html__('Space Between', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-justify-space-between-h',
-                    ],
-                    'space-around' => [
-                        'title' => esc_html__('Space Around', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-justify-space-around-h',
-                    ],
-                    'space-evenly' => [
-                        'title' => esc_html__('Space Evenly', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-justify-space-evenly-h',
-                    ],
+                    'flex-start' => ['title' => esc_html__('Start', 'element-camp'), 'icon' => 'eicon-flex eicon-justify-start-h'],
+                    'center' => ['title' => esc_html__('Center', 'element-camp'), 'icon' => 'eicon-flex eicon-justify-center-h'],
+                    'flex-end' => ['title' => esc_html__('End', 'element-camp'), 'icon' => 'eicon-flex eicon-justify-end-h'],
+                    'space-between' => ['title' => esc_html__('Space Between', 'element-camp'), 'icon' => 'eicon-flex eicon-justify-space-between-h'],
+                    'space-around' => ['title' => esc_html__('Space Around', 'element-camp'), 'icon' => 'eicon-flex eicon-justify-space-around-h'],
+                    'space-evenly' => ['title' => esc_html__('Space Evenly', 'element-camp'), 'icon' => 'eicon-flex eicon-justify-space-evenly-h'],
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button .tcgelements-button-content-wrapper' => 'justify-content: {{VALUE}};',
@@ -802,22 +715,10 @@ class ElementCamp_Button extends Widget_Base
                 'type' => Controls_Manager::CHOOSE,
                 'default' => '',
                 'options' => [
-                    'flex-start' => [
-                        'title' => esc_html__('Start', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-align-start-v',
-                    ],
-                    'center' => [
-                        'title' => esc_html__('Center', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-align-center-v',
-                    ],
-                    'flex-end' => [
-                        'title' => esc_html__('End', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-align-end-v',
-                    ],
-                    'stretch' => [
-                        'title' => esc_html__('Stretch', 'element-camp'),
-                        'icon' => 'eicon-flex eicon-align-stretch-v',
-                    ],
+                    'flex-start' => ['title' => esc_html__('Start', 'element-camp'), 'icon' => 'eicon-flex eicon-align-start-v'],
+                    'center' => ['title' => esc_html__('Center', 'element-camp'), 'icon' => 'eicon-flex eicon-align-center-v'],
+                    'flex-end' => ['title' => esc_html__('End', 'element-camp'), 'icon' => 'eicon-flex eicon-align-end-v'],
+                    'stretch' => ['title' => esc_html__('Stretch', 'element-camp'), 'icon' => 'eicon-flex eicon-align-stretch-v'],
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button .tcgelements-button-content-wrapper' => 'align-items: {{VALUE}};',
@@ -832,29 +733,14 @@ class ElementCamp_Button extends Widget_Base
             [
                 'label' => esc_html__('Button Content Wrapper Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'unit' => '%',
-                ],
-                'tablet_default' => [
-                    'unit' => '%',
-                ],
-                'mobile_default' => [
-                    'unit' => '%',
-                ],
+                'default' => ['unit' => '%'],
+                'tablet_default' => ['unit' => '%'],
+                'mobile_default' => ['unit' => '%'],
                 'size_units' => ['%', 'px', 'vw', 'custom'],
                 'range' => [
-                    '%' => [
-                        'min' => 1,
-                        'max' => 150,
-                    ],
-                    'px' => [
-                        'min' => 1,
-                        'max' => 1000,
-                    ],
-                    'vw' => [
-                        'min' => 1,
-                        'max' => 150,
-                    ],
+                    '%' => ['min' => 1, 'max' => 150],
+                    'px' => ['min' => 1, 'max' => 1000],
+                    'vw' => ['min' => 1, 'max' => 150],
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button .tcgelements-button-content-wrapper' => 'width: {{SIZE}}{{UNIT}};',
@@ -867,29 +753,14 @@ class ElementCamp_Button extends Widget_Base
             [
                 'label' => esc_html__('Button Content Wrapper Height', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'unit' => '%',
-                ],
-                'tablet_default' => [
-                    'unit' => '%',
-                ],
-                'mobile_default' => [
-                    'unit' => '%',
-                ],
+                'default' => ['unit' => '%'],
+                'tablet_default' => ['unit' => '%'],
+                'mobile_default' => ['unit' => '%'],
                 'size_units' => ['%', 'px', 'vw', 'custom'],
                 'range' => [
-                    '%' => [
-                        'min' => 1,
-                        'max' => 150,
-                    ],
-                    'px' => [
-                        'min' => 1,
-                        'max' => 1000,
-                    ],
-                    'vw' => [
-                        'min' => 1,
-                        'max' => 150,
-                    ],
+                    '%' => ['min' => 1, 'max' => 150],
+                    'px' => ['min' => 1, 'max' => 1000],
+                    'vw' => ['min' => 1, 'max' => 150],
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button .tcgelements-button-content-wrapper' => 'height: {{SIZE}}{{UNIT}};',
@@ -903,20 +774,24 @@ class ElementCamp_Button extends Widget_Base
                 'label' => esc_html__('Content Rotate', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['deg', 'custom'],
-                'default' => [
-                    'unit' => 'deg',
-                    'size' => 0,
-                ],
-                'range' => [
-                    'deg' => [
-                        'min' => -360,
-                        'max' => 360,
-                        'step' => 1,
-                    ],
-                ],
+                'default' => ['unit' => 'deg', 'size' => 0],
+                'range' => ['deg' => ['min' => -360, 'max' => 360, 'step' => 1]],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button .tcgelements-button-content-wrapper' => 'rotate: {{SIZE}}{{UNIT}};',
                 ],
+            ]
+        );
+
+        $this->end_controls_section();
+
+// ==========================================
+// SECTION 3: Typography & Text Effects
+// ==========================================
+        $this->start_controls_section(
+            'section_style_typography_text',
+            [
+                'label' => esc_html__('Typography & Text Effects', 'element-camp'),
+                'tab' => Controls_Manager::TAB_STYLE,
             ]
         );
 
@@ -943,6 +818,7 @@ class ElementCamp_Button extends Widget_Base
                 'selector' => '{{WRAPPER}} .tcgelements-button',
             ]
         );
+
         $this->add_control(
             'text_break_line',
             [
@@ -953,947 +829,6 @@ class ElementCamp_Button extends Widget_Base
                 'default' => esc_html__('yes', 'element-camp'),
             ]
         );
-        $this->start_controls_tabs('tabs_button_style');
-
-        $this->start_controls_tab(
-            'tab_button_normal',
-            [
-                'label' => esc_html__('Normal', 'element-camp'),
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'typography',
-                'global' => [
-                    'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-                ],
-                'selector' => '{{WRAPPER}} .tcgelements-button',
-            ]
-        );
-
-        $this->add_control(
-            'button_text_color_type',
-            [
-                'label' => esc_html__('Text color type', 'element-camp'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    'solid' => 'Solid',
-                    'gradient' => 'Gradient',
-                ],
-                'default' => 'solid',
-            ]
-        );
-
-        $this->add_control(
-            'button_text_color',
-            [
-                'label' => esc_html__('Text Color', 'element-camp'),
-                'type' => Controls_Manager::COLOR,
-                'global' => [
-                    'default' => Global_Colors::COLOR_PRIMARY,
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button' => 'color: {{VALUE}}; fill: {{VALUE}};',
-                ],
-                'condition' => [
-                    'button_text_color_type' => 'solid'
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'button_text_gradient_bg_color1',
-            [
-                'label' => _x('First Color', 'Background Control', 'element-camp'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '',
-                'title' => _x('First Color', 'Background Control', 'element-camp'),
-                'render_type' => 'ui',
-                'condition' => [
-                    'button_text_color_type' => ['gradient'],
-                ],
-                'of_type' => 'gradient',
-            ]
-        );
-
-
-        $this->add_control(
-            'button_text_gradient_bg_color1_stop',
-            [
-                'label' => _x('Location', 'Background Control', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['%'],
-                'default' => [
-                    'unit' => '%',
-                    'size' => 0,
-                ],
-                'render_type' => 'ui',
-                'condition' => [
-                    'button_text_color_type' => ['gradient'],
-                ],
-                'of_type' => 'gradient',
-            ]
-        );
-
-        $this->add_control(
-            'button_text_gradient_bg_color2',
-            [
-                'label' => _x('Second Color', 'Background Control', 'element-camp'),
-                'type' => Controls_Manager::COLOR,
-                'default' => '#f2295b',
-                'render_type' => 'ui',
-                'condition' => [
-                    'button_text_color_type' => ['gradient'],
-                ],
-                'of_type' => 'gradient',
-            ]
-        );
-
-        $this->add_control(
-            'button_text_gradient_bg_color2_stop',
-            [
-                'label' => _x('Location', 'Background Control', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['%'],
-                'default' => [
-                    'unit' => '%',
-                    'size' => 100,
-                ],
-                'render_type' => 'ui',
-                'condition' => [
-                    'button_text_color_type' => ['gradient'],
-                ],
-                'of_type' => 'gradient',
-            ]
-        );
-
-        $this->add_control(
-            'button_text_gradient_type',
-            [
-                'label' => _x('Type', 'Background Control', 'element-camp'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    'linear' => _x('Linear', 'Background Control', 'element-camp'),
-                    'radial' => _x('Radial', 'Background Control', 'element-camp'),
-                ],
-                'default' => 'linear',
-                'render_type' => 'ui',
-                'condition' => [
-                    'button_text_color_type' => ['gradient'],
-                ],
-                'of_type' => 'gradient',
-            ]
-        );
-
-        $this->add_control(
-            'button_text_gradient_angle',
-            [
-                'label' => _x('Angle', 'Background Control', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['deg'],
-                'default' => [
-                    'unit' => 'deg',
-                    'size' => 180,
-                ],
-                'range' => [
-                    'deg' => [
-                        'step' => 10,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button .tcgelements-button-text' => 'background-image: linear-gradient({{SIZE}}{{UNIT}}, {{button_text_gradient_bg_color1.VALUE}} {{button_text_gradient_bg_color1_stop.SIZE}}{{button_text_gradient_bg_color1_stop.UNIT}},{{button_text_gradient_bg_color2.VALUE}} {{button_text_gradient_bg_color2_stop.SIZE}}{{button_text_gradient_bg_color2_stop.UNIT}}); -webkit-background-clip: text; -webkit-text-fill-color: transparent;',
-                ],
-
-                'condition' => [
-                    'button_text_color_type' => ['gradient'],
-                    'button_text_gradient_type' => 'linear',
-                ],
-                'of_type' => 'gradient',
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
-            [
-                'name' => 'background',
-                'label' => esc_html__('Background', 'element-camp'),
-                'types' => ['classic', 'gradient','tcg_gradient','tcg_gradient_4'],
-                'selector' => '{{WRAPPER}} .tcgelements-button, {{WRAPPER}} .tcgelements-button.reverse .btn-animated-gr',
-                'fields_options' => [
-                    'background' => [
-                        'default' => 'classic',
-                    ],
-                    'color' => [
-                        'selectors' => [
-                            '{{SELECTOR}}' => 'background: {{color.VALUE}}; background-image: none;',
-                        ],
-                    ],
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Box_Shadow::get_type(),
-            [
-                'name' => 'button_box_shadow',
-                'selector' => '{{WRAPPER}} .tcgelements-button',
-            ]
-        );
-
-        $this->add_responsive_control(
-            'button_opacity',
-            [
-                'label' => esc_html__('Button Opacity', 'element-camp'),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'max' => 1,
-                        'min' => 0.10,
-                        'step' => 0.01,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button' => 'opacity: {{SIZE}};',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Border::get_type(),
-            [
-                'name' => 'border',
-                'selector' => '{{WRAPPER}} .tcgelements-button',
-                'separator' => 'before',
-            ]
-        );
-
-        $this->add_group_control(
-            \Elementor\Group_Control_Background::get_type(),
-            [
-                'name' => 'border_gradient',
-                'label' => esc_html__('Border Gradient Color', 'element-camp'),
-                'types' => ['gradient'],
-                'selector' => '{{WRAPPER}} .tcgelements-button',
-                'exclude' => ['image'],
-                'fields_options' => [
-                    'gradient_type' => [
-                        'default' => 'radial',
-                        'type' => Controls_Manager::HIDDEN,
-                    ],
-                    'color' => [
-                        'selectors' => [
-                            '{{SELECTOR}}' => 'background-color: none;',
-                        ],
-                    ],
-                    'gradient_angle' => [
-                        'selectors' => [
-                            '{{SELECTOR}}' => 'border-image-source: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
-                        ],
-                        'type' => Controls_Manager::HIDDEN,
-                    ],
-                    'gradient_position' => [
-                        'selectors' => [
-                            '{{SELECTOR}}' => 'border-image-slice: 1; border-image-source: radial-gradient(circle farthest-corner at 10% 20%, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
-                        ],
-                    ],
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'border_radius',
-            [
-                'label' => esc_html__('Border Radius', 'element-camp'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%', 'em', 'rem', 'custom'],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .tcgelements-button .btn-animated-gr' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'outline',
-            [
-                'label' => esc_html__('Outline', 'element-camp'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    'none' => esc_html__('None', 'element-camp'),
-                    'solid' => esc_html__('Solid', 'element-camp'),
-                    'dashed' => esc_html__('Dashed', 'element-camp'),
-                    'dotted' => esc_html__('Dotted', 'element-camp'),
-                ],
-                'default' => 'none',
-            ]
-        );
-
-        $this->add_control(
-            'outline_color',
-            [
-                'label' => esc_html__('Color', 'element-camp'),
-                'type' => Controls_Manager::COLOR,
-                'condition' => [
-                    'outline!' => 'none',
-                ],
-            ]
-        );
-
-        $this->add_responsive_control(
-            'outline_width',
-            [
-                'label' => esc_html__('Outline Width', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'em', 'rem', 'vw', 'vh', 'custom'],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button' => 'outline: {{outline_width.SIZE}}{{outline_width.UNIT}} {{outline.VALUE}} {{outline_color.VALUE}}',
-                ],
-                'condition' => [
-                    'outline!' => 'none',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'outline_offset',
-            [
-                'label' => esc_html__('Outline Offset', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 20,
-                        'step' => 1,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button' => 'outline-offset: {{SIZE}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'outline!' => 'none',
-                ],
-            ]
-        );
-
-        $this->add_responsive_control(
-            'button_translate_y',
-            [
-                'label' => esc_html__('Translate Y', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'custom'],
-            ]
-        );
-        $this->add_responsive_control(
-            'button_translate_x',
-            [
-                'label' => esc_html__('Translate X', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'custom'],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button' => 'transform: translate({{button_translate_x.SIZE}}{{button_translate_x.UNIT}},{{button_translate_y.SIZE}}{{button_translate_y.UNIT}}) scale({{button_scale.SIZE||1}})',
-                ],
-            ]
-        );
-        $this->add_responsive_control(
-            'button_scale',
-            [
-                'label' => esc_html__('Scale', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px'],
-                'default' => [
-                    'size' => 1,
-                    'unit' => '',
-                ],
-                'range' => [
-                    'px' => [
-                        'min' => 0.1,
-                        'max' => 3,
-                        'step' => 0.1,
-                    ],
-                ],
-            ]
-        );
-        $this->add_control(
-            'button_blur_method',
-            [
-                'label' => esc_html__('Blur Method', 'element-camp'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    'backdrop-filter' => 'backdrop-filter',
-                    'filter' => 'filter',
-                ],
-                'default' => 'backdrop-filter',
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button' => '{{VALUE}}: blur({{blur_value.SIZE}}px);',
-                ],
-            ]
-        );
-        $this->add_control(
-            'blur_value',
-            [
-                'label' => esc_html__('Blur', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'max' => 250,
-                    ],
-                ],
-            ]
-        );
-        $this->add_control(
-            'button_style_dark_mode',
-            [
-                'label' => esc_html__('Button Dark Mode', 'element-camp'),
-                'type' => \Elementor\Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-        $this->add_control(
-            'button_border_color_dark_mode',
-            [
-                'label' => esc_html__('Border Color ( Dark Mode )', 'element-camp'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-button' => 'border-color: {{VALUE}};',
-                    '} body.tcg-dark-mode {{WRAPPER}} .tcgelements-button' => 'border-color: {{VALUE}};',
-                ],
-                'condition' => [
-                    'button_text_color_type' => 'solid'
-                ]
-            ]
-        );
-
-        $this->add_control(
-            'button_text_color_dark_mode',
-            [
-                'label' => esc_html__('Text Color (Dark Mode)', 'element-camp'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-button' => 'color: {{VALUE}};fill: {{VALUE}};',
-                    '} body.tcg-dark-mode {{WRAPPER}} .tcgelements-button' => 'color: {{VALUE}};fill: {{VALUE}};',
-                ],
-                'condition' => [
-                    'button_text_color_type' => 'solid'
-                ]
-            ]
-        );
-        $this->add_group_control(
-            \Elementor\Group_Control_Background::get_type(),
-            [
-                'name' => 'background_dark_mode',
-                'selector' => '{{WRAPPER}} .tcgelements-button, {{WRAPPER}} .tcgelements-button.reverse .btn-animated-gr',
-                'types' => ['classic', 'gradient', 'tcg_gradient'],
-                'fields_options' => [
-                    'color' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: {{VALUE}};',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: {{VALUE}};',
-                        ],
-                    ],
-                    'gradient_angle' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
-                        ],
-                    ],
-                    'gradient_position' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
-                        ],
-                    ],
-                    'image' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-image: url("{{URL}}");',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-image: url("{{URL}}");',
-                        ],
-                    ],
-                    'position' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{VALUE}};',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{VALUE}};',
-                        ],
-                    ],
-                    'xpos' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}',
-                        ],
-                    ],
-                    'ypos' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}',
-                        ],
-                    ],
-                    'attachment' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode (desktop+){{SELECTOR}}' => 'background-attachment: {{VALUE}};',
-                            '} body.tcg-dark-mode (desktop+){{SELECTOR}}' => 'background-attachment: {{VALUE}};',
-                        ],
-                    ],
-                    'repeat' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-repeat: {{VALUE}};',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-repeat: {{VALUE}};',
-                        ],
-                    ],
-                    'size' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-size: {{VALUE}};',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-size: {{VALUE}};',
-                        ],
-                    ],
-                    'bg_width' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-size: {{SIZE}}{{UNIT}} auto',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-size: {{SIZE}}{{UNIT}} auto',
-                        ],
-                    ],
-                    'video_fallback' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background: url("{{URL}}") 50% 50%; background-size: cover;',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background: url("{{URL}}") 50% 50%; background-size: cover;',
-                        ],
-                    ],
-                ]
-            ]
-        );
-        $this->end_controls_tab();
-
-        $this->start_controls_tab(
-            'tab_button_hover',
-            [
-                'label' => esc_html__('Advanced Hover', 'element-camp'),
-            ]
-        );
-
-        $this->add_control(
-            'button_hover_selector',
-            [
-                'label' => esc_html__('Choose Selector', 'element-camp'),
-                'type' => \Elementor\Controls_Manager::SELECT,
-                'default' => 'button',
-                'options' => [
-                    'button' => esc_html__('Button', 'element-camp'),
-                    'container'  => esc_html__('Parent Container', 'element-camp'),
-                    'parent-container'  => esc_html__('Parent of Parent Container', 'element-camp'),
-                    'parent-n'  => esc_html__('Parent N', 'element-camp'),
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'button_hover_selector_important_note',
-            [
-                'type' => \Elementor\Controls_Manager::ALERT,
-                'alert_type' => 'info',
-                'heading' => esc_html__('Selector Note', 'element-camp'),
-                'content' => esc_html__('When "Parent N" is selected, set the number of parent elements to target.', 'element-camp'),
-                'condition' => [
-                    'button_hover_selector' => 'parent-n',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'parent_level',
-            [
-                'label' => esc_html__('Set Parent Levels', 'element-camp'),
-                'type' => \Elementor\Controls_Manager::NUMBER,
-                'min' => 1,
-                'max' => 10,
-                'default' => 1,
-                'condition' => [
-                    'button_hover_selector' => 'parent-n',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'hover_color',
-            [
-                'label' => esc_html__('Text Color', 'element-camp'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button:hover, {{WRAPPER}} .tcgelements-button:focus' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .tcgelements-button:hover svg, {{WRAPPER}} .tcgelements-button:focus svg' => 'fill: {{VALUE}};',
-                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'color: {{VALUE}};',
-                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active svg' => 'fill: {{VALUE}};',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
-            [
-                'name' => 'button_background_hover',
-                'label' => esc_html__('Background', 'element-camp'),
-                'types' => ['classic', 'gradient','tcg_gradient','tcg_gradient_4'],
-                'exclude' => ['image'],
-                'selector' => '{{WRAPPER}} .tcgelements-button:hover, {{WRAPPER}} .tcgelements-button:focus, {{WRAPPER}} .tcgelements-button .btn-animated-gr, {{WRAPPER}} .tcgelements-button:focus .btn-animated-gr, .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active, .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active .btn-animated-gr',
-                'fields_options' => [
-                    'background' => [
-                        'default' => 'classic',
-                    ],
-                    'color' => [
-                        'selectors' => [
-                            '{{SELECTOR}}' => 'background: {{color.VALUE}}; background-image: none;',
-                        ],
-                    ],
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Border::get_type(),
-            [
-                'name' => 'border_hover',
-                'selector' => '{{WRAPPER}} .tcgelements-button:hover, .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active',
-                'separator' => 'before',
-            ]
-        );
-
-        $this->add_group_control(
-            \Elementor\Group_Control_Background::get_type(),
-            [
-                'name' => 'border_gradient_hover',
-                'label' => esc_html__('Border Gradient Color', 'element-camp'),
-                'types' => ['gradient'],
-                'selector' => '{{WRAPPER}} .tcgelements-button:hover, .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active',
-                'exclude' => ['image'],
-                'fields_options' => [
-                    'gradient_type' => [
-                        'default' => 'radial',
-                        'type' => Controls_Manager::HIDDEN,
-                    ],
-                    'color' => [
-                        'selectors' => [
-                            '{{SELECTOR}}' => 'background-color: none;',
-                        ],
-                    ],
-                    'gradient_angle' => [
-                        'selectors' => [
-                            '{{SELECTOR}}' => 'border-image-source: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
-                        ],
-                        'type' => Controls_Manager::HIDDEN,
-                    ],
-                    'gradient_position' => [
-                        'selectors' => [
-                            '{{SELECTOR}}' => 'border-image-slice: 1; border-image-source: radial-gradient(circle farthest-corner at 10% 20%, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
-                        ],
-                    ],
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'border_radius_hover',
-            [
-                'label' => esc_html__('Border Radius', 'element-camp'),
-                'type' => Controls_Manager::DIMENSIONS,
-                'size_units' => ['px', '%', 'em'],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '{{WRAPPER}} .tcgelements-button:hover .btn-animated-gr' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active .btn-animated-gr' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Box_Shadow::get_type(),
-            [
-                'name' => 'button_box_shadow_hover',
-                'selector' => '{{WRAPPER}} .tcgelements-button:hover, .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active',
-            ]
-        );
-
-        $this->add_responsive_control(
-            'button_opacity_hover',
-            [
-                'label' => esc_html__('Button Opacity', 'element-camp'),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'max' => 1,
-                        'min' => 0.10,
-                        'step' => 0.01,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button:hover' => 'opacity: {{SIZE}};',
-                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'opacity: {{SIZE}};',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'outline_hover',
-            [
-                'label' => esc_html__('Outline', 'element-camp'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    'none' => esc_html__('None', 'element-camp'),
-                    'solid' => esc_html__('Solid', 'element-camp'),
-                    'dashed' => esc_html__('Dashed', 'element-camp'),
-                    'dotted' => esc_html__('Dotted', 'element-camp'),
-                ],
-                'default' => 'none',
-            ]
-        );
-
-        $this->add_control(
-            'outline_color_hover',
-            [
-                'label' => esc_html__('Color', 'element-camp'),
-                'type' => Controls_Manager::COLOR,
-                'condition' => [
-                    'outline_hover!' => 'none',
-                ],
-            ]
-        );
-
-        $this->add_responsive_control(
-            'outline_width_hover',
-            [
-                'label' => esc_html__('Outline Width', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'em', 'rem', 'vw', 'vh', 'custom'],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button:hover' => 'outline: {{outline_width_hover.SIZE}}{{outline_width_hover.UNIT}} {{outline_hover.VALUE}} {{outline_color_hover.VALUE}};',
-                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'outline: {{outline_width_hover.SIZE}}{{outline_width_hover.UNIT}} {{outline_hover.VALUE}} {{outline_color_hover.VALUE}};',
-                ],
-                'condition' => [
-                    'outline_hover!' => 'none',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'outline_offset_hover',
-            [
-                'label' => esc_html__('Outline Offset', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 20,
-                        'step' => 1,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button:hover' => 'outline-offset: {{SIZE}}{{UNIT}};',
-                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'outline-offset: {{SIZE}}{{UNIT}};',
-                ],
-                'condition' => [
-                    'outline_hover!' => 'none',
-                ],
-            ]
-        );
-
-        $this->add_control(
-            'button_translate_y_hover',
-            [
-                'label' => esc_html__('Translate Y', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'custom'],
-            ]
-        );
-        $this->add_control(
-            'button_translate_x_hover',
-            [
-                'label' => esc_html__('Translate X', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'custom'],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button:hover' => 'transform: translate({{button_translate_x_hover.SIZE}}{{button_translate_x_hover.UNIT}},{{button_translate_y_hover.SIZE}}{{button_translate_y_hover.UNIT}}) scale({{button_scale_hover.SIZE||1}})',
-                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'transform: translate({{button_translate_x_hover.SIZE}}{{button_translate_x_hover.UNIT}},{{button_translate_y_hover.SIZE}}{{button_translate_y_hover.UNIT}}) scale({{button_scale_hover.SIZE||1}})',
-                ],
-            ]
-        );
-        $this->add_responsive_control(
-            'button_scale_hover',
-            [
-                'label' => esc_html__('Scale', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px'],
-                'default' => [
-                    'size' => 1,
-                    'unit' => '',
-                ],
-                'range' => [
-                    'px' => [
-                        'min' => 0.1,
-                        'max' => 3,
-                        'step' => 0.1,
-                    ],
-                ],
-            ]
-        );
-        $this->add_control(
-            'button_style_dark_mode_hover',
-            [
-                'label' => esc_html__('Button Hover Dark Mode', 'element-camp'),
-                'type' => \Elementor\Controls_Manager::HEADING,
-                'separator' => 'before',
-            ]
-        );
-        $this->add_control(
-            'button_border_color_dark_mode_hover',
-            [
-                'label' => esc_html__('Border Color ( Dark Mode )', 'element-camp'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-button:hover' => 'border-color: {{VALUE}};',
-                    '} body.tcg-dark-mode {{WRAPPER}} .tcgelements-button:hover' => 'border-color: {{VALUE}};',
-                    '@media (prefers-color-scheme: dark){ body.tcg-auto-mode .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'border-color: {{VALUE}};',
-                    '} body.tcg-dark-mode .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'border-color: {{VALUE}};',
-                ],
-                'condition' => [
-                    'button_text_color_type' => 'solid'
-                ]
-            ]
-        );
-        $this->add_control(
-            'button_text_color_dark_mode_hover',
-            [
-                'label' => esc_html__('Text Color (Dark Mode)', 'element-camp'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-button:hover' => 'color: {{VALUE}};fill: {{VALUE}};',
-                    '} body.tcg-dark-mode {{WRAPPER}} .tcgelements-button:hover' => 'color: {{VALUE}};fill: {{VALUE}};',
-                    '@media (prefers-color-scheme: dark){ body.tcg-auto-mode .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'color: {{VALUE}};fill: {{VALUE}};',
-                    '} body.tcg-dark-mode .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'color: {{VALUE}};fill: {{VALUE}};',
-                ],
-            ]
-        );
-        $this->add_group_control(
-            \Elementor\Group_Control_Background::get_type(),
-            [
-                'name' => 'button_background_dark_mode_hover',
-                'selector' => '{{WRAPPER}} .tcgelements-button:hover,.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active',
-                'types' => ['classic', 'gradient', 'tcg_gradient'],
-                'fields_options' => [
-                    'color' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: {{VALUE}};',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: {{VALUE}};',
-                        ],
-                    ],
-                    'gradient_angle' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
-                        ],
-                    ],
-                    'gradient_position' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
-                        ],
-                    ],
-                    'image' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-image: url("{{URL}}");',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-image: url("{{URL}}");',
-                        ],
-                    ],
-                    'position' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{VALUE}};',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{VALUE}};',
-                        ],
-                    ],
-                    'xpos' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}',
-                        ],
-                    ],
-                    'ypos' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}',
-                        ],
-                    ],
-                    'attachment' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode (desktop+){{SELECTOR}}' => 'background-attachment: {{VALUE}};',
-                            '} body.tcg-dark-mode (desktop+){{SELECTOR}}' => 'background-attachment: {{VALUE}};',
-                        ],
-                    ],
-                    'repeat' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-repeat: {{VALUE}};',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-repeat: {{VALUE}};',
-                        ],
-                    ],
-                    'size' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-size: {{VALUE}};',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-size: {{VALUE}};',
-                        ],
-                    ],
-                    'bg_width' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-size: {{SIZE}}{{UNIT}} auto',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-size: {{SIZE}}{{UNIT}} auto',
-                        ],
-                    ],
-                    'video_fallback' => [
-                        'selectors' => [
-                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background: url("{{URL}}") 50% 50%; background-size: cover;',
-                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background: url("{{URL}}") 50% 50%; background-size: cover;',
-                        ],
-                    ],
-                ]
-            ]
-        );
-        $this->end_controls_tab();
-
-        $this->start_controls_tab(
-            'tab_only_button_hover',
-            [
-                'label' => esc_html__('Button Hover', 'element-camp'),
-            ]
-        );
-        $this->add_control(
-            'button_hover_color',
-            [
-                'label' => esc_html__('Text Color', 'element-camp'),
-                'type' => Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button:hover, {{WRAPPER}} .tcgelements-button:focus' => 'color: {{VALUE}};',
-                    '{{WRAPPER}} .tcgelements-button:hover svg, {{WRAPPER}} .tcgelements-button:focus svg' => 'fill: {{VALUE}};',
-                ],
-            ]
-        );
-        $this->add_group_control(
-            Group_Control_Background::get_type(),
-            [
-                'name' => 'button_only_background_hover',
-                'label' => esc_html__('Background', 'element-camp'),
-                'types' => ['classic', 'gradient','tcg_gradient','tcg_gradient_4'],
-                'exclude' => ['image'],
-                'selector' => '{{WRAPPER}} .tcgelements-button:hover, {{WRAPPER}} .tcgelements-button:focus, {{WRAPPER}} .tcgelements-button .btn-animated-gr, {{WRAPPER}} .tcgelements-button:focus .btn-animated-gr',
-                'fields_options' => [
-                    'background' => [
-                        'default' => 'classic',
-                    ],
-                    'color' => [
-                        'selectors' => [
-                            '{{SELECTOR}}' => 'background: {{color.VALUE}}; background-image: none;',
-                        ],
-                    ],
-                ],
-            ]
-        );
-        $this->end_controls_tab();
-        $this->end_controls_tabs();
 
         $this->add_control(
             'button_text_heading',
@@ -1903,6 +838,7 @@ class ElementCamp_Button extends Widget_Base
                 'separator' => 'before',
             ]
         );
+
         $this->add_control(
             'white_space',
             [
@@ -1932,6 +868,7 @@ class ElementCamp_Button extends Widget_Base
                 ],
             ]
         );
+
         $this->add_responsive_control(
             'text_span_padding',
             [
@@ -1943,6 +880,7 @@ class ElementCamp_Button extends Widget_Base
                 ],
             ]
         );
+
         $this->add_group_control(
             \Elementor\Group_Control_Background::get_type(),
             [
@@ -1952,6 +890,7 @@ class ElementCamp_Button extends Widget_Base
                 'selector' => '{{WRAPPER}} .tcgelements-button .tcgelements-button-text',
             ]
         );
+
         $this->add_responsive_control(
             'text_border_radius',
             [
@@ -1963,6 +902,7 @@ class ElementCamp_Button extends Widget_Base
                 ],
             ]
         );
+
         $this->add_responsive_control(
             'button_text_display',
             [
@@ -1980,213 +920,670 @@ class ElementCamp_Button extends Widget_Base
                 ]
             ]
         );
+
         $this->add_control(
             'button_text_transition',
             [
                 'label' => esc_html__('Button Text Transition', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'max' => 1,
-                        'min' => 0.10,
-                        'step' => 0.01,
-                    ],
-                ],
+                'range' => ['px' => ['max' => 1, 'min' => 0.10, 'step' => 0.01]],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button .tcgelements-button-text' => 'transition: all {{SIZE}}s ease;',
                 ],
             ]
         );
-        $this->start_controls_tabs(
-            'button_text_tabs',
-        );
-
-        $this->start_controls_tab(
-            'button_text_normal_tab',
-            [
-                'label'   => esc_html__('Normal', 'element-camp'),
-            ]
-        );
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'text_typography',
-                'global' => [
-                    'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-                ],
-                'selector' => '{{WRAPPER}} .tcgelements-button .tcgelements-button-text',
-            ]
-        );
-        $this->add_control(
-            'button_text_opacity',
-            [
-                'label' => esc_html__('Text Opacity', 'element-camp'),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'max' => 1,
-                        'min' => 0.10,
-                        'step' => 0.01,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button .tcgelements-button-text' => 'opacity: {{SIZE}};',
-                ],
-            ]
-        );
-        $this->add_responsive_control(
-            'button_text_indent',
-            [
-                'label' => esc_html__('Text Indent', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'em', 'rem', 'custom'],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button .tcgelements-button-text' => 'text-indent: {{SIZE}}{{UNIT}};',
-                ],
-            ]
-        );
-        $this->add_responsive_control(
-            'button_text_rotate',
-            [
-                'label' => esc_html__('Rotate', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'default' => [
-                    'size' => 0,
-                    'unit' => '',
-                ],
-                'size_units' => ['deg'],
-            ]
-        );
-        $this->add_responsive_control(
-            'button_text_translate_y',
-            [
-                'label' => esc_html__('Translate Y', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'custom'],
-            ]
-        );
-        $this->add_responsive_control(
-            'button_text_translate_x',
-            [
-                'label' => esc_html__('Translate X', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'custom'],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button .tcgelements-button-text' => 'transform: rotate({{button_text_rotate.SIZE}}deg) translate({{button_text_translate_x.SIZE}}{{button_text_translate_x.UNIT}},{{button_text_translate_y.SIZE}}{{button_text_translate_y.UNIT}})',
-                ],
-            ]
-        );
-        $this->add_responsive_control(
-            'button_text_transform_origin',
-            [
-                'label' => esc_html__('Button Text Transform Origin', 'element-camp'),
-                'type' => Controls_Manager::SELECT,
-                'options' => [
-                    'unset' => esc_html__('None', 'element-camp'),
-                    'center center' => esc_html__('Center Center', 'element-camp'),
-                    'center left' => esc_html__('Center Left', 'element-camp'),
-                    'center right' => esc_html__('Center Right', 'element-camp'),
-                    'top center' => esc_html__('Top Center', 'element-camp'),
-                    'top left' => esc_html__('Top Left', 'element-camp'),
-                    'top right' => esc_html__('Top Right', 'element-camp'),
-                    'bottom center' => esc_html__('Bottom Center', 'element-camp'),
-                    'bottom left' => esc_html__('Bottom Left', 'element-camp'),
-                    'bottom right' => esc_html__('Bottom Right', 'element-camp'),
-                ],
-                'default' => 'unset',
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button .tcgelements-button-text' => 'transform-origin: {{VALUE}};',
-                ],
-            ]
-        );
-        $this->end_controls_tab();
-
-        $this->start_controls_tab(
-            'button_text_hover_tab',
-            [
-                'label'   => esc_html__('Hover', 'element-camp'),
-            ]
-        );
-
-        $this->add_control(
-            'button_text_hover_selector',
-            [
-                'label' => esc_html__('Choose Selector', 'element-camp'),
-                'type' => \Elementor\Controls_Manager::SELECT,
-                'default' => 'button',
-                'options' => [
-                    'button' => esc_html__('Button', 'element-camp'),
-                    'container'  => esc_html__('Parent Container', 'element-camp'),
-                ],
-            ]
-        );
-
-        $this->add_group_control(
-            Group_Control_Typography::get_type(),
-            [
-                'name' => 'text_typography_hover',
-                'global' => [
-                    'default' => Global_Typography::TYPOGRAPHY_ACCENT,
-                ],
-                'selector' => '{{WRAPPER}} .tcgelements-button:hover .tcgelements-button-text',
-                '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-text-container-active .tcgelements-button-text',
-            ],
-        );
-
-        $this->add_control(
-            'button_text_opacity_hover',
-            [
-                'label' => esc_html__('Text Opacity', 'element-camp'),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'range' => [
-                    'px' => [
-                        'max' => 1,
-                        'min' => 0.10,
-                        'step' => 0.01,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button:hover .tcgelements-button-text' => 'opacity: {{SIZE}};',
-                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-text-container-active .tcgelements-button-text' => 'opacity: {{SIZE}};',
-                ],
-            ]
-        );
-        $this->add_responsive_control(
-            'button_text_indent_hover',
-            [
-                'label' => esc_html__('Text Indent', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'em', 'rem', 'custom'],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button:hover .tcgelements-button-text' => 'text-indent: {{SIZE}}{{UNIT}};',
-                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-text-container-active .tcgelements-button-text' => 'text-indent: {{SIZE}};',
-                ],
-            ]
-        );
-        $this->add_responsive_control(
-            'button_text_translate_y_hover',
-            [
-                'label' => esc_html__('Translate Y', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'custom'],
-            ]
-        );
-        $this->add_responsive_control(
-            'button_text_translate_x_hover',
-            [
-                'label' => esc_html__('Translate X', 'element-camp'),
-                'type' => Controls_Manager::SLIDER,
-                'size_units' => ['px', '%', 'custom'],
-                'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button:hover .tcgelements-button-text' => 'transform: translate({{button_text_translate_x_hover.SIZE}}{{button_text_translate_x_hover.UNIT}},{{button_text_translate_y_hover.SIZE}}{{button_text_translate_y_hover.UNIT}})',
-                    '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-text-container-active .tcgelements-button-text' => 'transform: translate({{button_text_translate_x_hover.SIZE}}{{button_text_translate_x_hover.UNIT}},{{button_text_translate_y_hover.SIZE}}{{button_text_translate_y_hover.UNIT}})',
-                ],
-            ]
-        );
-        $this->end_controls_tab();
-        $this->end_controls_tabs();
 
         $this->end_controls_section();
+
+// ==========================================
+// SECTION 4: Button States (Normal & Hover Tabs)
+// ==========================================
+        $this->start_controls_section(
+            'section_style_button_states',
+            [
+                'label' => esc_html__('Button States', 'element-camp'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->start_controls_tabs('tabs_button_style');
+
+        $this->start_controls_tab('tab_button_normal', ['label' => esc_html__('Normal', 'element-camp')]);
+
+        $this->add_group_control(Group_Control_Typography::get_type(), [
+            'name' => 'typography',
+            'global' => ['default' => Global_Typography::TYPOGRAPHY_ACCENT],
+            'selector' => '{{WRAPPER}} .tcgelements-button',
+        ]);
+
+        $this->add_control('button_text_color_type', [
+            'label' => esc_html__('Text color type', 'element-camp'),
+            'type' => Controls_Manager::SELECT,
+            'options' => ['solid' => 'Solid', 'gradient' => 'Gradient'],
+            'default' => 'solid',
+        ]);
+
+        $this->add_control('button_text_color', [
+            'label' => esc_html__('Text Color', 'element-camp'),
+            'type' => Controls_Manager::COLOR,
+            'global' => ['default' => Global_Colors::COLOR_PRIMARY],
+            'selectors' => ['{{WRAPPER}} .tcgelements-button' => 'color: {{VALUE}}; fill: {{VALUE}};'],
+            'condition' => ['button_text_color_type' => 'solid']
+        ]);
+
+        $this->add_control('button_text_gradient_bg_color1', [
+            'label' => _x('First Color', 'Background Control', 'element-camp'),
+            'type' => Controls_Manager::COLOR,
+            'default' => '',
+            'title' => _x('First Color', 'Background Control', 'element-camp'),
+            'render_type' => 'ui',
+            'condition' => ['button_text_color_type' => ['gradient']],
+            'of_type' => 'gradient',
+        ]);
+
+        $this->add_control('button_text_gradient_bg_color1_stop', [
+            'label' => _x('Location', 'Background Control', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['%'],
+            'default' => ['unit' => '%', 'size' => 0],
+            'render_type' => 'ui',
+            'condition' => ['button_text_color_type' => ['gradient']],
+            'of_type' => 'gradient',
+        ]);
+
+        $this->add_control('button_text_gradient_bg_color2', [
+            'label' => _x('Second Color', 'Background Control', 'element-camp'),
+            'type' => Controls_Manager::COLOR,
+            'default' => '#f2295b',
+            'render_type' => 'ui',
+            'condition' => ['button_text_color_type' => ['gradient']],
+            'of_type' => 'gradient',
+        ]);
+
+        $this->add_control('button_text_gradient_bg_color2_stop', [
+            'label' => _x('Location', 'Background Control', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['%'],
+            'default' => ['unit' => '%', 'size' => 100],
+            'render_type' => 'ui',
+            'condition' => ['button_text_color_type' => ['gradient']],
+            'of_type' => 'gradient',
+        ]);
+
+        $this->add_control('button_text_gradient_type', [
+            'label' => _x('Type', 'Background Control', 'element-camp'),
+            'type' => Controls_Manager::SELECT,
+            'options' => ['linear' => _x('Linear', 'Background Control', 'element-camp'), 'radial' => _x('Radial', 'Background Control', 'element-camp')],
+            'default' => 'linear',
+            'render_type' => 'ui',
+            'condition' => ['button_text_color_type' => ['gradient']],
+            'of_type' => 'gradient',
+        ]);
+
+        $this->add_control('button_text_gradient_angle', [
+            'label' => _x('Angle', 'Background Control', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['deg'],
+            'default' => ['unit' => 'deg', 'size' => 180],
+            'range' => ['deg' => ['step' => 10]],
+            'selectors' => ['{{WRAPPER}} .tcgelements-button .tcgelements-button-text' => 'background-image: linear-gradient({{SIZE}}{{UNIT}}, {{button_text_gradient_bg_color1.VALUE}} {{button_text_gradient_bg_color1_stop.SIZE}}{{button_text_gradient_bg_color1_stop.UNIT}},{{button_text_gradient_bg_color2.VALUE}} {{button_text_gradient_bg_color2_stop.SIZE}}{{button_text_gradient_bg_color2_stop.UNIT}}); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'],
+            'condition' => ['button_text_color_type' => ['gradient'], 'button_text_gradient_type' => 'linear'],
+            'of_type' => 'gradient',
+        ]);
+
+        $this->add_group_control(Group_Control_Background::get_type(), [
+            'name' => 'background',
+            'label' => esc_html__('Background', 'element-camp'),
+            'types' => ['classic', 'gradient','tcg_gradient','tcg_gradient_4'],
+            'selector' => '{{WRAPPER}} .tcgelements-button, {{WRAPPER}} .tcgelements-button.reverse .btn-animated-gr',
+            'fields_options' => [
+                'background' => ['default' => 'classic'],
+                'color' => ['selectors' => ['{{SELECTOR}}' => 'background: {{color.VALUE}}; background-image: none;']],
+            ],
+        ]);
+
+        $this->add_group_control(Group_Control_Box_Shadow::get_type(), [
+            'name' => 'button_box_shadow',
+            'selector' => '{{WRAPPER}} .tcgelements-button',
+        ]);
+
+        $this->add_responsive_control('button_opacity', [
+            'label' => esc_html__('Button Opacity', 'element-camp'),
+            'type' => \Elementor\Controls_Manager::SLIDER,
+            'range' => ['px' => ['max' => 1, 'min' => 0.10, 'step' => 0.01]],
+            'selectors' => ['{{WRAPPER}} .tcgelements-button' => 'opacity: {{SIZE}};'],
+        ]);
+
+        $this->add_group_control(Group_Control_Border::get_type(), [
+            'name' => 'border',
+            'selector' => '{{WRAPPER}} .tcgelements-button',
+            'separator' => 'before',
+        ]);
+
+        $this->add_group_control(\Elementor\Group_Control_Background::get_type(), [
+            'name' => 'border_gradient',
+            'label' => esc_html__('Border Gradient Color', 'element-camp'),
+            'types' => ['gradient'],
+            'selector' => '{{WRAPPER}} .tcgelements-button',
+            'exclude' => ['image'],
+            'fields_options' => [
+                'gradient_type' => ['default' => 'radial', 'type' => Controls_Manager::HIDDEN],
+                'color' => ['selectors' => ['{{SELECTOR}}' => 'background-color: none;']],
+                'gradient_angle' => ['selectors' => ['{{SELECTOR}}' => 'border-image-source: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})'], 'type' => Controls_Manager::HIDDEN],
+                'gradient_position' => ['selectors' => ['{{SELECTOR}}' => 'border-image-slice: 1; border-image-source: radial-gradient(circle farthest-corner at 10% 20%, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})']],
+            ],
+        ]);
+
+        $this->add_control('border_radius', [
+            'label' => esc_html__('Border Radius', 'element-camp'),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+            'selectors' => [
+                '{{WRAPPER}} .tcgelements-button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .tcgelements-button .btn-animated-gr' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ]);
+
+        $this->add_control('outline', [
+            'label' => esc_html__('Outline', 'element-camp'),
+            'type' => Controls_Manager::SELECT,
+            'options' => ['none' => esc_html__('None', 'element-camp'), 'solid' => esc_html__('Solid', 'element-camp'), 'dashed' => esc_html__('Dashed', 'element-camp'), 'dotted' => esc_html__('Dotted', 'element-camp')],
+            'default' => 'none',
+        ]);
+
+        $this->add_control('outline_color', [
+            'label' => esc_html__('Color', 'element-camp'),
+            'type' => Controls_Manager::COLOR,
+            'condition' => ['outline!' => 'none'],
+        ]);
+
+        $this->add_responsive_control('outline_width', [
+            'label' => esc_html__('Outline Width', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px', '%', 'em', 'rem', 'vw', 'vh', 'custom'],
+            'selectors' => ['{{WRAPPER}} .tcgelements-button' => 'outline: {{outline_width.SIZE}}{{outline_width.UNIT}} {{outline.VALUE}} {{outline_color.VALUE}}'],
+            'condition' => ['outline!' => 'none'],
+        ]);
+
+        $this->add_control('outline_offset', [
+            'label' => esc_html__('Outline Offset', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'range' => ['px' => ['min' => 0, 'max' => 20, 'step' => 1]],
+            'selectors' => ['{{WRAPPER}} .tcgelements-button' => 'outline-offset: {{SIZE}}{{UNIT}};'],
+            'condition' => ['outline!' => 'none'],
+        ]);
+
+        $this->add_responsive_control('button_translate_y', [
+            'label' => esc_html__('Translate Y', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px', '%', 'custom'],
+        ]);
+
+        $this->add_responsive_control('button_translate_x', [
+            'label' => esc_html__('Translate X', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px', '%', 'custom'],
+            'selectors' => ['{{WRAPPER}} .tcgelements-button' => 'transform: translate({{button_translate_x.SIZE}}{{button_translate_x.UNIT}},{{button_translate_y.SIZE}}{{button_translate_y.UNIT}}) scale({{button_scale.SIZE||1}})'],
+        ]);
+
+        $this->add_responsive_control('button_scale', [
+            'label' => esc_html__('Scale', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px'],
+            'default' => ['size' => 1, 'unit' => ''],
+            'range' => ['px' => ['min' => 0.1, 'max' => 3, 'step' => 0.1]],
+        ]);
+
+        $this->add_control('button_blur_method', [
+            'label' => esc_html__('Blur Method', 'element-camp'),
+            'type' => Controls_Manager::SELECT,
+            'options' => ['backdrop-filter' => 'backdrop-filter', 'filter' => 'filter'],
+            'default' => 'backdrop-filter',
+            'selectors' => ['{{WRAPPER}} .tcgelements-button' => '{{VALUE}}: blur({{blur_value.SIZE}}px);'],
+        ]);
+
+        $this->add_control('blur_value', [
+            'label' => esc_html__('Blur', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'range' => ['px' => ['max' => 250]],
+        ]);
+
+        $this->add_control('button_style_dark_mode', [
+            'label' => esc_html__('Button Dark Mode', 'element-camp'),
+            'type' => \Elementor\Controls_Manager::HEADING,
+            'separator' => 'before',
+        ]);
+
+        $this->add_control('button_border_color_dark_mode', [
+            'label' => esc_html__('Border Color ( Dark Mode )', 'element-camp'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-button' => 'border-color: {{VALUE}};',
+                '} body.tcg-dark-mode {{WRAPPER}} .tcgelements-button' => 'border-color: {{VALUE}};',
+            ],
+            'condition' => ['button_text_color_type' => 'solid']
+        ]);
+
+        $this->add_control('button_text_color_dark_mode', [
+            'label' => esc_html__('Text Color (Dark Mode)', 'element-camp'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-button' => 'color: {{VALUE}};fill: {{VALUE}};',
+                '} body.tcg-dark-mode {{WRAPPER}} .tcgelements-button' => 'color: {{VALUE}};fill: {{VALUE}};',
+            ],
+            'condition' => ['button_text_color_type' => 'solid']
+        ]);
+
+        $this->add_group_control(\Elementor\Group_Control_Background::get_type(), [
+            'name' => 'background_dark_mode',
+            'selector' => '{{WRAPPER}} .tcgelements-button, {{WRAPPER}} .tcgelements-button.reverse .btn-animated-gr',
+            'types' => ['classic', 'gradient', 'tcg_gradient'],
+            'fields_options' => [
+                'color' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: {{VALUE}};', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: {{VALUE}};']],
+                'gradient_angle' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})']],
+                'gradient_position' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})']],
+                'tcg_gradient_angle' => [
+                    'selectors' => [
+                        '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                        '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                    ],
+                ],
+                'tcg_gradient_position' => [
+                    'selectors' => [
+                        '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                        '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                    ],
+                ],
+                'image' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-image: url("{{URL}}");', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-image: url("{{URL}}");']],
+                'position' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{VALUE}};', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{VALUE}};']],
+                'xpos' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}']],
+                'ypos' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}']],
+                'attachment' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode (desktop+){{SELECTOR}}' => 'background-attachment: {{VALUE}};', '} body.tcg-dark-mode (desktop+){{SELECTOR}}' => 'background-attachment: {{VALUE}};']],
+                'repeat' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-repeat: {{VALUE}};', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-repeat: {{VALUE}};']],
+                'size' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-size: {{VALUE}};', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-size: {{VALUE}};']],
+                'bg_width' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-size: {{SIZE}}{{UNIT}} auto', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-size: {{SIZE}}{{UNIT}} auto']],
+                'video_fallback' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background: url("{{URL}}") 50% 50%; background-size: cover;', '} body.tcg-dark-mode {{SELECTOR}}' => 'background: url("{{URL}}") 50% 50%; background-size: cover;']],
+            ]
+        ]);
+
+        $this->end_controls_tab(); // tab_button_normal
+
+        $this->start_controls_tab('tab_button_hover', ['label' => esc_html__('Advanced Hover', 'element-camp')]);
+
+        $this->add_control('button_hover_selector', [
+            'label' => esc_html__('Choose Selector', 'element-camp'),
+            'type' => \Elementor\Controls_Manager::SELECT,
+            'default' => 'button',
+            'options' => ['button' => esc_html__('Button', 'element-camp'), 'container' => esc_html__('Parent Container', 'element-camp'), 'parent-container' => esc_html__('Parent of Parent Container', 'element-camp'), 'parent-n' => esc_html__('Parent N', 'element-camp')],
+        ]);
+
+        $this->add_control('button_hover_selector_important_note', [
+            'type' => \Elementor\Controls_Manager::ALERT,
+            'alert_type' => 'info',
+            'heading' => esc_html__('Selector Note', 'element-camp'),
+            'content' => esc_html__('When "Parent N" is selected, set the number of parent elements to target.', 'element-camp'),
+            'condition' => ['button_hover_selector' => 'parent-n'],
+        ]);
+
+        $this->add_control('parent_level', [
+            'label' => esc_html__('Set Parent Levels', 'element-camp'),
+            'type' => \Elementor\Controls_Manager::NUMBER,
+            'min' => 1, 'max' => 10, 'default' => 1,
+            'condition' => ['button_hover_selector' => 'parent-n'],
+        ]);
+
+        $this->add_control('hover_color', [
+            'label' => esc_html__('Text Color', 'element-camp'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tcgelements-button:hover, {{WRAPPER}} .tcgelements-button:focus' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .tcgelements-button:hover svg, {{WRAPPER}} .tcgelements-button:focus svg' => 'fill: {{VALUE}};',
+                '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'color: {{VALUE}};',
+                '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active svg' => 'fill: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_group_control(Group_Control_Background::get_type(), [
+            'name' => 'button_background_hover',
+            'label' => esc_html__('Background', 'element-camp'),
+            'types' => ['classic', 'gradient','tcg_gradient','tcg_gradient_4'],
+            'exclude' => ['image'],
+            'selector' => '{{WRAPPER}} .tcgelements-button:hover, {{WRAPPER}} .tcgelements-button:focus, {{WRAPPER}} .tcgelements-button .btn-animated-gr, {{WRAPPER}} .tcgelements-button:focus .btn-animated-gr, .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active, .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active .btn-animated-gr',
+            'fields_options' => [
+                'background' => ['default' => 'classic'],
+                'color' => ['selectors' => ['{{SELECTOR}}' => 'background: {{color.VALUE}}; background-image: none;']],
+            ],
+        ]);
+
+        $this->add_group_control(Group_Control_Border::get_type(), [
+            'name' => 'border_hover',
+            'selector' => '{{WRAPPER}} .tcgelements-button:hover, .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active',
+            'separator' => 'before',
+        ]);
+
+        $this->add_group_control(\Elementor\Group_Control_Background::get_type(), [
+            'name' => 'border_gradient_hover',
+            'label' => esc_html__('Border Gradient Color', 'element-camp'),
+            'types' => ['gradient'],
+            'selector' => '{{WRAPPER}} .tcgelements-button:hover, .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active',
+            'exclude' => ['image'],
+            'fields_options' => [
+                'gradient_type' => ['default' => 'radial', 'type' => Controls_Manager::HIDDEN],
+                'color' => ['selectors' => ['{{SELECTOR}}' => 'background-color: none;']],
+                'gradient_angle' => ['selectors' => ['{{SELECTOR}}' => 'border-image-source: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})'], 'type' => Controls_Manager::HIDDEN],
+                'gradient_position' => ['selectors' => ['{{SELECTOR}}' => 'border-image-slice: 1; border-image-source: radial-gradient(circle farthest-corner at 10% 20%, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})']],
+            ],
+        ]);
+
+        $this->add_control('border_radius_hover', [
+            'label' => esc_html__('Border Radius', 'element-camp'),
+            'type' => Controls_Manager::DIMENSIONS,
+            'size_units' => ['px', '%', 'em'],
+            'selectors' => [
+                '{{WRAPPER}} .tcgelements-button:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '{{WRAPPER}} .tcgelements-button:hover .btn-animated-gr' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active .btn-animated-gr' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+            ],
+        ]);
+
+        $this->add_group_control(Group_Control_Box_Shadow::get_type(), [
+            'name' => 'button_box_shadow_hover',
+            'selector' => '{{WRAPPER}} .tcgelements-button:hover, .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active',
+        ]);
+
+        $this->add_responsive_control('button_opacity_hover', [
+            'label' => esc_html__('Button Opacity', 'element-camp'),
+            'type' => \Elementor\Controls_Manager::SLIDER,
+            'range' => ['px' => ['max' => 1, 'min' => 0.10, 'step' => 0.01]],
+            'selectors' => [
+                '{{WRAPPER}} .tcgelements-button:hover' => 'opacity: {{SIZE}};',
+                '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'opacity: {{SIZE}};',
+            ],
+        ]);
+
+        $this->add_control('outline_hover', [
+            'label' => esc_html__('Outline', 'element-camp'),
+            'type' => Controls_Manager::SELECT,
+            'options' => ['none' => esc_html__('None', 'element-camp'), 'solid' => esc_html__('Solid', 'element-camp'), 'dashed' => esc_html__('Dashed', 'element-camp'), 'dotted' => esc_html__('Dotted', 'element-camp')],
+            'default' => 'none',
+        ]);
+
+        $this->add_control('outline_color_hover', [
+            'label' => esc_html__('Color', 'element-camp'),
+            'type' => Controls_Manager::COLOR,
+            'condition' => ['outline_hover!' => 'none'],
+        ]);
+
+        $this->add_responsive_control('outline_width_hover', [
+            'label' => esc_html__('Outline Width', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px', '%', 'em', 'rem', 'vw', 'vh', 'custom'],
+            'selectors' => [
+                '{{WRAPPER}} .tcgelements-button:hover' => 'outline: {{outline_width_hover.SIZE}}{{outline_width_hover.UNIT}} {{outline_hover.VALUE}} {{outline_color_hover.VALUE}};',
+                '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'outline: {{outline_width_hover.SIZE}}{{outline_width_hover.UNIT}} {{outline_hover.VALUE}} {{outline_color_hover.VALUE}};',
+            ],
+            'condition' => ['outline_hover!' => 'none'],
+        ]);
+
+        $this->add_control('outline_offset_hover', [
+            'label' => esc_html__('Outline Offset', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'range' => ['px' => ['min' => 0, 'max' => 20, 'step' => 1]],
+            'selectors' => [
+                '{{WRAPPER}} .tcgelements-button:hover' => 'outline-offset: {{SIZE}}{{UNIT}};',
+                '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'outline-offset: {{SIZE}}{{UNIT}};',
+            ],
+            'condition' => ['outline_hover!' => 'none'],
+        ]);
+
+        $this->add_control('button_translate_y_hover', [
+            'label' => esc_html__('Translate Y', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px', '%', 'custom'],
+        ]);
+
+        $this->add_control('button_translate_x_hover', [
+            'label' => esc_html__('Translate X', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px', '%', 'custom'],
+            'selectors' => [
+                '{{WRAPPER}} .tcgelements-button:hover' => 'transform: translate({{button_translate_x_hover.SIZE}}{{button_translate_x_hover.UNIT}},{{button_translate_y_hover.SIZE}}{{button_translate_y_hover.UNIT}}) scale({{button_scale_hover.SIZE||1}})',
+                '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'transform: translate({{button_translate_x_hover.SIZE}}{{button_translate_x_hover.UNIT}},{{button_translate_y_hover.SIZE}}{{button_translate_y_hover.UNIT}}) scale({{button_scale_hover.SIZE||1}})',
+            ],
+        ]);
+
+        $this->add_responsive_control('button_scale_hover', [
+            'label' => esc_html__('Scale', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px'],
+            'default' => ['size' => 1, 'unit' => ''],
+            'range' => ['px' => ['min' => 0.1, 'max' => 3, 'step' => 0.1]],
+        ]);
+
+        $this->add_control('button_style_dark_mode_hover', [
+            'label' => esc_html__('Button Hover Dark Mode', 'element-camp'),
+            'type' => \Elementor\Controls_Manager::HEADING,
+            'separator' => 'before',
+        ]);
+
+        $this->add_control('button_border_color_dark_mode_hover', [
+            'label' => esc_html__('Border Color ( Dark Mode )', 'element-camp'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-button:hover' => 'border-color: {{VALUE}};',
+                '} body.tcg-dark-mode {{WRAPPER}} .tcgelements-button:hover' => 'border-color: {{VALUE}};',
+                '@media (prefers-color-scheme: dark){ body.tcg-auto-mode .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'border-color: {{VALUE}};',
+                '} body.tcg-dark-mode .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'border-color: {{VALUE}};',
+            ],
+            'condition' => ['button_text_color_type' => 'solid']
+        ]);
+
+        $this->add_control('button_text_color_dark_mode_hover', [
+            'label' => esc_html__('Text Color (Dark Mode)', 'element-camp'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-button:hover' => 'color: {{VALUE}};fill: {{VALUE}};',
+                '} body.tcg-dark-mode {{WRAPPER}} .tcgelements-button:hover' => 'color: {{VALUE}};fill: {{VALUE}};',
+                '@media (prefers-color-scheme: dark){ body.tcg-auto-mode .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'color: {{VALUE}};fill: {{VALUE}};',
+                '} body.tcg-dark-mode .e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active' => 'color: {{VALUE}};fill: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_group_control(\Elementor\Group_Control_Background::get_type(), [
+            'name' => 'button_background_dark_mode_hover',
+            'selector' => '{{WRAPPER}} .tcgelements-button:hover,.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-container-active',
+            'types' => ['classic', 'gradient', 'tcg_gradient'],
+            'fields_options' => [
+                'color' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: {{VALUE}};', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: {{VALUE}};']],
+                'gradient_angle' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})']],
+                'gradient_position' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})']],
+                'tcg_gradient_angle' => [
+                    'selectors' => [
+                        '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                        '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                    ],
+                ],
+                'tcg_gradient_position' => [
+                    'selectors' => [
+                        '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                        '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                    ],
+                ],
+                'image' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-image: url("{{URL}}");', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-image: url("{{URL}}");']],
+                'position' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{VALUE}};', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{VALUE}};']],
+                'xpos' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}']],
+                'ypos' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-position: {{SIZE}}{{UNIT}} {{ypos.SIZE}}{{ypos.UNIT}}']],
+                'attachment' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode (desktop+){{SELECTOR}}' => 'background-attachment: {{VALUE}};', '} body.tcg-dark-mode (desktop+){{SELECTOR}}' => 'background-attachment: {{VALUE}};']],
+                'repeat' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-repeat: {{VALUE}};', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-repeat: {{VALUE}};']],
+                'size' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-size: {{VALUE}};', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-size: {{VALUE}};']],
+                'bg_width' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-size: {{SIZE}}{{UNIT}} auto', '} body.tcg-dark-mode {{SELECTOR}}' => 'background-size: {{SIZE}}{{UNIT}} auto']],
+                'video_fallback' => ['selectors' => ['@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background: url("{{URL}}") 50% 50%; background-size: cover;', '} body.tcg-dark-mode {{SELECTOR}}' => 'background: url("{{URL}}") 50% 50%; background-size: cover;']],
+            ]
+        ]);
+
+        $this->end_controls_tab(); // tab_button_hover
+
+        $this->start_controls_tab('tab_only_button_hover', ['label' => esc_html__('Button Hover', 'element-camp')]);
+
+        $this->add_control('button_hover_color', [
+            'label' => esc_html__('Text Color', 'element-camp'),
+            'type' => Controls_Manager::COLOR,
+            'selectors' => [
+                '{{WRAPPER}} .tcgelements-button:hover, {{WRAPPER}} .tcgelements-button:focus' => 'color: {{VALUE}};',
+                '{{WRAPPER}} .tcgelements-button:hover svg, {{WRAPPER}} .tcgelements-button:focus svg' => 'fill: {{VALUE}};',
+            ],
+        ]);
+
+        $this->add_group_control(Group_Control_Background::get_type(), [
+            'name' => 'button_only_background_hover',
+            'label' => esc_html__('Background', 'element-camp'),
+            'types' => ['classic', 'gradient','tcg_gradient','tcg_gradient_4'],
+            'exclude' => ['image'],
+            'selector' => '{{WRAPPER}} .tcgelements-button:hover, {{WRAPPER}} .tcgelements-button:focus, {{WRAPPER}} .tcgelements-button .btn-animated-gr, {{WRAPPER}} .tcgelements-button:focus .btn-animated-gr',
+            'fields_options' => [
+                'background' => ['default' => 'classic'],
+                'color' => ['selectors' => ['{{SELECTOR}}' => 'background: {{color.VALUE}}; background-image: none;']],
+            ],
+        ]);
+
+        $this->end_controls_tab(); // tab_only_button_hover
+        $this->end_controls_tabs(); // tabs_button_style
+
+        $this->end_controls_section(); // section_style_button_states
+
+// ==========================================
+// SECTION 5: Text Positioning & Transform
+// ==========================================
+        $this->start_controls_section(
+            'section_style_text_transform',
+            [
+                'label' => esc_html__('Text Positioning & Transform', 'element-camp'),
+                'tab' => Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+        $this->start_controls_tabs('button_text_tabs');
+
+        $this->start_controls_tab('button_text_normal_tab', ['label' => esc_html__('Normal', 'element-camp')]);
+
+        $this->add_group_control(Group_Control_Typography::get_type(), [
+            'name' => 'text_typography',
+            'global' => ['default' => Global_Typography::TYPOGRAPHY_ACCENT],
+            'selector' => '{{WRAPPER}} .tcgelements-button .tcgelements-button-text',
+        ]);
+
+        $this->add_control('button_text_opacity', [
+            'label' => esc_html__('Text Opacity', 'element-camp'),
+            'type' => \Elementor\Controls_Manager::SLIDER,
+            'range' => ['px' => ['max' => 1, 'min' => 0.10, 'step' => 0.01]],
+            'selectors' => ['{{WRAPPER}} .tcgelements-button .tcgelements-button-text' => 'opacity: {{SIZE}};'],
+        ]);
+
+        $this->add_responsive_control('button_text_indent', [
+            'label' => esc_html__('Text Indent', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+            'selectors' => ['{{WRAPPER}} .tcgelements-button .tcgelements-button-text' => 'text-indent: {{SIZE}}{{UNIT}};'],
+        ]);
+
+        $this->add_responsive_control('button_text_rotate', [
+            'label' => esc_html__('Rotate', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'default' => ['size' => 0, 'unit' => ''],
+            'size_units' => ['deg'],
+        ]);
+
+        $this->add_responsive_control('button_text_translate_y', [
+            'label' => esc_html__('Translate Y', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px', '%', 'custom'],
+        ]);
+
+        $this->add_responsive_control('button_text_translate_x', [
+            'label' => esc_html__('Translate X', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px', '%', 'custom'],
+            'selectors' => ['{{WRAPPER}} .tcgelements-button .tcgelements-button-text' => 'transform: rotate({{button_text_rotate.SIZE}}deg) translate({{button_text_translate_x.SIZE}}{{button_text_translate_x.UNIT}},{{button_text_translate_y.SIZE}}{{button_text_translate_y.UNIT}})'],
+        ]);
+
+        $this->add_responsive_control('button_text_transform_origin', [
+            'label' => esc_html__('Button Text Transform Origin', 'element-camp'),
+            'type' => Controls_Manager::SELECT,
+            'options' => [
+                'unset' => esc_html__('None', 'element-camp'),
+                'center center' => esc_html__('Center Center', 'element-camp'),
+                'center left' => esc_html__('Center Left', 'element-camp'),
+                'center right' => esc_html__('Center Right', 'element-camp'),
+                'top center' => esc_html__('Top Center', 'element-camp'),
+                'top left' => esc_html__('Top Left', 'element-camp'),
+                'top right' => esc_html__('Top Right', 'element-camp'),
+                'bottom center' => esc_html__('Bottom Center', 'element-camp'),
+                'bottom left' => esc_html__('Bottom Left', 'element-camp'),
+                'bottom right' => esc_html__('Bottom Right', 'element-camp'),
+            ],
+            'default' => 'unset',
+            'selectors' => ['{{WRAPPER}} .tcgelements-button .tcgelements-button-text' => 'transform-origin: {{VALUE}};'],
+        ]);
+
+        $this->end_controls_tab(); // button_text_normal_tab
+
+        $this->start_controls_tab('button_text_hover_tab', ['label' => esc_html__('Hover', 'element-camp')]);
+
+        $this->add_control('button_text_hover_selector', [
+            'label' => esc_html__('Choose Selector', 'element-camp'),
+            'type' => \Elementor\Controls_Manager::SELECT,
+            'default' => 'button',
+            'options' => ['button' => esc_html__('Button', 'element-camp'), 'container' => esc_html__('Parent Container', 'element-camp')],
+        ]);
+
+        $this->add_group_control(Group_Control_Typography::get_type(), [
+            'name' => 'text_typography_hover',
+            'global' => ['default' => Global_Typography::TYPOGRAPHY_ACCENT],
+            'selector' => '{{WRAPPER}} .tcgelements-button:hover .tcgelements-button-text',
+            '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-text-container-active .tcgelements-button-text',
+        ]);
+
+        $this->add_control('button_text_opacity_hover', [
+            'label' => esc_html__('Text Opacity', 'element-camp'),
+            'type' => \Elementor\Controls_Manager::SLIDER,
+            'range' => ['px' => ['max' => 1, 'min' => 0.10, 'step' => 0.01]],
+            'selectors' => [
+                '{{WRAPPER}} .tcgelements-button:hover .tcgelements-button-text' => 'opacity: {{SIZE}};',
+                '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-text-container-active .tcgelements-button-text' => 'opacity: {{SIZE}};',
+            ],
+        ]);
+
+        $this->add_responsive_control('button_text_indent_hover', [
+            'label' => esc_html__('Text Indent', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px', '%', 'em', 'rem', 'custom'],
+            'selectors' => [
+                '{{WRAPPER}} .tcgelements-button:hover .tcgelements-button-text' => 'text-indent: {{SIZE}}{{UNIT}};',
+                '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-text-container-active .tcgelements-button-text' => 'text-indent: {{SIZE}};',
+            ],
+        ]);
+
+        $this->add_responsive_control('button_text_translate_y_hover', [
+            'label' => esc_html__('Translate Y', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px', '%', 'custom'],
+        ]);
+
+        $this->add_responsive_control('button_text_translate_x_hover', [
+            'label' => esc_html__('Translate X', 'element-camp'),
+            'type' => Controls_Manager::SLIDER,
+            'size_units' => ['px', '%', 'custom'],
+            'selectors' => [
+                '{{WRAPPER}} .tcgelements-button:hover .tcgelements-button-text' => 'transform: translate({{button_text_translate_x_hover.SIZE}}{{button_text_translate_x_hover.UNIT}},{{button_text_translate_y_hover.SIZE}}{{button_text_translate_y_hover.UNIT}})',
+                '.e-con:hover .elementor-element-{{ID}}>.elementor-widget-container>.tcgelements-button.tc-button-text-container-active .tcgelements-button-text' => 'transform: translate({{button_text_translate_x_hover.SIZE}}{{button_text_translate_x_hover.UNIT}},{{button_text_translate_y_hover.SIZE}}{{button_text_translate_y_hover.UNIT}})',
+            ],
+        ]);
+
+        $this->end_controls_tab(); // button_text_hover_tab
+        $this->end_controls_tabs(); // button_text_tabs
+
+        $this->end_controls_section(); // section_style_text_transform
         $this->start_controls_section(
             'section_icon_style',
             [
@@ -2993,10 +2390,10 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'button_icon_outline',
             [
-                'label' => esc_html__('Outline', 'themescamp-plugin'),
+                'label' => esc_html__('Outline', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
                 'return_value' => 'yes',
                 'default' => 'yes',
             ]
@@ -3005,16 +2402,16 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'button_icon_outline_type',
             [
-                'label' => esc_html__('Border Type', 'themescamp-plugin'),
+                'label' => esc_html__('Border Type', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-plugin'),
-                    'none' => esc_html__('None', 'themescamp-plugin'),
-                    'solid' => esc_html__('Solid', 'themescamp-plugin'),
-                    'double' => esc_html__('Double', 'themescamp-plugin'),
-                    'dotted' => esc_html__('Dotted', 'themescamp-plugin'),
-                    'dashed' => esc_html__('Dashed', 'themescamp-plugin'),
-                    'groove' => esc_html__('Groove', 'themescamp-plugin'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                    'solid' => esc_html__('Solid', 'element-camp'),
+                    'double' => esc_html__('Double', 'element-camp'),
+                    'dotted' => esc_html__('Dotted', 'element-camp'),
+                    'dashed' => esc_html__('Dashed', 'element-camp'),
+                    'groove' => esc_html__('Groove', 'element-camp'),
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button .tcgelements-button-icon' => 'outline-style: {{VALUE}};',
@@ -3024,7 +2421,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'button_icon_outline_width',
             [
-                'label' => esc_html__('Bullet Width', 'themescamp-plugin'),
+                'label' => esc_html__('Bullet Width', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem', 'vw', 'custom'],
                 'range' => [
@@ -3045,7 +2442,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'button_icon_outline_color',
             [
-                'label' => esc_html__('Border Color', 'themescamp-plugin'),
+                'label' => esc_html__('Border Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -3059,7 +2456,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'button_icon_outline_offset',
             [
-                'label' => esc_html__('Bullet Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Bullet Offset', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -3130,22 +2527,22 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'button_the_icon_transform_options',
             [
-                'label' => esc_html__('Icon Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Icon Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
         $this->start_popover();
         $this->add_control(
-            'button_the_icon_translate_y_hover',
+            'button_the_icon_translate_y',
             [
                 'label' => esc_html__('Button Icon Translate Y', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'custom'],
                 'selectors' => [
-                    '{{WRAPPER}} .tcgelements-button:hover .tcgelements-button-icon svg' => '--e-transform-tcgelements-button-icon-translateY: {{SIZE}}{{UNIT}}',
-                    '{{WRAPPER}} .tcgelements-button:hover .tcgelements-button-icon i' => '--e-transform-tcgelements-button-icon-translateY: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .tcgelements-button .tcgelements-button-icon svg' => '--e-transform-tcgelements-button-icon-translateY: {{SIZE}}{{UNIT}}',
+                    '{{WRAPPER}} .tcgelements-button .tcgelements-button-icon i' => '--e-transform-tcgelements-button-icon-translateY: {{SIZE}}{{UNIT}}',
                 ],
             ]
         );
@@ -3183,6 +2580,20 @@ class ElementCamp_Button extends Widget_Base
             ]
         );
         $this->add_control(
+            'button_icon_color_dark_mode',
+            [
+                'label' => __('Icon Color', 'element-camp'),
+                'type' => Controls_Manager::COLOR,
+                'default' => '',
+                'selectors' => [
+                    '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-button .tcgelements-button-icon i' => 'color: {{VALUE}};',
+                    '} body.tcg-dark-mode {{WRAPPER}} .tcgelements-button .tcgelements-button-icon i' => 'color: {{VALUE}};',
+                    '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{WRAPPER}} .tcgelements-button .tcgelements-button-icon svg' => 'fill: {{VALUE}};',
+                    '} body.tcg-dark-mode {{WRAPPER}} .tcgelements-button .tcgelements-button-icon svg' => 'fill: {{VALUE}};',
+                ],
+            ]
+        );
+        $this->add_control(
             'button_icon_border_dark_mode',
             [
                 'label' => esc_html__('Border Color', 'element-camp'),
@@ -3216,6 +2627,18 @@ class ElementCamp_Button extends Widget_Base
                         'selectors' => [
                             '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
                             '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
+                        ],
+                    ],
+                    'tcg_gradient_angle' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                        ],
+                    ],
+                    'tcg_gradient_position' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
                         ],
                     ],
                     'image' => [
@@ -3305,7 +2728,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'button_icon_hover_offset_orientation_h',
             [
-                'label' => esc_html__('Horizontal Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Horizontal Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
@@ -3328,7 +2751,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'button_icon_hover_offset_x',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -3364,7 +2787,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'button_icon_hover_offset_x_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -3400,17 +2823,17 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'button_icon_hover_offset_orientation_v',
             [
-                'label' => esc_html__('Vertical Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Vertical Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
                 'options' => [
                     'start' => [
-                        'title' => esc_html__('Top', 'themescamp-plugin'),
+                        'title' => esc_html__('Top', 'element-camp'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'end' => [
-                        'title' => esc_html__('Bottom', 'themescamp-plugin'),
+                        'title' => esc_html__('Bottom', 'element-camp'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                 ],
@@ -3422,7 +2845,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'button_icon_hover_offset_y',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -3457,7 +2880,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'button_icon_hover_offset_y_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -3614,10 +3037,10 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'button_icon_outline_hover',
             [
-                'label' => esc_html__('Outline', 'themescamp-plugin'),
+                'label' => esc_html__('Outline', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
                 'return_value' => 'yes',
                 'default' => 'yes',
             ]
@@ -3626,16 +3049,16 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'button_icon_outline_type_hover',
             [
-                'label' => esc_html__('Border Type', 'themescamp-plugin'),
+                'label' => esc_html__('Border Type', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-plugin'),
-                    'none' => esc_html__('None', 'themescamp-plugin'),
-                    'solid' => esc_html__('Solid', 'themescamp-plugin'),
-                    'double' => esc_html__('Double', 'themescamp-plugin'),
-                    'dotted' => esc_html__('Dotted', 'themescamp-plugin'),
-                    'dashed' => esc_html__('Dashed', 'themescamp-plugin'),
-                    'groove' => esc_html__('Groove', 'themescamp-plugin'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                    'solid' => esc_html__('Solid', 'element-camp'),
+                    'double' => esc_html__('Double', 'element-camp'),
+                    'dotted' => esc_html__('Dotted', 'element-camp'),
+                    'dashed' => esc_html__('Dashed', 'element-camp'),
+                    'groove' => esc_html__('Groove', 'element-camp'),
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button:hover .tcgelements-button-icon' => 'outline-style: {{VALUE}};',
@@ -3645,7 +3068,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'button_icon_outline_width_hover',
             [
-                'label' => esc_html__('Bullet Width', 'themescamp-plugin'),
+                'label' => esc_html__('Bullet Width', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px', 'em', 'rem', 'vw', 'custom'],
                 'range' => [
@@ -3666,7 +3089,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'button_icon_outline_color_hover',
             [
-                'label' => esc_html__('Border Color', 'themescamp-plugin'),
+                'label' => esc_html__('Border Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
@@ -3680,7 +3103,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'button_icon_outline_offset_hover',
             [
-                'label' => esc_html__('Bullet Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Bullet Offset', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px'],
                 'range' => [
@@ -3759,10 +3182,10 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'button_the_icon_transform_options_hover',
             [
-                'label' => esc_html__('Icon Transform', 'themescamp-plugin'),
+                'label' => esc_html__('Icon Transform', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'themescamp-plugin'),
-                'label_on' => esc_html__('Custom', 'themescamp-plugin'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
         $this->start_popover();
@@ -3858,6 +3281,18 @@ class ElementCamp_Button extends Widget_Base
                             '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}})',
                         ],
                     ],
+                    'tcg_gradient_angle' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: linear-gradient({{SIZE}}{{UNIT}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                        ],
+                    ],
+                    'tcg_gradient_position' => [
+                        'selectors' => [
+                            '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                            '} body.tcg-dark-mode {{SELECTOR}}' => 'background-color: transparent; background-image: radial-gradient(at {{VALUE}}, {{color.VALUE}} {{color_stop.SIZE}}{{color_stop.UNIT}}, {{color_b.VALUE}} {{color_b_stop.SIZE}}{{color_b_stop.UNIT}}{{#color_c.VALUE}}, {{color_c.VALUE}} {{color_c_stop.SIZE}}{{color_c_stop.UNIT}}{{/color_c.VALUE}}{{#color_d.VALUE}}, {{color_d.VALUE}} {{color_d_stop.SIZE}}{{color_d_stop.UNIT}}{{/color_d.VALUE}})',
+                        ],
+                    ],
                     'image' => [
                         'selectors' => [
                             '@media (prefers-color-scheme: dark){ body.tcg-auto-mode {{SELECTOR}}' => 'background-image: url("{{URL}}");',
@@ -3933,12 +3368,12 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'image_positioning',
             [
-                'label' => esc_html__('Position', 'themescamp-plugin'),
+                'label' => esc_html__('Position', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-plugin'),
-                    'absolute' => esc_html__('absolute', 'themescamp-plugin'),
-                    'relative' => esc_html__('relative', 'themescamp-plugin'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'absolute' => esc_html__('absolute', 'element-camp'),
+                    'relative' => esc_html__('relative', 'element-camp'),
                 ],
                 'label_block' => true,
                 'default' => '',
@@ -3951,7 +3386,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'image_offset_orientation_h',
             [
-                'label' => esc_html__('Horizontal Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Horizontal Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
@@ -3974,7 +3409,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'image_offset_x',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -4010,7 +3445,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'image_offset_x_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -4046,17 +3481,17 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'image_offset_orientation_v',
             [
-                'label' => esc_html__('Vertical Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Vertical Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
                 'options' => [
                     'start' => [
-                        'title' => esc_html__('Top', 'themescamp-plugin'),
+                        'title' => esc_html__('Top', 'element-camp'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'end' => [
-                        'title' => esc_html__('Bottom', 'themescamp-plugin'),
+                        'title' => esc_html__('Bottom', 'element-camp'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                 ],
@@ -4068,7 +3503,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'image_offset_y',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -4103,7 +3538,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_responsive_control(
             'image_offset_y_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -4815,9 +4250,9 @@ class ElementCamp_Button extends Widget_Base
             'before_button_advanced_border_popover_toggle',
             [
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label' => esc_html__('Custom Border Settings', 'themescamp-elements'),
-                'label_off' => esc_html__('Default', 'themescamp-elements'),
-                'label_on' => esc_html__('Custom', 'themescamp-elements'),
+                'label' => esc_html__('Custom Border Settings', 'element-camp'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
                 'return_value' => 'yes',
             ]
         );
@@ -4827,16 +4262,16 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'before_button_advanced_border_top_style',
             [
-                'label' => esc_html__('Border Top Style', 'themescamp-elements'),
+                'label' => esc_html__('Border Top Style', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-elements'),
-                    'none' => esc_html__('None', 'themescamp-elements'),
-                    'solid' => esc_html__('Solid', 'themescamp-elements'),
-                    'double' => esc_html__('Double', 'themescamp-elements'),
-                    'dashed' => esc_html__('Dashed', 'themescamp-elements'),
-                    'dotted' => esc_html__('Dotted', 'themescamp-elements'),
-                    'groove' => esc_html__('Groove', 'themescamp-elements'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                    'solid' => esc_html__('Solid', 'element-camp'),
+                    'double' => esc_html__('Double', 'element-camp'),
+                    'dashed' => esc_html__('Dashed', 'element-camp'),
+                    'dotted' => esc_html__('Dotted', 'element-camp'),
+                    'groove' => esc_html__('Groove', 'element-camp'),
                 ],
                 'default' => '',
                 'selectors' => [
@@ -4847,7 +4282,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'before_button_advanced_border_top_color',
             [
-                'label' => esc_html__('Border Top Color', 'themescamp-elements'),
+                'label' => esc_html__('Border Top Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button::before' => 'border-top-color: {{VALUE}};',
@@ -4860,7 +4295,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'before_button_advanced_border_top_width',
             [
-                'label' => esc_html__('Border Top Width', 'themescamp-elements'),
+                'label' => esc_html__('Border Top Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button::before' => 'border-top-width: {{SIZE}}{{UNIT}};',
@@ -4880,16 +4315,16 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'before_button_advanced_border_bottom_style',
             [
-                'label' => esc_html__('Border Bottom Style', 'themescamp-elements'),
+                'label' => esc_html__('Border Bottom Style', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-elements'),
-                    'none' => esc_html__('None', 'themescamp-elements'),
-                    'solid' => esc_html__('Solid', 'themescamp-elements'),
-                    'double' => esc_html__('Double', 'themescamp-elements'),
-                    'dashed' => esc_html__('Dashed', 'themescamp-elements'),
-                    'dotted' => esc_html__('Dotted', 'themescamp-elements'),
-                    'groove' => esc_html__('Groove', 'themescamp-elements'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                    'solid' => esc_html__('Solid', 'element-camp'),
+                    'double' => esc_html__('Double', 'element-camp'),
+                    'dashed' => esc_html__('Dashed', 'element-camp'),
+                    'dotted' => esc_html__('Dotted', 'element-camp'),
+                    'groove' => esc_html__('Groove', 'element-camp'),
                 ],
                 'default' => '',
                 'selectors' => [
@@ -4900,7 +4335,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'before_button_advanced_border_bottom_color',
             [
-                'label' => esc_html__('Border Bottom Color', 'themescamp-elements'),
+                'label' => esc_html__('Border Bottom Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button::before' => 'border-bottom-color: {{VALUE}};',
@@ -4913,7 +4348,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'before_button_advanced_border_bottom_width',
             [
-                'label' => esc_html__('Border Bottom Width', 'themescamp-elements'),
+                'label' => esc_html__('Border Bottom Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button::before' => 'border-bottom-width: {{SIZE}}{{UNIT}};',
@@ -4933,16 +4368,16 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'before_button_advanced_border_right_style',
             [
-                'label' => esc_html__('Border Right Style', 'themescamp-elements'),
+                'label' => esc_html__('Border Right Style', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-elements'),
-                    'none' => esc_html__('None', 'themescamp-elements'),
-                    'solid' => esc_html__('Solid', 'themescamp-elements'),
-                    'double' => esc_html__('Double', 'themescamp-elements'),
-                    'dashed' => esc_html__('Dashed', 'themescamp-elements'),
-                    'dotted' => esc_html__('Dotted', 'themescamp-elements'),
-                    'groove' => esc_html__('Groove', 'themescamp-elements'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                    'solid' => esc_html__('Solid', 'element-camp'),
+                    'double' => esc_html__('Double', 'element-camp'),
+                    'dashed' => esc_html__('Dashed', 'element-camp'),
+                    'dotted' => esc_html__('Dotted', 'element-camp'),
+                    'groove' => esc_html__('Groove', 'element-camp'),
                 ],
                 'default' => '',
                 'selectors' => [
@@ -4953,7 +4388,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'before_button_advanced_border_right_color',
             [
-                'label' => esc_html__('Border Right Color', 'themescamp-elements'),
+                'label' => esc_html__('Border Right Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button::before' => 'border-right-color: {{VALUE}};',
@@ -4966,7 +4401,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'before_button_advanced_border_right_width',
             [
-                'label' => esc_html__('Border Right Width', 'themescamp-elements'),
+                'label' => esc_html__('Border Right Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button::before' => 'border-right-width: {{SIZE}}{{UNIT}};',
@@ -4986,16 +4421,16 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'before_button_advanced_border_left_style',
             [
-                'label' => esc_html__('Border Left Style', 'themescamp-elements'),
+                'label' => esc_html__('Border Left Style', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    '' => esc_html__('Default', 'themescamp-elements'),
-                    'none' => esc_html__('None', 'themescamp-elements'),
-                    'solid' => esc_html__('Solid', 'themescamp-elements'),
-                    'double' => esc_html__('Double', 'themescamp-elements'),
-                    'dashed' => esc_html__('Dashed', 'themescamp-elements'),
-                    'dotted' => esc_html__('Dotted', 'themescamp-elements'),
-                    'groove' => esc_html__('Groove', 'themescamp-elements'),
+                    '' => esc_html__('Default', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                    'solid' => esc_html__('Solid', 'element-camp'),
+                    'double' => esc_html__('Double', 'element-camp'),
+                    'dashed' => esc_html__('Dashed', 'element-camp'),
+                    'dotted' => esc_html__('Dotted', 'element-camp'),
+                    'groove' => esc_html__('Groove', 'element-camp'),
                 ],
                 'default' => '',
                 'selectors' => [
@@ -5006,7 +4441,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'before_button_advanced_border_left_color',
             [
-                'label' => esc_html__('Border Left Color', 'themescamp-elements'),
+                'label' => esc_html__('Border Left Color', 'element-camp'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button::before' => 'border-left-color: {{VALUE}};',
@@ -5019,7 +4454,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'before_button_advanced_border_left_width',
             [
-                'label' => esc_html__('Border Left Width', 'themescamp-elements'),
+                'label' => esc_html__('Border Left Width', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button::before' => 'border-left-width: {{SIZE}}{{UNIT}};',
@@ -5040,17 +4475,17 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'before_button_transform_rotate_popover',
             [
-                'label' => esc_html__('Rotate', 'tcgelements'),
+                'label' => esc_html__('Rotate', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::POPOVER_TOGGLE,
-                'label_off' => esc_html__('Default', 'tcgelements'),
-                'label_on' => esc_html__('Custom', 'tcgelements'),
+                'label_off' => esc_html__('Default', 'element-camp'),
+                'label_on' => esc_html__('Custom', 'element-camp'),
             ]
         );
         $this->start_popover();
         $this->add_control(
             'before_button_transform_rotate',
             [
-                'label' => esc_html__('Rotate', 'tcgelements'),
+                'label' => esc_html__('Rotate', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'size_units' => ['deg'],
                 'selectors' => [
@@ -5358,6 +4793,210 @@ class ElementCamp_Button extends Widget_Base
             ]
         );
         $this->end_popover();
+        $this->add_control(
+            'position_for_before_button_hover',
+            [
+                'label' => esc_html__('Position', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    '' => esc_html__('Default', 'element-camp'),
+                    'absolute' => esc_html__('Absolute', 'element-camp'),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-button:hover::before' => 'position: {{VALUE}};',
+                ],
+                'separator' => 'before',
+            ]
+        );
+        $this->add_control(
+            'button_before_offset_orientation_h_hover',
+            [
+                'label' => esc_html__('Horizontal Orientation', 'element-camp'),
+                'type' => Controls_Manager::CHOOSE,
+                'toggle' => false,
+                'default' => 'start',
+                'options' => [
+                    'start' => [
+                        'title' => esc_html__('Start', 'element-camp'),
+                        'icon' => 'eicon-h-align-left',
+                    ],
+                    'end' => [
+                        'title' => esc_html__('End', 'element-camp'),
+                        'icon' => 'eicon-h-align-right',
+                    ],
+                ],
+                'condition' => [
+                    'position_for_before_button_hover!' => '',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'button_before_offset_x_hover',
+            [
+                'label' => esc_html__('Offset', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => -1000,
+                        'max' => 1000,
+                    ],
+                    '%' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vw' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vh' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                ],
+                'default' => [
+                    'size' => 0,
+                ],
+                'size_units' => ['px', '%', 'em', 'rem', 'vw', 'vh', 'custom'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-button:hover::before' => 'left: {{SIZE}}{{UNIT}}',
+                ],
+                'condition' => [
+                    'button_before_offset_orientation_h_hover' => 'start',
+                    'position_for_before_button_hover!' => '',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'button_before_offset_x_end_hover',
+            [
+                'label' => esc_html__('Offset', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => -1000,
+                        'max' => 1000,
+                    ],
+                    '%' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vw' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vh' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                ],
+                'default' => [
+                    'size' => 0,
+                ],
+                'size_units' => ['px', '%', 'em', 'rem', 'vw', 'vh', 'custom'],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-button:hover::before' => 'right: {{SIZE}}{{UNIT}}',
+                ],
+                'condition' => [
+                    'button_before_offset_orientation_h_hover' => 'end',
+                    'position_for_before_button_hover!' => '',
+                ],
+            ]
+        );
+        $this->add_control(
+            'button_before_offset_orientation_v_hover',
+            [
+                'label' => esc_html__('Vertical Orientation', 'element-camp'),
+                'type' => Controls_Manager::CHOOSE,
+                'toggle' => false,
+                'default' => 'start',
+                'options' => [
+                    'start' => [
+                        'title' => esc_html__('Top', 'element-camp'),
+                        'icon' => 'eicon-v-align-top',
+                    ],
+                    'end' => [
+                        'title' => esc_html__('Bottom', 'element-camp'),
+                        'icon' => 'eicon-v-align-bottom',
+                    ],
+                ],
+                'condition' => [
+                    'position_for_before_button_hover!' => '',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'button_before_offset_y_hover',
+            [
+                'label' => esc_html__('Offset', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => -1000,
+                        'max' => 1000,
+                    ],
+                    '%' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vh' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vw' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                ],
+                'size_units' => ['px', '%', 'em', 'rem', 'vh', 'vw', 'custom'],
+                'default' => [
+                    'size' => 0,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-button:hover::before' => 'top: {{SIZE}}{{UNIT}}',
+                ],
+                'condition' => [
+                    'button_before_offset_orientation_v_hover' => 'start',
+                    'position_for_before_button_hover!' => '',
+                ],
+            ]
+        );
+        $this->add_responsive_control(
+            'button_before_offset_y_end_hover',
+            [
+                'label' => esc_html__('Offset', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'range' => [
+                    'px' => [
+                        'min' => -1000,
+                        'max' => 1000,
+                    ],
+                    '%' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vh' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                    'vw' => [
+                        'min' => -200,
+                        'max' => 200,
+                    ],
+                ],
+                'size_units' => ['px', '%', 'em', 'rem', 'vh', 'vw', 'custom'],
+                'default' => [
+                    'size' => 0,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-button:hover::before' => 'bottom: {{SIZE}}{{UNIT}}',
+                ],
+                'condition' => [
+                    'button_before_offset_orientation_v_hover' => 'end',
+                    'position_for_before_button_hover!' => '',
+                ],
+            ]
+        );
         $this->end_controls_tab();
         $this->end_controls_tabs();
         $this->add_control(
@@ -5402,8 +5041,8 @@ class ElementCamp_Button extends Widget_Base
             [
                 'label' => esc_html__('Button Clip Path', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::TEXTAREA,
-                'description' => esc_html__('example: polygon(0 0, 100% 0, 100% 100%, 27% 100%)'),
-                'placeholder' => esc_html__('example: polygon(0 0, 100% 0, 100% 100%, 27% 100%)'),
+                'description' => esc_html__('example: polygon(0 0, 100% 0, 100% 100%, 27% 100%)', 'element-camp'),
+                'placeholder' => esc_html__('example: polygon(0 0, 100% 0, 100% 100%, 27% 100%)', 'element-camp'),
                 'language' => 'css',
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-button' => 'clip-path: {{VALUE}};',
@@ -5489,7 +5128,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'glow_blur_method',
             [
-                'label' => esc_html__('Blur Method', 'themescamp-plugin'),
+                'label' => esc_html__('Blur Method', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'backdrop-filter' => 'backdrop-filter',
@@ -5507,7 +5146,7 @@ class ElementCamp_Button extends Widget_Base
         $this->add_control(
             'glow_blur_value',
             [
-                'label' => esc_html__('Blur', 'themescamp-plugin'),
+                'label' => esc_html__('Blur', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -5608,6 +5247,70 @@ class ElementCamp_Button extends Widget_Base
                 ],
             ]
         );
+        $this->add_control(
+            'text_transform_svg_animation',
+            [
+                'label' => esc_html__('Icon Animation', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'none',
+                'options' => [
+                    'none'     => esc_html__('Text Only (default)', 'element-camp'),
+                    'both'     => esc_html__('Text & Icon', 'element-camp'),
+                    'svg-only' => esc_html__('Icon Only', 'element-camp'),
+                ],
+                'condition' => [
+                    'button_animations' => 'text-transform',
+                ],
+            ]
+        );
+        $this->add_control(
+            'svg_animation_direction',
+            [
+                'label' => esc_html__('Icon Animation Direction', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'default' => 'bottom-to-top',
+                'options' => [
+                    'bottom-to-top' => esc_html__('Bottom to Top', 'element-camp'),
+                    'top-to-bottom' => esc_html__('Top to Bottom', 'element-camp'),
+                    'right-to-left' => esc_html__('Right to Left', 'element-camp'),
+                    'left-to-right' => esc_html__('Left to Right', 'element-camp'),
+                ],
+                'condition' => [
+                    'button_animations' => 'text-transform',
+                    'text_transform_svg_animation!' => 'none',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'svg_animation_offset',
+            [
+                'label' => esc_html__('Icon Animation Distance', 'element-camp'),
+                'type' => Controls_Manager::SLIDER,
+                'size_units' => ['px', '%'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 200,
+                    ],
+                    '%' => [
+                        'min' => 0,
+                        'max' => 200,
+                    ],
+                ],
+                'default' => [
+                    'unit' => 'px',
+                    'size' => 40,
+                ],
+                'selectors' => [
+                    '{{WRAPPER}}' => '--hvr-svg-offset: {{SIZE}}{{UNIT}}; --hvr-svg-offset-neg: -{{SIZE}}{{UNIT}};',
+                ],
+                'condition' => [
+                    'button_animations' => 'text-transform',
+                    'text_transform_svg_animation!' => 'none',
+                ],
+            ]
+        );
         $this->end_controls_section();
     }
 
@@ -5633,21 +5336,31 @@ class ElementCamp_Button extends Widget_Base
         }
 
         if (!$is_new && empty($settings['icon_align'])) {
-            // @todo: remove when deprecated
-            // added as bc in 2.6
-            //old default
             $settings['icon_align'] = $this->get_settings('icon_align');
         }
+
         if (!empty($settings['button_css_id'])) {
             $btn_id = $settings['button_css_id'];
         }
+
         $animated_class = '';
 
-        if ($settings['text_break_line'] == 'yes') $animated_class .= ' tcgelements-responsive-break-line';
-        if ($settings['button_animations'] == 'text-transform') $animated_class .= ' tce-hvr-txt-trans';
-        if ($settings['button_animations'] == 'mouse-parallax') $animated_class .= ' tce-btn-mouse-parallax';
-        if ($settings['button_animations'] == 'glow-effect') $animated_class .= ' tce-btn-glow-effect';
-        if ($settings['before_button_animations'] == 'infinite-scale') $animated_class .= ' tce-infinite-scale';
+        if ($settings['text_break_line'] === 'yes') $animated_class .= ' tcgelements-responsive-break-line';
+        if ($settings['button_animations'] === 'text-transform') $animated_class .= ' tce-hvr-txt-trans';
+        if (
+            $settings['button_animations'] === 'text-transform' &&
+            !empty($settings['text_transform_svg_animation']) &&
+            $settings['text_transform_svg_animation'] !== 'none' &&
+            !empty($settings['svg_animation_direction'])
+        ) {
+            $animated_class .= ' tce-hvr-txt-trans-dir-' . $settings['svg_animation_direction'];
+        }
+        if ($settings['button_animations'] === 'mouse-parallax') $animated_class .= ' tce-btn-mouse-parallax';
+        if ($settings['button_animations'] === 'glow-effect') $animated_class .= ' tce-btn-glow-effect';
+        if ($settings['before_button_animations'] === 'infinite-scale') $animated_class .= ' tce-infinite-scale';
+        if ($settings['height_same_as_width'] === 'yes') {
+            $animated_class .= ' img-h-w';
+        }
 
         $glow_element = '';
         if ($settings['button_animations'] == 'glow-effect') {
@@ -5673,9 +5386,8 @@ class ElementCamp_Button extends Widget_Base
 
         $url = '';
         $woo_button_class = '';
-        $scroll_top_class = ''; // Add this variable to handle scroll-top class
+        $scroll_top_class = '';
 
-        // Handle different link types
         if ($settings['link_to'] == 'post-url') {
             $url = esc_url(get_the_permalink());
         } elseif ($settings['link_to'] == 'site-url') {
@@ -5688,20 +5400,40 @@ class ElementCamp_Button extends Widget_Base
             }
         } elseif ($settings['link_to'] == 'scroll-top') {
             $url = '#';
-            $scroll_top_class = ' tcgelements-scroll-top'; // Add the class here
+            $scroll_top_class = ' tcgelements-scroll-top';
         } elseif ($settings['link_to'] == 'custom') {
             $url = esc_url($settings['link']['url']);
         }
 
-        if ($settings['link_to'] == 'woo-product' && isset($product)) {
-            $icon_html = '';
-            if (isset($is_new) || $migrated) {
-                ob_start();
-                Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']);
-                $icon_html = ob_get_clean();
-            } else {
-                $icon_html = '<i class="' . esc_attr($settings['icon']) . '" aria-hidden="true"></i>';
+        $selector_classes = 'btn-selector-type-' . $settings['button_hover_selector'] . ' ' . 'btn-text-selector-type-' . $settings['button_text_hover_selector'];
+
+        $data_attributes = '';
+
+        if ($settings['button_hover_selector'] == 'parent-n' && !empty($settings['parent_level'])) {
+            $data_attributes .= ' data-parent-level="' . esc_attr($settings['parent_level']) . '"';
+        }
+
+        if (!empty($settings['before_button_hover_selector'])) {
+            $data_attributes .= ' data-before-selector="' . esc_attr($settings['before_button_hover_selector']) . '"';
+
+            if ($settings['before_button_hover_selector'] == 'parent-n' && !empty($settings['before_parent_level'])) {
+                $data_attributes .= ' data-before-parent-level="' . esc_attr($settings['before_parent_level']) . '"';
             }
+        }
+
+        $svg_anim_type = '';
+        if (
+            $settings['button_animations'] === 'text-transform' &&
+            !empty($settings['text_transform_svg_animation']) &&
+            $settings['text_transform_svg_animation'] !== 'none'
+        ) {
+            $svg_anim_type = $settings['text_transform_svg_animation'];
+        }
+
+        $svg_only = $svg_anim_type === 'svg-only';
+        $svg_anim = !empty($svg_anim_type);
+
+        if ($settings['link_to'] == 'woo-product' && isset($product)) {
 
             $content_wrapper_attributes = '';
             ob_start();
@@ -5718,114 +5450,176 @@ class ElementCamp_Button extends Widget_Base
             $this->print_render_attribute_string('btn_text');
             $btn_text_attributes = ob_get_clean() . ' ';
 
-            $selector_classes = 'btn-selector-type-' . $settings['button_hover_selector'] . ' ' . 'btn-text-selector-type-' . $settings['button_text_hover_selector'];
+            ob_start();
+            if ($is_new || $migrated) {
+                Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']);
+            } else {
+                echo '<i class="' . esc_attr($settings['icon']) . '" aria-hidden="true"></i>';
+            }
+            $icon_html = ob_get_clean();
 
+            if ($svg_anim) {
+                $icon_html_wrapped = '<span class="hvr-svg">'
+                    . '<span class="hvr-svg-original">' . $icon_html . '</span>'
+                    . '<span class="hvr-svg-hover" aria-hidden="true">' . $icon_html . '</span>'
+                    . '</span>';
+            } else {
+                $icon_html_wrapped = $icon_html;
+            }
+
+            if ($svg_only) {
+                $btn_text_html = '<span ' . $btn_text_attributes . 'data-hidden="true">' . $settings['btn_text'] . '</span>';
+            } elseif ($settings['button_animations'] == 'text-transform') {
+                $btn_text_html = '<span class="hvr-txt" data-text="' . esc_attr($settings['text_transform_type'] === 'custom' ? $settings['text_transform_custom'] : $settings['btn_text']) . '">'
+                    . '<span ' . $btn_text_attributes . '>' . $settings['btn_text'] . '</span>'
+                    . '</span>';
+            } else {
+                $btn_text_html = '<span ' . $btn_text_attributes . '>' . $settings['btn_text'] . '</span>';
+            }
+
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo apply_filters(
+                // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
                 'woocommerce_loop_add_to_cart_link',
                 '<a href="' . $product->add_to_cart_url() . '" rel="nofollow" data-product_id="' . esc_attr($product->get_id()) . '" data-product_sku="' . esc_attr($product->get_sku()) . '"' .
-                (isset($settings['link_to']) && $settings['link_to'] == 'custom' && $settings['link']['is_external'] ? 'target="_blank"' : '') .
-                ' class="tcgelements-button product_type_' . esc_attr($product->get_type()) . ' ' . esc_attr($selector_classes) . ' ' . esc_attr($animated_class) .  ($settings['button_transition_switcher'] != 'yes' ? ' transition-none' : '') . ' add_to_cart_button ajax_add_to_cart" ' .
+                (isset($settings['link_to']) && $settings['link_to'] == 'custom' && $settings['link']['is_external'] ? ' target="_blank"' : '') .
+                ' class="tcgelements-button product_type_' . esc_attr($product->get_type()) . ' ' . esc_attr($selector_classes) . ' ' . esc_attr($animated_class) . ($settings['button_transition_switcher'] != 'yes' ? ' transition-none' : '') . ' add_to_cart_button ajax_add_to_cart" ' .
                 (isset($settings['play_button']) && $settings['play_button'] == 'yes' ? 'data-lity="video"' : '') .
-                (($settings['button_hover_selector'] == 'parent-n' && !empty($settings['parent_level'])) ? ' data-parent-level="' . esc_attr($settings['parent_level']) . '"' : '') .
+                $data_attributes .
                 '>
-                ' . $glow_element . '
-                <span class="button__loader h-rotatingNeuron"><span class="loading_popup">' . $settings['adding_text'] . ' <i class="fa fa-refresh"></i></span></span>
-                <span class="button__added"><span class="added_popup">' . $settings['added_text'] . ' <i class="fa fa-check"></i></span></span>
-                <span ' . $content_wrapper_attributes . '>
-                    ' . (isset($settings['icon']) || (!empty($settings['selected_icon']['value']) && $settings['icon_align'] == 'left') ?
-                    '<span ' . $icon_align_attributes . '>' .
-                    $icon_html .
-                    '</span>' : '') .
+            ' . $glow_element . '
+            <span class="button__loader h-rotatingNeuron"><span class="loading_popup">' . $settings['adding_text'] . ' <i class="fa fa-refresh"></i></span></span>
+            <span class="button__added"><span class="added_popup">' . $settings['added_text'] . ' <i class="fa fa-check"></i></span></span>
+            <span ' . $content_wrapper_attributes . '>
+                ' . (isset($settings['icon']) || (!empty($settings['selected_icon']['value']) && $settings['icon_align'] == 'left') ?
+                    '<span ' . $icon_align_attributes . '>' . $icon_html_wrapped . '</span>' : '') .
                 (isset($settings['image_switcher']) && $settings['image_switcher'] == 'yes' && $settings['image_position'] == 'left' ?
                     '<img src="' . esc_url($settings['image']['url']) . '" alt="' . (isset($settings['image']['alt']) ? esc_attr($settings['image']['alt']) : '') . '" class="image">' : '') .
-                (isset($settings['button_animations']) && $settings['button_animations'] == 'text-transform' ?
-                    '<span class="hvr-txt" data-text="' . esc_attr($settings['text_transform_type'] === 'custom' ? $settings['text_transform_custom'] : $settings['btn_text']) . '">' : '') .
-                '<span ' . $btn_text_attributes . '>' .
-                $settings['btn_text'] .
-                '</span>' .
-                (isset($settings['button_animations']) && $settings['button_animations'] == 'text-transform' ?
-                    '</span>' : '') .
+                $btn_text_html .
                 (isset($settings['image_switcher']) && $settings['image_switcher'] == 'yes' && $settings['image_position'] == 'right' ?
                     '<img src="' . esc_url($settings['image']['url']) . '" alt="' . (isset($settings['image']['alt']) ? esc_attr($settings['image']['alt']) : '') . '" class="image">' : '') .
                 (isset($settings['icon']) || (!empty($settings['selected_icon']['value']) && $settings['icon_align'] == 'right') ?
-                    '<span ' . $icon_align_attributes . '>' .
-                    $icon_html .
-                    '</span>' : '') .
+                    '<span ' . $icon_align_attributes . '>' . $icon_html_wrapped . '</span>' : '') .
                 '</span>
-            </a>',
+        </a>',
                 $product
             );
+
         } else {
             ?>
             <?php if ($settings['link_to'] == 'none') : ?>
-                <div <?php if (!empty($btn_id)) echo "id=$btn_id" ?> class="tcgelements-button <?php echo 'btn-selector-type-' . $settings['button_hover_selector'] . ' ' . 'btn-text-selector-type-' . $settings['button_text_hover_selector'] . ' ' . esc_attr($animated_class) . esc_attr($scroll_top_class);
+                <div <?php if (!empty($btn_id)) echo "id=" . esc_html($btn_id) ?>
+                class="tcgelements-button <?php echo esc_attr($selector_classes) . ' ' . esc_attr($animated_class) . esc_attr($scroll_top_class);
                 if ($settings['button_transition_switcher'] != 'yes') echo esc_attr(' transition-none'); ?>"
-                <?php if (!empty($settings['before_button_hover_selector'])) {
-                    echo 'data-before-selector="' . esc_attr($settings['before_button_hover_selector']) . '"';
-                }
-                if ($settings['before_button_hover_selector'] == 'parent-n' && !empty($settings['before_parent_level'])) {
-                    echo ' data-before-parent-level="' . esc_attr($settings['before_parent_level']) . '"';
-                }?>>
-                <?php echo $glow_element; ?>
+                <?php echo esc_attr($data_attributes); ?>>
+                <?php echo wp_kses_post($glow_element); ?>
             <?php else: ?>
-                <a <?php if (!empty($btn_id)) echo "id=$btn_id" ?> href="<?= $url; ?>" <?php if ($settings['link_to'] == 'custom' && $settings['link']['is_external']) {
+                <a <?php if (!empty($btn_id)) echo "id=" . esc_html($btn_id) ?>
+                href="<?php echo esc_url($url); ?>"
+                <?php if ($settings['link_to'] == 'custom' && $settings['link']['is_external']) {
                     echo 'target="_blank"';
-                } ?> class="tcgelements-button <?php echo 'btn-selector-type-' . $settings['button_hover_selector'] . ' ' . 'btn-text-selector-type-' . $settings['button_text_hover_selector'] . ' ' . esc_attr($animated_class) . esc_attr($scroll_top_class);
-                if ($settings['button_transition_switcher'] != 'yes') echo esc_attr(' transition-none'); ?>" <?php if ($settings['play_button'] == 'yes') echo esc_attr('data-lity="video"') ?>    <?php
-                if (!empty($settings['before_button_hover_selector'])) {
-                    echo 'data-before-selector="' . esc_attr($settings['before_button_hover_selector']) . '"';
-                }
-                if ($settings['before_button_hover_selector'] == 'parent-n' && !empty($settings['before_parent_level'])) {
-                    echo ' data-before-parent-level="' . esc_attr($settings['before_parent_level']) . '"';
-                }
-                ?>>
-                <?php echo $glow_element; ?>
+                } ?>
+                class="tcgelements-button <?php echo esc_attr($selector_classes) . ' ' . esc_attr($animated_class) . esc_attr($scroll_top_class);
+                if ($settings['button_transition_switcher'] != 'yes') echo esc_attr(' transition-none'); ?>"
+                <?php if ($settings['play_button'] == 'yes') echo esc_attr('data-lity="video"') ?>
+                <?php echo esc_attr($data_attributes); ?>>
+                <?php echo wp_kses_post($glow_element); ?>
             <?php endif; ?>
+
             <span <?php $this->print_render_attribute_string('content-wrapper'); ?>>
-                    <?php if (!empty($settings['icon']) or !empty($settings['selected_icon']['value']) and ($settings['icon_align'] == 'left')) : ?>
-                        <span <?php $this->print_render_attribute_string('icon-align'); ?>>
-                            <?php if ($is_new || $migrated) :
-                                Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']);
-                            else : ?>
-                                <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
-                            <?php endif; ?>
-                        </span>
-                    <?php endif; ?>
-                <?php if ($settings['image_switcher'] == 'yes' && $settings['image_position'] == 'left') : ?>
-                    <img src="<?= esc_url($settings['image']['url']) ?>" alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>" class="image">
-                <?php endif; ?>
-                <?php if ($settings['button_animations'] == 'text-transform') : ?>
-                        <span class="hvr-txt" data-text="<?= esc_attr($settings['text_transform_type'] === 'custom' ? $settings['text_transform_custom'] : $settings['btn_text']) ?>">
-                        <?php endif; ?>
-                        <span <?php $this->print_render_attribute_string('btn_text'); ?>>
-                            <?php $this->print_unescaped_setting('btn_text'); ?>
-                        </span>
-                        <?php if (class_exists('WooCommerce') && $settings['show_products_count'] === 'yes') : ?>
-                            <span class="products-count">
-                                <?php echo esc_html($product_count); ?>
+
+            <?php if (!empty($settings['icon']) or !empty($settings['selected_icon']['value']) and ($settings['icon_align'] == 'left')) : ?>
+                <span <?php $this->print_render_attribute_string('icon-align'); ?>>
+                    <?php if ($svg_anim) : ?>
+                        <span class="hvr-svg">
+                            <span class="hvr-svg-original">
+                                <?php if ($is_new || $migrated) :
+                                    Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']);
+                                else : ?>
+                                    <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                <?php endif; ?>
                             </span>
+                            <span class="hvr-svg-hover" aria-hidden="true">
+                                <?php if ($is_new || $migrated) :
+                                    Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']);
+                                else : ?>
+                                    <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                <?php endif; ?>
+                            </span>
+                        </span>
+                    <?php else : ?>
+                        <?php if ($is_new || $migrated) :
+                            Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']);
+                        else : ?>
+                            <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
                         <?php endif; ?>
-                            <?php if ($settings['button_animations'] == 'text-transform') : ?>
-                        </span>
                     <?php endif; ?>
-                <?php if ($settings['image_switcher'] == 'yes' && $settings['image_position'] == 'right') : ?>
-                    <img src="<?= esc_url($settings['image']['url']) ?>" alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>" class="image">
-                <?php endif; ?>
-                <?php if (!empty($settings['icon']) or !empty($settings['selected_icon']['value'])  and ($settings['icon_align'] == 'right')) : ?>
-                    <span <?php $this->print_render_attribute_string('icon-align'); ?>>
-                            <?php if ($is_new || $migrated) :
-                                Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']);
-                            else : ?>
-                                <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
-                            <?php endif; ?>
-                        </span>
-                <?php endif; ?>
                 </span>
+            <?php endif; ?>
+
+                <?php if ($settings['image_switcher'] == 'yes' && $settings['image_position'] == 'left') : ?>
+                    <img src="<?php echo esc_url($settings['image']['url']) ?>" alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>" class="image">
+                <?php endif; ?>
+
+                <?php if ($settings['button_animations'] == 'text-transform' && !$svg_only) : ?>
+                <span class="hvr-txt" data-text="<?php echo esc_attr($settings['text_transform_type'] === 'custom' ? $settings['text_transform_custom'] : $settings['btn_text']) ?>">
+            <?php endif; ?>
+
+            <span <?php $this->print_render_attribute_string('btn_text'); ?><?php if ($svg_only) echo ' data-hidden="true"'; ?>>
+                <?php $this->print_unescaped_setting('btn_text'); ?>
+            </span>
+
+            <?php if (class_exists('WooCommerce') && $settings['show_products_count'] === 'yes') : ?>
+                <span class="products-count">
+                    <?php echo esc_html($product_count); ?>
+                </span>
+            <?php endif; ?>
+
+                    <?php if ($settings['button_animations'] == 'text-transform' && !$svg_only) : ?>
+                </span>
+            <?php endif; ?>
+
+                <?php if ($settings['image_switcher'] == 'yes' && $settings['image_position'] == 'right') : ?>
+                    <img src="<?php echo esc_url($settings['image']['url']) ?>" alt="<?php if (!empty($settings['image']['alt'])) echo esc_attr($settings['image']['alt']); ?>" class="image">
+                <?php endif; ?>
+
+                <?php if (!empty($settings['icon']) or !empty($settings['selected_icon']['value']) and ($settings['icon_align'] == 'right')) : ?>
+                    <span <?php $this->print_render_attribute_string('icon-align'); ?>>
+                    <?php if ($svg_anim) : ?>
+                        <span class="hvr-svg">
+                            <span class="hvr-svg-original">
+                                <?php if ($is_new || $migrated) :
+                                    Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']);
+                                else : ?>
+                                    <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                <?php endif; ?>
+                            </span>
+                            <span class="hvr-svg-hover" aria-hidden="true">
+                                <?php if ($is_new || $migrated) :
+                                    Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']);
+                                else : ?>
+                                    <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                                <?php endif; ?>
+                            </span>
+                        </span>
+                    <?php else : ?>
+                        <?php if ($is_new || $migrated) :
+                            Icons_Manager::render_icon($settings['selected_icon'], ['aria-hidden' => 'true']);
+                        else : ?>
+                            <i class="<?php echo esc_attr($settings['icon']); ?>" aria-hidden="true"></i>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </span>
+                <?php endif; ?>
+
+        </span>
+
             <?php if ($settings['link_to'] == 'none') : ?>
                 </div>
             <?php else: ?>
                 </a>
             <?php endif; ?>
+
             <?php
         };
     }

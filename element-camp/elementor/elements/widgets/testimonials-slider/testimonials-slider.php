@@ -418,12 +418,12 @@ class ElementCamp_Testimonials_Slider extends Widget_Base
         $this->add_control(
             'cards_per_slide',
             [
-                'label' => esc_html__('Cards Per Slide', 'themescamp-plugin'),
+                'label' => esc_html__('Cards Per Slide', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => '1',
                 'options' => [
-                    '1' => esc_html__('1 Card', 'themescamp-plugin'),
-                    '2' => esc_html__('2 Cards', 'themescamp-plugin'),
+                    '1' => esc_html__('1 Card', 'element-camp'),
+                    '2' => esc_html__('2 Cards', 'element-camp'),
                 ],
             ]
         );
@@ -1907,15 +1907,15 @@ class ElementCamp_Testimonials_Slider extends Widget_Base
         $this->add_responsive_control(
             'rate_container_display',
             [
-                'label' => esc_html__('Rate Container Display Type', 'bazario'),
+                'label' => esc_html__('Rate Container Display Type', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'default' => 'block',
                 'options' => [
-                    'block' => esc_html__('Block', 'bazario'),
-                    'inline-block' => esc_html__('Inline Block', 'bazario'),
-                    'inline-flex' => esc_html__('Inline Flex', 'bazario'),
-                    'flex' => esc_html__('Flex', 'bazario'),
-                    'none' => esc_html__('None', 'bazario'),
+                    'block' => esc_html__('Block', 'element-camp'),
+                    'inline-block' => esc_html__('Inline Block', 'element-camp'),
+                    'inline-flex' => esc_html__('Inline Flex', 'element-camp'),
+                    'flex' => esc_html__('Flex', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
                 ],
                 'selectors' => [
                     '{{WRAPPER}} .tcgelements-testimonials-slider .testi-card .rate' => 'display: {{VALUE}};'
@@ -1925,23 +1925,23 @@ class ElementCamp_Testimonials_Slider extends Widget_Base
         $this->add_responsive_control(
             'rate_container_display_position',
             [
-                'label' => esc_html__('Card Display Position', 'bazario'),
+                'label' => esc_html__('Card Display Position', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'before' => [
-                        'title' => esc_html__('Before', 'bazario'),
+                        'title' => esc_html__('Before', 'element-camp'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'after' => [
-                        'title' => esc_html__('After', 'bazario'),
+                        'title' => esc_html__('After', 'element-camp'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                     'start' => [
-                        'title' => esc_html__('Start', 'bazario'),
+                        'title' => esc_html__('Start', 'element-camp'),
                         'icon' => "eicon-h-align-right",
                     ],
                     'end' => [
-                        'title' => esc_html__('End', 'bazario'),
+                        'title' => esc_html__('End', 'element-camp'),
                         'icon' => "eicon-h-align-left",
                     ],
                 ],
@@ -1960,33 +1960,33 @@ class ElementCamp_Testimonials_Slider extends Widget_Base
         $this->add_responsive_control(
             'rate_container_justify_content',
             [
-                'label' => esc_html__('Justify Content', 'bazario'),
+                'label' => esc_html__('Justify Content', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'label_block' => true,
                 'default' => '',
                 'options' => [
                     'flex-start' => [
-                        'title' => esc_html__('Start', 'bazario'),
+                        'title' => esc_html__('Start', 'element-camp'),
                         'icon' => 'eicon-flex eicon-justify-start-h',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'bazario'),
+                        'title' => esc_html__('Center', 'element-camp'),
                         'icon' => 'eicon-flex eicon-justify-center-h',
                     ],
                     'flex-end' => [
-                        'title' => esc_html__('End', 'bazario'),
+                        'title' => esc_html__('End', 'element-camp'),
                         'icon' => 'eicon-flex eicon-justify-end-h',
                     ],
                     'space-between' => [
-                        'title' => esc_html__('Space Between', 'bazario'),
+                        'title' => esc_html__('Space Between', 'element-camp'),
                         'icon' => 'eicon-flex eicon-justify-space-between-h',
                     ],
                     'space-around' => [
-                        'title' => esc_html__('Space Around', 'bazario'),
+                        'title' => esc_html__('Space Around', 'element-camp'),
                         'icon' => 'eicon-flex eicon-justify-space-around-h',
                     ],
                     'space-evenly' => [
-                        'title' => esc_html__('Space Evenly', 'bazario'),
+                        'title' => esc_html__('Space Evenly', 'element-camp'),
                         'icon' => 'eicon-flex eicon-justify-space-evenly-h',
                     ],
                 ],
@@ -2000,24 +2000,24 @@ class ElementCamp_Testimonials_Slider extends Widget_Base
         $this->add_responsive_control(
             'rate_container_align_items',
             [
-                'label' => esc_html__('Align Items', 'bazario'),
+                'label' => esc_html__('Align Items', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'default' => '',
                 'options' => [
                     'flex-start' => [
-                        'title' => esc_html__('Start', 'bazario'),
+                        'title' => esc_html__('Start', 'element-camp'),
                         'icon' => 'eicon-flex eicon-align-start-v',
                     ],
                     'center' => [
-                        'title' => esc_html__('Center', 'bazario'),
+                        'title' => esc_html__('Center', 'element-camp'),
                         'icon' => 'eicon-flex eicon-align-center-v',
                     ],
                     'flex-end' => [
-                        'title' => esc_html__('End', 'bazario'),
+                        'title' => esc_html__('End', 'element-camp'),
                         'icon' => 'eicon-flex eicon-align-end-v',
                     ],
                     'stretch' => [
-                        'title' => esc_html__('Stretch', 'bazario'),
+                        'title' => esc_html__('Stretch', 'element-camp'),
                         'icon' => 'eicon-flex eicon-align-stretch-v',
                     ],
                 ],
@@ -2665,7 +2665,23 @@ class ElementCamp_Testimonials_Slider extends Widget_Base
                 'separator' => 'before'
             ]
         );
-
+        $this->add_responsive_control(
+            'quote_text_image_display',
+            [
+                'label' => esc_html__('Rate Container Display Type', 'element-camp'),
+                'type' => Controls_Manager::SELECT,
+                'default' => '',
+                'options' => [
+                    '' => esc_html__('Default', 'element-camp'),
+                    'block' => esc_html__('Block', 'element-camp'),
+                    'inline-block' => esc_html__('Inline Block', 'element-camp'),
+                    'none' => esc_html__('None', 'element-camp'),
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .tcgelements-testimonials-slider .testi-card .quote-text img' => 'display: {{VALUE}};'
+                ]
+            ]
+        );
         $this->add_control(
             'quote_text_image_positioning',
             [
@@ -9005,23 +9021,23 @@ class ElementCamp_Testimonials_Slider extends Widget_Base
                                             <?php if ($slide['date_switcher'] == 'yes') : ?>
                                                 <div class="date">
                                                     <?php if (!empty($slide['quote_date_image']['url'])) : ?>
-                                                        <img src="<?= esc_url($slide['quote_date_image']['url']); ?>" alt="<?php if (!empty($slide['quote_date_image']['alt'])) echo esc_attr($slide['quote_date_image']['alt']); ?>">
+                                                        <img src="<?php echo esc_url($slide['quote_date_image']['url']); ?>" alt="<?php if (!empty($slide['quote_date_image']['alt'])) echo esc_attr($slide['quote_date_image']['alt']); ?>">
                                                     <?php endif;?>
-                                                    <span class="txt"> <?= esc_html($slide['quote_date']) ?> </span>
+                                                    <span class="txt"> <?php echo esc_html($slide['quote_date']) ?> </span>
                                                 </div>
                                             <?php endif; ?>
                                             <div class="quote-text">
                                                 <?php if (!empty($slide['quote_text_image']['url']) && $slide['quote_text_image_switcher'] === 'yes') : ?>
                                                     <?php if ($slide['quote_text_image_position'] === 'before') : ?>
-                                                        <img src="<?= esc_url($slide['quote_text_image']['url']); ?>" alt="<?php if (!empty($slide['quote_text_image']['alt'])) echo esc_attr($slide['quote_text_image']['alt']); ?>">
+                                                        <img src="<?php echo esc_url($slide['quote_text_image']['url']); ?>" alt="<?php if (!empty($slide['quote_text_image']['alt'])) echo esc_attr($slide['quote_text_image']['alt']); ?>">
                                                     <?php endif; ?>
                                                 <?php endif; ?>
 
-                                                <div class="text"><?= wp_kses_post(__($slide['quote_text'], 'element-camp')); ?></div>
+                                                <div class="text"><?php echo wp_kses_post($slide['quote_text']); ?></div>
 
                                                 <?php if (!empty($slide['quote_text_image']['url']) && $slide['quote_text_image_switcher'] === 'yes') : ?>
                                                     <?php if ($slide['quote_text_image_position'] === 'after') : ?>
-                                                        <img src="<?= esc_url($slide['quote_text_image']['url']); ?>" alt="<?php if (!empty($slide['quote_text_image']['alt'])) echo esc_attr($slide['quote_text_image']['alt']); ?>">
+                                                        <img src="<?php echo esc_url($slide['quote_text_image']['url']); ?>" alt="<?php if (!empty($slide['quote_text_image']['alt'])) echo esc_attr($slide['quote_text_image']['alt']); ?>">
                                                     <?php endif; ?>
                                                 <?php endif; ?>
                                             </div>
@@ -9033,7 +9049,7 @@ class ElementCamp_Testimonials_Slider extends Widget_Base
                                                 <?php if (!empty($slide['author_image']['url']) || !empty($slide['author_image_icon']['value'])) : ?>
                                                     <div class="author-image">
                                                         <?php if (!empty($slide['author_image']['url'])) : ?>
-                                                            <img src="<?= esc_url($slide['author_image']['url']); ?>" alt="<?php if (!empty($slide['author_image']['alt'])) echo esc_attr($slide['author_image']['alt']); ?>">
+                                                            <img src="<?php echo esc_url($slide['author_image']['url']); ?>" alt="<?php if (!empty($slide['author_image']['alt'])) echo esc_attr($slide['author_image']['alt']); ?>">
                                                         <?php endif; ?>
                                                         <?php if (!empty($slide['author_image_icon']['value'])) : ?>
                                                             <span class="icon"><?php Icons_Manager::render_icon($slide['author_image_icon']); ?></span>
@@ -9043,15 +9059,15 @@ class ElementCamp_Testimonials_Slider extends Widget_Base
                                                 <?php if (!empty($slide['author_name']) || !empty($slide['author_position'])) : ?>
                                                     <div class="cont">
                                                         <?php if (!empty($slide['author_name'])) : ?>
-                                                            <div class="author-name"><?php echo __($slide['author_name'], 'element-camp'); ?></div>
+                                                            <div class="author-name"><?php echo wp_kses_post($slide['author_name']); ?></div>
                                                         <?php endif; ?>
                                                         <?php if (!empty($slide['author_position'])) : ?>
-                                                            <p class="author-position"> <?= wp_kses_post(__($slide['author_position'], 'element-camp')); ?></p>
+                                                            <p class="author-position"> <?php echo wp_kses_post($slide['author_position']); ?></p>
                                                         <?php endif; ?>
                                                     </div>
                                                 <?php endif; ?>
                                                 <?php if ($slide['additional_link'] === 'yes') : ?>
-                                                    <a href="<?= esc_url($slide['additional_link_url']['url']) ?>" <?php if ($slide['additional_link_url']['is_external']) echo ' target="_blank"'; ?> class="additional-link"><?= esc_html__($slide['additional_link_text'], 'element-camp') ?></a>
+                                                    <a href="<?php echo esc_url($slide['additional_link_url']['url']) ?>" <?php if ($slide['additional_link_url']['is_external']) echo ' target="_blank"'; ?> class="additional-link"><?php echo esc_html($slide['additional_link_text']) ?></a>
                                                 <?php endif; ?>
                                                 <?php if (!empty($slide['icon_footer']['value'])) : ?>
                                                     <span class="footer-icon"> <?php {
@@ -9073,7 +9089,7 @@ class ElementCamp_Testimonials_Slider extends Widget_Base
 
             <?php if ($settings['pagination'] === 'true') : ?>
                 <!-- If we need pagination -->
-                <div class="swiper-pagination swiper-pagination-<?= $settings['direction'] ?>"></div>
+                <div class="swiper-pagination swiper-pagination-<?php echo esc_attr($settings['direction']) ?>"></div>
             <?php endif; ?>
 
             <?php if ($settings['arrows'] === 'true') : ?>
@@ -9105,7 +9121,7 @@ class ElementCamp_Testimonials_Slider extends Widget_Base
 
             <?php if ($settings['scrollbar'] === 'true') : ?>
                 <!-- If we need scrollbar -->
-                <div class="swiper-scrollbar scrollbar-<?= $settings['direction'] ?>"></div>
+                <div class="swiper-scrollbar scrollbar-<?php echo esc_attr($settings['direction']) ?>"></div>
             <?php endif; ?>
 
         </div>

@@ -142,7 +142,7 @@ class ElementCamp_Showcase_Fashion extends Widget_Base
     protected function register_controls()
     {
         $post_types = ControlsHelper::get_post_types();
-        $post_types['by_id'] = __('Manual Selection', 'themescamp-plugin');
+        $post_types['by_id'] = __('Manual Selection', 'element-camp');
         $taxonomies = get_taxonomies([], 'objects');
 
         $this->start_controls_section(
@@ -233,7 +233,7 @@ class ElementCamp_Showcase_Fashion extends Widget_Base
         $this->add_control(
             'posts_ids',
             [
-                'label' => __('Search & Select', 'themescamp-plugin'),
+                'label' => __('Search & Select', 'element-camp'),
                 'type' => 'tcg-select2',
                 'options' => ControlsHelper::get_post_list(),
                 'label_block' => true,
@@ -248,7 +248,7 @@ class ElementCamp_Showcase_Fashion extends Widget_Base
         $this->add_control(
             'posts_per_page',
             [
-                'label' => __('Posts Per Page', 'themescamp-plugin'),
+                'label' => __('Posts Per Page', 'element-camp'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '6',
                 'min' => '1',
@@ -265,7 +265,7 @@ class ElementCamp_Showcase_Fashion extends Widget_Base
         $this->add_control(
             'order',
             [
-                'label' => __('Order', 'themescamp-plugin'),
+                'label' => __('Order', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'asc' => 'Ascending',
@@ -278,7 +278,7 @@ class ElementCamp_Showcase_Fashion extends Widget_Base
         $this->add_control(
             'orderby',
             [
-                'label' => __('Order By', 'themescamp-plugin'),
+                'label' => __('Order By', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => ControlsHelper::get_post_orderby_options(),
                 'default' => 'date',
@@ -288,7 +288,7 @@ class ElementCamp_Showcase_Fashion extends Widget_Base
         $this->add_control(
             'authors',
             [
-                'label' => __('Author', 'themescamp-plugin'),
+                'label' => __('Author', 'element-camp'),
                 'label_block' => true,
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
@@ -302,7 +302,7 @@ class ElementCamp_Showcase_Fashion extends Widget_Base
         $this->add_control(
             'post__not_in',
             [
-                'label'       => __('Exclude', 'themescamp-plugin'),
+                'label'       => __('Exclude', 'element-camp'),
                 'type'        => 'tcg-select2',
                 'label_block' => true,
                 'multiple'    => true,
@@ -485,9 +485,9 @@ class ElementCamp_Showcase_Fashion extends Widget_Base
                         $slide_bg_color = $colors[$i % $color_count]['slide_bg_color'];
                         $i++; // Increment color index
                         ?>
-                            <div class="swiper-slide" data-slide-bg-color="<?= esc_attr($slide_bg_color); ?>">
+                            <div class="swiper-slide" data-slide-bg-color="<?php echo esc_attr($slide_bg_color); ?>">
                                 <div class="showcase-fashion-title" data-swiper-parallax="-130%" >
-                                    <div class="showcase-fashion-title-text"><?=esc_html(get_the_title())?></div>
+                                    <div class="showcase-fashion-title-text"><?php echo esc_html(get_the_title())?></div>
                                 </div>
                                 <?php if ($settings['display_terms']=='yes') : ?>
                                     <div class="taxonomy-text">
@@ -496,15 +496,15 @@ class ElementCamp_Showcase_Fashion extends Widget_Base
                                         $tag_counter = 0;
                                         if($selected_term_type == 'categories' && $category){
                                             foreach ($category as $cat) {
-                                                if ($cat_counter >= 1) echo $settings['meta_separator'];
-                                                echo '<span>' . $cat->name . '</span>';
+                                                if ($cat_counter >= 1) echo wp_kses_post($settings['meta_separator']);
+                                                echo '<span>' . wp_kses_post($cat->name) . '</span>';
                                                 $cat_counter++;
                                             };
                                         }
                                         if($selected_term_type == 'tags' && $tags){
                                             foreach ($tags as $tag) {
-                                                if ($tag_counter >= 1) echo $settings['meta_separator'];
-                                                echo '<span>' . $tag->name . '</span>';
+                                                if ($tag_counter >= 1) echo wp_kses_post($settings['meta_separator']);
+                                                echo '<span>' . wp_kses_post($tag->name) . '</span>';
                                                 $tag_counter++;
                                             }
                                         }
@@ -512,7 +512,7 @@ class ElementCamp_Showcase_Fashion extends Widget_Base
                                     </div>
                                 <?php endif;?>
                                 <div class="showcase-fashion-scale">
-                                    <img src="<?=esc_url(get_the_post_thumbnail_url())?>" alt="<?=esc_html(get_the_title())?>">
+                                    <img src="<?php echo esc_url(get_the_post_thumbnail_url())?>" alt="<?php echo esc_html(get_the_title())?>">
                                 </div>
                             </div>
                         <?php endwhile;  wp_reset_postdata(); endif; ?>

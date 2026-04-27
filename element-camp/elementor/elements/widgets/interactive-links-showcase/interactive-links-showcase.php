@@ -104,7 +104,7 @@ class elementcamp_Interactive_Links_Showcase extends Widget_Base
     protected function _register_controls()
     {
         $post_types = ControlsHelper::get_post_types();
-        $post_types['by_id'] = __('Manual Selection', 'themescamp-plugin');
+        $post_types['by_id'] = __('Manual Selection', 'element-camp');
         $taxonomies = get_taxonomies([], 'objects');
 
         $this->start_controls_section(
@@ -146,7 +146,7 @@ class elementcamp_Interactive_Links_Showcase extends Widget_Base
         $this->add_control(
             'posts_ids',
             [
-                'label' => __('Search & Select', 'themescamp-plugin'),
+                'label' => __('Search & Select', 'element-camp'),
                 'type' => 'tcg-select2',
                 'options' => ControlsHelper::get_post_list(),
                 'label_block' => true,
@@ -161,7 +161,7 @@ class elementcamp_Interactive_Links_Showcase extends Widget_Base
         $this->add_control(
             'posts_per_page',
             [
-                'label' => __('Posts Per Page', 'themescamp-plugin'),
+                'label' => __('Posts Per Page', 'element-camp'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '4',
                 'min' => '1',
@@ -180,7 +180,7 @@ class elementcamp_Interactive_Links_Showcase extends Widget_Base
         $this->add_control(
             'order',
             [
-                'label' => __('Order', 'themescamp-plugin'),
+                'label' => __('Order', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'asc' => 'Ascending',
@@ -193,7 +193,7 @@ class elementcamp_Interactive_Links_Showcase extends Widget_Base
         $this->add_control(
             'orderby',
             [
-                'label' => __('Order By', 'themescamp-plugin'),
+                'label' => __('Order By', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => ControlsHelper::get_post_orderby_options(),
                 'default' => 'date',
@@ -204,7 +204,7 @@ class elementcamp_Interactive_Links_Showcase extends Widget_Base
         $this->add_control(
             'authors',
             [
-                'label' => __('Author', 'themescamp-plugin'),
+                'label' => __('Author', 'element-camp'),
                 'label_block' => true,
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
@@ -218,7 +218,7 @@ class elementcamp_Interactive_Links_Showcase extends Widget_Base
         $this->add_control(
             'post__not_in',
             [
-                'label'       => __('Exclude', 'themescamp-plugin'),
+                'label'       => __('Exclude', 'element-camp'),
                 'type'        => 'tcg-select2',
                 'label_block' => true,
                 'multiple'    => true,
@@ -963,12 +963,12 @@ class elementcamp_Interactive_Links_Showcase extends Widget_Base
                                 }
                             }
                     ?>
-                            <li data-tab="tab-<?= esc_attr($itemCount) ?>">
+                            <li data-tab="tab-<?php echo esc_attr($itemCount) ?>">
                                 <h2>
-                                    <span class="num"><?= esc_html(sprintf('%02d', $itemCount)) ?>.</span>
-                                    <a href="<?= esc_url(get_the_permalink()) ?>">
-                                        <span class="taxonomy"><?= esc_html($terms_display) ?></span>
-                                        <span class="title"><?= esc_html(get_the_title()) ?></span>
+                                    <span class="num"><?php echo esc_html(sprintf('%02d', $itemCount)) ?>.</span>
+                                    <a href="<?php echo esc_url(get_the_permalink()) ?>">
+                                        <span class="taxonomy"><?php echo esc_html($terms_display) ?></span>
+                                        <span class="title"><?php echo esc_html(get_the_title()) ?></span>
                                     </a>
                                 </h2>
                             </li>
@@ -986,8 +986,8 @@ class elementcamp_Interactive_Links_Showcase extends Widget_Base
                 if ($query->have_posts()) :
                     while ($query->have_posts()) :
                         $query->the_post(); ?>
-                        <div class="img" id="tab-<?= esc_attr($itemCount) ?>">
-                            <img src="<?= esc_url(get_the_post_thumbnail_url()) ?>" alt="<?= esc_attr(get_the_title()) ?>">
+                        <div class="img" id="tab-<?php echo esc_attr($itemCount) ?>">
+                            <img src="<?php echo esc_url(get_the_post_thumbnail_url()) ?>" alt="<?php echo esc_attr(get_the_title()) ?>">
                         </div>
                 <?php
                         $itemCount++;

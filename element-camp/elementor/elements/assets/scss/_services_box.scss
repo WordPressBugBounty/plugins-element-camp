@@ -1,0 +1,37 @@
+.tcgelements-services-box {
+  display: flex;
+
+  .item {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 40px 30px;
+    width: 450px;
+    height: 450px;
+    margin: 0 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.4s;
+
+    &.active {
+      width: calc(100vw - 450px * 2);
+      border-color: #aaa;
+
+      .service-description {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        transition-delay: 0.4s;
+        opacity: 1;
+        transform: translate(0);
+      }
+    }
+
+    .service-description {
+      opacity: 0;
+      transition: opacity 0.1s ease-out, transform 0.4s ease-out,
+        clip-path 0.6s cubic-bezier(0.25, 0.59, 0.29, 0.96);
+      clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+      transform: translateX(100px);
+      margin-bottom: 0;
+    }
+  }
+}

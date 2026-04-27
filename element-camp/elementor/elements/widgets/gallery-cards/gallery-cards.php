@@ -58,8 +58,8 @@ class ElementCamp_Gallery_Cards extends Widget_Base
 
     protected function register_controls() {
 
-        $start = is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
-        $end = !is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
+        $start = is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
+        $end = !is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
 
         $this->start_controls_section(
             'section_content_source',
@@ -182,7 +182,7 @@ class ElementCamp_Gallery_Cards extends Widget_Base
 
         // Post Type Query Section
         $post_types = ControlsHelper::get_post_types();
-        $post_types['by_id'] = __('Manual Selection', 'themescamp-plugin');
+        $post_types['by_id'] = __('Manual Selection', 'element-camp');
         $taxonomies = get_taxonomies([], 'objects');
         $this->start_controls_section(
             'section_post_query',
@@ -207,7 +207,7 @@ class ElementCamp_Gallery_Cards extends Widget_Base
         $this->add_control(
             'posts_ids',
             [
-                'label' => __('Search & Select', 'themescamp-plugin'),
+                'label' => __('Search & Select', 'element-camp'),
                 'type' => 'tcg-select2',
                 'options' => ControlsHelper::get_post_list(),
                 'label_block' => true,
@@ -223,7 +223,7 @@ class ElementCamp_Gallery_Cards extends Widget_Base
         $this->add_control(
             'posts_per_page',
             [
-                'label' => __('Posts Per Page', 'themescamp-plugin'),
+                'label' => __('Posts Per Page', 'element-camp'),
                 'type' => Controls_Manager::NUMBER,
                 'default' => '4',
                 'min' => '1',
@@ -242,7 +242,7 @@ class ElementCamp_Gallery_Cards extends Widget_Base
         $this->add_control(
             'order',
             [
-                'label' => __('Order', 'themescamp-plugin'),
+                'label' => __('Order', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
                     'asc' => 'Ascending',
@@ -255,7 +255,7 @@ class ElementCamp_Gallery_Cards extends Widget_Base
         $this->add_control(
             'orderby',
             [
-                'label' => __('Order By', 'themescamp-plugin'),
+                'label' => __('Order By', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => ControlsHelper::get_post_orderby_options(),
                 'default' => 'date',
@@ -265,7 +265,7 @@ class ElementCamp_Gallery_Cards extends Widget_Base
         $this->add_control(
             'authors',
             [
-                'label' => __('Author', 'themescamp-plugin'),
+                'label' => __('Author', 'element-camp'),
                 'label_block' => true,
                 'type' => Controls_Manager::SELECT2,
                 'multiple' => true,
@@ -280,7 +280,7 @@ class ElementCamp_Gallery_Cards extends Widget_Base
         $this->add_control(
             'post__not_in',
             [
-                'label' => __('Exclude', 'themescamp-plugin'),
+                'label' => __('Exclude', 'element-camp'),
                 'type' => 'tcg-select2',
                 'label_block' => true,
                 'multiple' => true,
@@ -984,7 +984,8 @@ class ElementCamp_Gallery_Cards extends Widget_Base
                                 $link_key = 'link_' . $index;
                                 $this->add_link_attributes($link_key, $item['link']);
                                 ?>
-                                <a <?php echo $this->get_render_attribute_string($link_key); ?>>
+                                <a <?php 
+                                echo $this->get_render_attribute_string($link_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
                                     <?php endif; ?>
 
                                     <div class="image-card-inner">
@@ -1022,7 +1023,8 @@ class ElementCamp_Gallery_Cards extends Widget_Base
                             $link_key = 'desktop_link_' . $index;
                             $this->add_link_attributes($link_key, $item['link']);
                             ?>
-                            <a <?php echo $this->get_render_attribute_string($link_key); ?>>
+                            <a <?php 
+                            echo $this->get_render_attribute_string($link_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
                                 <?php endif; ?>
 
                                 <?php if (!empty($item['image']['url'])): ?>

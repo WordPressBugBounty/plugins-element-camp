@@ -26,21 +26,11 @@ class TCG_Helper
         }
 
         if ($update_query) {
-            global $wpdb;
-
             $post_id = get_the_ID();
-            $data = get_post_meta($post_id, '_elementor_data', true);
-            $data = str_replace('eaeposts_', '', $data);
-            $wpdb->update(
-                $wpdb->postmeta,
-                [
-                    'meta_value' => $data,
-                ],
-                [
-                    'post_id' => $post_id,
-                    'meta_key' => '_elementor_data',
-                ]
-            );
+            $data    = get_post_meta( $post_id, '_elementor_data', true );
+            $data    = str_replace( 'eaeposts_', '', $data );
+
+            update_post_meta( $post_id, '_elementor_data', $data );
         }
 
         return $settings;
@@ -118,7 +108,8 @@ class TCG_Helper
 		    $args['post__not_in'] = $settings['post__not_in'];
 	    }
 
-        if( 'product' === $post_type && function_exists('whols_lite') ){
+        if ( 'product' === $post_type && function_exists( 'whols_lite' ) ) {
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
             $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
         }
 
@@ -128,9 +119,11 @@ class TCG_Helper
             $args['paged'] = $paged;
         }
 
-        if(is_search() && isset($_GET['s'])){
-            $args['s'] = $_GET['s'];
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended
+        if ( is_search() && isset( $_GET['s'] ) ) {
+            $args['s'] = sanitize_text_field( wp_unslash( $_GET['s'] ) );
         }
+        // phpcs:enable WordPress.Security.NonceVerification.Recommended
 
         return $args;
     }
@@ -167,16 +160,16 @@ class TCG_Helper
     public static function get_post_orderby_options()
     {
 	    $orderby = array(
-		    'ID'            => __( 'Post ID', 'themescamp-plugin' ),
-		    'author'        => __( 'Post Author', 'themescamp-plugin' ),
-		    'title'         => __( 'Title', 'themescamp-plugin' ),
-		    'date'          => __( 'Date', 'themescamp-plugin' ),
-		    'modified'      => __( 'Last Modified Date', 'themescamp-plugin' ),
-		    'parent'        => __( 'Parent Id', 'themescamp-plugin' ),
-		    'rand'          => __( 'Random', 'themescamp-plugin' ),
-		    'comment_count' => __( 'Comment Count', 'themescamp-plugin' ),
-		    'most_viewed'   => __( 'Most Viewed', 'themescamp-plugin' ),
-		    'menu_order'    => __( 'Menu Order', 'themescamp-plugin' )
+		    'ID'            => __( 'Post ID', 'element-camp' ),
+		    'author'        => __( 'Post Author', 'element-camp' ),
+		    'title'         => __( 'Title', 'element-camp' ),
+		    'date'          => __( 'Date', 'element-camp' ),
+		    'modified'      => __( 'Last Modified Date', 'element-camp' ),
+		    'parent'        => __( 'Parent Id', 'element-camp' ),
+		    'rand'          => __( 'Random', 'element-camp' ),
+		    'comment_count' => __( 'Comment Count', 'element-camp' ),
+		    'most_viewed'   => __( 'Most Viewed', 'element-camp' ),
+		    'menu_order'    => __( 'Menu Order', 'element-camp' )
 	    );
 
         return $orderby;
@@ -276,7 +269,8 @@ class TCG_Helper
                     'value' => 'instock'
                 ];
             }
-            if( 'product' === $args['post_type'] && function_exists('whols_lite') ){
+            if ( 'product' === $args['post_type'] && function_exists( 'whols_lite' ) ) {
+                // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
                 $args['meta_query'] = array_filter( apply_filters( 'woocommerce_product_query_meta_query', $args['meta_query'], new \WC_Query() ) );
             }
         }
@@ -286,42 +280,18 @@ class TCG_Helper
 
     public static function get_query_post_list($post_type = 'any', $limit = -1, $search = '')
     {
-        global $wpdb;
-        $where = '';
-        $data = [];
+        $args = [
+            'post_type'      => $post_type,
+            'posts_per_page' => $limit,
+            's'              => $search,
+            'post_status'    => 'publish',
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+        ];
 
-        if (-1 == $limit) {
-            $limit = '';
-        } elseif (0 == $limit) {
-            $limit = "limit 0,1";
-        } else {
-            $limit = $wpdb->prepare(" limit 0,%d", esc_sql($limit));
-        }
+        $posts = get_posts($args);
 
-        if ('any' === $post_type) {
-            $in_search_post_types = get_post_types(['exclude_from_search' => false]);
-            if (empty($in_search_post_types)) {
-                $where .= ' AND 1=0 ';
-            } else {
-                $where .= " AND {$wpdb->posts}.post_type IN ('" . join("', '",
-                    array_map('esc_sql', $in_search_post_types)) . "')";
-            }
-        } elseif (!empty($post_type)) {
-            $where .= $wpdb->prepare(" AND {$wpdb->posts}.post_type = %s", esc_sql($post_type));
-        }
-
-        if (!empty($search)) {
-            $where .= $wpdb->prepare(" AND {$wpdb->posts}.post_title LIKE %s", '%' . esc_sql($search) . '%');
-        }
-
-        $query = "select post_title,ID  from $wpdb->posts where post_status = 'publish' $where $limit";
-        $results = $wpdb->get_results($query);
-        if (!empty($results)) {
-            foreach ($results as $row) {
-                $data[$row->ID] = $row->post_title;
-            }
-        }
-        return $data;
+        return wp_list_pluck($posts, 'post_title', 'ID');
     }
 }
 

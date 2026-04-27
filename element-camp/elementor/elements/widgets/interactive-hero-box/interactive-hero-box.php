@@ -221,7 +221,7 @@ class ElementCamp_Interactive_Hero_Box extends Widget_Base
         $this->add_responsive_control(
             'columns',
             [
-                'label' => esc_html__('Columns', 'elementcamp_plg'),
+                'label' => esc_html__('Columns', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'default' => '6',
                 'options' => [
@@ -329,7 +329,7 @@ class ElementCamp_Interactive_Hero_Box extends Widget_Base
         $this->add_responsive_control(
             'space_between_x',
             [
-                'label' => esc_html__('Space Between Columns (Horizontal)', 'themescamp-core'),
+                'label' => esc_html__('Space Between Columns (Horizontal)', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'unit' => 'px',
@@ -821,7 +821,7 @@ class ElementCamp_Interactive_Hero_Box extends Widget_Base
                             $column_class = $this->get_column_classes($settings);
                             ?>
                             <div class="<?php echo esc_attr($column_class); ?>">
-                                <a href="<?php echo esc_url($item['box_link']['url']); ?>" class="box-item<?php echo esc_attr($active_class); ?>" data-bg="<?php echo esc_attr($bg_class); ?>" <?php echo $target . $nofollow; ?>>
+                                <a href="<?php echo esc_url($item['box_link']['url']); ?>" class="box-item<?php echo esc_attr($active_class); ?>" data-bg="<?php echo esc_attr($bg_class); ?>" <?php echo esc_attr($target . $nofollow); ?>>
                                     <span class="num text-end"> <?php echo esc_html($item['box_number']); ?> </span>
                                     <div class="info">
                                         <div class="date fsz-12 cr-green1 mb-3"> <?php echo esc_html($item['box_date']); ?> </div>

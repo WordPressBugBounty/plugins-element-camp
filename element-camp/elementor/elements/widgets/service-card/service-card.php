@@ -109,8 +109,8 @@ class ElementCamp_Service_Card extends Widget_Base
      */
 
     protected function register_controls(){
-        $start = is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
-        $end = !is_rtl() ? esc_html__('Right', 'themescamp-plugin') : esc_html__('Left', 'themescamp-plugin');
+        $start = is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
+        $end = !is_rtl() ? esc_html__('Right', 'element-camp') : esc_html__('Left', 'element-camp');
 
         $this->start_controls_section(
             'content',
@@ -2145,7 +2145,7 @@ class ElementCamp_Service_Card extends Widget_Base
         $this->add_responsive_control(
             'info_overlay_width',
             [
-                'label' => esc_html__('Width', 'themescamp-plugin'),
+                'label' => esc_html__('Width', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'em', 'rem', 'custom'],
                 'range' => [
@@ -2168,7 +2168,7 @@ class ElementCamp_Service_Card extends Widget_Base
         $this->add_responsive_control(
             'info_overlay_height',
             [
-                'label' => esc_html__('Height', 'themescamp-plugin'),
+                'label' => esc_html__('Height', 'element-camp'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
                 'size_units' => ['px', '%', 'em', 'rem', 'custom'],
                 'range' => [
@@ -2191,12 +2191,12 @@ class ElementCamp_Service_Card extends Widget_Base
         $this->add_responsive_control(
             'info_overlay_positioning',
             [
-                'label' => esc_html__('Position', 'themescamp-plugin'),
+                'label' => esc_html__('Position', 'element-camp'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'unset' => esc_html__('unset', 'themescamp-plugin'),
-                    'absolute' => esc_html__('absolute', 'themescamp-plugin'),
-                    'relative' => esc_html__('relative', 'themescamp-plugin'),
+                    'unset' => esc_html__('unset', 'element-camp'),
+                    'absolute' => esc_html__('absolute', 'element-camp'),
+                    'relative' => esc_html__('relative', 'element-camp'),
                 ],
                 'label_block' => true,
                 'default' => 'absolute',
@@ -2211,7 +2211,7 @@ class ElementCamp_Service_Card extends Widget_Base
         $this->add_control(
             'info_overlay_offset_orientation_h',
             [
-                'label' => esc_html__('Horizontal Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Horizontal Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
@@ -2235,7 +2235,7 @@ class ElementCamp_Service_Card extends Widget_Base
         $this->add_responsive_control(
             'info_overlay_offset_x',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -2270,7 +2270,7 @@ class ElementCamp_Service_Card extends Widget_Base
         $this->add_responsive_control(
             'info_overlay_offset_x_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -2305,17 +2305,17 @@ class ElementCamp_Service_Card extends Widget_Base
         $this->add_control(
             'info_overlay_offset_orientation_v',
             [
-                'label' => esc_html__('Vertical Orientation', 'themescamp-plugin'),
+                'label' => esc_html__('Vertical Orientation', 'element-camp'),
                 'type' => Controls_Manager::CHOOSE,
                 'toggle' => false,
                 'default' => 'start',
                 'options' => [
                     'start' => [
-                        'title' => esc_html__('Top', 'themescamp-plugin'),
+                        'title' => esc_html__('Top', 'element-camp'),
                         'icon' => 'eicon-v-align-top',
                     ],
                     'end' => [
-                        'title' => esc_html__('Bottom', 'themescamp-plugin'),
+                        'title' => esc_html__('Bottom', 'element-camp'),
                         'icon' => 'eicon-v-align-bottom',
                     ],
                 ],
@@ -2328,7 +2328,7 @@ class ElementCamp_Service_Card extends Widget_Base
         $this->add_responsive_control(
             'info_overlay_offset_y',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -2362,7 +2362,7 @@ class ElementCamp_Service_Card extends Widget_Base
         $this->add_responsive_control(
             'info_overlay_offset_y_end',
             [
-                'label' => esc_html__('Offset', 'themescamp-plugin'),
+                'label' => esc_html__('Offset', 'element-camp'),
                 'type' => Controls_Manager::SLIDER,
                 'range' => [
                     'px' => [
@@ -8186,18 +8186,18 @@ class ElementCamp_Service_Card extends Widget_Base
             $button_html .= '</div>';
         }
         ?>
-        <<?= $tag ?> class="<?= esc_attr($element_class) ?>" <?= $href_attr ?> <?= $is_external ?>>
+        <<?php echo esc_attr($tag) ?> class="<?php echo esc_attr($element_class) ?>" <?php echo esc_attr($href_attr) ?> <?php echo esc_attr($is_external) ?>>
 
             <?php if ($settings['number_switcher']=='yes' && $settings['number_position']=='card') : ?>
-                <div class="num"> <?=esc_html($settings['number'])?> </div>
+                <div class="num"> <?php echo esc_html($settings['number'])?> </div>
             <?php endif;
                 if ((!empty($settings['service_image']['url'])) || ($settings['number_switcher']=='yes' && $settings['number_position']=='image')) : ?>
                     <div class="icon">
                         <?php if (!empty($settings['service_image']['url'])) : ?>
-                            <img src="<?= esc_url($settings['service_image']['url']); ?>" alt="<?php if (!empty($settings['service_image']['alt'])) echo esc_attr($settings['service_image']['alt']); ?>" >
+                            <img src="<?php echo esc_url($settings['service_image']['url']); ?>" alt="<?php if (!empty($settings['service_image']['alt'])) echo esc_attr($settings['service_image']['alt']); ?>" >
                         <?php endif;?>
                         <?php if ($settings['number_switcher']=='yes' && $settings['number_position']=='image') : ?>
-                            <span class="num"> <?=esc_html($settings['number'])?> </span>
+                            <span class="num"> <?php echo esc_html($settings['number'])?> </span>
                         <?php endif;?>
                     </div>
                 <?php endif;?>
@@ -8210,45 +8210,45 @@ class ElementCamp_Service_Card extends Widget_Base
                 ($settings['button_switcher'] === 'yes' && $settings['button_position'] === 'inside')
             );
             if ($has_inf_content) : ?>
-                <div class="inf <?=esc_attr($settings['info_section_animations'])?>">
+                <div class="inf <?php echo esc_attr($settings['info_section_animations'])?>">
                     <?php if ($settings['sub_title_switcher']=='yes') : ?>
-                        <h6 class="sub-title"><?=esc_html($settings['sub_title'])?></h6>
+                        <h6 class="sub-title"><?php echo esc_html($settings['sub_title'])?></h6>
                     <?php endif;?>
                     <?php if (!empty($settings['title'])) : ?>
-                        <h5 class="title"><?= __($settings['title'],'element-camp'); ?></h5>
+                        <h5 class="title"><?php echo esc_html($settings['title']); ?></h5>
                     <?php endif;?>
                     <?php if ($settings['list_switcher']=='yes') : ?>
                     <ul class="check-list">
                         <?php foreach ($settings['list'] as $item) : ?>
-                            <li class="<?= 'elementor-repeater-item-' . esc_attr( $item['_id'] ) . ''; ?>">
+                            <li class="<?php echo 'elementor-repeater-item-' . esc_attr( $item['_id'] ) . ''; ?>">
                                 <?php if (!empty($item['selected_icon']['value'])) : ?>
                                     <span class="list-icon"> <?php Icons_Manager::render_icon($item['selected_icon'], ['aria-hidden' => 'true']); ?></span>
                                 <?php endif; ?>
-                                <span class="txt"> <?= esc_html($item['title']); ?> </span>
+                                <span class="txt"> <?php echo esc_html($item['title']); ?> </span>
                             </li>
                         <?php endforeach; ?>
                     </ul>
                     <?php endif;?>
                     <?php if ($settings['description_switcher']=='yes') : ?>
-                       <p class="description"><?=$settings['description']?></p>
+                       <p class="description"><?php echo wp_kses_post($settings['description'])?></p>
                     <?php endif;?>
                     <?php
                     if ($settings['button_switcher'] === 'yes' && $settings['button_position'] === 'inside') {
-                        echo $button_html;
+                        echo wp_kses_post($button_html);
                     }
                     ?>
                 </div>
             <?php endif;?>
             <?php if ($settings['float_image_switcher'] === 'yes') : ?>
-                <img class="float-icon" src="<?= esc_url($settings['float_image']['url']); ?>" alt="<?php if (!empty($settings['float_image']['alt'])) echo esc_attr($settings['float_image']['alt']); ?>" >
+                <img class="float-icon" src="<?php echo esc_url($settings['float_image']['url']); ?>" alt="<?php if (!empty($settings['float_image']['alt'])) echo esc_attr($settings['float_image']['alt']); ?>" >
             <?php endif;?>
             <?php if ($settings['button_switcher'] === 'yes' && $settings['button_position'] === 'outside') {
-                    echo $button_html;
+                    echo wp_kses_post($button_html);
                 } ?>
             <?php if ($settings['float_name_switcher'] === 'yes') : ?>
-                <div class="float-name"><?= esc_html($settings['float_name_text']) ?></div>
+                <div class="float-name"><?php echo esc_html($settings['float_name_text']) ?></div>
             <?php endif; ?>
-        </<?= $tag ?>>
+        </<?php echo esc_attr($tag) ?>>
         <?php
     }
 }
